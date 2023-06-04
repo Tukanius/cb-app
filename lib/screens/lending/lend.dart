@@ -1,3 +1,4 @@
+import 'package:bank_core/components/custom_button.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/screens/main/main_page.dart';
@@ -403,6 +404,9 @@ class _LendingState extends State<Lending> {
                         ),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   InkWell(
                     onTap: () => showDialog<String>(
@@ -825,34 +829,21 @@ class _LendingState extends State<Lending> {
                       ),
                     ),
                     child: Container(
-                      margin: EdgeInsets.all(15),
-                      width: MediaQuery.of(context).size.width,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                      margin: const EdgeInsets.only(left: 10, right: 5),
+                      child: CustomButton(
+                        boxShadow: true,
                         color: buttonColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: buttonColor.withOpacity(0.5),
-                            blurRadius: 5,
-                            offset: Offset(0, 1),
-                          )
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Үргэлжлүүлэх',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
+                        labelText: 'Үргэлжлүүлэх',
+                        onClick: () {},
+                        textColor: white,
                       ),
                     ),
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 50,
             ),
           ],
         ),
