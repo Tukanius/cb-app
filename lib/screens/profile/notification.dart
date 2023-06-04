@@ -1,3 +1,4 @@
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -138,7 +139,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         width: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.greenAccent,
+                          color: buttonColor,
                         ),
                         child: Center(
                             child: Text(

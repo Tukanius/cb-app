@@ -1,22 +1,13 @@
 import 'package:bank_core/api/auth.dart';
-import 'package:bank_core/widget/custon_button.dart';
-import 'package:bank_core/screens/main/main_page.dart';
+import 'package:bank_core/components/custom_button.dart';
 import 'package:bank_core/screens/register/register.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
+import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:bank_core/widget/form_textfield.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:bank_core/screens/splash/index.dart';
-import 'package:bank_core/screens/register/register.dart';
 import '../../../models/user.dart';
-import '../../../provider/user_provider.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:after_layout/after_layout.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:bank_core/models/user.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = "LoginPage";
@@ -181,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 child: CustomButton(
                   labelText: 'Нэвтрэх',
-                  color: Colors.greenAccent,
+                  color: buttonColor,
                   textColor: Colors.white,
                   onClick: () {
                     onSubmit(); //
@@ -196,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: CustomButton(
                   labelText: 'Бүртгүүлэх',
                   color: Colors.white,
-                  textColor: Colors.greenAccent,
+                  textColor: buttonColor,
                   onClick: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (BuildContext context) {

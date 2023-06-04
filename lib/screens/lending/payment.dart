@@ -1,3 +1,4 @@
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/screens/main/main_page.dart';
 
@@ -174,7 +175,7 @@ class _PaymentState extends State<Payment> {
                         height: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: Colors.greenAccent,
+                          color: buttonColor,
                         ),
                         child: InkWell(
                           onTap: () {
@@ -341,7 +342,7 @@ class _PaymentState extends State<Payment> {
                       ),
                       Icon(
                         Icons.calendar_month,
-                        color: Colors.greenAccent,
+                        color: buttonColor,
                       ),
                       SizedBox(
                         width: 15,
@@ -385,7 +386,7 @@ class _PaymentState extends State<Payment> {
                       ),
                       Icon(
                         Icons.money,
-                        color: Colors.greenAccent,
+                        color: buttonColor,
                       ),
                       SizedBox(
                         width: 15,
@@ -429,7 +430,7 @@ class _PaymentState extends State<Payment> {
                       ),
                       Icon(
                         Icons.percent,
-                        color: Colors.greenAccent,
+                        color: buttonColor,
                       ),
                       SizedBox(
                         width: 15,

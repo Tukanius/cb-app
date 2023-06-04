@@ -1,14 +1,15 @@
+import 'package:bank_core/components/custom_button.dart';
 import 'package:bank_core/models/customer_related_person.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
+import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:bank_core/widget/form_textfield.dart';
 import 'package:provider/provider.dart';
 import '../../api/auth.dart';
 import 'package:bank_core/models/general.dart';
 import '../../models/user.dart';
 import '../../provider/user_provider.dart';
-import '../../widget/custon_button.dart';
 import '../splash/index.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:bank_core/provider/general_provider.dart';
@@ -222,7 +223,7 @@ class _WhoTypeState extends State<WhoType> with AfterLayoutMixin {
               margin: const EdgeInsets.symmetric(horizontal: 30),
               child: CustomButton(
                 labelText: 'Нэмэх',
-                color: Colors.greenAccent,
+                color: buttonColor,
                 textColor: Colors.white,
                 onClick: () {
                   onSubmit();

@@ -1,5 +1,6 @@
 import 'package:bank_core/screens/lending/lendschedule.dart';
 import 'package:bank_core/screens/lending/payment.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class LendInformation extends StatefulWidget {
@@ -75,7 +76,7 @@ class _LendInformationState extends State<LendInformation> {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           topRight: Radius.circular(10)),
-                      color: Colors.greenAccent,
+                      color: buttonColor,
                     ),
                     child: Container(
                       margin: EdgeInsets.all(40),
@@ -388,7 +389,7 @@ class _LendInformationState extends State<LendInformation> {
                               ),
                               Icon(
                                 Icons.check,
-                                color: Colors.greenAccent,
+                                color: buttonColor,
                               ),
                               SizedBox(
                                 width: 15,

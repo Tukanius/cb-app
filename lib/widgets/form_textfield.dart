@@ -1,3 +1,4 @@
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -68,7 +69,7 @@ class FormTextField extends StatefulWidget {
       this.focus,
       this.nextFocus,
       this.prefixIcon,
-      this.color = Colors.grey,
+      this.color,
       this.suffixIcon,
       this.labelText});
 
@@ -140,7 +141,7 @@ class _FormTextFieldState extends State<FormTextField> {
               borderSide: BorderSide.none,
             ),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
             filled: true,
             hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
             fillColor: widget.color,

@@ -7,6 +7,7 @@ import 'package:bank_core/screens/profile/loginsettings.dart';
 import 'package:bank_core/screens/profile/profileinformation.dart';
 import 'package:bank_core/screens/profile/whotype.dart';
 import 'package:bank_core/screens/splash/index.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
@@ -76,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Icon(
                               Icons.person,
                               size: 60,
-                              color: Colors.greenAccent,
+                              color: buttonColor,
                             ),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),

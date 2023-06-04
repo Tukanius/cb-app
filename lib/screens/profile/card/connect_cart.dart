@@ -1,7 +1,7 @@
+import 'package:bank_core/components/custom_button.dart';
 import 'package:bank_core/screens/profile/card/bank.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
-
-import '../../../widget/custon_button.dart';
 
 class ConnectCard extends StatefulWidget {
   const ConnectCard({super.key});
@@ -111,7 +111,7 @@ class _ConnectCardState extends State<ConnectCard> {
               margin: const EdgeInsets.symmetric(horizontal: 30),
               child: CustomButton(
                 labelText: 'Данс нэмэх',
-                color: Colors.greenAccent,
+                color: buttonColor,
                 textColor: Colors.white,
                 onClick: () {
                   Navigator.of(context)

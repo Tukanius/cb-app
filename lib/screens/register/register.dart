@@ -1,15 +1,11 @@
-import 'package:bank_core/widget/custon_button.dart';
+import 'package:bank_core/components/custom_button.dart';
 import 'package:bank_core/models/user.dart';
-import 'package:bank_core/screens/register/fistname_lastname.dart';
-import 'package:bank_core/utils/http_handler.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
+import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:bank_core/provider/user_provider.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:bank_core/widget/form_textfield.dart';
-import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/api/auth.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
@@ -760,7 +756,7 @@ class _RegisterState extends State<Register> {
                       margin: const EdgeInsets.symmetric(horizontal: 30),
                       child: CustomButton(
                         labelText: 'Бүртгүүлэх',
-                        color: Colors.greenAccent,
+                        color: buttonColor,
                         textColor: Colors.white,
                         onClick: () {
                           onSubmit();

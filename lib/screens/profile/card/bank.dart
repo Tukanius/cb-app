@@ -1,13 +1,14 @@
+import 'package:bank_core/components/custom_button.dart';
 import 'package:bank_core/models/customer_account.dart';
 import 'package:bank_core/models/general.dart';
 import 'package:bank_core/provider/general_provider.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
+import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:bank_core/widget/form_textfield.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/api/auth.dart';
-import '../../../widget/custon_button.dart';
 import '../../splash/index.dart';
 import 'package:provider/provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
@@ -179,7 +180,7 @@ class _BankState extends State<Bank> with AfterLayoutMixin {
               margin: const EdgeInsets.symmetric(horizontal: 30),
               child: CustomButton(
                 labelText: 'Данс нэмэх',
-                color: Colors.greenAccent,
+                color: buttonColor,
                 textColor: Colors.white,
                 onClick: () {
                   onSubmit();

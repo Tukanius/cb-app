@@ -1,4 +1,5 @@
 import 'package:bank_core/screens/main/main_page.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmCode extends StatefulWidget {
@@ -79,7 +80,7 @@ class _ConfirmCodeState extends State<ConfirmCode> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.greenAccent,
+              color: buttonColor,
             ),
             child: InkWell(
               onTap: () {

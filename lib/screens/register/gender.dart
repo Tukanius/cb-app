@@ -1,4 +1,5 @@
 import 'package:bank_core/screens/register/date.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class Gender extends StatefulWidget {
@@ -65,7 +66,7 @@ class _GenderState extends State<Gender> {
                     Radio(
                       value: 1,
                       fillColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.greenAccent),
+                          (states) => buttonColor),
                       groupValue: _value,
                       onChanged: (value) {
                         setState(() {
@@ -96,7 +97,7 @@ class _GenderState extends State<Gender> {
                   children: [
                     Radio(
                       fillColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.greenAccent),
+                          (states) => buttonColor),
                       value: 2,
                       groupValue: _value,
                       onChanged: (value) {
@@ -120,7 +121,7 @@ class _GenderState extends State<Gender> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.greenAccent,
+              color: buttonColor,
             ),
             child: InkWell(
               onTap: () {

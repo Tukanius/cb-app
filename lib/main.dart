@@ -1,14 +1,18 @@
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/lending/lend.dart';
 import 'package:bank_core/screens/login/login.dart';
 import 'package:bank_core/screens/main/main_page.dart';
 import 'package:bank_core/screens/splash/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+GetIt locator = GetIt.instance;
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -37,6 +41,10 @@ class MyApp extends StatelessWidget {
                     case SplashPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const SplashPage();
+                      });
+                    case Lending.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const Lending();
                       });
                     case MainPage.routeName:
                       return MaterialPageRoute(builder: (context) {

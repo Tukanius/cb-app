@@ -1,3 +1,4 @@
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/screens/main/main_page.dart';
 import 'package:bank_core/screens/lending/lend.dart';
@@ -17,15 +18,17 @@ class _LendingState extends State<Lending> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade800,
+        backgroundColor: backgroundColor,
         automaticallyImplyLeading: false,
-        elevation: 1,
+        elevation: 0,
         leading: Container(
           margin: EdgeInsets.only(left: 10),
           padding: EdgeInsets.all(7),
           decoration: ShapeDecoration(
             color: Colors.grey.shade700,
-            shape: CircleBorder(side: BorderSide(color: Colors.grey.shade500)),
+            shape: CircleBorder(
+              side: BorderSide(color: Colors.grey.shade500),
+            ),
           ),
           child: IconButton(
             icon: Icon(
@@ -59,13 +62,10 @@ class _LendingState extends State<Lending> {
           ),
         ],
       ),
-      backgroundColor: Colors.grey.shade800,
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Divider(
-            //   color: Colors.grey,
-            // ),
             Container(
               margin: EdgeInsets.only(top: 40),
               child: Center(
@@ -88,7 +88,7 @@ class _LendingState extends State<Lending> {
             ),
             Slider(
               activeColor: Colors.white,
-              thumbColor: Colors.green.shade500,
+              thumbColor: buttonColor,
               inactiveColor: Colors.grey.shade600,
               value: _sliderValue,
               max: 500000,
@@ -165,7 +165,7 @@ class _LendingState extends State<Lending> {
                   InkWell(
                     onTap: () {
                       setState(() {
-                        BoxDecoration(color: Colors.greenAccent);
+                        BoxDecoration(color: buttonColor);
                       });
                     },
                     child: Container(
@@ -422,7 +422,6 @@ class _LendingState extends State<Lending> {
                           child: Container(
                             child: Column(
                               children: [
-                                const Divider(),
                                 Container(
                                   margin: const EdgeInsets.all(10),
                                   child: Row(
@@ -549,8 +548,7 @@ class _LendingState extends State<Lending> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                     color: Colors.white,
-                                    border:
-                                        Border.all(color: Colors.greenAccent),
+                                    border: Border.all(color: buttonColor),
                                   ),
                                   child: InkWell(
                                     onTap: () =>
@@ -560,7 +558,7 @@ class _LendingState extends State<Lending> {
                                           child: Text(
                                         'Татгалзах',
                                         style: TextStyle(
-                                          color: Colors.greenAccent,
+                                          color: buttonColor,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18,
                                         ),
@@ -573,7 +571,7 @@ class _LendingState extends State<Lending> {
                                   height: 50,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    color: Colors.greenAccent,
+                                    color: buttonColor,
                                   ),
                                   child: InkWell(
                                     onTap: () => showDialog<String>(
@@ -611,7 +609,6 @@ class _LendingState extends State<Lending> {
                                           child: Container(
                                             child: Column(
                                               children: [
-                                                const Divider(),
                                                 Container(
                                                   width: MediaQuery.of(context)
                                                       .size
@@ -623,7 +620,7 @@ class _LendingState extends State<Lending> {
                                                             10),
                                                     color: Colors.white,
                                                     border: Border.all(
-                                                      color: Colors.greenAccent,
+                                                      color: buttonColor,
                                                     ),
                                                   ),
                                                   child: Column(
@@ -699,7 +696,7 @@ class _LendingState extends State<Lending> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15),
-                                                    color: Colors.greenAccent,
+                                                    color: buttonColor,
                                                   ),
                                                   child: InkWell(
                                                     onTap: () =>
@@ -833,7 +830,14 @@ class _LendingState extends State<Lending> {
                       height: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.greenAccent,
+                        color: buttonColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: buttonColor.withOpacity(0.5),
+                            blurRadius: 5,
+                            offset: Offset(0, 1),
+                          )
+                        ],
                       ),
                       child: Center(
                         child: Text(

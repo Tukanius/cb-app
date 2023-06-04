@@ -1,33 +1,41 @@
-import 'package:bank_core/screens/lending/lending_information.dart';
 import 'package:bank_core/models/user.dart';
+import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/home_page/home_page.dart';
 import 'package:bank_core/screens/profile/profile_page.dart';
-import 'package:bank_core/services/service_page.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/screens/lending/lend.dart';
-import 'package:bank_core/screens/lending/lending_information.dart';
 import 'package:bank_core/screens/profile/notification.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:bank_core/provider/user_provider.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = 'MainPage';
-  final User? user;
-  const MainPage({Key? key, this.user}) : super(key: key);
+  const MainPage({
+    Key? key,
+  }) : super(key: key);
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
-const List<Widget> tabContainer = <Widget>[
-  MainPage(),
-  Lending(),
-];
-
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage>
+    with SingleTickerProviderStateMixin {
   bool _isVisible = true;
   int number = 500000;
-  double _sliderValue = 20000;
   int selectedIndex = 0;
   User me = User();
+  TabController? tabController;
+  @override
+  void initState() {
+    tabController = TabController(length: 3, vsync: this);
+    super.initState();
+  }
+
+  static const List<Widget> currentPages = [
+    HomePage(),
+    Text('2'),
+    Text('3'),
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -35,612 +43,244 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  User user = User();
-
   @override
   Widget build(BuildContext context) {
-    me = Provider.of<UserProvider>(context, listen: true).user;
+    me = Provider.of<UserProvider>(context, listen: false).user;
     return SafeArea(
       bottom: false,
       top: false,
-      child: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 80,
-            automaticallyImplyLeading: false,
-            elevation: 0.0,
-            iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: Colors.grey.shade800,
-            centerTitle: false,
-            title: Container(
-              child: Row(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return ProfilePage();
-                            }));
-                          },
-                          child: Container(
-                            // decoration: BoxDecoration(
-                            //   image: const DecorationImage(
-                            //       image: AssetImage('images/1.png'),
-                            //       fit: BoxFit.cover),
-                            //   borderRadius: BorderRadius.circular(100),
-                            // ),
-                            width: 60,
-                            height: 60,
-                            child: Icon(
-                              Icons.person,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.greenAccent),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Сайн уу? 👋 ",
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "${me.firstName}",
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: ShapeDecoration(
-                  color: Colors.grey.shade700,
-                  shape: CircleBorder(
-                      side: BorderSide(color: Colors.grey.shade500)),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isVisible = !_isVisible;
-                    });
-                  },
-                  icon: _isVisible
-                      ? const Icon(
-                          Icons.visibility,
-                          color: Colors.white,
-                        )
-                      : const Icon(
-                          Icons.visibility_off,
-                          color: Colors.white,
-                        ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Container(
-                width: 40,
-                height: 40,
-                decoration: ShapeDecoration(
-                  color: Colors.grey.shade700,
-                  shape: CircleBorder(
-                      side: BorderSide(color: Colors.grey.shade500)),
-                ),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return NotificationPage();
-                      }));
-                    },
-                    icon: Icon(
-                      Icons.notifications,
-                      color: Colors.white,
-                    )),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-            ],
-          ),
-          backgroundColor: Colors.grey.shade800,
-          body: SingleChildScrollView(
-            child: Column(
+      child: Scaffold(
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          toolbarHeight: 80,
+          automaticallyImplyLeading: false,
+          elevation: 0.0,
+          iconTheme: const IconThemeData(color: Colors.white),
+          backgroundColor: backgroundColor,
+          centerTitle: false,
+          title: Container(
+            child: Row(
               children: [
-                Container(
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                      top: 20,
-                      left: 15,
+                Row(
+                  children: [
+                    Container(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return ProfilePage();
+                          }));
+                        },
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          child: Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              color: buttonColor),
+                        ),
+                      ),
                     ),
-                    child: Row(
-                      children: const [
-                        Text('Дижитал зээл',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15)),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Сайн уу? 👋 ",
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "${me.firstName}",
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(15),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey.shade900,
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 40),
-                        child: Center(
-                          child: Text(
-                            'Боломжит үлдэгдэл',
-                            style: TextStyle(color: Colors.white, fontSize: 15),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: Center(
-                          child: Text(
-                            '$_sliderValue₮',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 18),
-                          ),
-                        ),
-                      ),
-                      Slider(
-                        activeColor: Colors.white,
-                        thumbColor: Colors.green.shade500,
-                        inactiveColor: Colors.grey.shade600,
-                        value: _sliderValue,
-                        max: 500000,
-                        divisions: 10,
-                        label: _sliderValue.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _sliderValue = value;
-                          });
-                        },
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Text(
-                                '0₮',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(right: 20),
-                              child: Text(
-                                '500000₮',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return Lending();
-                              },
-                            ),
-                          );
-                        },
-                        child: Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.greenAccent,
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Зээл авах',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Идэвхтэй зээл',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return LendInformation();
-                              },
-                            ),
-                          );
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 20),
-                          height: 250,
-                          width: 200,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.shade900,
-                          ),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Center(
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.greenAccent,
-                                  radius: 50,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.grey.shade900,
-                                    radius: 47,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                        Text(
-                                          '5',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                        ),
-                                        Text(
-                                          'хоног',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.all(10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Эргэн төлөх дүн:',
-                                          style: TextStyle(
-                                              color: Colors.grey.shade600,
-                                              fontSize: 11),
-                                        ),
-                                        Text(
-                                          '120000₮',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.all(10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Эргэн төлөх өдөр:',
-                                          style: TextStyle(
-                                              color: Colors.grey.shade600,
-                                              fontSize: 11),
-                                        ),
-                                        Text(
-                                          '2023.03.21',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.all(10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Зээлийн төлөв:',
-                                          style: TextStyle(
-                                              color: Colors.grey.shade600,
-                                              fontSize: 11),
-                                        ),
-                                        Text(
-                                          'Хэвийн',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 20),
-                        height: 250,
-                        width: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey.shade900,
-                        ),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Center(
-                              child: CircleAvatar(
-                                backgroundColor: Colors.greenAccent,
-                                radius: 50,
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.grey.shade900,
-                                  radius: 47,
-                                  child: Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 25,
-                                      ),
-                                      Text(
-                                        '5',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: 20),
-                                      ),
-                                      Text(
-                                        'хоног',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.all(10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Эргэн төлөх дүн:',
-                                        style: TextStyle(
-                                            color: Colors.grey.shade600,
-                                            fontSize: 11),
-                                      ),
-                                      Text(
-                                        '120000₮',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.all(10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Эргэн төлөх өдөр:',
-                                        style: TextStyle(
-                                            color: Colors.grey.shade600,
-                                            fontSize: 11),
-                                      ),
-                                      Text(
-                                        '2023.03.21',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.all(10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Зээлийн төлөв:',
-                                        style: TextStyle(
-                                            color: Colors.grey.shade600,
-                                            fontSize: 11),
-                                      ),
-                                      Text(
-                                        'Хэвийн',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(20),
-                  width: MediaQuery.of(context).size.width,
-                  height: 180,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                          image: AssetImage(
-                            'images/1.png',
-                          ),
-                          fit: BoxFit.cover)),
+                  ],
                 ),
               ],
             ),
           ),
-          bottomNavigationBar: NavigationBar(
-            backgroundColor: Colors.grey.shade800,
-            elevation: 0,
-            destinations: [
-              NavigationDestination(
+          actions: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: ShapeDecoration(
+                color: Colors.grey.shade700,
+                shape:
+                    CircleBorder(side: BorderSide(color: Colors.grey.shade500)),
+              ),
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isVisible = !_isVisible;
+                  });
+                },
+                icon: _isVisible
+                    ? const Icon(
+                        Icons.visibility,
+                        color: Colors.white,
+                      )
+                    : const Icon(
+                        Icons.visibility_off,
+                        color: Colors.white,
+                      ),
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: ShapeDecoration(
+                color: Colors.grey.shade700,
+                shape:
+                    CircleBorder(side: BorderSide(color: Colors.grey.shade500)),
+              ),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return NotificationPage();
+                    }));
+                  },
                   icon: Icon(
-                    Icons.home,
+                    Icons.notifications,
                     color: Colors.white,
-                  ),
-                  label: 'Нүүр'),
-              NavigationDestination(
-                icon: Icon(
-                  Icons.clean_hands,
-                  color: Colors.white,
+                  )),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+          ],
+        ),
+        body: currentPages.elementAt(selectedIndex),
+        bottomNavigationBar: Material(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+          ),
+          child: BottomNavigationBar(
+            useLegacyColorScheme: true,
+            selectedItemColor: buttonColor,
+            unselectedItemColor: grey,
+            unselectedLabelStyle: TextStyle(color: grey),
+            backgroundColor: backgroundColor,
+            onTap: _onItemTapped,
+            items: [
+              BottomNavigationBarItem(
+                icon: Column(
+                  children: [
+                    selectedIndex == 0
+                        ? Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: 50,
+                            height: 2,
+                            color: buttonColor,
+                          )
+                        : Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: 50,
+                            height: 2,
+                            color: transparent,
+                          ),
+                    SvgPicture.asset('images/home.svg'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+                label: 'Нүүр',
+              ),
+              BottomNavigationBarItem(
+                icon: Column(
+                  children: [
+                    selectedIndex == 1
+                        ? Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: 50,
+                            height: 2,
+                            color: buttonColor,
+                          )
+                        : Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: 50,
+                            height: 2,
+                            color: transparent,
+                          ),
+                    SvgPicture.asset('images/lend.svg'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
                 label: 'Зээл',
               ),
-              NavigationDestination(
-                  icon: Icon(
-                    Icons.home,
-                    color: Colors.white,
-                  ),
-                  label: 'Үйлчилгээ'),
+              BottomNavigationBarItem(
+                icon: Column(
+                  children: [
+                    selectedIndex == 2
+                        ? Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: 50,
+                            height: 2,
+                            color: buttonColor,
+                          )
+                        : Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: 50,
+                            height: 2,
+                            color: transparent,
+                          ),
+                    SvgPicture.asset('images/shop.svg'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+                label: 'Дэлгүүр',
+              ),
             ],
-            onDestinationSelected: (int index) {
-              switch (index) {
-                case 0:
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return MainPage();
-                  }));
-                  break;
-
-                case 1:
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return Lending();
-                  }));
-                  break;
-
-                case 2:
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return ServicePage();
-                  }));
-                  break;
-              }
-            },
           ),
-          // bottomNavigationBar: BottomNavigationBar(
-          //   backgroundColor: Colors.grey.shade800,
-          //   elevation: 0,
-          //   showSelectedLabels: false,
-          //   showUnselectedLabels: false,
-          //   items: const <BottomNavigationBarItem>[
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.home),
-          //       label: 'Нүүр',
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.clean_hands_rounded),
-          //       label: 'Зээл авах',
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.apps),
-          //       label: 'Үйлчилгээ',
-          //     ),
-          //   ],
-          //   currentIndex: selectedIndex,
-          //   selectedItemColor: Colors.greenAccent,
-          //   unselectedItemColor: Colors.grey,
-          //   onTap: _onItemTapped,
-          // ),
         ),
       ),
     );
+  }
+}
+
+class TopIndicator extends Decoration {
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    return _TopIndicatorBox();
+  }
+}
+
+class _TopIndicatorBox extends BoxPainter {
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
+    Paint _paint = Paint()
+      ..color = buttonColor
+      ..strokeWidth = 5
+      ..isAntiAlias = true;
+
+    canvas.drawLine(offset, Offset(cfg.size!.width + offset.dx, 0), _paint);
   }
 }

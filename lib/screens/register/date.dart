@@ -1,4 +1,5 @@
 import 'package:bank_core/screens/register/confirmcode.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class Date extends StatefulWidget {
@@ -95,7 +96,7 @@ class _DateState extends State<Date> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.greenAccent,
+              color: buttonColor,
             ),
             child: InkWell(
               onTap: () {
