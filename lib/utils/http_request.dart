@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'http_handler.dart';
-import '../main.dart';
 
 class HttpRequest {
   static const host = 'http://192.168.1.59:30700';
@@ -41,15 +40,15 @@ class HttpRequest {
       dio.interceptors.add(CookieManager(cookieJar));
 
       var token = await UserProvider.getAccessToken();
-      var deviceToken = await UserProvider.getDeviceToken();
+      // var deviceToken = await UserProvider.getDeviceToken();
       debugPrint('++++++++++++++++++++++deviceaaaaaaaToken+++++++++++++++ ');
-      debugPrint(deviceToken);
+      // debugPrint(deviceToken);
       debugPrint(token);
       debugPrint('+++++++++++++++++++++++deviceaaaaaaaToken++++++++++++++ ');
 
       dio.options.headers = {
         'authorization': 'Bearer $token',
-        'device-token': '$deviceToken',
+        // 'device-token': '$deviceToken',
         'device_type': 'MOS',
         'device_imei': 'test-imei',
         'device_info': 'iphone 13'

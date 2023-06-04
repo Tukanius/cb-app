@@ -1,9 +1,6 @@
-import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/lending/lend.dart';
-import 'package:bank_core/screens/login/login.dart';
-import 'package:bank_core/screens/main/main_page.dart';
-import 'package:bank_core/screens/splash/index.dart';
+import 'package:bank_core/screens/main-page.dart';
+import 'package:bank_core/screens/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
@@ -28,32 +25,18 @@ class MyApp extends StatelessWidget {
         home: MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(create: (_) => GeneralProvider()),
           ],
           child: Stack(
             children: [
               MaterialApp(
                 title: 'Bank Core',
                 debugShowCheckedModeBanner: false,
-                initialRoute: SplashPage.routeName,
+                initialRoute: SplashScreen.routeName,
                 onGenerateRoute: (RouteSettings settings) {
                   switch (settings.name) {
-                    case SplashPage.routeName:
+                    case SplashScreen.routeName:
                       return MaterialPageRoute(builder: (context) {
-                        return const SplashPage();
-                      });
-                    case Lending.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const Lending();
-                      });
-                    case MainPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const MainPage();
-                      });
-
-                    case LoginPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const LoginPage();
+                        return const SplashScreen();
                       });
 
                     default:
