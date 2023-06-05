@@ -119,12 +119,28 @@ General _$GeneralFromJson(Map<String, dynamic> json) {
             .map((e) => LoanStatuses.fromJson(e))
             .toList()
         : null,
+    banks: json['banks'] != null
+        ? (json['banks'] as List).map((e) => Banks.fromJson(e)).toList()
+        : null,
+    currencies: json['currencies'] != null
+        ? (json['currencies'] as List)
+            .map((e) => Currencies.fromJson(e))
+            .toList()
+        : null,
+    industries: json['industries'] != null
+        ? (json['industries'] as List)
+            .map((e) => Industries.fromJson(e))
+            .toList()
+        : null,
   );
 }
 
 Map<String, dynamic> _$GeneralToJson(General instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.industries != null) json['industries'] = instance.industries;
+  if (instance.currencies != null) json['currencies'] = instance.currencies;
+  if (instance.banks != null) json['banks'] = instance.banks;
   if (instance.provinces != null) json['provinces'] = instance.provinces;
   if (instance.districts != null) json['districts'] = instance.districts;
   if (instance.khoroos != null) json['khoroos'] = instance.khoroos;

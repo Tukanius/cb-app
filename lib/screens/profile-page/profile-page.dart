@@ -5,6 +5,7 @@ import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/bank-accounts.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
+import 'package:bank_core/screens/who-type-page/who-type-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -217,31 +218,37 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: white,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Who Type",
-                    style: TextStyle(
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(WhoTypePage.routeName);
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: darkGrey,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.person,
                       color: white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
                     ),
-                  )
-                ],
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      "Who Type",
+                      style: TextStyle(
+                        color: white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Container(

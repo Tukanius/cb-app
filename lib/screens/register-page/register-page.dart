@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
@@ -5,6 +7,7 @@ import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -36,15 +39,93 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
       try {
         print("12312321312");
         User data = User.fromJson(form!.value);
-        data.birthDate = datepickervalue;
+        data.birthDate =
+            Platform.isAndroid ? datepickervalue : dateTime.toString();
         await Provider.of<UserProvider>(context, listen: false).register(data);
-        Navigator.of(context).pushNamed(LoginScreen.routeName);
+        await showSuccesful(context);
+        await Navigator.of(context).pushNamed(LoginScreen.routeName);
       } catch (e) {
         print('==========err==========');
         print(e.toString());
         print('==========err==========');
       }
     }
+  }
+
+  showSuccesful(context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        Future.delayed(Duration(seconds: 2), () {
+          Navigator.of(context).pop(true);
+        });
+        return Material(
+          type: MaterialType.transparency,
+          child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 150),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: white,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: buttonColor, width: 3),
+                        ),
+                        child: Icon(
+                          Icons.check,
+                          color: buttonColor,
+                          size: 40,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Танд амжилт хүсье',
+                        style: TextStyle(
+                            color: black.withOpacity(0.7), fontSize: 14),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        'Амжилттай',
+                        style: TextStyle(
+                          color: black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          left: 50,
+                          right: 50,
+                        ),
+                        child: CustomButton(
+                          textColor: white,
+                          labelColor: buttonColor,
+                          boxShadow: true,
+                          labelText: "Ок",
+                          onClick: () {},
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              )),
+        );
+      },
+    );
   }
   // onSubmit() async {
   //   if (fbKey.currentState!.saveAndValidate()) {
@@ -59,6 +140,8 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
   void initState() {
     super.initState();
   }
+
+  DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -144,81 +227,103 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                     SizedBox(
                       height: 10,
                     ),
-                    // Container(
-                    //   padding: EdgeInsets.all(15),
-                    //   height: MediaQuery.of(context).size.width / 3,
-                    //   child: Center(
-                    //     child: TextField(
-                    //       controller: dateInput,
-                    //       //editing controller of this TextField
-                    //       decoration: InputDecoration(
-                    //           icon: Icon(
-                    //               Icons.calendar_today), //icon of text field
-                    //           labelText:
-                    //               "Төрсөн он, сар, өдөр" //label text of field
-                    //           ),
-                    //       readOnly: true,
-                    //       //set it true, so that user will not able to edit text
-                    //       onTap: () async {
-                    //         DateTime? pickedDate = await showDatePicker(
-                    //             context: context,
-                    //             initialDate: DateTime.now(),
-                    //             firstDate: DateTime(1950),
-                    //             //DateTime.now() - not to allow to choose before today.
-                    //             lastDate: DateTime(2100));
+                    Platform.isAndroid
+                        ? GestureDetector(
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1950),
+                                  lastDate: DateTime(2100));
 
-                    //         if (pickedDate != null) {
-                    //           print(
-                    //               pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                    //           String formattedDate =
-                    //               DateFormat('yyyy-MM-dd').format(pickedDate);
-                    //           print(
-                    //               formattedDate); //formatted date output using intl package =>  2021-03-16
-                    //           setState(() {
-                    //             dateInput.text =
-                    //                 formattedDate; //set output date to TextField value.
-                    //           });
-                    //         } else {}
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
-                    GestureDetector(
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1950),
-                            lastDate: DateTime(2100));
-
-                        if (pickedDate != null) {
-                          print(pickedDate);
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(formattedDate);
-                          setState(() {
-                            datepickervalue = formattedDate;
-                          });
-                        } else {}
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: white),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 20),
-                        child: datepickervalue == ''
-                            ? Text(
-                                'Төрсөн он, сар, өдөр',
-                                style: TextStyle(color: darkGrey),
-                              )
-                            : Text(
-                                datepickervalue,
-                                style: TextStyle(color: darkGrey),
-                              ),
-                      ),
-                    ),
+                              if (pickedDate != null) {
+                                print(pickedDate);
+                                String formattedDate =
+                                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                                print(formattedDate);
+                                setState(() {
+                                  datepickervalue = formattedDate;
+                                });
+                              } else {}
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: white),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 20),
+                              child: datepickervalue == ''
+                                  ? Text(
+                                      'Төрсөн он, сар, өдөр',
+                                      style: TextStyle(color: darkGrey),
+                                    )
+                                  : Text(
+                                      datepickervalue,
+                                      style: TextStyle(color: darkGrey),
+                                    ),
+                            ),
+                          )
+                        : GestureDetector(
+                            child: Container(
+                              height: 60,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: white),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 20),
+                              child: dateTime == DateTime.now()
+                                  ? Text(
+                                      'Төрсөн он, сар, өдөр',
+                                      style: TextStyle(color: darkGrey),
+                                    )
+                                  : Text(
+                                      '${dateTime}',
+                                      style: TextStyle(color: darkGrey),
+                                    ),
+                            ),
+                            onTap: () {
+                              showCupertinoModalPopup(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    height: 250,
+                                    color: white,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text(
+                                            'Болсон',
+                                            style: TextStyle(color: black),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: CupertinoDatePicker(
+                                            minimumYear: 1920,
+                                            mode: CupertinoDatePickerMode.date,
+                                            initialDateTime: dateTime,
+                                            onDateTimeChanged:
+                                                (DateTime newDate) {
+                                              setState(() {
+                                                dateTime = newDate;
+                                                print(dateTime);
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                     SizedBox(
                       height: 10,
                     ),

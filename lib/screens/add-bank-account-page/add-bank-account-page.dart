@@ -1,10 +1,13 @@
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
+import 'package:bank_core/models/general.dart';
+import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
 
 class AddBankAccountPage extends StatefulWidget {
   static const routeName = 'AddBankAccountPage';
@@ -23,8 +26,12 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
   ];
   String? selectedMethod;
 
+  General general = General();
+
   @override
   Widget build(BuildContext context) {
+    general = Provider.of<GeneralProvider>(context, listen: false).general;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -95,7 +102,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                 name: 'paymentMethod',
                 onChanged: (value) async {
                   setState(() {
-                    selectedMethod = value;
+                    selectedMethod = value.toString();
                   });
                 },
                 decoration: InputDecoration(
@@ -111,7 +118,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     borderSide: const BorderSide(color: white, width: 0),
                   ),
                 ),
-                items: bankAccounts
+                items: general.banks!
                     .map(
                       (item) => DropdownMenuItem(
                         value: item,
@@ -120,7 +127,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                           child: Row(
                             children: [
                               Text(
-                                '${item}',
+                                '${item.name}',
                                 style: TextStyle(fontSize: 14),
                               ),
                             ],

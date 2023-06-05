@@ -7,7 +7,7 @@ Currencies _$CurrenciesFromJson(Map<String, dynamic> json) {
     updatedAt: json['updatedAt'] != null ? json['updatedAt'] as String : null,
     deletedAt: json['deletedAt'] != null ? json['deletedAt'] as String : null,
     name: json['name'] != null ? json['name'] as String : null,
-    isActive: json['name'] != null ? json['name'] as bool : null,
+    isActive: json['isActive'] != null ? json['isActive'] as bool : null,
   );
 }
 

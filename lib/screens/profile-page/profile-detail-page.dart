@@ -1,6 +1,12 @@
+import 'dart:async';
+
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/models/user.dart';
+import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:after_layout/after_layout.dart';
+import 'package:provider/provider.dart';
 
 class ProfileDetailPage extends StatefulWidget {
   static const routeName = "ProfileDetailPage";
@@ -10,9 +16,16 @@ class ProfileDetailPage extends StatefulWidget {
   State<ProfileDetailPage> createState() => _ProfileDetailPageState();
 }
 
-class _ProfileDetailPageState extends State<ProfileDetailPage> {
+class _ProfileDetailPageState extends State<ProfileDetailPage>
+    with AfterLayoutMixin {
+  User user = User();
+
+  @override
+  afterFirstLayout(BuildContext context) async {}
+
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<UserProvider>(context, listen: true).user;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -77,7 +90,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                     height: 5,
                   ),
                   Text(
-                    "Пүрэвдорж",
+                    "${user.lastName}",
                     style: TextStyle(
                       color: white,
                       fontSize: 14,
@@ -109,7 +122,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                     height: 5,
                   ),
                   Text(
-                    "Энхманлай",
+                    "${user.firstName}",
                     style: TextStyle(
                       color: white,
                       fontSize: 14,
@@ -141,7 +154,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                     height: 5,
                   ),
                   Text(
-                    "96119230",
+                    "${user.phone}",
                     style: TextStyle(
                       color: white,
                       fontSize: 14,
@@ -173,7 +186,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                     height: 5,
                   ),
                   Text(
-                    "penkhmanlai0225@gmail.com",
+                    "${user.email}",
                     style: TextStyle(
                       color: white,
                       fontSize: 14,

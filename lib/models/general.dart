@@ -67,6 +67,9 @@ class General {
   List<LoanStatuses>? loanStatuses;
 
   General({
+    this.industries,
+    this.currencies,
+    this.banks,
     this.provinces,
     this.districts,
     this.khoroos,
