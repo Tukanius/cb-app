@@ -1,21 +1,18 @@
 import 'dart:io';
+import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/services/dialog.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:bank_core/provider/user_provider.dart';
 import 'http_handler.dart';
+import '../main.dart';
 
 class HttpRequest {
   static const host = 'http://192.168.1.59:30700';
-  // static const host = 'https://dev-edar.zto.mn';
-  // static const host = 'http://192.168.1.17:5002';
 
-  //static const s3host = 'https://e-darkhan.mn/s3';
-  // static const s3host = 'https://dev-edar.zto.mn/s3';
-  // static const s3host = 'http://192.168.1.17:5002/s3';
-  static const version = '/api';
+  static const version = '/api/mobile';
 
   static const uri = host;
 
@@ -24,8 +21,9 @@ class HttpRequest {
   Future<dynamic> request(String api, String method, dynamic data,
       {bool handler = true, bool approve = false}) async {
     Response? response;
-    final String uri = '$host$version$api';
+    final String uri;
 
+    uri = '$host$version$api';
     debugPrint(uri);
 
     debugPrint('+++++++++++++++++++++++++++++++++++++++++++++++++++');
@@ -40,15 +38,14 @@ class HttpRequest {
       dio.interceptors.add(CookieManager(cookieJar));
 
       var token = await UserProvider.getAccessToken();
-      // var deviceToken = await UserProvider.getDeviceToken();
-      debugPrint('++++++++++++++++++++++deviceaaaaaaaToken+++++++++++++++ ');
+      var deviceToken = "";
+      // debugPrint('++++++++++++++++++++++deviceToken+++++++++++++++ ');
       // debugPrint(deviceToken);
-      debugPrint(token);
-      debugPrint('+++++++++++++++++++++++deviceaaaaaaaToken++++++++++++++ ');
+      // debugPrint('+++++++++++++++++++++++deviceToken++++++++++++++ ');
 
       dio.options.headers = {
         'authorization': 'Bearer $token',
-        // 'device-token': '$deviceToken',
+        'device-token': '$deviceToken',
         'device_type': 'MOS',
         'device_imei': 'test-imei',
         'device_info': 'iphone 13'
@@ -56,8 +53,6 @@ class HttpRequest {
     } catch (err) {
       debugPrint(err.toString());
     }
-    // final Connectivity _connectivity = Connectivity();
-    // ConnectivityResult result = ConnectivityResult.none;
 
     if (method != 'GET') {
       debugPrint('body: $data');
@@ -92,13 +87,24 @@ class HttpRequest {
 
       return HttpHandler(statusCode: response?.statusCode).handle(response);
     } on DioError catch (ex) {
+      // try {
+      //   result = await _connectivity.checkConnectivity();
+      //   if (result == ConnectivityResult.none) {
+      //     MyApp.dialogService!
+      //         .showInternetErrorDialog("No internet connection");
+      //     return null;
+      //   }
+      // } on PlatformException catch (e) {
+      //   debugPrint(e.toString());
+      // }
+
       HttpHandler? error =
           HttpHandler(statusCode: ex.response?.statusCode).handle(ex.response);
 
-      // if (handler == true && error!.message != null) {
-      //   final DialogService dialogService = locator<DialogService>();
-      //   dialogService.showErrorDialog(error.message.toString());
-      // }
+      if (handler == true && error!.message != null) {
+        final DialogService dialogService = locator<DialogService>();
+        dialogService.showErrorDialog(error.message.toString());
+      }
 
       throw error!;
     }

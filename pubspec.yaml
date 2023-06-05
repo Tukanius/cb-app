@@ -53,6 +53,9 @@ dev_dependencies:
   another_flushbar: ^1.12.30
   flutter_svg: ^2.0.4
   percent_indicator: ^4.2.3
+  lottie: ^2.2.0
+  intl: ^0.17.0
+  carousel_slider: ^4.2.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

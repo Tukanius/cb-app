@@ -1,14 +1,15 @@
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class FormTextField extends StatefulWidget {
+  final Color? color;
   final String? name;
   final TextEditingController? controller;
   final String? attribute;
   final String? labelText;
   final String? hintText;
+  final Widget? suffixIcon;
   final TextInputType inputType;
   final TextInputAction? inputAction;
   final InputDecoration? decoration;
@@ -16,15 +17,11 @@ class FormTextField extends StatefulWidget {
   final FocusNode? focus;
   final FocusNode? nextFocus;
   final Widget? prefixIcon;
-  final Widget? suffixIcon;
   final bool obscureText;
   final bool hasObscureControl;
   final bool autoFocus;
-  final double? fontSize;
   final bool readOnly;
   final FocusNode? focusNode;
-  final FontWeight fontWeight;
-  final int? maxLines;
   final FocusNode? nextFocusNode;
   final Function? onComplete;
   final String? Function(dynamic)? validator;
@@ -35,19 +32,18 @@ class FormTextField extends StatefulWidget {
   final int? maxLenght;
   final bool showCounter;
   final Function(dynamic)? onChanged;
-  final Color? color;
+  final int? maxLines;
 
   // ignore: use_key_in_widget_constructors
   const FormTextField(
       {Key? key,
+      this.color,
+      this.suffixIcon,
       this.name,
       this.controller,
       this.decoration,
-      this.maxLines = 1,
-      this.fontWeight = FontWeight.w400,
       this.attribute,
       this.hintText,
-      this.fontSize = 14,
       this.inputType = TextInputType.visiblePassword,
       this.inputAction,
       this.initialValue,
@@ -69,8 +65,7 @@ class FormTextField extends StatefulWidget {
       this.focus,
       this.nextFocus,
       this.prefixIcon,
-      this.color,
-      this.suffixIcon,
+      this.maxLines = 1,
       this.labelText});
 
   @override
@@ -124,24 +119,21 @@ class _FormTextFieldState extends State<FormTextField> {
           widget.onComplete!();
         }
       },
-      style: TextStyle(
-          color: Colors.black,
-          fontSize: widget.fontSize,
-          fontWeight: widget.fontWeight),
+      style: const TextStyle(color: Colors.black, fontSize: 14),
 
       decoration: widget.decoration ??
           InputDecoration(
+            suffixIcon: widget.suffixIcon,
             hintText: widget.hintText,
             prefixIcon: widget.prefixIcon,
-            suffixIcon: widget.suffixIcon,
             labelText: widget.labelText,
             errorBorder: const OutlineInputBorder(),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               borderSide: BorderSide.none,
             ),
             contentPadding:
-                const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 15),
+                const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             filled: true,
             hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
             fillColor: widget.color,
