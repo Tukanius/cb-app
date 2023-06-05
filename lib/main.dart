@@ -1,5 +1,6 @@
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/add-address-page/add-address-page.dart';
 import 'package:bank_core/screens/add-bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/screens/loan-detail-page/loan-detail-page.dart';
@@ -110,6 +111,10 @@ class MyApp extends StatelessWidget {
                     case RegisterPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const RegisterPage();
+                      });
+                    case AddAddressPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const AddAddressPage();
                       });
                     case WhoTypePage.routeName:
                       return MaterialPageRoute(builder: (context) {
