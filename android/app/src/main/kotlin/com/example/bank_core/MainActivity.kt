@@ -1,4 +1,4 @@
-package com.example.bank_core
+package com.bank.core
 
 import io.flutter.embedding.android.FlutterActivity
 
