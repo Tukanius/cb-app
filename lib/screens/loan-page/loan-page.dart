@@ -32,7 +32,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   onSubmit() async {}
 
   double currentValue = 0;
-  double maxValue = 400000;
   int? selectedIndex;
   bool onTap = false;
   TextEditingController textController = TextEditingController();

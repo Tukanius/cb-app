@@ -9,7 +9,7 @@ import 'package:bank_core/screens/loan-schedule-page/loan-schedule-page.dart';
 import 'package:bank_core/screens/main-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
-import 'package:bank_core/screens/profile-page/add-address.dart';
+import 'package:bank_core/screens/add-address-page/address.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/register-page/register-page.dart';
@@ -65,10 +65,7 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return const SplashScreen();
                       });
-                    case LoanDetailPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const LoanDetailPage();
-                      });
+
                     case MainPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const MainPage();
@@ -80,14 +77,6 @@ class MyApp extends StatelessWidget {
                     case MainPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const MainPage();
-                      });
-                    case PaymentPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const PaymentPage();
-                      });
-                    case LoanSchedulePage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const LoanSchedulePage();
                       });
                     case LoginScreen.routeName:
                       return MaterialPageRoute(builder: (context) {
@@ -124,6 +113,31 @@ class MyApp extends StatelessWidget {
                     case AddAddress.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const AddAddress();
+                      });
+                    case LoanDetailPage.routeName:
+                      LoanDetailPageArguments arguments =
+                          settings.arguments as LoanDetailPageArguments;
+                      return MaterialPageRoute(builder: (context) {
+                        return LoanDetailPage(
+                          id: arguments.id,
+                        );
+                      });
+                    case LoanSchedulePage.routeName:
+                      LoanSchedulePageArguments arguments =
+                          settings.arguments as LoanSchedulePageArguments;
+                      return MaterialPageRoute(builder: (context) {
+                        return LoanSchedulePage(
+                          id: arguments.id,
+                        );
+                      });
+                    case PaymentPage.routeName:
+                      PaymentPageArguments arguments =
+                          settings.arguments as PaymentPageArguments;
+                      return MaterialPageRoute(builder: (context) {
+                        return PaymentPage(
+                          loanResidual: arguments.loanResidual,
+                          id: arguments.id,
+                        );
                       });
                     default:
                       return MaterialPageRoute(

@@ -1,9 +1,9 @@
-import 'dart:async';
-
 import 'package:bank_core/api/auth-api.dart';
+import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/active-loan-card/active-loan-card.dart';
 import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
 import 'package:bank_core/models/get.dart';
+import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/loan-detail-page/loan-detail-page.dart';
@@ -12,7 +12,6 @@ import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class HomePageArguments {
   String id;
@@ -34,10 +33,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   bool isLoading = true;
+  int page = 1;
+  int limit = 5;
+  Result loan = Result(count: 0, rows: []);
 
   @override
   afterFirstLayout(BuildContext context) async {
     get = await AuthApi().accountGet(user.customerId!);
+    list(limit, page);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  list(limit, page) async {
+    Offset offset = Offset(page: page, limit: limit);
+    Filter filter = Filter(query: '');
+    loan = await CustomerApi().activeList(
+        ResultArguments(offset: offset, filter: filter), user.customerId!);
     setState(() {
       isLoading = false;
     });
@@ -49,6 +62,9 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
+    print('==========LOAN========');
+    print(loan.toJson());
+    print('==========LOAN========');
 
     return isLoading == true
         ? Center(
@@ -100,15 +116,20 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      ActiveLoanCard(
-                        onClick: () {
-                          Navigator.of(context)
-                              .pushNamed(LoanDetailPage.routeName);
-                        },
-                      ),
-                      ActiveLoanCard(),
-                    ],
+                    children: loan.rows!
+                        .map(
+                          (e) => ActiveLoanCard(
+                            data: e,
+                            onClick: () {
+                              Navigator.of(context).pushNamed(
+                                LoanDetailPage.routeName,
+                                arguments:
+                                    LoanDetailPageArguments(id: e.loanId),
+                              );
+                            },
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
                 SizedBox(

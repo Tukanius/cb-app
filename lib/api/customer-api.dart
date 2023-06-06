@@ -29,8 +29,43 @@ class CustomerApi extends HttpRequest {
   }
 
   customerAddress(Customer data) async {
-    var res = await post('/mobile/customerAddress/create',
+    var res = await post('/customerAddress/create',
         data: data.toJson(), handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
+  }
+
+  Future<Result> addressList(ResultArguments resultArguments) async {
+    var res = await get("/customerAddress",
+        data: resultArguments.toJson(), handler: true);
+    return Result.fromJson(res, Customer.fromJson);
+  }
+
+  Future<Result> activeList(ResultArguments resultArguments, String id) async {
+    var res =
+        await get("/Loans/$id", data: resultArguments.toJson(), handler: true);
+    return Result.fromJson(res, Customer.fromJson);
+  }
+
+  activeLoanGet(String id) async {
+    var res = await get("/loanPayBack/$id", handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
+  }
+
+  Future<Result> paidList(ResultArguments resultArguments, String id) async {
+    var res = await get("/loanPayBackPaidList/$id",
+        data: resultArguments.toJson(), handler: true);
+    return Result.fromJson(res, Customer.fromJson);
+  }
+
+  Future<Result> loanSchedule(
+      ResultArguments resultArguments, String id) async {
+    var res = await get("/loanPayBackList/$id",
+        data: resultArguments.toJson(), handler: true);
+    return Result.fromJson(res, Customer.fromJson);
+  }
+
+  pay(Customer data) async {
+    var res = await post("/payment/create", data: data.toJson(), handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 }

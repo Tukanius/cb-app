@@ -13,7 +13,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     firstName: json['firstName'] != null ? json['firstName'] as String : null,
     lastName: json['lastName'] != null ? json['lastName'] as String : null,
     phone: json['phone'] != null ? json['phone'] as String : null,
-    isActive: json['isActive'] != null ? json['isActive'] as bool : null,
+    isActive: json['isActive'] != null ? json['isActive'] as String : null,
     createdAt: json['createdAt'] != null ? json['createdAt'] as String : null,
     createdUserId:
         json['createdUserId'] != null ? json['createdUserId'] as String : null,
@@ -31,12 +31,63 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     bank: json['bank'] != null
         ? Customer.fromJson(json['bank'] as Map<String, dynamic>)
         : null,
+    addressTypeId:
+        json['addressTypeId'] != null ? json['addressTypeId'] as String : null,
+    provinceId:
+        json['provinceId'] != null ? json['provinceId'] as String : null,
+    districtId:
+        json['districtId'] != null ? json['districtId'] as String : null,
+    khorooId: json['khorooId'] != null ? json['khorooId'] as String : null,
+    address: json['address'] != null ? json['address'] as String : null,
+    province: json['province'] != null
+        ? Customer.fromJson(json['province'] as Map<String, dynamic>)
+        : null,
+    district: json['district'] != null
+        ? Customer.fromJson(json['district'] as Map<String, dynamic>)
+        : null,
+    khoroo: json['khoroo'] != null
+        ? Customer.fromJson(json['khoroo'] as Map<String, dynamic>)
+        : null,
+    addressType: json['addressType'] != null
+        ? Customer.fromJson(json['addressType'] as Map<String, dynamic>)
+        : null,
+    totalPayAmount: json['totalPayAmount'] != null
+        ? json['totalPayAmount'] as String
+        : null,
+    payDate: json['payDate'] != null ? json['payDate'] as String : null,
+    loanStatusId:
+        json['loanStatusId'] != null ? json['loanStatusId'] as String : null,
+    loan: json['loan'] != null
+        ? Customer.fromJson(json['loan'] as Map<String, dynamic>)
+        : null,
+    loanId: json['loanId'] != null ? json['loanId'] as String : null,
+    loanResidual:
+        json['loanResidual'] != null ? json['loanResidual'] as String : null,
+    rateCalcDay:
+        json['rateCalcDay'] != null ? json['rateCalcDay'] as String : null,
+    rateAmount:
+        json['rateAmount'] != null ? json['rateAmount'] as String : null,
+    mainLoanPayAmount: json['mainLoanPayAmount'] != null
+        ? json['mainLoanPayAmount'] as String
+        : null,
+    amount:
+        json['amount'] != null ? double.parse(json['amount'].toString()) : null,
+    paidDate: json['paidDate'] != null ? json['paidDate'] as String : null,
+    payerUserId:
+        json['payerUserId'] != null ? json['payerUserId'] as String : null,
   );
 }
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.paidDate != null) json['paidDate'] = instance.paidDate;
+  if (instance.payerUserId != null) json['payerUserId'] = instance.payerUserId;
+  if (instance.amount != null) json['amount'] = instance.amount;
+  if (instance.rateAmount != null) json['rateAmount'] = instance.rateAmount;
+  if (instance.mainLoanPayAmount != null)
+    json['mainLoanPayAmount'] = instance.mainLoanPayAmount;
+  if (instance.loanId != null) json['loanId'] = instance.loanId;
   if (instance.bankId != null) json['bankId'] = instance.bankId;
   if (instance.accountNumber != null)
     json['accountNumber'] = instance.accountNumber;
@@ -59,6 +110,19 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   if (instance.deletedAt != null) json['deletedAt'] = instance.deletedAt;
   if (instance.whoType != null) json['whoType'] = instance.whoType;
   if (instance.name != null) json['name'] = instance.name;
+  if (instance.addressTypeId != null)
+    json['addressTypeId'] = instance.addressTypeId;
+  if (instance.provinceId != null) json['provinceId'] = instance.provinceId;
+  if (instance.districtId != null) json['districtId'] = instance.districtId;
+  if (instance.khorooId != null) json['khorooId'] = instance.khorooId;
+  if (instance.address != null) json['address'] = instance.address;
+  if (instance.province != null) json['province'] = instance.province;
+  if (instance.district != null) json['district'] = instance.district;
+  if (instance.khoroo != null) json['khoroo'] = instance.khoroo;
+  if (instance.addressType != null) json['addressType'] = instance.addressType;
+  if (instance.loanResidual != null)
+    json['loanResidual'] = instance.loanResidual;
+  if (instance.rateCalcDay != null) json['rateCalcDay'] = instance.rateCalcDay;
 
   return json;
 }

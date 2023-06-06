@@ -29,7 +29,6 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15),
       alignment: Alignment.center,
-      // width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: darkGrey,

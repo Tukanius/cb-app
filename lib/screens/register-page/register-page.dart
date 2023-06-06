@@ -14,6 +14,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = 'RegisterPage';
@@ -191,6 +192,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       name: 'lastName',
                       hintText: 'Овог',
                       color: white,
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Заавал оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -199,6 +204,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       name: 'firstName',
                       hintText: 'Нэр',
                       color: white,
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Заавал оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -207,6 +216,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       name: 'registerNo',
                       hintText: 'Регистер №',
                       color: white,
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Заавал оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -215,6 +228,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       name: 'phone',
                       hintText: 'Утасны дугаар',
                       color: white,
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Заавал оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -223,6 +240,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       name: 'email',
                       hintText: 'И-мэйл хаяг',
                       color: white,
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Заавал оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -348,6 +369,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                                 color: darkGrey,
                               ),
                       ),
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Заавал оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -372,6 +397,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                                 color: darkGrey,
                               ),
                       ),
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Заавал оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 50,

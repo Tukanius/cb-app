@@ -2,134 +2,145 @@ import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
-class LoanScheduleCard extends StatefulWidget {
+class AddressCard extends StatefulWidget {
   final Customer? data;
-  const LoanScheduleCard({
+  const AddressCard({
     Key? key,
     this.data,
   }) : super(key: key);
 
   @override
-  State<LoanScheduleCard> createState() => _LoanScheduleCardState();
+  State<AddressCard> createState() => _AddressCardState();
 }
 
-class _LoanScheduleCardState extends State<LoanScheduleCard> {
+class _AddressCardState extends State<AddressCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: darkGrey,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '${widget.data!.payDate}',
-            style: TextStyle(
-              color: white,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          SizedBox(
-            height: 5,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Хаягын төрөл',
+                style: TextStyle(
+                  color: white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                'Байнгын',
+                style: TextStyle(
+                  color: white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
           Divider(
             color: grey,
           ),
-          SizedBox(
-            height: 5,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Төлөх дүн',
+                'Аймаг/Хот',
                 style: TextStyle(
-                  color: grey,
-                  fontSize: 12,
+                  color: white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                "${widget.data!.totalPayAmount}₮",
+                '${widget.data!.provinceId}',
                 style: TextStyle(
                   color: white,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               )
             ],
           ),
-          SizedBox(
-            height: 10,
+          Divider(
+            color: grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Зээлийн үлдэгдэл',
+                'Дүүргэ/Сум',
                 style: TextStyle(
-                  color: grey,
-                  fontSize: 12,
+                  color: white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                "${widget.data!.loanResidual}₮",
+                '${widget.data!.districtId}',
                 style: TextStyle(
                   color: white,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
-              )
+              ),
             ],
           ),
-          SizedBox(
-            height: 10,
+          Divider(
+            color: grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Зээлийн хүү',
+                'Хороо/Баг',
                 style: TextStyle(
-                  color: grey,
-                  fontSize: 12,
+                  color: white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                "${widget.data!.rateAmount}₮",
+                '${widget.data!.khorooId}',
                 style: TextStyle(
                   color: white,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
-              )
+              ),
             ],
           ),
-          SizedBox(
-            height: 10,
+          Divider(
+            color: grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Үндсэн зээлээс',
+                'Хаяг/Тоот',
                 style: TextStyle(
-                  color: grey,
-                  fontSize: 12,
+                  color: white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                "${widget.data!.mainLoanPayAmount}₮",
+                '${widget.data!.address}',
                 style: TextStyle(
                   color: white,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
-              )
+              ),
             ],
           ),
         ],

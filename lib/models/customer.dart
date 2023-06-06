@@ -11,7 +11,7 @@ class Customer {
   String? firstName;
   String? lastName;
   String? phone;
-  bool? isActive;
+  String? isActive;
   String? createdAt;
   String? createdUserId;
   String? updatedAt;
@@ -19,10 +19,31 @@ class Customer {
   String? deletedAt;
   Customer? whoType;
   String? name;
-
   String? bankId;
   String? accountNumber;
   Customer? bank;
+  String? addressTypeId;
+  String? provinceId;
+  String? districtId;
+  String? khorooId;
+  String? address;
+  Customer? province;
+  Customer? district;
+  Customer? khoroo;
+  Customer? addressType;
+  String? totalPayAmount;
+  String? payDate;
+  String? loanStatusId;
+  Customer? loan;
+  String? loanId;
+  String? loanResidual;
+  String? rateCalcDay;
+  String? rateAmount;
+  String? mainLoanPayAmount;
+
+  double? amount;
+  String? paidDate;
+  String? payerUserId;
 
   String getPostDate() {
     return Moment.parse(DateFormat("yyyy-MM-dd")
@@ -33,6 +54,27 @@ class Customer {
   }
 
   Customer({
+    this.payerUserId,
+    this.paidDate,
+    this.amount,
+    this.rateAmount,
+    this.mainLoanPayAmount,
+    this.loanResidual,
+    this.rateCalcDay,
+    this.loanId,
+    this.totalPayAmount,
+    this.payDate,
+    this.loanStatusId,
+    this.loan,
+    this.province,
+    this.district,
+    this.khoroo,
+    this.addressType,
+    this.addressTypeId,
+    this.provinceId,
+    this.districtId,
+    this.khorooId,
+    this.address,
     this.bankId,
     this.accountNumber,
     this.bank,

@@ -1,11 +1,14 @@
+import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ActiveLoanCard extends StatefulWidget {
+  final Customer? data;
   final Function()? onClick;
   const ActiveLoanCard({
     Key? key,
+    this.data,
     this.onClick,
   }) : super(key: key);
 
@@ -69,7 +72,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      '120000₮',
+                      '${widget.data!.totalPayAmount}',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,
@@ -91,7 +94,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      '2023.03.21',
+                      '${widget.data!.payDate}',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,
@@ -113,7 +116,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      'Хэвийн',
+                      '${widget.data!.loan!.loanStatusId}',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,

@@ -2,6 +2,7 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/screens/main-page.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,13 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Center(
+        child: CircularProgressIndicator(
+          color: buttonColor,
+        ),
+      ),
+    );
   }
 }
