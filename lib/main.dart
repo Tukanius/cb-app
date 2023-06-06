@@ -13,7 +13,6 @@ import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/register-page/register-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
-import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
 import 'package:bank_core/screens/who-type-page/who-type-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
