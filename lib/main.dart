@@ -1,19 +1,19 @@
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/add-address-page/add-address-page.dart';
-import 'package:bank_core/screens/add-bank-account-page/add-bank-account-page.dart';
+import 'package:bank_core/screens/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/screens/loan-detail-page/loan-detail-page.dart';
 import 'package:bank_core/screens/loan-page/loan-page.dart';
 import 'package:bank_core/screens/loan-schedule-page/loan-schedule-page.dart';
 import 'package:bank_core/screens/main-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
-import 'package:bank_core/screens/profile-page/add-address.dart';
-import 'package:bank_core/screens/profile-page/bank-accounts.dart';
+import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/register-page/register-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
+import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
 import 'package:bank_core/screens/who-type-page/who-type-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
@@ -120,10 +120,6 @@ class MyApp extends StatelessWidget {
                     case WhoTypePage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const WhoTypePage();
-                      });
-                    case AddAddress.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const AddAddress();
                       });
                     default:
                       return MaterialPageRoute(

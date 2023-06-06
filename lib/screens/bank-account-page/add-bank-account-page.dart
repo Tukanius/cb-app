@@ -1,17 +1,22 @@
+import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
+import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/general.dart';
+import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
+import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class AddBankAccountPage extends StatefulWidget {
   static const routeName = 'AddBankAccountPage';
-  const AddBankAccountPage({super.key});
+  const AddBankAccountPage({Key? key}) : super(key: key);
 
   @override
   State<AddBankAccountPage> createState() => _AddBankAccountPageState();
@@ -19,12 +24,91 @@ class AddBankAccountPage extends StatefulWidget {
 
 class _AddBankAccountPageState extends State<AddBankAccountPage> {
   String? selectedMethod;
-
+  TextEditingController textController = TextEditingController();
   General general = General();
+  User user = User();
+
+  Customer save = Customer();
+
+  onSubmit() async {
+    try {
+      save.bankId = selectedMethod;
+      save.customerId = user.customerId;
+      save.accountNumber = textController.text;
+      await CustomerApi().createBankAccount(save);
+      await show(context);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  show(ctx) async {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 75),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text(
+                        'Амжилттай',
+                        style: TextStyle(
+                            color: dark,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Text(
+                        'Таны бүртгэл амжилттай үүслээ.',
+                        textAlign: TextAlign.center,
+                      ),
+                      ButtonBar(
+                        buttonMinWidth: 100,
+                        alignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          TextButton(
+                            child: const Text(
+                              "Дуусгах",
+                              style: TextStyle(color: dark),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              UserProvider().logout();
+                              Navigator.of(ctx).pop();
+                              Navigator.of(ctx).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Lottie.asset('images/success.json', height: 150, repeat: false),
+              ],
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     general = Provider.of<GeneralProvider>(context, listen: false).general;
+    user = Provider.of<UserProvider>(context, listen: false).user;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -96,7 +180,8 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                 name: 'paymentMethod',
                 onChanged: (value) async {
                   setState(() {
-                    selectedMethod = value.toString();
+                    // selectedMethod = value.toString();
+                    // print(selectedMethod);
                   });
                 },
                 decoration: InputDecoration(
@@ -115,6 +200,12 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                 items: general.banks!
                     .map(
                       (item) => DropdownMenuItem(
+                        onTap: () {
+                          setState(() {
+                            selectedMethod = item.id;
+                            print(selectedMethod);
+                          });
+                        },
                         value: item,
                         child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -138,6 +229,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15),
               child: FormTextField(
+                controller: textController,
                 name: 'BankAccount',
                 hintText: 'Дансны дугаараа оруулна уу',
                 color: white,
@@ -152,7 +244,9 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                 boxShadow: false,
                 labelColor: buttonColor,
                 labelText: 'Нэмэх',
-                onClick: () {},
+                onClick: () {
+                  onSubmit();
+                },
                 textColor: white,
               ),
             ),

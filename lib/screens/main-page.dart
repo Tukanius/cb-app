@@ -37,9 +37,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
-    print('==========CustomerId');
-    print(user.customerId.toString());
-    print('==========CustomerId');
     return SafeArea(
       bottom: false,
       top: false,
