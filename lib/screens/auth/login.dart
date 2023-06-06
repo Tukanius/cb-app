@@ -52,8 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 50),
-                height: 150,
-                width: 150,
+                height: 100,
+                width: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: darkGrey,
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.center,
               ),
               SizedBox(
-                height: 50,
+                height: 100,
               ),
               FormBuilder(
                 key: fbKey,

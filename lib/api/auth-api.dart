@@ -1,3 +1,4 @@
+import 'package:bank_core/models/result.dart';
 import 'package:bank_core/utils/http_request.dart';
 import '../models/user.dart';
 import '../models/get.dart';
@@ -26,12 +27,6 @@ class AuthApi extends HttpRequest {
 
   checkPassword(User data) async {
     var res = post("/auth/checkPassword", data: data.toJson(), handler: true);
-    return res;
-  }
-
-  createRelatedPerson(User data) async {
-    var res =
-        post("/customerRelatedPerson/", data: data.toJson(), handler: true);
     return res;
   }
 }
