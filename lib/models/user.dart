@@ -46,7 +46,10 @@ class User {
   String? genderId;
   String? birthDate;
 
+  String? whoTypeId;
+
   User({
+    this.whoTypeId,
     this.registerNo,
     this.genderId,
     this.birthDate,

@@ -18,12 +18,6 @@ class AddBankAccountPage extends StatefulWidget {
 }
 
 class _AddBankAccountPageState extends State<AddBankAccountPage> {
-  List<String> bankAccounts = [
-    'Хаан банк',
-    'Голомт Банк',
-    'Хас банк',
-    'Худалдаа хөгжил',
-  ];
   String? selectedMethod;
 
   General general = General();

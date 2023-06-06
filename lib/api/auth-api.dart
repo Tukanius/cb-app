@@ -28,4 +28,10 @@ class AuthApi extends HttpRequest {
     var res = post("/auth/checkPassword", data: data.toJson(), handler: true);
     return res;
   }
+
+  createRelatedPerson(User data) async {
+    var res =
+        post("/customerRelatedPerson/", data: data.toJson(), handler: true);
+    return res;
+  }
 }

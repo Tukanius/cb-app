@@ -377,27 +377,27 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         isLoading = true;
                       });
                       checkPassword(textController.text);
-                      // try {
-                      //   loan.amount = currentValue;
-                      //   loan.customerId = user.customerId;
-                      //   loan.loanDate = DateTime.now().toString();
-                      //   loan.loanRate = '3';
-                      //   loan.loanTimeId = seletedDayId;
-                      //   user.password = textController.text;
-                      //   user.id = user.id;
-                      //   await LoanApi().createLoan(loan);
-                      //   setState(() {
-                      //     isLoading = false;
-                      //   });
-                      //   showSuccesful(context);
-                      // } catch (e) {
-                      //   print(e.toString());
-                      //   print('=====err====');
-                      //   setState(() {
-                      //     isLoading = false;
-                      //   });
-                      //   showError(context);
-                      // }
+                      try {
+                        loan.amount = currentValue;
+                        loan.customerId = user.customerId;
+                        loan.loanDate = DateTime.now().toString();
+                        loan.loanRate = '3';
+                        loan.loanTimeId = seletedDayId;
+                        user.password = textController.text;
+                        user.id = user.id;
+                        await LoanApi().createLoan(loan);
+                        setState(() {
+                          isLoading = false;
+                        });
+                        showSuccesful(context);
+                      } catch (e) {
+                        print(e.toString());
+                        print('=====err====');
+                        setState(() {
+                          isLoading = false;
+                        });
+                        showError(context);
+                      }
                     },
                   ),
                 ),
