@@ -9,6 +9,7 @@ import 'package:bank_core/screens/loan-schedule-page/loan-schedule-page.dart';
 import 'package:bank_core/screens/main-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
+import 'package:bank_core/screens/profile-page/add-address.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/register-page/register-page.dart';
@@ -119,6 +120,10 @@ class MyApp extends StatelessWidget {
                     case WhoTypePage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const WhoTypePage();
+                      });
+                    case AddAddress.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const AddAddress();
                       });
                     default:
                       return MaterialPageRoute(

@@ -27,4 +27,10 @@ class CustomerApi extends HttpRequest {
         data: data.toJson(), handler: true);
     return res;
   }
+
+  customerAddress(Customer data) async {
+    var res = await post('/mobile/customerAddress/create',
+        data: data.toJson(), handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
+  }
 }

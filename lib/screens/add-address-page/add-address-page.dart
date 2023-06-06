@@ -1,4 +1,6 @@
+import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/api/general-api.dart';
+import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
@@ -28,16 +30,14 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
   String? selectedProvince;
 
   General general = General();
+  Customer customer = Customer();
 
   onItemTapped() async {
     final form = fbKey.currentState;
     if (form?.saveAndValidate() ?? false) {
       try {
-        // General data = General.fromJson(form!.value);
-        print('==========Province==========');
-        print(selectedProvince);
-        print('==========Province==========');
-        // await GeneralApi().(data);
+        Customer data = Customer.fromJson(form!.value);
+        await CustomerApi().customerAddress(data);
       } catch (e) {
         print('==========err==========');
         print(e.toString());
@@ -304,72 +304,72 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                             ),
                           )
                         : Container(
-                            height: 50,
-                            child: FormBuilderDropdown(
-                              hint: Container(
-                                margin: const EdgeInsets.only(left: 10),
-                                child: Row(
-                                  children: [
-                                    const Text(
-                                      "Баг",
-                                      style: TextStyle(
-                                          fontSize: 14, color: Colors.black),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              icon: Container(
-                                decoration: BoxDecoration(
-                                  color: white,
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: const Icon(
-                                  Icons.arrow_drop_down,
-                                  color: black,
-                                ),
-                              ),
-                              name: 'districtId',
-                              onChanged: (value) async {
-                                setState(() {
-                                  selectedMethod = value.toString();
-                                });
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: white,
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 12, horizontal: 10),
-                                border: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: white, width: 0),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: white, width: 0),
-                                ),
-                              ),
-                              items: general.districts!
-                                  .map(
-                                    (item) => DropdownMenuItem(
-                                      value: item,
-                                      child: Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              '${item.name}',
-                                              style: TextStyle(fontSize: 14),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
+                            // height: 50,
+                            // child: FormBuilderDropdown(
+                            //   hint: Container(
+                            //     margin: const EdgeInsets.only(left: 10),
+                            //     child: Row(
+                            //       children: [
+                            //         const Text(
+                            //           "Баг",
+                            //           style: TextStyle(
+                            //               fontSize: 14, color: Colors.black),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //   ),
+                            //   icon: Container(
+                            //     decoration: BoxDecoration(
+                            //       color: white,
+                            //       borderRadius: BorderRadius.circular(15),
+                            //     ),
+                            //     child: const Icon(
+                            //       Icons.arrow_drop_down,
+                            //       color: black,
+                            //     ),
+                            //   ),
+                            //   name: 'districtId',
+                            //   onChanged: (value) async {
+                            //     setState(() {
+                            //       selectedMethod = value.toString();
+                            //     });
+                            //   },
+                            //   decoration: InputDecoration(
+                            //     filled: true,
+                            //     fillColor: white,
+                            //     contentPadding: const EdgeInsets.symmetric(
+                            //         vertical: 12, horizontal: 10),
+                            //     border: OutlineInputBorder(
+                            //       borderSide:
+                            //           const BorderSide(color: white, width: 0),
+                            //       borderRadius: BorderRadius.circular(20),
+                            //     ),
+                            //     enabledBorder: OutlineInputBorder(
+                            //       borderSide:
+                            //           const BorderSide(color: white, width: 0),
+                            //     ),
+                            //   ),
+                            //   items: general.districts!
+                            //       .map(
+                            //         (item) => DropdownMenuItem(
+                            //           value: item,
+                            //           child: Container(
+                            //             margin: const EdgeInsets.symmetric(
+                            //                 horizontal: 15),
+                            //             child: Row(
+                            //               children: [
+                            //                 Text(
+                            //                   '${item.name}',
+                            //                   style: TextStyle(fontSize: 14),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       )
+                            //       .toList(),
+                            // ),
                             ),
-                          ),
                     SizedBox(
                       height: 20,
                     ),
