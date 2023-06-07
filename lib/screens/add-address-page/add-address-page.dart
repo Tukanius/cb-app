@@ -188,7 +188,6 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       (item) => DropdownMenuItem(
                         onTap: () {
                           selectedMethod = item.id;
-                          print(selectedMethod);
                         },
                         value: item,
                         child: Container(

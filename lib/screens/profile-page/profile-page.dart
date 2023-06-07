@@ -30,9 +30,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
-    print('========USER========');
-    print(user.toJson());
-    print('========USER========');
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(

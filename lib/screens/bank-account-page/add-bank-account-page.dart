@@ -178,10 +178,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                 ),
                 name: 'paymentMethod',
                 onChanged: (value) async {
-                  setState(() {
-                    // selectedMethod = value.toString();
-                    // print(selectedMethod);
-                  });
+                  setState(() {});
                 },
                 decoration: InputDecoration(
                   filled: true,

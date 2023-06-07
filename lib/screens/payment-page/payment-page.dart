@@ -40,7 +40,6 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
   @override
   afterFirstLayout(BuildContext context) async {
     get = await AuthApi().accountGet(user.customerId!);
-    print(get.balance);
     setState(() {
       isLoading = false;
     });

@@ -403,7 +403,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         }
                       } catch (e) {
                         print(e.toString());
-                        print('=====err====');
                         setState(() {
                           isLoading = false;
                         });
@@ -874,7 +873,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                               enabled: true,
                               onTap: () {
                                 selectedMethod = item.bank.name;
-                                print(selectedMethod);
                               },
                               value: item,
                               child: Container(

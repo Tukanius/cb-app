@@ -38,7 +38,6 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
     final form = fbKey.currentState;
     if (form?.saveAndValidate() ?? false) {
       try {
-        print("12312321312");
         User data = User.fromJson(form!.value);
         data.birthDate =
             Platform.isAndroid ? datepickervalue : dateTime.toString();
@@ -46,9 +45,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
         await showSuccesful(context);
         await Navigator.of(context).pushNamed(LoginScreen.routeName);
       } catch (e) {
-        print('==========err==========');
         print(e.toString());
-        print('==========err==========');
       }
     }
   }
@@ -302,7 +299,6 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                                   lastDate: DateTime(2100));
 
                               if (pickedDate != null) {
-                                print(pickedDate);
                                 String formattedDate =
                                     DateFormat('yyyy-MM-dd').format(pickedDate);
                                 print(formattedDate);
@@ -377,7 +373,6 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                                                 (DateTime newDate) {
                                               setState(() {
                                                 dateTime = newDate;
-                                                print(dateTime);
                                               });
                                             },
                                           ),

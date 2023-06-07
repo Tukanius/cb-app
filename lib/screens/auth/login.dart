@@ -43,109 +43,110 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: backgroundColor,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 50),
-                height: 100,
-                width: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: darkGrey,
+    return Container(
+      color: backgroundColor,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: backgroundColor,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 80),
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: darkGrey,
+                  ),
+                  alignment: Alignment.center,
                 ),
-                alignment: Alignment.center,
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              FormBuilder(
-                key: fbKey,
-                child: Column(
+                FormBuilder(
+                  key: fbKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
+                        child: FormTextField(
+                          inputType: TextInputType.text,
+                          name: 'email',
+                          hintText: 'Нэвтрэх нэр',
+                          color: white,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
+                        child: FormTextField(
+                          inputType: TextInputType.visiblePassword,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isVisible = !isVisible;
+                              });
+                            },
+                            icon: isVisible == true
+                                ? Icon(Icons.visibility, color: darkGrey)
+                                : Icon(Icons.visibility_off, color: darkGrey),
+                          ),
+                          name: 'password',
+                          hintText: 'Нууц үг',
+                          obscureText: isVisible,
+                          color: white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
+                      margin: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        'Нууц үгээ мартсан уу?',
+                        style: TextStyle(
+                          color: grey,
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 70,
+                    ),
+                    Container(
                       margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
-                      child: FormTextField(
-                        inputType: TextInputType.text,
-                        name: 'email',
-                        hintText: 'Нэвтрэх нэр',
-                        color: white,
+                          horizontal: 15, vertical: 5),
+                      child: CustomButton(
+                        boxShadow: false,
+                        labelColor: darkGrey,
+                        labelText: "Нэвтрэх",
+                        textColor: white,
+                        onClick: () {
+                          onSubmit();
+                        },
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
-                      child: FormTextField(
-                        inputType: TextInputType.visiblePassword,
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isVisible = !isVisible;
-                            });
-                          },
-                          icon: isVisible == true
-                              ? Icon(Icons.visibility, color: darkGrey)
-                              : Icon(Icons.visibility_off, color: darkGrey),
-                        ),
-                        name: 'password',
-                        hintText: 'Нууц үг',
-                        obscureText: isVisible,
-                        color: white,
+                          horizontal: 15, vertical: 5),
+                      child: CustomButton(
+                        boxShadow: false,
+                        labelColor: white,
+                        labelText: "Бүртгүүлэх",
+                        textColor: black,
+                        onClick: () {
+                          Navigator.of(context)
+                              .pushNamed(RegisterPage.routeName);
+                        },
                       ),
                     ),
                   ],
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      'Нууц үгээ мартсан уу?',
-                      style: TextStyle(
-                        color: grey,
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 70,
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    child: CustomButton(
-                      boxShadow: false,
-                      labelColor: darkGrey,
-                      labelText: "Нэвтрэх",
-                      textColor: white,
-                      onClick: () {
-                        onSubmit();
-                      },
-                    ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    child: CustomButton(
-                      boxShadow: false,
-                      labelColor: white,
-                      labelText: "Бүртгүүлэх",
-                      textColor: black,
-                      onClick: () {
-                        Navigator.of(context).pushNamed(RegisterPage.routeName);
-                      },
-                    ),
-                  ),
-                ],
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

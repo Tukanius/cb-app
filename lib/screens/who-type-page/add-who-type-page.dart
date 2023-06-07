@@ -37,9 +37,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
         User save = User.fromJson(fbkey.currentState!.value);
         save.customerId = user.customerId;
         save.whoTypeId = whoTypeId;
-        print('=======CustomerId======');
         print(user.customerId.toString());
-        print('=======CustomerId======');
         // user = selectedValue.toString() as User;
         await CustomerApi().createRelatedPerson(save);
         await show(context);
