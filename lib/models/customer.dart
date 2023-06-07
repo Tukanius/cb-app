@@ -46,8 +46,7 @@ class Customer {
 
   String getPostDate() {
     final now = Moment.now();
-    var res = now.format("yyyy-MM-dd");
-    print(res);
+    var res = now.format(createdAt.toString());
     return res;
   }
 
