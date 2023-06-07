@@ -91,16 +91,13 @@ class _MainPageState extends State<MainPage> {
           actions: [
             ActionButton(
               icon: isVisible == true
-                  ? Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 5),
-                      child: SvgPicture.asset(
-                        'images/visiblity_off.svg',
-                        color: white,
-                      ),
+                  ? Icon(
+                      Icons.visibility,
+                      color: white,
                     )
                   : Icon(
-                      Icons.visibility,
-                      color: grey,
+                      Icons.visibility_off,
+                      color: white,
                     ),
               onClick: () {
                 setState(() {
@@ -137,7 +134,8 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   SvgPicture.asset(
                     'images/home.svg',
-                    color: currentIndex == 0 ? buttonColor : grey,
+                    theme: SvgTheme(
+                        currentColor: currentIndex == 0 ? buttonColor : grey),
                   ),
                   SizedBox(
                     height: 10,
@@ -157,7 +155,8 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   SvgPicture.asset(
                     'images/lend.svg',
-                    color: currentIndex == 1 ? buttonColor : grey,
+                    theme: SvgTheme(
+                        currentColor: currentIndex == 1 ? buttonColor : grey),
                   ),
                   SizedBox(
                     height: 10,
@@ -177,7 +176,8 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   SvgPicture.asset(
                     'images/shop.svg',
-                    color: currentIndex == 2 ? buttonColor : grey,
+                    theme: SvgTheme(
+                        currentColor: currentIndex == 2 ? buttonColor : grey),
                   ),
                   SizedBox(
                     height: 10,
