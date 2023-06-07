@@ -139,10 +139,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       ),
                     ),
                   ),
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     children: [
                   PotentialBalanceCard(
                     isVisible: widget.isVisible,
                     slider: false,
@@ -151,9 +147,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       Navigator.of(context).pushNamed(LoanPage.routeName);
                     },
                   ),
-                  //     ],
-                  //   ),
-                  // ),
                   loan.rows!.length != 0
                       ? Column(
                           children: [
