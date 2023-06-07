@@ -105,7 +105,8 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                     ],
                   ),
                 ),
-                Lottie.asset('images/success.json', height: 150, repeat: false),
+                Lottie.asset('assets/lottie/success.json',
+                    height: 150, repeat: false),
               ],
             ),
           );
@@ -137,133 +138,140 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              'Холбоо хамааралтай хүн нэмэх',
-              style: TextStyle(
-                color: white,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 50,
               ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            FormBuilder(
-              key: fbkey,
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    height: 50,
-                    child: FormBuilderDropdown(
-                      initialValue: Container(
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Сонгох",
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.black),
-                            ),
-                          ],
-                        ),
+              Text(
+                'Холбоо хамааралтай хүн нэмэх',
+                style: TextStyle(
+                  color: white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              FormBuilder(
+                key: fbkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        "Таны хэн болох ?",
+                        style: TextStyle(
+                            color: white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500),
                       ),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(15),
+                    ),
+                    Container(
+                      height: 50,
+                      child: FormBuilderDropdown(
+                        initialValue: const Text(
+                          "Сонгох",
+                          style: TextStyle(fontSize: 14, color: Colors.black),
                         ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: black,
+                        icon: Container(
+                          decoration: BoxDecoration(
+                            color: white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: black,
+                          ),
                         ),
-                      ),
-                      name: 'whoTypes',
-                      onChanged: (value) async {
-                        setState(() {
-                          selectedValue = value.toString();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: white,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 10),
-                        border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
-                          borderRadius: BorderRadius.circular(20),
+                        name: 'whoTypes',
+                        onChanged: (value) async {
+                          setState(() {
+                            selectedValue = value.toString();
+                          });
+                        },
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: white,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 10),
+                          border: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: white, width: 0),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: white, width: 0),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
-                        ),
-                      ),
-                      items: general.whoTypes!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              onTap: () {
-                                setState(() {
-                                  whoTypeId = item.id;
-                                });
-                              },
-                              value: item,
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      '${item.name}',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
+                        items: general.whoTypes!
+                            .map(
+                              (item) => DropdownMenuItem(
+                                onTap: () {
+                                  setState(() {
+                                    whoTypeId = item.id;
+                                  });
+                                },
+                                value: item,
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '${item.name}',
+                                        style: TextStyle(
+                                            fontSize: 14, color: black),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                          .toList(),
+                            )
+                            .toList(),
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    child: FormTextField(
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FormTextField(
                       name: 'lastName',
+                      labelText: "Овог",
                       color: white,
                       hintText: 'Овог',
                     ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    child: FormTextField(
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FormTextField(
+                      labelText: "Нэр",
                       name: 'firstName',
                       color: white,
                       hintText: 'Нэр',
                     ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                    child: FormTextField(
+                    SizedBox(
+                      height: 10,
+                    ),
+                    FormTextField(
+                      labelText: "Утасны дугаар",
                       name: 'phone',
                       color: white,
                       hintText: 'Утасны дугаар',
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              child: CustomButton(
+              SizedBox(
+                height: 30,
+              ),
+              CustomButton(
                 boxShadow: false,
                 labelColor: buttonColor,
                 labelText: 'Нэмэх',
@@ -272,8 +280,8 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                 },
                 textColor: white,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
