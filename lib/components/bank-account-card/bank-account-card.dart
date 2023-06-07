@@ -40,7 +40,7 @@ class _BankAccountCardState extends State<BankAccountCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${widget.data!.bank!.name}',
+                    "${widget.data?.bank?.name}",
                     style: TextStyle(
                       color: grey,
                       fontSize: 12,
@@ -60,13 +60,13 @@ class _BankAccountCardState extends State<BankAccountCard> {
               ),
             ],
           ),
-          // Text(
-          //   "${widget.data!.getPostDate()}",
-          //   style: TextStyle(
-          //     color: white,
-          //     fontWeight: FontWeight.w600,
-          //   ),
-          // )
+          Text(
+            "123",
+            style: TextStyle(
+              color: white,
+              fontWeight: FontWeight.w600,
+            ),
+          )
         ],
       ),
     );

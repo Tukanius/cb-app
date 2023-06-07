@@ -1,5 +1,4 @@
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OwnBankAccountCard extends StatefulWidget {
