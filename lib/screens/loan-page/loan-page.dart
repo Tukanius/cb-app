@@ -583,9 +583,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     general = Provider.of<GeneralProvider>(context, listen: false).general;
     user = Provider.of<UserProvider>(context, listen: false).user;
-    print('======GENERAL=====');
-    print(general.loanTimes!.toList());
-    print('======GENERAL=====');
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -854,23 +851,14 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                       isExpanded: true,
                       dropdownColor: black,
                       borderRadius: BorderRadius.circular(10),
-                      initialValue: Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Хүлээн авах данс сонгох",
-                              style: TextStyle(fontSize: 14, color: white),
-                            ),
-                          ],
-                        ),
-                      ),
                       icon: Icon(
                         Icons.keyboard_arrow_down_outlined,
                         color: white,
                       ),
                       name: 'bankAccount',
                       decoration: InputDecoration(
+                        hintText: 'Данс сонгоно уу',
+                        hintStyle: TextStyle(color: grey, fontSize: 14),
                         filled: true,
                         fillColor: darkGrey,
                         border: OutlineInputBorder(
