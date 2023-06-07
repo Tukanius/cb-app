@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-import "package:moment_dart/moment_dart.dart";
 part '../parts/customer.dart';
 
 class Customer {
@@ -45,13 +43,13 @@ class Customer {
   String? paidDate;
   String? payerUserId;
 
-  String getPostDate() {
-    return Moment.parse(DateFormat("yyyy-MM-dd")
-            .parseUTC(createdAt!)
-            .toLocal()
-            .toIso8601String())
-        .format("yyyy-MM-dd");
-  }
+  // String getPostDate() {
+  //   return Moment.parse(DateFormat("yyyy-MM-dd")
+  //           .parseUTC(createdAt!)
+  //           .toLocal()
+  //           .toIso8601String())
+  //       .format("yyyy-MM-dd");
+  // }
 
   Customer({
     this.payerUserId,

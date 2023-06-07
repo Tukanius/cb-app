@@ -37,9 +37,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_form_builder: ^9.0.0
+  flutter_form_builder: ^8.0.0
   shared_preferences: ^2.0.15
-  form_builder_validators: ^9.0.0
+  form_builder_validators: ^8.0.0
   dio: ^4.0.4
   dio_cookie_manager: ^2.0.0
   path_provider: ^2.0.8
@@ -52,7 +52,7 @@ dev_dependencies:
   flutter_svg: ^2.0.4
   percent_indicator: ^4.2.3
   lottie: ^2.2.0
-  intl: 0.18.0
+  intl: ^0.17.0
   carousel_slider: ^4.2.1
   moment_dart: ^0.17.4
   flutter_launcher_icons: "^0.13.1"
