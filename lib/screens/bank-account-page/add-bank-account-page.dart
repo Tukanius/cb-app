@@ -97,7 +97,8 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     ],
                   ),
                 ),
-                Lottie.asset('images/success.json', height: 150, repeat: false),
+                Lottie.asset('assets/lottie/success.json',
+                    height: 150, repeat: false),
               ],
             ),
           );

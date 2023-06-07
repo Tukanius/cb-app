@@ -17,7 +17,7 @@ class _WhoTypeCardState extends State<WhoTypeCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      padding: const EdgeInsets.all(15),
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -27,14 +27,14 @@ class _WhoTypeCardState extends State<WhoTypeCard> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "${widget.data!.name}",
+            "${widget.data?.whoType?.name}",
             style: TextStyle(
               color: white,
               fontWeight: FontWeight.w500,
             ),
           ),
           Text(
-            "${widget.data!.phone}",
+            "${widget.data?.phone}",
             style: TextStyle(
               color: white,
               fontWeight: FontWeight.w500,

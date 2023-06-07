@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               bottom: 10,
                             ),
                             child: FormTextField(
-                              labelText: "Е-Мэйл болон утасны дугаар",
+                              labelText: "Е-Мэйл",
                               inputType: TextInputType.text,
                               name: 'email',
                               hintText: 'Нэвтрэх нэр',
