@@ -1,11 +1,14 @@
 import 'package:bank_core/api/auth-api.dart';
+import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/bank-account-card/own-bank-account-card.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/components/loan/schedule.dart';
 import 'package:bank_core/models/general.dart';
 import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/loan.dart';
+import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
@@ -15,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class LoanPage extends StatefulWidget {
   static const routeName = 'LoanPage';
@@ -26,22 +30,27 @@ class LoanPage extends StatefulWidget {
 
 class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
-
-  onSubmit() async {}
-
   double currentValue = 0;
   int? selectedIndex;
   bool onTap = false;
   TextEditingController textController = TextEditingController();
   String selectedDay = "";
   String seletedDayId = "";
-
+  int page = 1;
+  int limit = 10;
   bool isLoading = false;
-
+  Result bankList = Result(rows: [], count: 0);
   General general = General();
 
-  Loan loan = Loan();
+  list(page, limit) async {
+    Offset offset = Offset(page: page, limit: limit);
+    Filter filter = Filter(query: '');
+    bankList = await CustomerApi()
+        .bankAccountList(ResultArguments(offset: offset, filter: filter));
+  }
 
+  Loan loan = Loan();
+  String? selectedMethod;
   Get get = Get();
 
   @override
@@ -50,12 +59,10 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
       isLoading = true;
     });
     get = await AuthApi().accountGet(user.customerId!);
+    list(page, limit);
     setState(() {
       isLoading = false;
     });
-    print('=============GET============');
-    print(get.toJson());
-    print('=============GET============');
   }
 
   allowClear() {
@@ -344,6 +351,10 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                               ),
                             ),
                             hintText: 'Нууц үг',
+                            validators: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(
+                                  errorText: 'Заавал оруулна уу')
+                            ]),
                           ),
                         ),
                       ),
@@ -373,20 +384,24 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                       setState(() {
                         isLoading = true;
                       });
-                      checkPassword(textController.text);
                       try {
-                        loan.amount = currentValue;
-                        loan.customerId = user.customerId;
-                        loan.loanDate = DateTime.now().toString();
-                        loan.loanRate = '3';
-                        loan.loanTimeId = seletedDayId;
-                        user.password = textController.text;
-                        user.id = user.id;
-                        await LoanApi().createLoan(loan);
-                        setState(() {
-                          isLoading = false;
-                        });
-                        showSuccesful(context);
+                        password.password = textController.text;
+                        password.id = user.customerId;
+                        var res = await AuthApi().checkPassword(password);
+                        if (res == true) {
+                          loan.amount = currentValue;
+                          loan.customerId = user.customerId;
+                          loan.loanDate = DateTime.now().toString();
+                          loan.loanRate = '3';
+                          loan.loanTimeId = seletedDayId;
+                          user.password = textController.text;
+                          user.id = user.id;
+                          await LoanApi().createLoan(loan);
+                          setState(() {
+                            isLoading = false;
+                          });
+                          showSuccesful(context);
+                        }
                       } catch (e) {
                         print(e.toString());
                         print('=====err====');
@@ -406,13 +421,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
     );
   }
 
-  checkPassword(value) async {
-    user.password = value;
-    print('=======RESPONCE======');
-    var res = await AuthApi().checkPassword(user);
-    print(res);
-    print('=======RESPONCE======');
-  }
+  User password = User();
 
   showSuccesful(context) {
     showDialog(
@@ -476,6 +485,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                           boxShadow: true,
                           labelText: "Ок",
                           onClick: () {
+                            Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
@@ -574,6 +584,9 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     general = Provider.of<GeneralProvider>(context, listen: false).general;
     user = Provider.of<UserProvider>(context, listen: false).user;
+    print('======GENERAL=====');
+    print(general.loanTimes!.toList());
+    print('======GENERAL=====');
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -663,7 +676,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                       ),
                       Slider(
                         min: 0,
-                        max: double.parse(get.balance.toString()),
+                        max: double.parse('${get.balance}'),
                         thumbColor: buttonColor,
                         activeColor: white,
                         inactiveColor: grey.withOpacity(0.2),
@@ -832,78 +845,110 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    padding: const EdgeInsets.only(
-                        top: 10, bottom: 10, left: 10, right: 15),
-                    decoration: BoxDecoration(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: FormBuilderDropdown(
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: "Заавал сонгоно уу"),
+                      ]),
+                      alignment: Alignment.center,
+                      isExpanded: true,
+                      dropdownColor: black,
                       borderRadius: BorderRadius.circular(10),
-                      color: darkGrey,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+                      hint: Container(
+                        margin: const EdgeInsets.only(left: 10),
+                        child: Row(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: white,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: Image(
-                                  image: AssetImage('images/2.png'),
-                                  height: 35,
-                                  width: 35,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Golomt bank',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  '141 423 8739',
-                                  style: TextStyle(
-                                    color: white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
+                            const Text(
+                              "Хүлээн авах данс сонгох",
+                              style: TextStyle(fontSize: 14, color: white),
                             ),
                           ],
                         ),
-                        Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          color: white,
-                          size: 25,
+                      ),
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        color: white,
+                      ),
+                      name: 'bankAccount',
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: darkGrey,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
                         ),
-                      ],
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      items: bankList.rows!
+                          .map(
+                            (item) => DropdownMenuItem(
+                              enabled: true,
+                              onTap: () {
+                                selectedMethod = item.bank.name;
+                                print(selectedMethod);
+                              },
+                              value: item,
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: black,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image(
+                                          image: AssetImage('images/4.png'),
+                                          height: 30,
+                                          width: 30,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "${item.bank.name}",
+                                          style: TextStyle(
+                                              fontSize: 8, color: white),
+                                        ),
+                                        Text(
+                                          "${item.accountNumber}",
+                                          style: TextStyle(
+                                            color: white,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
                   ),
                   SizedBox(
                     height: 30,
                   ),
-                  CustomButton(
-                    textColor: white,
-                    labelColor: buttonColor,
-                    onClick: () {
-                      show(context);
-                    },
-                    labelText: 'Үргэлжлүүлэх',
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
+                    child: CustomButton(
+                      textColor: white,
+                      labelColor: buttonColor,
+                      onClick: () {
+                        show(context);
+                      },
+                      labelText: 'Үргэлжлүүлэх',
+                    ),
                   ),
                   SizedBox(
                     height: 50,

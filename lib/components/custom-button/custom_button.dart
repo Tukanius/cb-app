@@ -25,8 +25,8 @@ class _CustomButtonState extends State<CustomButton> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        width: MediaQuery.of(context).size.width,
         height: 56,
-        width: 360,
         decoration: BoxDecoration(
           boxShadow: [
             widget.boxShadow == true || widget.boxShadow == null

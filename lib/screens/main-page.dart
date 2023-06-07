@@ -17,10 +17,11 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  bool isVisible = false;
   int currentIndex = 0;
   static const List<Widget> currentPages = [
     HomePage(
-        // id: user.customerId,
+        // isVisible: isVisible,
         ),
     Text('2'),
     Text('3'),
@@ -37,6 +38,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
+    print(isVisible);
     return SafeArea(
       bottom: false,
       top: false,
@@ -87,7 +89,25 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
           actions: [
-            ActionButton(),
+            ActionButton(
+              icon: isVisible == true
+                  ? Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      child: SvgPicture.asset(
+                        'images/visiblity_off.svg',
+                        color: white,
+                      ),
+                    )
+                  : Icon(
+                      Icons.visibility,
+                      color: grey,
+                    ),
+              onClick: () {
+                setState(() {
+                  isVisible = !isVisible;
+                });
+              },
+            ),
             SizedBox(
               width: 10,
             ),
