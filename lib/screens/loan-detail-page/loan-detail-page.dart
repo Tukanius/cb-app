@@ -44,6 +44,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
     customer = await CustomerApi().activeLoanGet(widget.id);
     totalAmount = double.parse(
         (customer.mainLoanPayAmount! + customer.rateAmount!).toString());
+    print(customer.rateAmount.toString());
+    print('========CUSTOMER======');
 
     paidList(page, limit);
     setState(() {
@@ -301,9 +303,10 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                       Navigator.of(context).pushNamed(
                         PaymentPage.routeName,
                         arguments: PaymentPageArguments(
-                          id: widget.id,
-                          loanResidual: totalAmount.toString(),
-                        ),
+                            id: widget.id,
+                            loanResidual: customer.totalPayAmount.toString()
+                            // totalAmount.toString(),
+                            ),
                       );
                     },
                     child: Row(

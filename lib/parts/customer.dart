@@ -71,7 +71,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
         ? json['mainLoanPayAmount'] as String
         : null,
     amount:
-        json['amount'] != null ? double.parse(json['amount'].toString()) : null,
+        json['amount'] != null ? int.parse(json['amount'].toString()) : null,
     paidDate: json['paidDate'] != null ? json['paidDate'] as String : null,
     payerUserId:
         json['payerUserId'] != null ? json['payerUserId'] as String : null,

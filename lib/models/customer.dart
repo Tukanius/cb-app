@@ -39,7 +39,7 @@ class Customer {
   String? rateCalcDay;
   String? rateAmount;
   String? mainLoanPayAmount;
-  double? amount;
+  int? amount;
   String? paidDate;
   String? payerUserId;
 

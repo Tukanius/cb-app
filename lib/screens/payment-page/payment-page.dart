@@ -51,7 +51,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
   onSubmit() async {
     try {
       Customer customer = Customer();
-      customer.amount = double.parse(widget.loanResidual.toString());
+      customer.amount = int.parse(widget.loanResidual.toString());
       customer.payerUserId = user.customerId;
       customer.loanId = widget.id;
       customer.paidDate = DateTime.now().toString();
@@ -94,7 +94,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         height: 16,
                       ),
                       const Text(
-                        'Таны бүртгэл амжилттай үүслээ.',
+                        'Төлөлт амжилттай хийгдлээ.',
                         textAlign: TextAlign.center,
                       ),
                       ButtonBar(

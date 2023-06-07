@@ -387,7 +387,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         print(pass.toJson());
                         print('====pass');
                         var res = await AuthApi().checkPassword(pass);
-                        await CustomerApi().verify(user.customerId!);
+                        // await CustomerApi().verify(user.customerId!);
                         if (res == true) {
                           loan.amount = currentValue;
                           loan.customerId = user.customerId;
@@ -486,7 +486,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
-                            Navigator.of(context).pop();
                           },
                         ),
                       ),
@@ -561,7 +560,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                           boxShadow: true,
                           labelText: "Ок",
                           onClick: () {
-                            Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
