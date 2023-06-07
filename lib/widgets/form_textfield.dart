@@ -66,7 +66,7 @@ class FormTextField extends StatefulWidget {
       this.nextFocus,
       this.prefixIcon,
       this.maxLines = 1,
-      this.labelText});
+      this.labelText = ""});
 
   @override
   _FormTextFieldState createState() => _FormTextFieldState();
@@ -83,63 +83,79 @@ class _FormTextFieldState extends State<FormTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      buildCounter: widget.showCounter
-          ? null
-          : (context, {int? currentLength, bool? isFocused, int? maxLength}) =>
-              const SizedBox(),
-      // attribute: widget.attribute,
-      controller: widget.controller,
-      autofocus: widget.autoFocus,
-      focusNode: widget.focusNode,
-      maxLines: widget.maxLines,
-      keyboardType: widget.inputType,
-      textInputAction: widget.inputAction,
-      initialValue: widget.initialValue,
-      obscureText:
-          widget.hasObscureControl ? isPasswordVisible : widget.obscureText,
-      readOnly: widget.readOnly,
-      autocorrect: false,
-      // autovalidate: false,
-      // validator: widget.validators ?? [],
-      validator: widget.validators ?? widget.validator,
-      textCapitalization: widget.textCapitalization,
-      inputFormatters: widget.inputFormatters,
-      maxLength: widget.maxLenght,
-      onChanged: widget.onChanged,
-      onEditingComplete: () {
-        if (widget.nextFocusNode != null) {
-          widget.nextFocusNode!.requestFocus();
-        } else {
-          FocusScope.of(context).unfocus();
-        }
-      },
-      onSubmitted: (value) {
-        if (widget.onComplete is Function) {
-          widget.onComplete!();
-        }
-      },
-      style: const TextStyle(color: Colors.black, fontSize: 14),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        widget.labelText != ""
+            ? Container(
+                margin: EdgeInsets.only(bottom: 8),
+                child: Text(
+                  "${widget.labelText}",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )
+            : SizedBox(),
+        FormBuilderTextField(
+          buildCounter: widget.showCounter
+              ? null
+              : (context,
+                      {int? currentLength, bool? isFocused, int? maxLength}) =>
+                  const SizedBox(),
+          // attribute: widget.attribute,
+          controller: widget.controller,
+          autofocus: widget.autoFocus,
+          focusNode: widget.focusNode,
+          maxLines: widget.maxLines,
+          keyboardType: widget.inputType,
+          textInputAction: widget.inputAction,
+          initialValue: widget.initialValue,
+          obscureText:
+              widget.hasObscureControl ? isPasswordVisible : widget.obscureText,
+          readOnly: widget.readOnly,
+          autocorrect: false,
+          // autovalidate: false,
+          // validator: widget.validators ?? [],
+          validator: widget.validators ?? widget.validator,
+          textCapitalization: widget.textCapitalization,
+          inputFormatters: widget.inputFormatters,
+          maxLength: widget.maxLenght,
+          onChanged: widget.onChanged,
+          onEditingComplete: () {
+            if (widget.nextFocusNode != null) {
+              widget.nextFocusNode!.requestFocus();
+            } else {
+              FocusScope.of(context).unfocus();
+            }
+          },
+          onSubmitted: (value) {
+            if (widget.onComplete is Function) {
+              widget.onComplete!();
+            }
+          },
+          style: const TextStyle(color: Colors.black, fontSize: 14),
 
-      decoration: widget.decoration ??
-          InputDecoration(
-            suffixIcon: widget.suffixIcon,
-            hintText: widget.hintText,
-            prefixIcon: widget.prefixIcon,
-            labelText: widget.labelText,
-            errorBorder: const OutlineInputBorder(),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            filled: true,
-            hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
-            fillColor: widget.color,
-          ),
+          decoration: widget.decoration ??
+              InputDecoration(
+                suffixIcon: widget.suffixIcon,
+                hintText: widget.hintText,
+                prefixIcon: widget.prefixIcon,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                filled: true,
+                hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+                fillColor: widget.color,
+              ),
 
-      name: widget.name!,
+          name: widget.name!,
+        ),
+      ],
     );
   }
 }
