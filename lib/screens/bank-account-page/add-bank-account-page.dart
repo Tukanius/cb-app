@@ -155,17 +155,6 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
               margin: const EdgeInsets.symmetric(horizontal: 15),
               height: 50,
               child: FormBuilderDropdown(
-                initialValue: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Row(
-                    children: [
-                      const Text(
-                        "Банк сонгох",
-                        style: TextStyle(fontSize: 14, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
                 icon: Container(
                   decoration: BoxDecoration(
                     color: white,
@@ -181,6 +170,8 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   setState(() {});
                 },
                 decoration: InputDecoration(
+                  hintText: 'Банк сонгоно уу',
+                  hintStyle: TextStyle(color: grey, fontSize: 14),
                   filled: true,
                   fillColor: white,
                   contentPadding:
@@ -225,9 +216,15 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15),
               child: FormTextField(
+                decoration: InputDecoration(
+                  hintText: 'Дансны дугаараа оруулна уу',
+                  fillColor: white,
+                  filled: true,
+                  border: OutlineInputBorder(borderSide: BorderSide.none),
+                  contentPadding: EdgeInsets.all(10),
+                ),
                 controller: textController,
                 name: 'BankAccount',
-                hintText: 'Дансны дугаараа оруулна уу',
                 color: white,
               ),
             ),

@@ -42,10 +42,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   General general = General();
 
   list(page, limit) async {
-    Offset offset = Offset(page: page, limit: limit);
-    Filter filter = Filter(query: '');
-    bankList = await CustomerApi()
-        .bankAccountList(ResultArguments(offset: offset, filter: filter));
+    // bankList = await CustomerApi().bankAccountList(user.id!);
   }
 
   Loan loan = Loan();
@@ -384,16 +381,18 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         isLoading = true;
                       });
                       try {
-                        password.password = textController.text;
-                        password.id = user.customerId;
-                        var res = await AuthApi().checkPassword(password);
+                        pass.id = user.customerId;
+                        pass.password = textController.text;
+                        print(pass.toJson());
+                        print('====pass');
+                        var res = await AuthApi().checkPassword(pass);
+                        await CustomerApi().verify(user.id!);
                         if (res == true) {
                           loan.amount = currentValue;
                           loan.customerId = user.customerId;
                           loan.loanDate = DateTime.now().toString();
                           loan.loanRate = '3';
                           loan.loanTimeId = seletedDayId;
-                          user.password = textController.text;
                           user.id = user.id;
                           await LoanApi().createLoan(loan);
                           setState(() {
@@ -419,7 +418,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
     );
   }
 
-  User password = User();
+  User pass = User();
 
   showSuccesful(context) {
     showDialog(
@@ -561,6 +560,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                           boxShadow: true,
                           labelText: "Ок",
                           onClick: () {
+                            Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
@@ -768,7 +768,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                     height: 20,
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -798,7 +798,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                     height: 20,
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -856,6 +856,8 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                       ),
                       name: 'bankAccount',
                       decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                         hintText: 'Данс сонгоно уу',
                         hintStyle: TextStyle(color: grey, fontSize: 14),
                         filled: true,
