@@ -6,7 +6,6 @@ import 'package:bank_core/screens/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:lottie/lottie.dart';
 
 class BankAccounts extends StatefulWidget {
   static const routeName = 'BankAccounts';

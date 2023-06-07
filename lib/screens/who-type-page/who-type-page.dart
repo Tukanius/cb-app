@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/who-type-card/who-type.card.dart';
-import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';

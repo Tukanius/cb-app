@@ -2,7 +2,6 @@ import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/add-address-page/add-address-page.dart';
 import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
 import 'package:bank_core/screens/add-address-page/address.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';

@@ -2,7 +2,6 @@ import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
-import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/user.dart';

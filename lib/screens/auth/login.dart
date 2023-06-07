@@ -1,7 +1,6 @@
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/main-page.dart';
 import 'package:bank_core/screens/register-page/register-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';

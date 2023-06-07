@@ -1,5 +1,4 @@
 import 'package:bank_core/api/customer-api.dart';
-import 'package:bank_core/api/general-api.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +148,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
               margin: const EdgeInsets.symmetric(horizontal: 15),
               height: 50,
               child: FormBuilderDropdown(
-                hint: Container(
+                initialValue: Container(
                   margin: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [

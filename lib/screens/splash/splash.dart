@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
     try {
       await Provider.of<GeneralProvider>(context, listen: false).init(true);
       print('1');
-      await Provider.of<UserProvider>(context, listen: false).me(true);
+      await Provider.of<UserProvider>(context, listen: false).me(false);
       print('2');
       Navigator.of(context).pushNamed(MainPage.routeName);
     } catch (e) {

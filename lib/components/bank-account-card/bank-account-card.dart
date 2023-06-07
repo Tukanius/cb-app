@@ -60,13 +60,13 @@ class _BankAccountCardState extends State<BankAccountCard> {
               ),
             ],
           ),
-          Text(
-            "${widget.data!.getPostDate()}",
-            style: TextStyle(
-              color: white,
-              fontWeight: FontWeight.w600,
-            ),
-          )
+          // Text(
+          //   "${widget.data!.getPostDate()}",
+          //   style: TextStyle(
+          //     color: white,
+          //     fontWeight: FontWeight.w600,
+          //   ),
+          // )
         ],
       ),
     );

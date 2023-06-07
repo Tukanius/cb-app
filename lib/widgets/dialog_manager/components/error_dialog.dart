@@ -1,5 +1,4 @@
 import 'package:bank_core/services/dialog.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../dialog_wrapper.dart';

@@ -161,76 +161,76 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
               key: fbkey,
               child: Column(
                 children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    height: 50,
-                    child: FormBuilderDropdown(
-                      hint: Container(
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Сонгох",
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: black,
-                        ),
-                      ),
-                      name: 'whoTypes',
-                      onChanged: (value) async {
-                        setState(() {
-                          selectedValue = value.toString();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: white,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 10),
-                        border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
-                        ),
-                      ),
-                      items: general.whoTypes!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              onTap: () {
-                                setState(() {
-                                  whoTypeId = item.id;
-                                });
-                              },
-                              value: item,
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      '${item.name}',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(horizontal: 15),
+                  //   height: 50,
+                  //   child: FormBuilderDropdown(
+                  //     hint: Container(
+                  //       child: Row(
+                  //         children: [
+                  //           const Text(
+                  //             "Сонгох",
+                  //             style:
+                  //                 TextStyle(fontSize: 14, color: Colors.black),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     icon: Container(
+                  //       decoration: BoxDecoration(
+                  //         color: white,
+                  //         borderRadius: BorderRadius.circular(15),
+                  //       ),
+                  //       child: const Icon(
+                  //         Icons.arrow_drop_down,
+                  //         color: black,
+                  //       ),
+                  //     ),
+                  //     name: 'whoTypes',
+                  //     onChanged: (value) async {
+                  //       setState(() {
+                  //         selectedValue = value.toString();
+                  //       });
+                  //     },
+                  //     decoration: InputDecoration(
+                  //       filled: true,
+                  //       fillColor: white,
+                  //       contentPadding: const EdgeInsets.symmetric(
+                  //           vertical: 12, horizontal: 10),
+                  //       border: OutlineInputBorder(
+                  //         borderSide: const BorderSide(color: white, width: 0),
+                  //         borderRadius: BorderRadius.circular(20),
+                  //       ),
+                  //       enabledBorder: OutlineInputBorder(
+                  //         borderSide: const BorderSide(color: white, width: 0),
+                  //       ),
+                  //     ),
+                  //     items: general.whoTypes!
+                  //         .map(
+                  //           (item) => DropdownMenuItem(
+                  //             onTap: () {
+                  //               setState(() {
+                  //                 whoTypeId = item.id;
+                  //               });
+                  //             },
+                  //             value: item,
+                  //             child: Container(
+                  //               margin:
+                  //                   const EdgeInsets.symmetric(horizontal: 15),
+                  //               child: Row(
+                  //                 children: [
+                  //                   Text(
+                  //                     '${item.name}',
+                  //                     style: TextStyle(fontSize: 14),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         )
+                  //         .toList(),
+                  //   ),
+                  // ),
                   Container(
                     margin:
                         const EdgeInsets.symmetric(horizontal: 15, vertical: 5),

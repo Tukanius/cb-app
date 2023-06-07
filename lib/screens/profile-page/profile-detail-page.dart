@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';

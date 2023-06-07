@@ -1,15 +1,12 @@
-import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/paid-back-card/paid-back-card.dart';
-import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/screens/loan-schedule-page/loan-schedule-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:after_layout/after_layout.dart';
 

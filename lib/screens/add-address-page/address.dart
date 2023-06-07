@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/address-card/address-card.dart';

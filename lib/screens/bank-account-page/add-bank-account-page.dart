@@ -9,7 +9,6 @@ import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
@@ -156,7 +155,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
               margin: const EdgeInsets.symmetric(horizontal: 15),
               height: 50,
               child: FormBuilderDropdown(
-                hint: Container(
+                initialValue: Container(
                   margin: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
