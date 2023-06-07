@@ -15,16 +15,6 @@ class SuccessDialog {
       context: context!,
       barrierDismissible: true,
       builder: (context) {
-        // Future.delayed(duration, () {
-        //   dialogService!.dialogComplete();
-
-        //   // ignore: unnecessary_null_comparison
-        //   if (context == null) return;
-        //   if (Navigator.of(context, rootNavigator: true).canPop()) {
-        //     Navigator.of(context).pop(true);
-        //   }
-        // });
-
         return DialogWrapper(
           child: Column(
             mainAxisSize: MainAxisSize.min,

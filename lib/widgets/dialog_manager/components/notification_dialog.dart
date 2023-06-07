@@ -13,7 +13,6 @@ class NotificationDialog {
       duration: Duration(milliseconds: duration ?? 3000),
       flushbarPosition: FlushbarPosition.TOP,
       backgroundColor: Colors.white,
-      // borderColor: Colors.grey,
       borderRadius: BorderRadius.circular(2.0),
       onTap: (flushbar) {
         flushbar.dismiss();

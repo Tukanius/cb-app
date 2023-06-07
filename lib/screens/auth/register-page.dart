@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
@@ -7,12 +5,11 @@ import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:intl/intl.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -25,23 +22,25 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
-
   User user = User();
+  bool isVisible = true;
+  bool isVisible1 = true;
+  String? pVal;
 
-  String datepickervalue = "";
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   afterFirstLayout(BuildContext context) async {}
 
   onSubmit() async {
-    final form = fbKey.currentState;
-    if (form?.saveAndValidate() ?? false) {
+    if (fbKey.currentState!.saveAndValidate()) {
       try {
-        User data = User.fromJson(form!.value);
-        data.birthDate =
-            Platform.isAndroid ? datepickervalue : dateTime.toString();
+        User data = User.fromJson(fbKey.currentState!.value);
         await Provider.of<UserProvider>(context, listen: false).register(data);
-        await showSuccesful(context);
+        await show(context);
         await Navigator.of(context).pushNamed(LoginScreen.routeName);
       } catch (e) {
         print(e.toString());
@@ -49,363 +48,244 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
     }
   }
 
-  showSuccesful(context) {
+  show(ctx) async {
     showDialog(
-      context: context,
-      builder: (context) {
-        Future.delayed(Duration(seconds: 2), () {
-          Navigator.of(context).pop(true);
-        });
-        return Material(
-          type: MaterialType.transparency,
-          child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 150),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: buttonColor, width: 3),
-                        ),
-                        child: Icon(
-                          Icons.check,
-                          color: buttonColor,
-                          size: 40,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Танд амжилт хүсье',
-                        style: TextStyle(
-                            color: black.withOpacity(0.7), fontSize: 14),
-                      )
-                    ],
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 75),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  Column(
-                    children: [
-                      Text(
+                  padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text(
                         'Амжилттай',
                         style: TextStyle(
-                          color: black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            color: dark,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
                       ),
-                      SizedBox(
-                        height: 20,
+                      const SizedBox(
+                        height: 16,
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 50,
-                          right: 50,
-                        ),
-                        child: CustomButton(
-                          textColor: white,
-                          labelColor: buttonColor,
-                          boxShadow: true,
-                          labelText: "Ок",
-                          onClick: () {},
-                        ),
+                      const Text(
+                        'Таны бүртгэл амжилттай үүслээ.',
+                        textAlign: TextAlign.center,
+                      ),
+                      ButtonBar(
+                        buttonMinWidth: 100,
+                        alignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          TextButton(
+                            child: const Text(
+                              "Нэвтрэх",
+                              style: TextStyle(color: dark),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              UserProvider().logout();
+                            },
+                          ),
+                        ],
                       ),
                     ],
-                  )
-                ],
-              )),
-        );
-      },
-    );
-  }
-
-  bool isVisible = true;
-  bool isVisible1 = true;
-
-  @override
-  void initState() {
-    super.initState();
+                  ),
+                ),
+                Lottie.asset('assets/lottie/success.json',
+                    height: 150, repeat: false),
+              ],
+            ),
+          );
+        });
   }
 
   DateTime dateTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: backgroundColor,
-        automaticallyImplyLeading: false,
-        leading: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          child: ActionButton(
-            onClick: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: white,
-              size: 10,
-            ),
-          ),
-        ),
-        title: Text(
-          'Бүртгүүлэх',
-          style: TextStyle(
-            color: white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            FormBuilder(
-              key: fbKey,
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  children: [
-                    FormTextField(
-                      labelText: "Овог",
-                      inputType: TextInputType.text,
-                      name: 'lastName',
-                      hintText: "Овогоо оруулна уу",
-                      color: white,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Овогоо оруулна уу')
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      labelText: "Нэр",
-                      inputType: TextInputType.text,
-                      name: 'firstName',
-                      hintText: "Нэрээ оруулна уу",
-                      color: white,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Нэрээ оруулна уу')
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      labelText: "Регистер №",
-                      inputType: TextInputType.text,
-                      name: 'registerNo',
-                      hintText: "Регистерийн дугаар",
-                      color: white,
-                      validators: FormBuilderValidators.compose([
-                        (value) {
-                          return validateRegisterNo(value.toString(), context);
-                        }
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Platform.isAndroid
-                        ? GestureDetector(
-                            onTap: () async {
-                              DateTime? pickedDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1950),
-                                  lastDate: DateTime(2100));
-
-                              if (pickedDate != null) {
-                                String formattedDate =
-                                    DateFormat('yyyy-MM-dd').format(pickedDate);
-                                print(formattedDate);
-                                setState(() {
-                                  datepickervalue = formattedDate;
-                                });
-                              } else {}
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: white),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 20),
-                              child: datepickervalue == ''
-                                  ? Text(
-                                      'Төрсөн он, сар, өдөр',
-                                      style: TextStyle(color: black),
-                                    )
-                                  : Text(
-                                      datepickervalue,
-                                      style: TextStyle(color: black),
-                                    ),
-                            ),
-                          )
-                        : GestureDetector(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: white),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 15),
-                              child: dateTime == DateTime.now()
-                                  ? Text(
-                                      'Төрсөн он, сар, өдөр',
-                                      style: TextStyle(color: black),
-                                    )
-                                  : Text(
-                                      // '${Moment.parse(DateFormat("yyyy-MM-dd").parseUTC(dateTime.toString()).toLocal().toIso8601String()).format("yyyy-MM-dd")}',
-                                      "123",
-                                      style: TextStyle(color: black),
-                                    ),
-                            ),
-                            onTap: () {
-                              showCupertinoModalPopup(
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                    height: 250,
-                                    color: white,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Text(
-                                            'Болсон',
-                                            style: TextStyle(color: black),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: CupertinoDatePicker(
-                                            minimumYear: 1920,
-                                            mode: CupertinoDatePickerMode.date,
-                                            initialDateTime: dateTime,
-                                            onDateTimeChanged:
-                                                (DateTime newDate) {
-                                              setState(() {
-                                                dateTime = newDate;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isVisible1 = !isVisible1;
-                            });
-                          },
-                          icon: isVisible1 == true
-                              ? Icon(
-                                  Icons.visibility,
-                                  color: darkGrey,
-                                )
-                              : Icon(
-                                  Icons.visibility_off,
-                                  color: darkGrey,
-                                ),
-                        ),
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: "Нууц үг",
-                        hintStyle: TextStyle(color: black),
-                        fillColor: white,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                      ),
-                      obscureText: isVisible1,
-                      name: 'password',
-                      color: white,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isVisible = !isVisible;
-                            });
-                          },
-                          icon: isVisible == true
-                              ? Icon(
-                                  Icons.visibility,
-                                  color: darkGrey,
-                                )
-                              : Icon(
-                                  Icons.visibility_off,
-                                  color: darkGrey,
-                                ),
-                        ),
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: "Нууц үг давтан оруулна уу",
-                        hintStyle: TextStyle(color: black),
-                        fillColor: white,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                      ),
-                      obscureText: isVisible,
-                      name: 'password_verify',
-                      color: white,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    )
-                  ],
+    return Container(
+      color: backgroundColor,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: backgroundColor,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: backgroundColor,
+            automaticallyImplyLeading: false,
+            leading: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: ActionButton(
+                onClick: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: white,
+                  size: 10,
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              child: CustomButton(
-                onClick: onSubmit,
-                labelColor: buttonColor,
-                labelText: 'Бүртгүүлэх',
-                boxShadow: false,
-                textColor: white,
+            title: Text(
+              'Бүртгүүлэх',
+              style: TextStyle(
+                color: white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
-            SizedBox(
-              height: 50,
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  FormBuilder(
+                    key: fbKey,
+                    child: Column(
+                      children: [
+                        FormTextField(
+                          labelText: "Овог",
+                          inputType: TextInputType.text,
+                          name: 'lastName',
+                          hintText: "Овогоо оруулна уу",
+                          color: white,
+                          validators: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: 'Овогоо оруулна уу')
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
+                          labelText: "Нэр",
+                          inputType: TextInputType.text,
+                          name: 'firstName',
+                          hintText: "Нэрээ оруулна уу",
+                          color: white,
+                          validators: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: 'Нэрээ оруулна уу')
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
+                          labelText: "Регистер №",
+                          inputType: TextInputType.text,
+                          name: 'registerNo',
+                          hintText: "Регистерийн дугаар",
+                          color: white,
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return validateRegisterNo(
+                                  value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
+                          labelText: "Утаны дугаар",
+                          inputType: TextInputType.phone,
+                          name: 'phone',
+                          hintText: "Утасны дугаараа оруулна уу",
+                          color: white,
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return validatePhone(value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
+                          labelText: "И-Мейл",
+                          inputType: TextInputType.emailAddress,
+                          name: 'email',
+                          hintText: "И-Мейлээ оруулна уу",
+                          color: white,
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return validateEmail(value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
+                          labelText: "Нууц үг",
+                          obscureText: true,
+                          name: 'password',
+                          hintText: "Нууц үгээ оруулна уу",
+                          color: white,
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return validatePassword(
+                                  value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
+                          labelText: "Нууц үг баталгаажуулалт",
+                          name: "password_verify",
+                          inputType: TextInputType.text,
+                          hintText: "Нууц үгээ давтан оруулна уу",
+                          inputAction: TextInputAction.done,
+                          obscureText: true,
+                          color: white,
+                          validators: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: "Нууц үгээ давтан оруулна уу"),
+                            (value) {
+                              if (fbKey.currentState?.fields['password']
+                                      ?.value !=
+                                  value) {
+                                return 'Оруулсан нууц үгтэй таарахгүй байна';
+                              }
+                              return null;
+                            }
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  CustomButton(
+                    onClick: onSubmit,
+                    labelColor: buttonColor,
+                    labelText: 'Бүртгүүлэх',
+                    boxShadow: false,
+                    textColor: white,
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -419,6 +299,45 @@ String? validateRegisterNo(String value, context) {
   } else {
     if (!regex.hasMatch(value)) {
       return 'Зөвхөн криллээр бичнэ үү';
+    } else {
+      return null;
+    }
+  }
+}
+
+String? validatePassword(String value, context) {
+  RegExp regex = RegExp(r'^.{6,20}$');
+  if (value.isEmpty) {
+    return 'Нууц үгээ оруулна уу';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Нууц үг нь дор хаяж 6 тэмдэгтээс бүрдэх ёстой';
+    } else {
+      return null;
+    }
+  }
+}
+
+String? validatePhone(String value, context) {
+  RegExp regex = RegExp(r'[(9|8]{1}[0-9]{7}$');
+  if (value.isEmpty) {
+    return 'Утасны дугаараа оруулна уу';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Утасны дугаараа шалгана уу';
+    } else {
+      return null;
+    }
+  }
+}
+
+String? validateEmail(String value, context) {
+  RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  if (value.isEmpty) {
+    return 'И-Мейлээ оруулна уу';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'И-Мейлээ шалгана уу';
     } else {
       return null;
     }

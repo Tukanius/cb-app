@@ -1,3 +1,4 @@
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -19,6 +20,7 @@ class FormTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final bool obscureText;
   final bool hasObscureControl;
+  final bool password;
   final bool autoFocus;
   final bool readOnly;
   final FocusNode? focusNode;
@@ -41,6 +43,7 @@ class FormTextField extends StatefulWidget {
       this.suffixIcon,
       this.name,
       this.controller,
+      this.password = false,
       this.decoration,
       this.attribute,
       this.hintText,
@@ -114,7 +117,7 @@ class _FormTextFieldState extends State<FormTextField> {
           textInputAction: widget.inputAction,
           initialValue: widget.initialValue,
           obscureText:
-              widget.hasObscureControl ? isPasswordVisible : widget.obscureText,
+              !widget.obscureText ? isPasswordVisible : !isPasswordVisible,
           readOnly: widget.readOnly,
           autocorrect: false,
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -140,7 +143,24 @@ class _FormTextFieldState extends State<FormTextField> {
 
           decoration: widget.decoration ??
               InputDecoration(
-                suffixIcon: widget.suffixIcon,
+                suffixIcon: widget.obscureText == true
+                    ? IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isPasswordVisible = !isPasswordVisible;
+                          });
+                        },
+                        icon: isPasswordVisible != true
+                            ? Icon(
+                                Icons.visibility,
+                                color: darkGrey,
+                              )
+                            : Icon(
+                                Icons.visibility_off,
+                                color: darkGrey,
+                              ),
+                      )
+                    : widget.suffixIcon,
                 hintText: widget.hintText,
                 prefixIcon: widget.prefixIcon,
                 border: OutlineInputBorder(
