@@ -117,7 +117,7 @@ class _FormTextFieldState extends State<FormTextField> {
               widget.hasObscureControl ? isPasswordVisible : widget.obscureText,
           readOnly: widget.readOnly,
           autocorrect: false,
-          // autovalidate: false,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           // validator: widget.validators ?? [],
           validator: widget.validators ?? widget.validator,
           textCapitalization: widget.textCapitalization,
