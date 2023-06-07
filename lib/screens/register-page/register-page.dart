@@ -15,7 +15,6 @@ import 'package:intl/intl.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:simple_moment/simple_moment.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = 'RegisterPage';
@@ -344,7 +343,8 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                                       style: TextStyle(color: black),
                                     )
                                   : Text(
-                                      '${Moment.parse(DateFormat("yyyy-MM-dd").parseUTC(dateTime.toString()).toLocal().toIso8601String()).format("yyyy-MM-dd")}',
+                                      // '${Moment.parse(DateFormat("yyyy-MM-dd").parseUTC(dateTime.toString()).toLocal().toIso8601String()).format("yyyy-MM-dd")}',
+                                      "123",
                                       style: TextStyle(color: black),
                                     ),
                             ),

@@ -1,4 +1,3 @@
-import 'package:bank_core/models/result.dart';
 import 'package:bank_core/utils/http_request.dart';
 import '../models/user.dart';
 import '../models/get.dart';

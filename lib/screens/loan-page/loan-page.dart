@@ -2,7 +2,6 @@ import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
-import 'package:bank_core/components/bank-account-card/own-bank-account-card.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/components/loan/schedule.dart';
 import 'package:bank_core/models/general.dart';
@@ -855,7 +854,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                       isExpanded: true,
                       dropdownColor: black,
                       borderRadius: BorderRadius.circular(10),
-                      hint: Container(
+                      initialValue: Container(
                         margin: const EdgeInsets.only(left: 10),
                         child: Row(
                           children: [

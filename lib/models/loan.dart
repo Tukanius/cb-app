@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 part '../parts/loan.dart';
 
 class Loan {
