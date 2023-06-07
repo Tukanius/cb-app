@@ -12,7 +12,7 @@ import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
 import 'package:bank_core/screens/add-address-page/address.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
-import 'package:bank_core/screens/register-page/register-page.dart';
+import 'package:bank_core/screens/auth/register-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/screens/who-type-page/who-type-page.dart';
 import 'package:bank_core/services/dialog.dart';
@@ -50,6 +50,9 @@ class MyApp extends StatelessWidget {
           child: Stack(
             children: [
               MaterialApp(
+                theme: ThemeData(
+                  primarySwatch: Colors.grey,
+                ),
                 builder: (context, widget) => Navigator(
                   onGenerateRoute: (settings) => MaterialPageRoute(
                     builder: (context) =>

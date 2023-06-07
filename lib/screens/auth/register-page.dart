@@ -9,7 +9,6 @@ import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:after_layout/after_layout.dart';
@@ -35,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
   @override
   afterFirstLayout(BuildContext context) async {}
 
-  onItemTapped() async {
+  onSubmit() async {
     final form = fbKey.currentState;
     if (form?.saveAndValidate() ?? false) {
       try {
@@ -126,11 +125,6 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
       },
     );
   }
-  // onSubmit() async {
-  //   if (fbKey.currentState!.saveAndValidate()) {
-  //     User data = User.fromJson(fbKey.currentState!.value);
-  //   }
-  // }
 
   bool isVisible = true;
   bool isVisible1 = true;
@@ -176,13 +170,6 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Lottie.asset(
-              'images/progress.json',
-              height: 150,
-            ),
-            SizedBox(
-              height: 50,
-            ),
             FormBuilder(
               key: fbKey,
               child: Container(
@@ -190,101 +177,43 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                 child: Column(
                   children: [
                     FormTextField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: "Овог",
-                        hintStyle: TextStyle(color: black),
-                        fillColor: white,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                      ),
+                      labelText: "Овог",
                       inputType: TextInputType.text,
                       name: 'lastName',
+                      hintText: "Овогоо оруулна уу",
                       color: white,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
+                            errorText: 'Овогоо оруулна уу')
                       ]),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     FormTextField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: "Нэр",
-                        hintStyle: TextStyle(color: black),
-                        fillColor: white,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                      ),
+                      labelText: "Нэр",
                       inputType: TextInputType.text,
                       name: 'firstName',
+                      hintText: "Нэрээ оруулна уу",
                       color: white,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
+                            errorText: 'Нэрээ оруулна уу')
                       ]),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     FormTextField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: "Регистер №",
-                        hintStyle: TextStyle(color: black),
-                        fillColor: white,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                      ),
+                      labelText: "Регистер №",
                       inputType: TextInputType.text,
                       name: 'registerNo',
+                      hintText: "Регистерийн дугаар",
                       color: white,
                       validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: "Утасны дугаар",
-                        hintStyle: TextStyle(color: black),
-                        fillColor: white,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                      ),
-                      inputType: TextInputType.number,
-                      name: 'phone',
-                      hintText: 'Утасны дугаар',
-                      color: white,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(15),
-                        hintText: "И-мэйл хаяг",
-                        hintStyle: TextStyle(color: black),
-                        fillColor: white,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                      ),
-                      inputType: TextInputType.emailAddress,
-                      name: 'email',
-                      color: white,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
+                        (value) {
+                          return validateRegisterNo(value.toString(), context);
+                        }
                       ]),
                     ),
                     SizedBox(
@@ -467,7 +396,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 15),
               child: CustomButton(
-                onClick: onItemTapped,
+                onClick: onSubmit,
                 labelColor: buttonColor,
                 labelText: 'Бүртгүүлэх',
                 boxShadow: false,
@@ -481,5 +410,18 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
         ),
       ),
     );
+  }
+}
+
+String? validateRegisterNo(String value, context) {
+  RegExp regex = RegExp(r'[а-яА-ЯёЁөӨүҮ]{2}\d{8}$');
+  if (value.isEmpty) {
+    return 'Регистрийн дугаараа оруулна уу';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Зөвхөн криллээр бичнэ үү';
+    } else {
+      return null;
+    }
   }
 }

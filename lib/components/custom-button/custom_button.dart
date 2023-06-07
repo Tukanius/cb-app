@@ -26,7 +26,7 @@ class _CustomButtonState extends State<CustomButton> {
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 56,
+        height: 42,
         decoration: BoxDecoration(
           boxShadow: [
             widget.boxShadow == true || widget.boxShadow == null
@@ -53,6 +53,9 @@ class _CustomButtonState extends State<CustomButton> {
             ),
           ),
           style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
             shadowColor: Colors.transparent,
             backgroundColor: widget.labelColor,
           ),
