@@ -10,7 +10,7 @@ class Customer {
   String? firstName;
   String? lastName;
   String? phone;
-  String? isActive;
+  bool? isActive;
   String? createdAt;
   String? createdUserId;
   String? updatedAt;

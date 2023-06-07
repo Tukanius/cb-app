@@ -13,7 +13,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     firstName: json['firstName'] != null ? json['firstName'] as String : null,
     lastName: json['lastName'] != null ? json['lastName'] as String : null,
     phone: json['phone'] != null ? json['phone'] as String : null,
-    isActive: json['isActive'] != null ? json['isActive'] as String : null,
+    isActive: json['isActive'] != null ? json['isActive'] as bool : null,
     createdAt: json['createdAt'] != null ? json['createdAt'] as String : null,
     createdUserId:
         json['createdUserId'] != null ? json['createdUserId'] as String : null,
