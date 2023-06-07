@@ -15,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = 'RegisterPage';
@@ -178,7 +179,10 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Lottie.asset('images/register.json', height: 150),
+            Lottie.asset(
+              'images/progress.json',
+              height: 150,
+            ),
             SizedBox(
               height: 50,
             ),
@@ -189,8 +193,16 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                 child: Column(
                   children: [
                     FormTextField(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: "Овог",
+                        hintStyle: TextStyle(color: black),
+                        fillColor: white,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
+                      inputType: TextInputType.text,
                       name: 'lastName',
-                      hintText: 'Овог',
                       color: white,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -201,8 +213,16 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       height: 10,
                     ),
                     FormTextField(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: "Нэр",
+                        hintStyle: TextStyle(color: black),
+                        fillColor: white,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
+                      inputType: TextInputType.text,
                       name: 'firstName',
-                      hintText: 'Нэр',
                       color: white,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -213,8 +233,16 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       height: 10,
                     ),
                     FormTextField(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: "Регистер №",
+                        hintStyle: TextStyle(color: black),
+                        fillColor: white,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
+                      inputType: TextInputType.text,
                       name: 'registerNo',
-                      hintText: 'Регистер №',
                       color: white,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -225,6 +253,15 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       height: 10,
                     ),
                     FormTextField(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: "Утасны дугаар",
+                        hintStyle: TextStyle(color: black),
+                        fillColor: white,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
+                      inputType: TextInputType.number,
                       name: 'phone',
                       hintText: 'Утасны дугаар',
                       color: white,
@@ -237,8 +274,16 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       height: 10,
                     ),
                     FormTextField(
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: "И-мэйл хаяг",
+                        hintStyle: TextStyle(color: black),
+                        fillColor: white,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
+                      inputType: TextInputType.emailAddress,
                       name: 'email',
-                      hintText: 'И-мэйл хаяг',
                       color: white,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -277,31 +322,30 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                               child: datepickervalue == ''
                                   ? Text(
                                       'Төрсөн он, сар, өдөр',
-                                      style: TextStyle(color: darkGrey),
+                                      style: TextStyle(color: black),
                                     )
                                   : Text(
                                       datepickervalue,
-                                      style: TextStyle(color: darkGrey),
+                                      style: TextStyle(color: black),
                                     ),
                             ),
                           )
                         : GestureDetector(
                             child: Container(
-                              height: 60,
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: white),
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 20),
+                                  horizontal: 15, vertical: 15),
                               child: dateTime == DateTime.now()
                                   ? Text(
                                       'Төрсөн он, сар, өдөр',
-                                      style: TextStyle(color: darkGrey),
+                                      style: TextStyle(color: black),
                                     )
                                   : Text(
-                                      '${dateTime}',
-                                      style: TextStyle(color: darkGrey),
+                                      '${Moment.parse(DateFormat("yyyy-MM-dd").parseUTC(dateTime.toString()).toLocal().toIso8601String()).format("yyyy-MM-dd")}',
+                                      style: TextStyle(color: black),
                                     ),
                             ),
                             onTap: () {
@@ -349,26 +393,33 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       height: 10,
                     ),
                     FormTextField(
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isVisible1 = !isVisible1;
+                            });
+                          },
+                          icon: isVisible1 == true
+                              ? Icon(
+                                  Icons.visibility,
+                                  color: darkGrey,
+                                )
+                              : Icon(
+                                  Icons.visibility_off,
+                                  color: darkGrey,
+                                ),
+                        ),
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: "Нууц үг",
+                        hintStyle: TextStyle(color: black),
+                        fillColor: white,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                      ),
                       obscureText: isVisible1,
                       name: 'password',
-                      hintText: 'Нууц үг',
                       color: white,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isVisible1 = !isVisible1;
-                          });
-                        },
-                        icon: isVisible1 == true
-                            ? Icon(
-                                Icons.visibility,
-                                color: darkGrey,
-                              )
-                            : Icon(
-                                Icons.visibility_off,
-                                color: darkGrey,
-                              ),
-                      ),
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -378,25 +429,33 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                       height: 10,
                     ),
                     FormTextField(
-                      name: 'password_verify',
-                      hintText: 'Нууц үг давтан оруулна уу',
-                      color: white,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                        icon: isVisible == true
-                            ? Icon(
-                                Icons.visibility,
-                                color: darkGrey,
-                              )
-                            : Icon(
-                                Icons.visibility_off,
-                                color: darkGrey,
-                              ),
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isVisible = !isVisible;
+                            });
+                          },
+                          icon: isVisible == true
+                              ? Icon(
+                                  Icons.visibility,
+                                  color: darkGrey,
+                                )
+                              : Icon(
+                                  Icons.visibility_off,
+                                  color: darkGrey,
+                                ),
+                        ),
+                        contentPadding: EdgeInsets.all(15),
+                        hintText: "Нууц үг давтан оруулна уу",
+                        hintStyle: TextStyle(color: black),
+                        fillColor: white,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
                       ),
+                      obscureText: isVisible,
+                      name: 'password_verify',
+                      color: white,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')

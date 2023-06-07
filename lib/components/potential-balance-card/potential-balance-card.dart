@@ -7,7 +7,9 @@ class PotentialBalanceCard extends StatefulWidget {
   final Get? data;
   final bool? slider;
   final bool? button;
+  final bool? isVisible;
   const PotentialBalanceCard({
+    this.isVisible,
     this.data,
     this.slider,
     this.button,
@@ -62,7 +64,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                           ),
                         ),
                       ),
-                widget.slider == false || widget.slider == null
+                widget.isVisible != false
                     ? Text(
                         "${widget.data!.balance}₮",
                         style: TextStyle(
@@ -72,7 +74,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                         ),
                       )
                     : Text(
-                        '${currentValue.toInt()}',
+                        '*******',
                         style: TextStyle(
                           color: white,
                           fontWeight: FontWeight.bold,
