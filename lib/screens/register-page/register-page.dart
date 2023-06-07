@@ -14,6 +14,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
+import "package:moment_dart/moment_dart.dart";
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -339,8 +340,8 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                                       style: TextStyle(color: black),
                                     )
                                   : Text(
-                                      // '${Moment.parse(DateFormat("yyyy-MM-dd").parseUTC(dateTime.toString()).toLocal().toIso8601String()).format("yyyy-MM-dd")}',
-                                      "123",
+                                      Moment.parse(dateTime.toString())
+                                          .format("YYYY-MM-DD"),
                                       style: TextStyle(color: black),
                                     ),
                             ),

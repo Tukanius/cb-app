@@ -16,10 +16,9 @@ class CustomerApi extends HttpRequest {
     return res;
   }
 
-  Future<Result> bankAccountList(ResultArguments resultArguments) async {
-    var res = await get("/customerAccount/list",
-        data: resultArguments.toJson(), handler: true);
-    return Result.fromJson(res, Customer.fromJson);
+  Future<Customer> bankAccountList(String id) async {
+    var res = await get("/customerAccount/list/$id", handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
   }
 
   createBankAccount(Customer data) async {
@@ -66,6 +65,11 @@ class CustomerApi extends HttpRequest {
 
   pay(Customer data) async {
     var res = await post("/payment/create", data: data.toJson(), handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
+  }
+
+  Future<Customer> verify(String id) async {
+    var res = await get("/loan/verify/$id", handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 }

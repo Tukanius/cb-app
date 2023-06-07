@@ -27,6 +27,7 @@ class AuthApi extends HttpRequest {
   checkPassword(User data) async {
     Map<String, dynamic> json = {};
     json['password'] = data.password;
+    json['id'] = data.id;
     var res = await post("/auth/checkPassword", data: json);
     return res == true;
   }
