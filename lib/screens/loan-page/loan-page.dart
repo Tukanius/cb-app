@@ -4,10 +4,10 @@ import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/components/loan/schedule.dart';
+import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/general.dart';
 import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/loan.dart';
-import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
@@ -38,7 +38,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   int page = 1;
   int limit = 10;
   bool isLoading = false;
-  Result bankList = Result(rows: [], count: 0);
+  Customer bankList = Customer();
   General general = General();
 
   list(page, limit) async {
@@ -55,6 +55,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
       isLoading = true;
     });
     get = await AuthApi().accountGet(user.customerId!);
+    bankList = await CustomerApi().bankAccountList(user.customerId!);
     list(page, limit);
     setState(() {
       isLoading = false;
@@ -386,7 +387,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         print(pass.toJson());
                         print('====pass');
                         var res = await AuthApi().checkPassword(pass);
-                        await CustomerApi().verify(user.id!);
+                        await CustomerApi().verify(user.customerId!);
                         if (res == true) {
                           loan.amount = currentValue;
                           loan.customerId = user.customerId;
@@ -874,7 +875,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                             (item) => DropdownMenuItem(
                               enabled: true,
                               onTap: () {
-                                selectedMethod = item.bank.name;
+                                selectedMethod = item.bank?.name;
                               },
                               value: item,
                               child: Container(
@@ -902,7 +903,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "${item.bank.name}",
+                                          "${item.bank?.name}",
                                           style: TextStyle(
                                               fontSize: 8, color: white),
                                         ),

@@ -1,7 +1,9 @@
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/who-type-card/who-type.card.dart';
-import 'package:bank_core/models/result.dart';
+import 'package:bank_core/models/customer.dart';
+import 'package:bank_core/models/user.dart';
+import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:provider/provider.dart';
 
 class WhoTypePage extends StatefulWidget {
   static const routeName = 'WhoTypePage';
@@ -19,37 +22,18 @@ class WhoTypePage extends StatefulWidget {
 }
 
 class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
-  Result customer = Result(rows: [], count: 0);
-  int page = 1;
-  int limit = 5;
+  Customer customer = Customer();
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
   bool isLoading = false;
 
   @override
   afterFirstLayout(BuildContext context) async {
-    setState(() {
-      isLoading = true;
-    });
-    list(int, page);
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  list(int, page) async {
-    Offset offset = Offset(page: page, limit: limit);
-    Filter filter = Filter(query: '');
-    customer = await CustomerApi().relatedPersonList(
-      ResultArguments(offset: offset, filter: filter),
-    );
+    customer = await CustomerApi().relatedPersonList(user.customerId!);
   }
 
   void _onLoading() async {
-    setState(() {
-      limit += 10;
-    });
-    await list(page, limit);
+    setState(() {});
     refreshController.refreshCompleted();
     setState(() {
       isLoading = false;
@@ -61,13 +45,15 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
     setState(() {
       isLoading = true;
     });
-    await list(page, limit);
     refreshController.refreshCompleted();
     isLoading = false;
   }
 
+  User user = User();
+
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<UserProvider>(context, listen: true).user;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -96,22 +82,19 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
           ),
         ),
         actions: [
-          customer.count! < 4
-              ? Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  child: ActionButton(
-                    onClick: () {
-                      Navigator.of(context).pushNamed(AddWhoTypePage.routeName);
-                    },
-                    icon: Icon(
-                      Icons.add,
-                      color: white,
-                      size: 14,
-                    ),
-                  ),
-                )
-              : SizedBox(),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            child: ActionButton(
+              onClick: () {
+                Navigator.of(context).pushNamed(AddWhoTypePage.routeName);
+              },
+              icon: Icon(
+                Icons.add,
+                color: white,
+                size: 14,
+              ),
+            ),
+          )
         ],
       ),
       body: isLoading == true

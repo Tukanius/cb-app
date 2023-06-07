@@ -154,38 +154,43 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                   //     ],
                   //   ),
                   // ),
-
-                  Container(
-                    margin:
-                        const EdgeInsets.only(left: 15, bottom: 20, top: 40),
-                    child: Text(
-                      'Идэвхтэй зээл',
-                      style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: loan.rows!
-                          .map(
-                            (e) => ActiveLoanCard(
-                              data: e,
-                              onClick: () {
-                                Navigator.of(context).pushNamed(
-                                  LoanDetailPage.routeName,
-                                  arguments:
-                                      LoanDetailPageArguments(id: e.loanId),
-                                );
-                              },
+                  loan.rows!.length != 0
+                      ? Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  left: 15, bottom: 20, top: 40),
+                              child: Text(
+                                'Идэвхтэй зээл',
+                                style: TextStyle(
+                                  color: white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                          )
-                          .toList(),
-                    ),
-                  ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: loan.rows!
+                                    .map(
+                                      (e) => ActiveLoanCard(
+                                        data: e,
+                                        onClick: () {
+                                          Navigator.of(context).pushNamed(
+                                            LoanDetailPage.routeName,
+                                            arguments: LoanDetailPageArguments(
+                                                id: e.loanId),
+                                          );
+                                        },
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
                   SizedBox(
                     height: 40,
                   ),

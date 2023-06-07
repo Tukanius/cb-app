@@ -38,7 +38,6 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
         save.customerId = user.customerId;
         save.whoTypeId = whoTypeId;
         print(user.customerId.toString());
-        // user = selectedValue.toString() as User;
         await CustomerApi().createRelatedPerson(save);
         await show(context);
       } catch (e) {

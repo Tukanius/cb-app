@@ -75,6 +75,26 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     paidDate: json['paidDate'] != null ? json['paidDate'] as String : null,
     payerUserId:
         json['payerUserId'] != null ? json['payerUserId'] as String : null,
+    educationTypeId: json['educationTypeId'] != null
+        ? json['educationTypeId'] as String
+        : null,
+    marriageStatusId: json['marriageStatusId'] != null
+        ? json['marriageStatusId'] as String
+        : null,
+    familyCount: json['familyCount'] != null
+        ? int.parse(json['familyCount'].toString())
+        : null,
+    incomeAmountMonth: json['incomeAmountMonth'] != null
+        ? int.parse(json['incomeAmountMonth'].toString())
+        : null,
+    nationalityTypeId: json['nationalityTypeId'] != null
+        ? json['nationalityTypeId'] as String
+        : null,
+    genderId: json['genderId'] != null ? json['genderId'] as String : null,
+    birthPlace:
+        json['birthPlace'] != null ? json['birthPlace'] as String : null,
+    workStatusId:
+        json['workStatusId'] != null ? json['workStatusId'] as String : null,
   );
 }
 
@@ -123,6 +143,19 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   if (instance.loanResidual != null)
     json['loanResidual'] = instance.loanResidual;
   if (instance.rateCalcDay != null) json['rateCalcDay'] = instance.rateCalcDay;
+  if (instance.educationTypeId != null)
+    json['educationTypeId'] = instance.educationTypeId;
+  if (instance.marriageStatusId != null)
+    json['marriageStatusId'] = instance.marriageStatusId;
+  if (instance.familyCount != null) json['familyCount'] = instance.familyCount;
+  if (instance.incomeAmountMonth != null)
+    json['incomeAmountMonth'] = instance.incomeAmountMonth;
+  if (instance.nationalityTypeId != null)
+    json['nationalityTypeId'] = instance.nationalityTypeId;
+  if (instance.genderId != null) json['genderId'] = instance.genderId;
+  if (instance.birthPlace != null) json['birthPlace'] = instance.birthPlace;
+  if (instance.workStatusId != null)
+    json['workStatusId'] = instance.workStatusId;
 
   return json;
 }

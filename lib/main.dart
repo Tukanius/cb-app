@@ -10,10 +10,12 @@ import 'package:bank_core/screens/main-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
 import 'package:bank_core/screens/add-address-page/address.dart';
+import 'package:bank_core/screens/profile-page/add-information-page.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
+import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
 import 'package:bank_core/screens/who-type-page/who-type-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
@@ -77,9 +79,17 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return const LoanPage();
                       });
+                    case AddWhoTypePage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const AddWhoTypePage();
+                      });
                     case MainPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const MainPage();
+                      });
+                    case AddInformationPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const AddInformationPage();
                       });
                     case LoginScreen.routeName:
                       return MaterialPageRoute(builder: (context) {

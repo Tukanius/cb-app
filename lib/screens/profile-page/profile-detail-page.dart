@@ -1,6 +1,7 @@
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/profile-page/add-information-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -51,6 +52,21 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
             fontSize: 16,
           ),
         ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            child: ActionButton(
+              onClick: () {
+                Navigator.of(context).pushNamed(AddInformationPage.routeName);
+              },
+              icon: Icon(
+                Icons.add,
+                color: white,
+                size: 14,
+              ),
+            ),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

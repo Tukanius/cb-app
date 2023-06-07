@@ -73,7 +73,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                         height: 16,
                       ),
                       const Text(
-                        'Таны бүртгэл амжилттай үүслээ.',
+                        'Данс ажилттай холбогдлоо.',
                         textAlign: TextAlign.center,
                       ),
                       ButtonBar(

@@ -33,6 +33,9 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
   @override
   afterFirstLayout(BuildContext context) async {
     customer = await CustomerApi().bankAccountList(user.customerId!);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   list(page, limit) async {

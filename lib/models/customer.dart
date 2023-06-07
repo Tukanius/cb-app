@@ -39,10 +39,18 @@ class Customer {
   String? rateCalcDay;
   String? rateAmount;
   String? mainLoanPayAmount;
-
   double? amount;
   String? paidDate;
   String? payerUserId;
+
+  String? educationTypeId;
+  String? marriageStatusId;
+  int? familyCount;
+  int? incomeAmountMonth;
+  String? nationalityTypeId;
+  String? genderId;
+  String? birthPlace;
+  String? workStatusId;
 
   String getPostDate() {
     final now = Moment.now();
@@ -51,6 +59,14 @@ class Customer {
   }
 
   Customer({
+    this.educationTypeId,
+    this.marriageStatusId,
+    this.familyCount,
+    this.incomeAmountMonth,
+    this.nationalityTypeId,
+    this.genderId,
+    this.birthPlace,
+    this.workStatusId,
     this.payerUserId,
     this.paidDate,
     this.amount,
