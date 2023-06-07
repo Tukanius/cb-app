@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-
 part '../parts/user.dart';
 
 class User {
-  final GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
-
   String? id;
   String? createdAt;
   String? updatedAt;

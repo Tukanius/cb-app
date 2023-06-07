@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-// import '../models/alert.dart';
-// import '../screens/no_internet/no_internet_page.dart';
-
 class DialogService {
   late Function getContextListener;
   late Function(String) showSuccessDialogListener;
@@ -52,8 +49,6 @@ class DialogService {
   bool errorAlert = true;
   showInternetErrorDialog(String message) async {
     if (errorAlert == true) {
-      // locator<NavigationService>()
-      //     .pushReplacementNamed(routeName: NoInternet.routeName);
       errorAlert = false;
       dialogCompleter = Completer();
       showErrorDialogListener(message);
