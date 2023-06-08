@@ -14,6 +14,7 @@ import 'package:bank_core/screens/profile-page/add-information-page.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
+import 'package:bank_core/screens/qpay/qpay.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
 import 'package:bank_core/screens/who-type-page/who-type-page.dart';
@@ -105,6 +106,10 @@ class MyApp extends StatelessWidget {
                     case AddBankAccountPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const AddBankAccountPage();
+                      });
+                    case QpayPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const QpayPage();
                       });
                     case ProfilePage.routeName:
                       return MaterialPageRoute(builder: (context) {

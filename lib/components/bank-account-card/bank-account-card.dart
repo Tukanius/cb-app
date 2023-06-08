@@ -18,7 +18,7 @@ class _BankAccountCardState extends State<BankAccountCard> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: darkGrey,
@@ -28,10 +28,17 @@ class _BankAccountCardState extends State<BankAccountCard> {
         children: [
           Row(
             children: [
-              Image(
-                image: AssetImage('images/2.png'),
-                height: 40,
+              Container(
                 width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/2.png'),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(100),
+                  ),
+                ),
               ),
               SizedBox(
                 width: 10,

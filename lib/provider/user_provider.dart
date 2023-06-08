@@ -1,12 +1,9 @@
 import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
-  final DefaultCacheManager cacheManager = DefaultCacheManager();
-
   User user = User();
   bool isView = false;
 

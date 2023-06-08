@@ -120,7 +120,7 @@ class _MainPageState extends State<MainPage> {
             ),
             actions: [
               ActionButton(
-                icon: isView == true
+                icon: isView == false
                     ? Icon(
                         Icons.visibility,
                         color: white,
