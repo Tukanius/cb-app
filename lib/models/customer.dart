@@ -42,16 +42,29 @@ class Customer {
   double? amount;
   String? paidDate;
   String? payerUserId;
-
   String? educationTypeId;
   String? marriageStatusId;
   int? familyCount;
-  int? incomeAmountMonth;
+  double? incomeAmountMonth;
   String? nationalityTypeId;
   String? genderId;
   String? birthPlace;
   String? workStatusId;
   String? loanRate;
+  String? familyName;
+  String? birthDate;
+  String? registerNo;
+  String? email;
+  String? signature;
+  String? avatar;
+  String? birthPlaceNote;
+  Customer? result;
+
+  Customer? educationType;
+  Customer? marriageStatus;
+  Customer? nationalityType;
+  Customer? gender;
+  Customer? workStatus;
 
   String getPostDate() {
     final now = Moment.now();
@@ -60,6 +73,19 @@ class Customer {
   }
 
   Customer({
+    this.educationType,
+    this.marriageStatus,
+    this.nationalityType,
+    this.gender,
+    this.workStatus,
+    this.result,
+    this.familyName,
+    this.birthDate,
+    this.registerNo,
+    this.email,
+    this.signature,
+    this.avatar,
+    this.birthPlaceNote,
     this.loanRate,
     this.educationTypeId,
     this.marriageStatusId,
