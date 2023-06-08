@@ -8,12 +8,18 @@ class UserProvider extends ChangeNotifier {
   final DefaultCacheManager cacheManager = DefaultCacheManager();
 
   User user = User();
+  bool isView = false;
 
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("ACCESS_TOKEN");
 
     return token;
+  }
+
+  setView(value) {
+    isView = value;
+    notifyListeners();
   }
 
   me(bool handler) async {

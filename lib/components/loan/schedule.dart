@@ -22,10 +22,10 @@ class _LoanScheduleState extends State<LoanSchedule> {
     return GestureDetector(
       onTap: widget.onClick,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 15),
         width: 80,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
           color: widget.isSelected == true ? buttonColor : darkGrey,
         ),
         child: Text(

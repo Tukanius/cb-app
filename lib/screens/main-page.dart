@@ -19,9 +19,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  bool isVisible = false;
   User user = User();
   int currentIndex = 0;
+  bool isView = false;
 
   static const List<Widget> currentPages = [
     HomePage(),
@@ -66,7 +66,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
-    print(isVisible);
+    isView = Provider.of<UserProvider>(context, listen: true).isView;
     return WillPopScope(
       onWillPop: () => _onWillPop(context),
       child: SafeArea(
@@ -120,7 +120,7 @@ class _MainPageState extends State<MainPage> {
             ),
             actions: [
               ActionButton(
-                icon: isVisible == true
+                icon: isView == true
                     ? Icon(
                         Icons.visibility,
                         color: white,
@@ -129,10 +129,9 @@ class _MainPageState extends State<MainPage> {
                         Icons.visibility_off,
                         color: white,
                       ),
-                onClick: () {
-                  setState(() {
-                    isVisible = !isVisible;
-                  });
+                onClick: () async {
+                  await Provider.of<UserProvider>(context, listen: false)
+                      .setView(!isView);
                 },
               ),
               SizedBox(
