@@ -19,6 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:rainbow_color/rainbow_color.dart';
 
 class LoanPage extends StatefulWidget {
   static const routeName = 'LoanPage';
@@ -28,7 +29,8 @@ class LoanPage extends StatefulWidget {
   State<LoanPage> createState() => _LoanPageState();
 }
 
-class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
+class _LoanPageState extends State<LoanPage>
+    with AfterLayoutMixin, SingleTickerProviderStateMixin {
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
   double currentValue = 0;
   int? selectedIndex;
@@ -36,13 +38,44 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   TextEditingController textController = TextEditingController();
   String selectedDay = "";
   String seletedDayId = "";
-  String? selectedMethod;
+  String selectedMethod = "";
   bool isLoading = false;
   Customer bankList = Customer();
   General general = General();
   User user = User();
   Get get = Get();
   Loan loan = Loan();
+
+  bool isDateError = false;
+  bool isBankError = false;
+  bool isValueError = false;
+  late AnimationController controller;
+  late Animation<Color> _colorAnim;
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: Duration(seconds: 2), vsync: this);
+    _colorAnim =
+        RainbowColorTween([Colors.red, Colors.white]).animate(controller)
+          ..addListener(() {
+            setState(() {});
+          })
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              controller.reset();
+            } else if (status == AnimationStatus.dismissed) {
+              controller.forward();
+            }
+          });
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -60,6 +93,32 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
     setState(() {
       textController.text = '';
     });
+  }
+
+  onSubmit() async {
+    if (currentValue < 50000) {
+      setState(() {
+        isValueError = true;
+      });
+      print("error value ===> ${currentValue}");
+    }
+    if (selectedDay == "") {
+      setState(() {
+        isDateError = true;
+      });
+      print("error date ===> ${selectedDay}");
+    }
+    if (selectedMethod == "") {
+      setState(() {
+        isBankError = true;
+      });
+      print("error bank ===> ${selectedMethod}");
+    }
+    if (isBankError == false && isDateError == false && isValueError == false) {
+      show(context);
+    } else {
+      print("error");
+    }
   }
 
   show(ctx) {
@@ -649,17 +708,32 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         Text(
                           '${Utils().formatCurrency("${currentValue}")}₮',
                           style: TextStyle(
-                            color: white,
+                            color:
+                                isValueError == true ? _colorAnim.value : white,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        isValueError == true
+                            ? Container(
+                                width: 240,
+                                margin: EdgeInsets.symmetric(vertical: 8),
+                                child: Text(
+                                  'Хамгийн багадаа 50,000₮ өөр зээл авах боломжтой',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: red,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
                         SizedBox(
                           height: 20,
                         ),
                         Slider(
                           min: 0,
-                          max: double.parse('${get.balance}'),
+                          max: double.parse("${get.balance}"),
                           thumbColor: buttonColor,
                           activeColor: white,
                           inactiveColor: grey.withOpacity(0.2),
@@ -669,6 +743,11 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                           onChanged: (double value) {
                             setState(() {
                               currentValue = value;
+                              if (currentValue > 50000) {
+                                isValueError = false;
+                              } else {
+                                isValueError = true;
+                              }
                             });
                           },
                         ),
@@ -740,11 +819,13 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                           .map(
                             (item) => LoanSchedule(
                               isSelected: item.day == selectedDay,
+                              error: isDateError,
                               data: item.day,
                               onClick: () {
                                 setState(() {
                                   selectedDay = item.day!;
                                   seletedDayId = item.id!;
+                                  isDateError = false;
                                 });
                               },
                             ),
@@ -820,91 +901,100 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         ),
                       ),
                     ),
-                    Container(
-                      child: FormBuilderDropdown(
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: "Заавал сонгоно уу"),
-                        ]),
-                        alignment: Alignment.center,
-                        isExpanded: true,
-                        dropdownColor: black,
-                        borderRadius: BorderRadius.circular(10),
-                        icon: Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          color: white,
+                    DropdownButtonFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          selectedMethod = "${value?.name}";
+                          isBankError = false;
+                        });
+                        ;
+                      },
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: "Заавал сонгоно уу"),
+                      ]),
+                      alignment: Alignment.center,
+                      isExpanded: true,
+                      dropdownColor: mainColor,
+                      menuMaxHeight: 300,
+                      elevation: 2,
+                      borderRadius: BorderRadius.circular(10),
+                      icon: Icon(
+                        Icons.keyboard_arrow_down_outlined,
+                        color: white,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'Данс сонгоно уу',
+                        hintStyle: TextStyle(color: grey, fontSize: 14),
+                        filled: true,
+                        fillColor: darkGrey,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        name: 'bankAccount',
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 15),
-                          hintText: 'Данс сонгоно уу',
-                          hintStyle: TextStyle(color: grey, fontSize: 14),
-                          filled: true,
-                          fillColor: darkGrey,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                          ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        items: bankList.rows!
-                            .map(
-                              (item) => DropdownMenuItem(
-                                enabled: true,
-                                onTap: () {
-                                  selectedMethod = item.bank?.name;
-                                },
-                                value: item,
-                                child: Container(
-                                  child: Row(
+                      ),
+                      items: bankList.rows!
+                          .map(
+                            (item) => DropdownMenuItem(
+                              enabled: true,
+                              value: item,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: black,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image(
+                                        image: AssetImage('images/4.png'),
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: black,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image(
-                                            image: AssetImage('images/4.png'),
-                                            height: 30,
-                                            width: 30,
-                                          ),
-                                        ),
+                                      Text(
+                                        "${item.bank?.name}",
+                                        style: TextStyle(
+                                            fontSize: 8, color: white),
                                       ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "${item.bank?.name}",
-                                            style: TextStyle(
-                                                fontSize: 8, color: white),
-                                          ),
-                                          Text(
-                                            "${item.accountNumber}",
-                                            style: TextStyle(
-                                              color: white,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
+                                      Text(
+                                        "${item.accountNumber}",
+                                        style: TextStyle(
+                                          color: white,
+                                          fontSize: 12,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
+                                ],
                               ),
-                            )
-                            .toList(),
-                      ),
+                            ),
+                          )
+                          .toList(),
                     ),
+                    isBankError == true
+                        ? Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 5),
+                            child: Text(
+                              "Банкаа сонгоно уу",
+                              style: TextStyle(color: red, fontSize: 12),
+                            ),
+                          )
+                        : SizedBox(),
                     SizedBox(
                       height: 30,
                     ),
@@ -913,8 +1003,8 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         textColor: white,
                         labelColor: buttonColor,
                         onClick: () {
-                          show(context);
-                          // Navigator.of(context).pushNamed(QpayPage.routeName);
+                          // show(context);
+                          onSubmit();
                         },
                         labelText: 'Үргэлжлүүлэх',
                       ),

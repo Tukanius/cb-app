@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 class LoanSchedule extends StatefulWidget {
   final bool? isSelected;
   final Function()? onClick;
+  final bool error;
   final String? data;
   const LoanSchedule({
     this.onClick,
     Key? key,
     this.isSelected,
     this.data,
+    required this.error,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class _LoanScheduleState extends State<LoanSchedule> {
         width: 80,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: widget.error ? red : transparent),
           color: widget.isSelected == true ? buttonColor : darkGrey,
         ),
         child: Text(
