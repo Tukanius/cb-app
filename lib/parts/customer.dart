@@ -71,7 +71,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
         ? json['mainLoanPayAmount'] as String
         : null,
     amount:
-        json['amount'] != null ? int.parse(json['amount'].toString()) : null,
+        json['amount'] != null ? double.parse(json['amount'].toString()) : null,
     paidDate: json['paidDate'] != null ? json['paidDate'] as String : null,
     payerUserId:
         json['payerUserId'] != null ? json['payerUserId'] as String : null,
@@ -95,12 +95,14 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
         json['birthPlace'] != null ? json['birthPlace'] as String : null,
     workStatusId:
         json['workStatusId'] != null ? json['workStatusId'] as String : null,
+    loanRate: json['loanRate'] != null ? json['loanRate'] as String : null,
   );
 }
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.loanRate != null) json['loanRate'] = instance.loanRate;
   if (instance.paidDate != null) json['paidDate'] = instance.paidDate;
   if (instance.payerUserId != null) json['payerUserId'] = instance.payerUserId;
   if (instance.amount != null) json['amount'] = instance.amount;

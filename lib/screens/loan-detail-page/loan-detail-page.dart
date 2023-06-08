@@ -42,9 +42,6 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
       isLoading = true;
     });
     customer = await CustomerApi().activeLoanGet(widget.id);
-    totalAmount = double.parse(
-        (customer.mainLoanPayAmount! + customer.rateAmount!).toString());
-    print(customer.rateAmount.toString());
 
     paidList(page, limit);
     setState(() {
@@ -208,7 +205,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${customer.rateCalcDay}₮",
+                                      "${customer.loanRate}%",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -281,7 +278,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${customer.rateCalcDay}₮",
+                                      "${customer.rateAmount}₮",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
