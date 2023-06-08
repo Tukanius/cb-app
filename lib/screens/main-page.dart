@@ -100,7 +100,7 @@ class _MainPageState extends State<MainPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Сайн уу?',
+                      'Сайн  уу? 👋',
                       style: TextStyle(
                         color: grey,
                         fontSize: 12,
