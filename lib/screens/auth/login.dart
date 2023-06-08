@@ -63,10 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Container(
                       margin: EdgeInsets.only(top: 80),
-                      height: 90,
-                      width: 90,
+                      height: 110,
+                      width: 110,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(45),
                         color: darkGrey,
                       ),
                       alignment: Alignment.center,
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         CustomButton(
                           boxShadow: false,
-                          labelColor: darkGrey,
+                          labelColor: buttonColor,
                           labelText: "Нэвтрэх",
                           textColor: white,
                           onClick: () {
