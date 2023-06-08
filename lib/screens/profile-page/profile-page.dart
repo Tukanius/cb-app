@@ -236,7 +236,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 15,
                       ),
                       Text(
-                        "Who Type",
+                        "Холбоо хамаарал",
                         style: TextStyle(
                           color: white,
                           fontSize: 14,

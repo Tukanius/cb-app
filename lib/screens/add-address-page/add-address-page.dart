@@ -88,7 +88,6 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              UserProvider().logout();
                               Navigator.of(ctx).pop();
                               Navigator.of(ctx).pop();
                             },
@@ -148,17 +147,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
               margin: const EdgeInsets.symmetric(horizontal: 15),
               height: 50,
               child: FormBuilderDropdown(
-                initialValue: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  child: Row(
-                    children: [
-                      const Text(
-                        "Оршин сууж буй хаягийн төрөл",
-                        style: TextStyle(fontSize: 14, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
+                initialValue: 'Оршин сууж байгаа хаягын төрөл',
                 icon: Container(
                   decoration: BoxDecoration(
                     color: white,
@@ -171,10 +160,12 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                 ),
                 name: 'addressTypeId',
                 decoration: InputDecoration(
+                  hintText: 'Оршин сууж байгаа хаягын төрөл',
+                  hintStyle: TextStyle(fontSize: 14),
                   filled: true,
                   fillColor: white,
                   contentPadding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(color: white, width: 0),
                     borderRadius: BorderRadius.circular(20),

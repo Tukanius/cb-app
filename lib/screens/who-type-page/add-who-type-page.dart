@@ -11,6 +11,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:bank_core/api/customer-api.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class AddWhoTypePage extends StatefulWidget {
   static const routeName = 'AddWhoTypePage';
@@ -81,7 +82,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                         height: 16,
                       ),
                       const Text(
-                        'Таны бүртгэл амжилттай үүслээ.',
+                        'Холбоо хамаарлын мэдээлэл амжилттай нэмэгдлээ.',
                         textAlign: TextAlign.center,
                       ),
                       ButtonBar(
@@ -95,7 +96,6 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              UserProvider().logout();
                               Navigator.of(ctx).pop();
                               Navigator.of(ctx).pop();
                             },
@@ -132,7 +132,8 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              size: 12,
+              size: 10,
+              color: white,
             ),
           ),
         ),
@@ -175,10 +176,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                     Container(
                       height: 50,
                       child: FormBuilderDropdown(
-                        initialValue: const Text(
-                          "Сонгох",
-                          style: TextStyle(fontSize: 14, color: Colors.black),
-                        ),
+                        initialValue: 'Холбоо хамаарал сонгох',
                         icon: Container(
                           decoration: BoxDecoration(
                             color: white,
@@ -196,10 +194,12 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                           });
                         },
                         decoration: InputDecoration(
+                          hintText: 'Холбоо хамаарал сонгох',
+                          hintStyle: TextStyle(fontSize: 14),
                           filled: true,
                           fillColor: white,
                           contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 10),
+                              vertical: 12, horizontal: 15),
                           border: OutlineInputBorder(
                             borderSide:
                                 const BorderSide(color: white, width: 0),
@@ -246,6 +246,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       labelText: "Овог",
                       color: white,
                       hintText: 'Овог',
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Овог оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -255,6 +259,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       name: 'firstName',
                       color: white,
                       hintText: 'Нэр',
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Нэр оруулна уу')
+                      ]),
                     ),
                     SizedBox(
                       height: 10,
@@ -264,6 +272,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       name: 'phone',
                       color: white,
                       hintText: 'Утасны дугаар',
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Утасны дугаар оруулна уу')
+                      ]),
                     ),
                   ],
                 ),

@@ -55,7 +55,7 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
           ),
         ),
         title: Text(
-          'Who Type',
+          'Холбоо хамаарал',
           style: TextStyle(
             color: white,
             fontWeight: FontWeight.bold,

@@ -87,7 +87,6 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              UserProvider().logout();
                               Navigator.of(ctx).pop();
                               Navigator.of(ctx).pop();
                             },

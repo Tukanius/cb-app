@@ -108,7 +108,6 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              UserProvider().logout();
                               Navigator.of(ctx).pop();
                               Navigator.of(ctx).pop();
                             },

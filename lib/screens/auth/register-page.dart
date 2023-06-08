@@ -94,7 +94,6 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              UserProvider().logout();
                             },
                           ),
                         ],
