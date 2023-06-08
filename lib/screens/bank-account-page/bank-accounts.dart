@@ -87,7 +87,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
           : customer.rows!.length == 0
               ? Column(
                   children: [
-                    Lottie.asset('images/asdf.json', height: 200),
+                    Lottie.asset('assets/lottie/empty.json', height: 200),
                     Text(
                       "Данс холбоогүй байна",
                       style: TextStyle(color: grey),

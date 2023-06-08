@@ -166,204 +166,196 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
               ),
             )
           : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Text(
-                      "Төлөх дүн",
-                      style: TextStyle(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10, top: 20),
+                      child: Text(
+                        "Төлөх дүн",
+                        style: TextStyle(
+                            color: white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        color: darkGrey,
+                      ),
+                      child: Column(children: [
+                        Text(currentValue.toString()),
+                        Slider(
+                          min: 0,
+                          max: double.parse(get.balance.toString()),
+                          thumbColor: buttonColor,
+                          activeColor: white,
+                          inactiveColor: grey.withOpacity(0.2),
+                          label: '${currentValue}',
+                          divisions: 5,
+                          value: currentValue,
+                          onChanged: (double value) {
+                            setState(() {
+                              currentValue = value;
+                            });
+                          },
+                        ),
+                      ]),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20, bottom: 10),
+                      child: Text(
+                        'Төлөх',
+                        style: TextStyle(
                           color: white,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15),
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
+                        ),
                       ),
-                      color: darkGrey,
                     ),
-                    child: Column(children: [
-                      Text(currentValue.toString()),
-                      Slider(
-                        min: 0,
-                        max: double.parse(get.balance.toString()),
-                        thumbColor: buttonColor,
-                        activeColor: white,
-                        inactiveColor: grey.withOpacity(0.2),
-                        label: '${currentValue}',
-                        divisions: 5,
-                        value: currentValue,
-                        onChanged: (double value) {
-                          setState(() {
-                            currentValue = value;
-                          });
+                    Container(
+                      decoration: BoxDecoration(
+                        color: darkGrey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image(
+                              image: AssetImage('images/3.png'),
+                              height: 24,
+                              width: 24,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Q Pay',
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 20, bottom: 10),
+                      child: Text(
+                        'Дараагийн төлөлт',
+                        style: TextStyle(
+                          color: white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: darkGrey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                'images/schedule.svg',
+                                height: 20,
+                                width: 20,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Төлбөр хийх өдөр',
+                                style: TextStyle(
+                                  color: grey,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                          Text(
+                            "2024/04/12",
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: darkGrey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                'images/schedule.svg',
+                                height: 20,
+                                width: 20,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Төлбөр хийх өдөр',
+                                style: TextStyle(
+                                  color: grey,
+                                  fontSize: 12,
+                                ),
+                              )
+                            ],
+                          ),
+                          Text(
+                            "2024/04/12",
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      child: CustomButton(
+                        boxShadow: true,
+                        labelColor: buttonColor,
+                        labelText: 'Төлбөр хийх',
+                        onClick: () {
+                          onSubmit();
                         },
-                      ),
-                    ]),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.only(left: 15, bottom: 10, top: 20),
-                    child: Text(
-                      'Төлөх',
-                      style: TextStyle(
-                        color: white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        textColor: white,
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    decoration: BoxDecoration(
-                      color: darkGrey,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 20),
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image(
-                            image: AssetImage('images/3.png'),
-                            height: 24,
-                            width: 24,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          'Q Pay',
-                          style: TextStyle(
-                            color: white,
-                            fontSize: 16,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.only(left: 15, bottom: 10, top: 20),
-                    child: Text(
-                      'Дараагийн төлөлт',
-                      style: TextStyle(
-                        color: white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: darkGrey,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'images/schedule.svg',
-                              height: 20,
-                              width: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Төлбөр хийх өдөр',
-                              style: TextStyle(
-                                color: grey,
-                                fontSize: 12,
-                              ),
-                            )
-                          ],
-                        ),
-                        Text(
-                          "2024/04/12",
-                          style: TextStyle(
-                            color: white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: darkGrey,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'images/schedule.svg',
-                              height: 20,
-                              width: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Төлбөр хийх өдөр',
-                              style: TextStyle(
-                                color: grey,
-                                fontSize: 12,
-                              ),
-                            )
-                          ],
-                        ),
-                        Text(
-                          "2024/04/12",
-                          style: TextStyle(
-                            color: white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    child: CustomButton(
-                      boxShadow: true,
-                      labelColor: buttonColor,
-                      labelText: 'Төлбөр хийх',
-                      onClick: () {
-                        onSubmit();
-                      },
-                      textColor: white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
     );

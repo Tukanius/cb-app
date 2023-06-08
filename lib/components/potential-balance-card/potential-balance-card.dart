@@ -1,15 +1,15 @@
 import 'package:bank_core/models/get.dart';
+import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PotentialBalanceCard extends StatefulWidget {
   final Function()? onClick;
   final Get? data;
   final bool? slider;
   final bool? button;
-  final bool? isVisible;
   const PotentialBalanceCard({
-    this.isVisible,
     this.data,
     this.slider,
     this.button,
@@ -24,9 +24,12 @@ class PotentialBalanceCard extends StatefulWidget {
 class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
   double maxValue = 400000;
   double currentValue = 0;
+  bool isView = false;
 
   @override
   Widget build(BuildContext context) {
+    isView = Provider.of<UserProvider>(context, listen: true).isView;
+
     var division = maxValue / 10000;
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15),
@@ -67,7 +70,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                 SizedBox(
                   height: 4,
                 ),
-                widget.isVisible != false
+                isView == false
                     ? Text(
                         "${widget.data!.balance}₮",
                         style: TextStyle(

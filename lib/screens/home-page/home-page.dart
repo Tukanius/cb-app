@@ -23,9 +23,7 @@ class HomePageArguments {
 }
 
 class HomePage extends StatefulWidget {
-  final bool? isVisible;
   const HomePage({
-    this.isVisible,
     Key? key,
   }) : super(key: key);
 
@@ -127,7 +125,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                     ),
                   ),
                   PotentialBalanceCard(
-                    isVisible: widget.isVisible,
                     slider: false,
                     data: get,
                     onClick: () {
@@ -140,7 +137,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                           children: [
                             Container(
                               margin: const EdgeInsets.only(
-                                  left: 15, bottom: 20, top: 40),
+                                  left: 15, bottom: 20, top: 30),
                               child: Text(
                                 'Идэвхтэй зээл',
                                 style: TextStyle(
@@ -175,22 +172,25 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                         )
                       : SizedBox(),
                   SizedBox(
-                    height: 20,
+                    height: 30,
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    decoration: BoxDecoration(),
-                    height: 160,
-                    width: MediaQuery.of(context).size.width,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image(
-                        image: NetworkImage(
-                            'https://officebanao.com/wp-content/uploads/2022/10/Modern-office-design-5-1024x576.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(horizontal: 15),
+                  //   decoration: BoxDecoration(),
+                  //   height: 160,
+                  //   width: MediaQuery.of(context).size.width,
+                  //   child: ClipRRect(
+                  //     borderRadius: BorderRadius.circular(10),
+                  //     child: Image(
+                  //       image: NetworkImage(
+                  //           'https://officebanao.com/wp-content/uploads/2022/10/Modern-office-design-5-1024x576.jpg'),
+                  //       fit: BoxFit.cover,
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                 ],
               ),
             ),

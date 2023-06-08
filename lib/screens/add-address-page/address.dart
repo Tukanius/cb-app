@@ -22,7 +22,7 @@ class AddAddress extends StatefulWidget {
 }
 
 class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
-  Result user = Result(count: 0, rows: []);
+  Result result = Result(count: 0, rows: []);
   int page = 1;
   int limit = 5;
   bool isLoading = true;
@@ -32,7 +32,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
   list(page, limit) async {
     Offset offset = Offset(page: page, limit: limit);
     Filter filter = Filter(query: customer.customerId.toString());
-    user = await CustomerApi()
+    result = await CustomerApi()
         .addressList(ResultArguments(offset: offset, filter: filter));
     setState(() {
       isLoading = false;
@@ -99,7 +99,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
           ),
         ),
         actions: [
-          user.rows!.length >= 3
+          result.rows!.length >= 3
               ? SizedBox()
               : Container(
                   margin:
@@ -123,7 +123,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
                 color: buttonColor,
               ),
             )
-          : user.rows!.length != 0
+          : result.rows!.length != 0
               ? SmartRefresher(
                   enablePullDown: true,
                   enablePullUp: true,
@@ -170,7 +170,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
                           ),
                         ),
                         Column(
-                          children: user.rows!
+                          children: result.rows!
                               .map(
                                 (e) => AddressCard(
                                   data: e,
