@@ -7,6 +7,7 @@ import 'package:bank_core/screens/loan-detail-page/loan-detail-page.dart';
 import 'package:bank_core/screens/loan-page/loan-page.dart';
 import 'package:bank_core/screens/loan-schedule-page/loan-schedule-page.dart';
 import 'package:bank_core/screens/main-page.dart';
+import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
 import 'package:bank_core/screens/add-address-page/address.dart';
@@ -142,6 +143,10 @@ class MyApp extends StatelessWidget {
                     case AddAddress.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const AddAddress();
+                      });
+                    case NotificationPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const NotificationPage();
                       });
                     case LoanDetailPage.routeName:
                       LoanDetailPageArguments arguments =

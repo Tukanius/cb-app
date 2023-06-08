@@ -4,7 +4,9 @@ import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/home-page/home-page.dart';
+import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
+import 'package:bank_core/screens/shop-page/shop-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,8 +27,8 @@ class _MainPageState extends State<MainPage> {
 
   static const List<Widget> currentPages = [
     HomePage(),
-    Text("2"),
-    Text("3"),
+    ShopPage(),
+    ShopPage(),
   ];
 
   ontappedItem(index) {
@@ -138,6 +140,9 @@ class _MainPageState extends State<MainPage> {
                 width: 10,
               ),
               ActionButton(
+                onClick: () {
+                  Navigator.of(context).pushNamed(NotificationPage.routeName);
+                },
                 icon: Icon(
                   Icons.notifications,
                   color: white,
