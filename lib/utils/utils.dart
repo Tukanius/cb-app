@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 class Utils {
   formatCurrency(value) {
     var result;
-    if (value == 0) {
+    if (value == '0.00') {
       return result = '0.00';
     }
     var formattedNumber =
