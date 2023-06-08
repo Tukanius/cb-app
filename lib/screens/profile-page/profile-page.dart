@@ -261,9 +261,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.person,
-                        color: white,
+                      SvgPicture.asset(
+                        'assets/svg/home.svg',
                       ),
                       SizedBox(
                         width: 15,
