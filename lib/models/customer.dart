@@ -10,7 +10,7 @@ class Customer {
   String? firstName;
   String? lastName;
   String? phone;
-  bool? isActive;
+  // bool? isActive;
   String? createdAt;
   String? createdUserId;
   String? updatedAt;
@@ -101,7 +101,7 @@ class Customer {
     this.firstName,
     this.lastName,
     this.phone,
-    this.isActive,
+    // this.isActive,
     this.createdAt,
     this.createdUserId,
     this.updatedAt,

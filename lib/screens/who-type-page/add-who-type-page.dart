@@ -1,4 +1,5 @@
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/general.dart';
 import 'package:bank_core/models/user.dart';
@@ -13,9 +14,18 @@ import 'package:lottie/lottie.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+class AddWhoTypePageArguments {
+  ListenController listenController;
+  AddWhoTypePageArguments({
+    required this.listenController,
+  });
+}
+
 class AddWhoTypePage extends StatefulWidget {
   static const routeName = 'AddWhoTypePage';
-  const AddWhoTypePage({Key? key}) : super(key: key);
+  final ListenController listenController;
+  const AddWhoTypePage({Key? key, required this.listenController})
+      : super(key: key);
 
   @override
   State<AddWhoTypePage> createState() => _WhoTypePageState();
@@ -38,8 +48,8 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
         User save = User.fromJson(fbkey.currentState!.value);
         save.customerId = user.customerId;
         save.whoTypeId = whoTypeId;
-        print(user.customerId.toString());
         await CustomerApi().createRelatedPerson(save);
+        widget.listenController.changeVariable("whotypes");
         await show(context);
       } catch (e) {
         debugPrint(e.toString());
@@ -96,7 +106,6 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              Navigator.of(ctx).pop();
                               Navigator.of(ctx).pop();
                             },
                           ),
@@ -271,6 +280,8 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       labelText: "Утасны дугаар",
                       name: 'phone',
                       color: white,
+                      showCounter: false,
+                      maxLenght: 8,
                       hintText: 'Утасны дугаар',
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(

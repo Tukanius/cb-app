@@ -1,4 +1,5 @@
 import 'package:bank_core/api/customer-api.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,18 @@ import 'package:after_layout/after_layout.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:lottie/lottie.dart';
 
+class AddAddressPageArguments {
+  ListenController listenController;
+  AddAddressPageArguments({
+    required this.listenController,
+  });
+}
+
 class AddAddressPage extends StatefulWidget {
   static const routeName = 'AddAddressPage';
-  const AddAddressPage({Key? key}) : super(key: key);
+  final ListenController listenController;
+  const AddAddressPage({Key? key, required this.listenController})
+      : super(key: key);
 
   @override
   State<AddAddressPage> createState() => _AddAddressPageState();
@@ -38,6 +48,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
       customer.addressTypeId = selectedMethod;
       customer.customerId = user.customerId;
       await CustomerApi().customerAddress(customer);
+      widget.listenController.changeVariable("addAddress");
       await show(context);
     }
   }
@@ -89,7 +100,6 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                             onPressed: () {
                               Navigator.of(context).pop();
                               Navigator.of(ctx).pop();
-                              Navigator.of(ctx).pop();
                             },
                           ),
                         ],
@@ -97,7 +107,8 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                     ],
                   ),
                 ),
-                Lottie.asset('images/success.json', height: 150, repeat: false),
+                Lottie.asset('assets/lottie/success.json',
+                    height: 150, repeat: false),
               ],
             ),
           );

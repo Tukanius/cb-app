@@ -69,180 +69,160 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 15, bottom: 10, top: 20),
-              child: Text(
-                "Дэлгэнгүй",
-                style: TextStyle(
-                  color: white,
-                  fontWeight: FontWeight.bold,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 30, bottom: 8),
+                child: Text(
+                  "Дэлгэнгүй",
+                  style: TextStyle(
+                    color: white,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Овог',
-                    style: TextStyle(
-                      color: grey,
-                      fontSize: 12,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: darkGrey,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Овог',
+                      style: TextStyle(
+                        color: grey,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "${user.lastName}",
-                    style: TextStyle(
-                      color: white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                    SizedBox(
+                      height: 5,
                     ),
-                  )
-                ],
+                    Text(
+                      "${user.lastName}",
+                      style: TextStyle(
+                        color: white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+              SizedBox(
+                height: 8,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Нэр',
-                    style: TextStyle(
-                      color: grey,
-                      fontSize: 12,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: darkGrey,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Нэр',
+                      style: TextStyle(
+                        color: grey,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "${user.firstName}",
-                    style: TextStyle(
-                      color: white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                    SizedBox(
+                      height: 5,
                     ),
-                  )
-                ],
+                    Text(
+                      "${user.firstName}",
+                      style: TextStyle(
+                        color: white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+              SizedBox(
+                height: 8,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Утасны дугаар',
-                    style: TextStyle(
-                      color: grey,
-                      fontSize: 12,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: darkGrey,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Утасны дугаар',
+                      style: TextStyle(
+                        color: grey,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "${user.phone}",
-                    style: TextStyle(
-                      color: white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                    SizedBox(
+                      height: 5,
                     ),
-                  )
-                ],
+                    Text(
+                      "${user.phone}",
+                      style: TextStyle(
+                        color: white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+              SizedBox(
+                height: 8,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'И-мэйл хаяг',
-                    style: TextStyle(
-                      color: grey,
-                      fontSize: 12,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: darkGrey,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'И-мэйл хаяг',
+                      style: TextStyle(
+                        color: grey,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "${user.email}",
-                    style: TextStyle(
-                      color: white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                    SizedBox(
+                      height: 5,
                     ),
-                  )
-                ],
+                    Text(
+                      "${user.email}",
+                      style: TextStyle(
+                        color: white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Оршин суугаа хаяг',
-                    style: TextStyle(
-                      color: grey,
-                      fontSize: 12,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "БЗД",
-                    style: TextStyle(
-                      color: white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

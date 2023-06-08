@@ -13,7 +13,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     firstName: json['firstName'] != null ? json['firstName'] as String : null,
     lastName: json['lastName'] != null ? json['lastName'] as String : null,
     phone: json['phone'] != null ? json['phone'] as String : null,
-    isActive: json['isActive'] != null ? json['isActive'] as bool : null,
+    // isActive: json['isActive'] != null ? json['isActive'] as bool : null,
     createdAt: json['createdAt'] != null ? json['createdAt'] as String : null,
     createdUserId:
         json['createdUserId'] != null ? json['createdUserId'] as String : null,
@@ -122,7 +122,7 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   if (instance.firstName != null) json['firstName'] = instance.firstName;
   if (instance.lastName != null) json['lastName'] = instance.lastName;
   if (instance.phone != null) json['phone'] = instance.phone;
-  if (instance.isActive != null) json['isActive'] = instance.isActive;
+  // if (instance.isActive != null) json['isActive'] = instance.isActive;
   if (instance.createdAt != null) json['createdAt'] = instance.createdAt;
   if (instance.createdUserId != null)
     json['createdUserId'] = instance.createdUserId;

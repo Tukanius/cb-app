@@ -32,10 +32,9 @@ class CustomerApi extends HttpRequest {
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 
-  Future<Result> addressList(ResultArguments resultArguments) async {
-    var res = await get("/customerAddress",
-        data: resultArguments.toJson(), handler: true);
-    return Result.fromJson(res, Customer.fromJson);
+  Future<Customer> addressList(String id) async {
+    var res = await get("/customerAddress/list/$id", handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
   }
 
   Future<Result> activeList(ResultArguments resultArguments, String id) async {

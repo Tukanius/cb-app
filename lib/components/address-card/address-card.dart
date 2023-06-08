@@ -3,10 +3,10 @@ import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class AddressCard extends StatefulWidget {
-  final Customer? data;
+  final Customer data;
   const AddressCard({
     Key? key,
-    this.data,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                'Байнгын',
+                "${widget.data.addressType?.name}",
                 style: TextStyle(
                   color: white,
                   fontSize: 14,
@@ -48,7 +48,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey,
+            color: grey.withOpacity(0.2),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,7 +62,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                '${widget.data!.provinceId}',
+                '${widget.data.provinceId}',
                 style: TextStyle(
                   color: white,
                   fontSize: 14,
@@ -72,7 +72,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey,
+            color: grey.withOpacity(0.2),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +86,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                '${widget.data!.districtId}',
+                '${widget.data.districtId}',
                 style: TextStyle(
                   color: white,
                   fontSize: 14,
@@ -96,7 +96,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey,
+            color: grey.withOpacity(0.2),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,7 +110,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                '${widget.data!.khorooId}',
+                '${widget.data.khorooId}',
                 style: TextStyle(
                   color: white,
                   fontSize: 14,
@@ -120,7 +120,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey,
+            color: grey.withOpacity(0.2),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,7 +134,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                '${widget.data!.address}',
+                '${widget.data.address}',
                 style: TextStyle(
                   color: white,
                   fontSize: 14,

@@ -1,5 +1,6 @@
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/who-type-card/who-type.card.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
@@ -23,13 +24,24 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
   Customer customer = Customer();
   bool isLoading = true;
   User user = User();
-
+  ListenController listenController = ListenController();
   @override
   afterFirstLayout(BuildContext context) async {
     customer = await CustomerApi().relatedPersonList(user.customerId!);
     setState(() {
       isLoading = false;
     });
+  }
+
+  @override
+  void initState() {
+    listenController.addListener(() async {
+      customer = await CustomerApi().relatedPersonList(user.customerId!);
+      setState(() {
+        isLoading = false;
+      });
+    });
+    super.initState();
   }
 
   @override
@@ -67,7 +79,9 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: ActionButton(
               onClick: () {
-                Navigator.of(context).pushNamed(AddWhoTypePage.routeName);
+                Navigator.of(context).pushNamed(AddWhoTypePage.routeName,
+                    arguments: AddWhoTypePageArguments(
+                        listenController: listenController));
               },
               icon: Icon(
                 Icons.add,
