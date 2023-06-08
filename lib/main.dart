@@ -94,9 +94,14 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return const MainPage();
                       });
+
                     case AddInformationPage.routeName:
+                      AddInformationPageArguments arguments =
+                          settings.arguments as AddInformationPageArguments;
                       return MaterialPageRoute(builder: (context) {
-                        return const AddInformationPage();
+                        return AddInformationPage(
+                          listenController: arguments.listenController,
+                        );
                       });
                     case LoginScreen.routeName:
                       return MaterialPageRoute(builder: (context) {

@@ -85,7 +85,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
         ? int.parse(json['familyCount'].toString())
         : null,
     incomeAmountMonth: json['incomeAmountMonth'] != null
-        ? int.parse(json['incomeAmountMonth'].toString())
+        ? double.parse(json['incomeAmountMonth'].toString())
         : null,
     nationalityTypeId: json['nationalityTypeId'] != null
         ? json['nationalityTypeId'] as String
@@ -96,12 +96,51 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     workStatusId:
         json['workStatusId'] != null ? json['workStatusId'] as String : null,
     loanRate: json['loanRate'] != null ? json['loanRate'] as String : null,
+
+    familyName:
+        json['familyName'] != null ? json['familyName'] as String : null,
+    birthDate: json['birthDate'] != null ? json['birthDate'] as String : null,
+    registerNo:
+        json['registerNo'] != null ? json['registerNo'] as String : null,
+    email: json['email'] != null ? json['email'] as String : null,
+    signature: json['signature'] != null ? json['signature'] as String : null,
+    avatar: json['avatar'] != null ? json['avatar'] as String : null,
+    birthPlaceNote: json['birthPlaceNote'] != null
+        ? json['birthPlaceNote'] as String
+        : null,
+    result: json['result'] != null
+        ? Customer.fromJson(json['result'] as Map<String, dynamic>)
+        : null,
+    educationType: json['educationType'] != null
+        ? Customer.fromJson(json['educationType'] as Map<String, dynamic>)
+        : null,
+    marriageStatus: json['marriageStatus'] != null
+        ? Customer.fromJson(json['marriageStatus'] as Map<String, dynamic>)
+        : null,
+    nationalityType: json['nationalityType'] != null
+        ? Customer.fromJson(json['nationalityType'] as Map<String, dynamic>)
+        : null,
+    gender: json['gender'] != null
+        ? Customer.fromJson(json['gender'] as Map<String, dynamic>)
+        : null,
+    workStatus: json['workStatus'] != null
+        ? Customer.fromJson(json['workStatus'] as Map<String, dynamic>)
+        : null,
   );
 }
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.educationType != null)
+    json['educationType'] = instance.educationType;
+  if (instance.marriageStatus != null)
+    json['marriageStatus'] = instance.marriageStatus;
+  if (instance.nationalityType != null)
+    json['nationalityType'] = instance.nationalityType;
+  if (instance.gender != null) json['gender'] = instance.gender;
+  if (instance.workStatus != null) json['workStatus'] = instance.workStatus;
+  if (instance.result != null) json['result'] = instance.result;
   if (instance.loanRate != null) json['loanRate'] = instance.loanRate;
   if (instance.paidDate != null) json['paidDate'] = instance.paidDate;
   if (instance.payerUserId != null) json['payerUserId'] = instance.payerUserId;
@@ -158,6 +197,15 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   if (instance.birthPlace != null) json['birthPlace'] = instance.birthPlace;
   if (instance.workStatusId != null)
     json['workStatusId'] = instance.workStatusId;
+
+  if (instance.familyName != null) json['familyName'] = instance.familyName;
+  if (instance.birthDate != null) json['birthDate'] = instance.birthDate;
+  if (instance.registerNo != null) json['registerNo'] = instance.registerNo;
+  if (instance.email != null) json['email'] = instance.email;
+  if (instance.signature != null) json['signature'] = instance.signature;
+  if (instance.avatar != null) json['avatar'] = instance.avatar;
+  if (instance.birthPlaceNote != null)
+    json['birthPlaceNote'] = instance.birthPlaceNote;
 
   return json;
 }
