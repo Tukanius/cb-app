@@ -99,8 +99,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(
-                            left: 15, bottom: 10, top: 20),
+                        margin: EdgeInsets.only(left: 15, bottom: 10, top: 20),
                         child: Text(
                           'Холбогдсон данс',
                           style: TextStyle(

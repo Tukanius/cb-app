@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 class AddBankAccountPage extends StatefulWidget {
   static const routeName = 'AddBankAccountPage';
@@ -24,20 +25,22 @@ class AddBankAccountPage extends StatefulWidget {
 class _AddBankAccountPageState extends State<AddBankAccountPage> {
   String? selectedMethod;
   TextEditingController textController = TextEditingController();
+  GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
   General general = General();
   User user = User();
 
   Customer save = Customer();
 
   onSubmit() async {
-    try {
-      save.bankId = selectedMethod;
-      save.customerId = user.customerId;
-      save.accountNumber = textController.text;
-      await CustomerApi().createBankAccount(save);
-      await show(context);
-    } catch (e) {
-      print(e.toString());
+    if (fbKey.currentState!.saveAndValidate()) {
+      try {
+        save = Customer.fromJson(fbKey.currentState!.value);
+        save.customerId = user.customerId;
+        await CustomerApi().createBankAccount(save);
+        await show(context);
+      } catch (e) {
+        print(e.toString());
+      }
     }
   }
 
@@ -139,112 +142,110 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 15, bottom: 10, top: 20),
-              child: Text(
-                'Банк сонгох',
-                style: TextStyle(
-                  color: white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              height: 50,
-              child: FormBuilderDropdown(
-                icon: Container(
-                  decoration: BoxDecoration(
-                    color: white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: const Icon(
-                    Icons.arrow_drop_down,
-                    color: black,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: FormBuilder(
+            key: fbKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 8, top: 20),
+                  child: Text(
+                    'Банк сонгох',
+                    style: TextStyle(
+                      color: white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
-                name: 'paymentMethod',
-                onChanged: (value) async {
-                  setState(() {});
-                },
-                decoration: InputDecoration(
-                  hintText: 'Банк сонгоно уу',
-                  hintStyle: TextStyle(color: grey, fontSize: 14),
-                  filled: true,
-                  fillColor: white,
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: white, width: 0),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: white, width: 0),
-                  ),
-                ),
-                items: general.banks!
-                    .map(
-                      (item) => DropdownMenuItem(
-                        onTap: () {
-                          setState(() {
-                            selectedMethod = item.id;
-                            print(selectedMethod);
-                          });
-                        },
-                        value: item,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            children: [
-                              Text(
-                                '${item.name}',
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ),
+                Container(
+                  child: FormBuilderDropdown(
+                    initialValue: "Банк сонгоно уу",
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(
+                          errorText: 'Дансаа оруулна уу.')
+                    ]),
+                    icon: Container(
+                      decoration: BoxDecoration(
+                        color: white,
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                    )
-                    .toList(),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              child: FormTextField(
-                decoration: InputDecoration(
-                  hintText: 'Дансны дугаараа оруулна уу',
-                  fillColor: white,
-                  filled: true,
-                  border: OutlineInputBorder(borderSide: BorderSide.none),
-                  contentPadding: EdgeInsets.all(10),
+                      child: const Icon(
+                        Icons.arrow_drop_down,
+                        color: black,
+                      ),
+                    ),
+                    name: 'bankId',
+                    onChanged: (value) async {
+                      setState(() {});
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Банк сонгоно уу',
+                      hintStyle: TextStyle(fontSize: 14),
+                      filled: true,
+                      fillColor: white,
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(color: white, width: 0),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    items: general.banks!
+                        .map(
+                          (item) => DropdownMenuItem(
+                            onTap: () {
+                              setState(() {
+                                selectedMethod = item.id;
+                                print(selectedMethod);
+                              });
+                            },
+                            value: item,
+                            child: Text(
+                              '${item.name}',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
-                controller: textController,
-                name: 'BankAccount',
-                color: white,
-              ),
+                SizedBox(
+                  height: 10,
+                ),
+                FormTextField(
+                  labelText: "Дансны дугаар",
+                  name: 'accountNumber',
+                  hintText: 'Дансны дугаараа оруулна уу',
+                  color: white,
+                  validators: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(
+                        errorText: 'Дансаа оруулна уу.')
+                  ]),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: CustomButton(
+                    boxShadow: false,
+                    labelColor: buttonColor,
+                    labelText: 'Нэмэх',
+                    onClick: onSubmit,
+                    textColor: white,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 100,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              child: CustomButton(
-                boxShadow: false,
-                labelColor: buttonColor,
-                labelText: 'Нэмэх',
-                onClick: () {
-                  onSubmit();
-                },
-                textColor: white,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
