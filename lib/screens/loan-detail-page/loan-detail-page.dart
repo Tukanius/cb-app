@@ -45,7 +45,6 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
     totalAmount = double.parse(
         (customer.mainLoanPayAmount! + customer.rateAmount!).toString());
     print(customer.rateAmount.toString());
-    print('========CUSTOMER======');
 
     paidList(page, limit);
     setState(() {
@@ -104,7 +103,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                 children: [
                   Container(
                     margin:
-                        const EdgeInsets.only(left: 15, top: 30, bottom: 10),
+                        const EdgeInsets.only(left: 15, top: 20, bottom: 10),
                     child: Text(
                       'Дижитал зээл',
                       style: TextStyle(
@@ -226,7 +225,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                           height: 10,
                         ),
                         Divider(
-                          color: grey,
+                          color: grey.withOpacity(0.2),
                           endIndent: 20,
                           indent: 20,
                         ),
@@ -391,7 +390,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                         children: [
                           SvgPicture.asset('images/schedule.svg'),
                           SizedBox(
-                            width: 10,
+                            width: 12,
                           ),
                           Text(
                             'Зээлийн хуваарь',

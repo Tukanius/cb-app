@@ -64,6 +64,9 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                           ),
                         ),
                       ),
+                SizedBox(
+                  height: 4,
+                ),
                 widget.isVisible != false
                     ? Text(
                         "${widget.data!.balance}₮",

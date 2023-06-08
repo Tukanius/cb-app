@@ -170,8 +170,6 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin:
-                        const EdgeInsets.only(top: 30, left: 15, bottom: 15),
                     child: Text(
                       "Төлөх дүн",
                       style: TextStyle(
@@ -180,21 +178,33 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                           fontSize: 16),
                     ),
                   ),
-                  Text(currentValue.toString()),
-                  Slider(
-                    min: 0,
-                    max: double.parse(get.balance.toString()),
-                    thumbColor: buttonColor,
-                    activeColor: white,
-                    inactiveColor: grey.withOpacity(0.2),
-                    label: '${currentValue}',
-                    divisions: 5,
-                    value: currentValue,
-                    onChanged: (double value) {
-                      setState(() {
-                        currentValue = value;
-                      });
-                    },
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      color: darkGrey,
+                    ),
+                    child: Column(children: [
+                      Text(currentValue.toString()),
+                      Slider(
+                        min: 0,
+                        max: double.parse(get.balance.toString()),
+                        thumbColor: buttonColor,
+                        activeColor: white,
+                        inactiveColor: grey.withOpacity(0.2),
+                        label: '${currentValue}',
+                        divisions: 5,
+                        value: currentValue,
+                        onChanged: (double value) {
+                          setState(() {
+                            currentValue = value;
+                          });
+                        },
+                      ),
+                    ]),
                   ),
                   Container(
                     margin:

@@ -22,7 +22,6 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
     return GestureDetector(
       onTap: widget.onClick,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 5),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

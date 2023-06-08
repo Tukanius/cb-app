@@ -63,17 +63,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   Get get = Get();
   User user = User();
 
-  void _onLoading() async {
-    setState(() {
-      limit += 10;
-    });
-    await list(page, limit);
-    refreshController.refreshCompleted();
-    setState(() {
-      isLoading = false;
-    });
-  }
-
   void _onRefresh() async {
     await Future.delayed(Duration(milliseconds: 1000));
     setState(() {
@@ -96,13 +85,11 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
           )
         : SmartRefresher(
             enablePullDown: true,
-            enablePullUp: true,
             controller: refreshController,
             header: WaterDropHeader(
               waterDropColor: grey,
             ),
             onRefresh: _onRefresh,
-            onLoading: _onLoading,
             footer: CustomFooter(
               builder: (context, mode) {
                 Widget body;
@@ -129,7 +116,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                 children: [
                   Container(
                     margin:
-                        const EdgeInsets.only(left: 15, bottom: 15, top: 40),
+                        const EdgeInsets.only(left: 15, bottom: 15, top: 20),
                     child: Text(
                       'Дижитал зээл',
                       style: TextStyle(
@@ -149,6 +136,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                   ),
                   loan.rows!.length != 0
                       ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               margin: const EdgeInsets.only(
@@ -166,18 +154,20 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: loan.rows!
-                                    .map(
-                                      (e) => ActiveLoanCard(
-                                        data: e,
-                                        onClick: () {
-                                          Navigator.of(context).pushNamed(
-                                            LoanDetailPage.routeName,
-                                            arguments: LoanDetailPageArguments(
-                                                id: e.loanId),
-                                          );
-                                        },
-                                      ),
-                                    )
+                                    .map((data) => Container(
+                                          margin: EdgeInsets.only(left: 15),
+                                          child: ActiveLoanCard(
+                                            data: data,
+                                            onClick: () {
+                                              Navigator.of(context).pushNamed(
+                                                LoanDetailPage.routeName,
+                                                arguments:
+                                                    LoanDetailPageArguments(
+                                                        id: data.loanId),
+                                              );
+                                            },
+                                          ),
+                                        ))
                                     .toList(),
                               ),
                             ),
@@ -185,7 +175,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                         )
                       : SizedBox(),
                   SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 15),

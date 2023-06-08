@@ -25,7 +25,6 @@ const Color yellow = Color(0xffF89938);
 const Color tod = Color(0xffF6931A);
 const Color orange = Color(0xffFF8A00);
 const Color backgroundColor = Color(0xff2C2E2F);
-const Color moodyblue = Color(0xffA9A9E2);
 const Color textColor = Color(0xffABA5D1);
 const Color buttonColor = Color(0xff00CD90);
 Color fillColor = Color(0xff44566C).withOpacity(0.3);

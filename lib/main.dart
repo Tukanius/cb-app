@@ -52,9 +52,8 @@ class MyApp extends StatelessWidget {
           child: Stack(
             children: [
               MaterialApp(
-                theme: ThemeData(
-                  primarySwatch: Colors.grey,
-                ),
+                theme:
+                    ThemeData(primarySwatch: Colors.grey, fontFamily: "Rubik"),
                 builder: (context, widget) => Navigator(
                   onGenerateRoute: (settings) => MaterialPageRoute(
                     builder: (context) =>
