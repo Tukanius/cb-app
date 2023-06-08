@@ -7,10 +7,11 @@ import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bank_core/components/payment-type/payment-type-card.dart';
 
 class PaymentPageArguments {
   String id;
@@ -42,6 +43,7 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
   User user = User();
   bool isLoading = true;
+  String paymentType = "";
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -225,36 +227,18 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: darkGrey,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 20),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image(
-                              image: AssetImage('images/3.png'),
-                              height: 24,
-                              width: 24,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Q Pay',
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 16,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    Column(
+                        children: ["QPAY", "SOCIALPAY", "BANK_TRANSPER"]
+                            .map((e) => PaymentTypeCard(
+                                  data: e,
+                                  onClick: () {
+                                    setState(() {
+                                      paymentType = e;
+                                    });
+                                  },
+                                  value: paymentType == e,
+                                ))
+                            .toList()),
                     Container(
                       margin: EdgeInsets.only(top: 20, bottom: 10),
                       child: Text(
