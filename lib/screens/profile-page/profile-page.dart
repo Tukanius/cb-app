@@ -1,3 +1,5 @@
+import 'package:bank_core/screens/faq/faq.dart';
+import 'package:bank_core/screens/term/term.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
@@ -194,31 +196,72 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: darkGrey,
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/svg/document.svg',
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Үйлчилгээний нөхцөл",
-                      style: TextStyle(
-                        color: white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(TermofPolicyPage.routeName);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: darkGrey,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/svg/document.svg',
+                        height: 24,
+                        width: 24,
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "Үйлчилгээний нөхцөл",
+                        style: TextStyle(
+                          color: white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(FaqPage.routeName);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: darkGrey,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/svg/faq.svg',
+                        height: 24,
+                        width: 24,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "Тусламж",
+                        style: TextStyle(
+                          color: white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(
