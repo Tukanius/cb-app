@@ -97,121 +97,124 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
               color: buttonColor,
             ),
           )
-        : SmartRefresher(
-            enablePullDown: true,
-            controller: refreshController,
-            header: WaterDropHeader(
-              waterDropColor: grey,
-            ),
-            onRefresh: _onRefresh,
-            footer: CustomFooter(
-              builder: (context, mode) {
-                Widget body;
-                if (mode == LoadStatus.idle) {
-                  body = const Text("");
-                } else if (mode == LoadStatus.loading) {
-                  body = const CupertinoActivityIndicator(
-                    color: CupertinoColors.white,
+        : Container(
+            color: backgroundColor,
+            child: SmartRefresher(
+              enablePullDown: true,
+              controller: refreshController,
+              header: WaterDropHeader(
+                waterDropColor: grey,
+              ),
+              onRefresh: _onRefresh,
+              footer: CustomFooter(
+                builder: (context, mode) {
+                  Widget body;
+                  if (mode == LoadStatus.idle) {
+                    body = const Text("");
+                  } else if (mode == LoadStatus.loading) {
+                    body = const CupertinoActivityIndicator(
+                      color: CupertinoColors.white,
+                    );
+                  } else if (mode == LoadStatus.failed) {
+                    body = const Text("Алдаа гарлаа. Дахин үзнэ үү!");
+                  } else {
+                    body = const Text("Мэдээлэл алга байна");
+                  }
+                  return SizedBox(
+                    height: 55.0,
+                    child: Center(child: body),
                   );
-                } else if (mode == LoadStatus.failed) {
-                  body = const Text("Алдаа гарлаа. Дахин үзнэ үү!");
-                } else {
-                  body = const Text("Мэдээлэл алга байна");
-                }
-                return SizedBox(
-                  height: 55.0,
-                  child: Center(child: body),
-                );
-              },
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin:
-                        const EdgeInsets.only(left: 15, bottom: 15, top: 20),
-                    child: Text(
-                      'Дижитал зээл',
-                      style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                },
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin:
+                          const EdgeInsets.only(left: 15, bottom: 15, top: 20),
+                      child: Text(
+                        'Дижитал зээл',
+                        style: TextStyle(
+                          color: white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
-                  ),
-                  PotentialBalanceCard(
-                    data: get,
-                    onClick: () {
-                      Navigator.of(context).pushNamed(LoanPage.routeName,
-                          arguments: LoanPageArguments(
-                              listenController: listenController));
-                    },
-                  ),
-                  loan.rows!.length != 0
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(
-                                  left: 15, bottom: 20, top: 30),
-                              child: Text(
-                                'Идэвхтэй зээл',
-                                style: TextStyle(
-                                  color: white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
+                    PotentialBalanceCard(
+                      data: get,
+                      onClick: () {
+                        Navigator.of(context).pushNamed(LoanPage.routeName,
+                            arguments: LoanPageArguments(
+                                listenController: listenController));
+                      },
+                    ),
+                    loan.rows!.length != 0
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(
+                                    left: 15, bottom: 20, top: 30),
+                                child: Text(
+                                  'Идэвхтэй зээл',
+                                  style: TextStyle(
+                                    color: white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: loan.rows!
-                                    .map((data) => Container(
-                                          margin: EdgeInsets.only(left: 15),
-                                          child: ActiveLoanCard(
-                                            data: data,
-                                            onClick: () {
-                                              Navigator.of(context).pushNamed(
-                                                LoanDetailPage.routeName,
-                                                arguments:
-                                                    LoanDetailPageArguments(
-                                                  id: data.loanId,
-                                                  listenController:
-                                                      listenController,
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ))
-                                    .toList(),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: loan.rows!
+                                      .map((data) => Container(
+                                            margin: EdgeInsets.only(left: 15),
+                                            child: ActiveLoanCard(
+                                              data: data,
+                                              onClick: () {
+                                                Navigator.of(context).pushNamed(
+                                                  LoanDetailPage.routeName,
+                                                  arguments:
+                                                      LoanDetailPageArguments(
+                                                    id: data.loanId,
+                                                    listenController:
+                                                        listenController,
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ))
+                                      .toList(),
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      : SizedBox(),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  // Container(
-                  //   margin: const EdgeInsets.symmetric(horizontal: 15),
-                  //   decoration: BoxDecoration(),
-                  //   height: 160,
-                  //   width: MediaQuery.of(context).size.width,
-                  //   child: ClipRRect(
-                  //     borderRadius: BorderRadius.circular(10),
-                  //     child: Image(
-                  //       image: NetworkImage(
-                  //           'https://officebanao.com/wp-content/uploads/2022/10/Modern-office-design-5-1024x576.jpg'),
-                  //       fit: BoxFit.cover,
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
-                ],
+                            ],
+                          )
+                        : SizedBox(),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    // Container(
+                    //   margin: const EdgeInsets.symmetric(horizontal: 15),
+                    //   decoration: BoxDecoration(),
+                    //   height: 160,
+                    //   width: MediaQuery.of(context).size.width,
+                    //   child: ClipRRect(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     child: Image(
+                    //       image: NetworkImage(
+                    //           'https://officebanao.com/wp-content/uploads/2022/10/Modern-office-design-5-1024x576.jpg'),
+                    //       fit: BoxFit.cover,
+                    //     ),
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 20,
+                    // ),
+                  ],
+                ),
               ),
             ),
           );

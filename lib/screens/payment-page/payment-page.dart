@@ -1,10 +1,8 @@
-import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/customer.dart';
-import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -42,16 +40,15 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
+  User user = User();
+  bool isLoading = true;
+
   @override
   afterFirstLayout(BuildContext context) async {
-    get = await AuthApi().accountGet(user.customerId!);
     setState(() {
       isLoading = false;
     });
   }
-
-  bool isLoading = true;
-  Get get = Get();
 
   onSubmit() async {
     try {
@@ -131,9 +128,6 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
         });
   }
 
-  User user = User();
-  double currentValue = 0;
-
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: false).user;
@@ -188,18 +182,38 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
+                        width: MediaQuery.of(context).size.width,
+                        height: 130,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                          color: darkGrey,
                         ),
-                        color: darkGrey,
-                      ),
-                      child: Text(
-                        currentValue.toString(),
-                        style: TextStyle(),
-                      ),
-                    ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Нийт төлөх дүн:',
+                              style: TextStyle(
+                                color: white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              widget.loanResidual.toString(),
+                              style: TextStyle(
+                                color: white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        )),
                     Container(
                       margin: EdgeInsets.only(top: 20, bottom: 10),
                       child: Text(
