@@ -125,7 +125,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                     ),
                   ),
                   PotentialBalanceCard(
-                    slider: false,
                     data: get,
                     onClick: () {
                       Navigator.of(context).pushNamed(LoanPage.routeName);
