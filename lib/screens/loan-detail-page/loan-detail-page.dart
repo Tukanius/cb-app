@@ -182,7 +182,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${customer.loan!.amount}",
+                                      "${customer.loan?.amount}",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,

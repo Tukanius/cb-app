@@ -150,7 +150,7 @@ class _FormTextFieldState extends State<FormTextField> {
                             isPasswordVisible = !isPasswordVisible;
                           });
                         },
-                        icon: isPasswordVisible != true
+                        icon: isPasswordVisible == true
                             ? Icon(
                                 Icons.visibility,
                                 color: darkGrey,

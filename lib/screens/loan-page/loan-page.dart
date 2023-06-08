@@ -35,19 +35,13 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
   TextEditingController textController = TextEditingController();
   String selectedDay = "";
   String seletedDayId = "";
-  int page = 1;
-  int limit = 10;
+  String? selectedMethod;
   bool isLoading = false;
   Customer bankList = Customer();
   General general = General();
-
-  list(page, limit) async {
-    // bankList = await CustomerApi().bankAccountList(user.id!);
-  }
-
-  Loan loan = Loan();
-  String? selectedMethod;
+  User user = User();
   Get get = Get();
+  Loan loan = Loan();
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -56,7 +50,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
     });
     get = await AuthApi().accountGet(user.customerId!);
     bankList = await CustomerApi().bankAccountList(user.customerId!);
-    list(page, limit);
     setState(() {
       isLoading = false;
     });
@@ -68,10 +61,9 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
     });
   }
 
-  show(context) {
+  show(ctx) {
     showDialog(
-      useSafeArea: true,
-      context: context,
+      context: ctx,
       builder: (context) {
         return Material(
           type: MaterialType.transparency,
@@ -263,6 +255,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                             labelText: 'Зөвшөөрөх',
                             boxShadow: true,
                             onClick: () {
+                              Navigator.of(context).pop;
                               showConfrim(context);
                             },
                             textColor: white,
@@ -382,12 +375,9 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         isLoading = true;
                       });
                       try {
-                        pass.id = user.customerId;
-                        pass.password = textController.text;
-                        print(pass.toJson());
-                        print('====pass');
-                        var res = await AuthApi().checkPassword(pass);
-                        // await CustomerApi().verify(user.customerId!);
+                        user.id = user.customerId;
+                        user.password = textController.text;
+                        var res = await AuthApi().checkPassword(user);
                         if (res == true) {
                           loan.amount = currentValue;
                           loan.customerId = user.customerId;
@@ -418,8 +408,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
       },
     );
   }
-
-  User pass = User();
 
   showSuccesful(context) {
     showDialog(
@@ -498,9 +486,9 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
     );
   }
 
-  showError(context) {
+  showError(ctx) {
     showDialog(
-      context: context,
+      context: ctx,
       builder: (context) {
         return Material(
           type: MaterialType.transparency,
@@ -560,8 +548,8 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                           boxShadow: true,
                           labelText: "Ок",
                           onClick: () {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
+                            Navigator.of(ctx).pop();
+                            Navigator.of(ctx).pop();
                             Navigator.of(context).pop();
                           },
                         ),
@@ -574,8 +562,6 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
       },
     );
   }
-
-  User user = User();
 
   @override
   Widget build(BuildContext context) {
@@ -927,6 +913,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                         labelColor: buttonColor,
                         onClick: () {
                           show(context);
+                          // Navigator.of(context).pushNamed(QpayPage.routeName);
                         },
                         labelText: 'Үргэлжлүүлэх',
                       ),
