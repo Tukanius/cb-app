@@ -1,4 +1,5 @@
 import 'package:bank_core/models/customer.dart';
+import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -71,7 +72,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      '${double.parse(widget.data!.totalPayAmount.toString()).toStringAsFixed(2)}',
+                      '${Utils().formatCurrency(widget.data!.totalPayAmount)}₮',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,
