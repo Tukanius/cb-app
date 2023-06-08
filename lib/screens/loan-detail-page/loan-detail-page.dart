@@ -1,3 +1,4 @@
+import 'package:bank_core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
@@ -136,7 +137,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                           height: 5,
                         ),
                         Text(
-                          "${customer.totalPayAmount}₮",
+                          "${Utils().formatCurrency(customer.totalPayAmount)}₮",
                           style: TextStyle(
                             color: white,
                             fontSize: 24,
@@ -179,7 +180,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${customer.loan?.amount}",
+                                      "${Utils().formatCurrency("${customer.loan?.amount}")}₮",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -252,7 +253,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${customer.loanResidual}₮",
+                                      "${Utils().formatCurrency(customer.loanResidual)}₮",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -278,7 +279,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${customer.rateAmount}₮",
+                                      "${Utils().formatCurrency(customer.rateAmount)}₮",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,

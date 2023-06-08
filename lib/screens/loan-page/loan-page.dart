@@ -11,6 +11,7 @@ import 'package:bank_core/models/loan.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +138,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                                 ),
                               ),
                               Text(
-                                "${currentValue}",
+                                "${Utils().formatCurrency("${currentValue}")}",
                                 style: TextStyle(
                                   color: black,
                                   fontSize: 14,
@@ -646,7 +647,7 @@ class _LoanPageState extends State<LoanPage> with AfterLayoutMixin {
                           height: 5,
                         ),
                         Text(
-                          '${currentValue.toString()}',
+                          '${Utils().formatCurrency("${currentValue}")}₮',
                           style: TextStyle(
                             color: white,
                             fontSize: 24,

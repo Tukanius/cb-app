@@ -1,4 +1,5 @@
 import 'package:bank_core/models/customer.dart';
+import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
                 ),
               ),
               Text(
-                "${widget.data!.totalPayAmount}₮",
+                "${Utils().formatCurrency(widget.data!.totalPayAmount)}₮",
                 style: TextStyle(
                   color: white,
                   fontSize: 12,
@@ -77,7 +78,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
                 ),
               ),
               Text(
-                "${widget.data!.loanResidual}₮",
+                "${Utils().formatCurrency(widget.data!.loanResidual)}₮",
                 style: TextStyle(
                   color: white,
                   fontSize: 12,
@@ -100,7 +101,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
                 ),
               ),
               Text(
-                "${widget.data!.rateAmount}₮",
+                "${Utils().formatCurrency(widget.data!.rateAmount)}₮",
                 style: TextStyle(
                   color: white,
                   fontSize: 12,
@@ -123,7 +124,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
                 ),
               ),
               Text(
-                "${widget.data!.mainLoanPayAmount}₮",
+                "${Utils().formatCurrency(widget.data!.mainLoanPayAmount)}₮",
                 style: TextStyle(
                   color: white,
                   fontSize: 12,
