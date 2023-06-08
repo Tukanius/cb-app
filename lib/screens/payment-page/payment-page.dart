@@ -51,7 +51,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
   onSubmit() async {
     try {
       Customer customer = Customer();
-      customer.amount = int.parse(widget.loanResidual.toString());
+      customer.amount = double.parse(widget.loanResidual.toString());
       customer.payerUserId = user.customerId;
       customer.loanId = widget.id;
       customer.paidDate = DateTime.now().toString();
@@ -117,7 +117,8 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                     ],
                   ),
                 ),
-                Lottie.asset('images/success.json', height: 150, repeat: false),
+                Lottie.asset('assets/lottie/success.json',
+                    height: 150, repeat: false),
               ],
             ),
           );
