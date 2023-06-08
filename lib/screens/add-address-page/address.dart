@@ -186,7 +186,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
                   ),
                 )
               : Center(
-                  child: Lottie.asset('images/asdf.json', height: 300),
+                  child: Lottie.asset('assets/lottie/empty.json', height: 300),
                 ),
     );
   }
