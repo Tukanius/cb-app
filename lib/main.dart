@@ -104,8 +104,12 @@ class MyApp extends StatelessWidget {
                         return const BankAccounts();
                       });
                     case AddBankAccountPage.routeName:
+                      AddBankAccountPageArguments arguments =
+                          settings.arguments as AddBankAccountPageArguments;
                       return MaterialPageRoute(builder: (context) {
-                        return const AddBankAccountPage();
+                        return AddBankAccountPage(
+                          listenController: arguments.listenController,
+                        );
                       });
                     case QpayPage.routeName:
                       return MaterialPageRoute(builder: (context) {

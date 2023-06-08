@@ -1,15 +1,16 @@
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/bank-account-card/bank-account-card.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:after_layout/after_layout.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:after_layout/after_layout.dart';
 
 class BankAccounts extends StatefulWidget {
   static const routeName = 'BankAccounts';
@@ -23,6 +24,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
   bool isLoading = true;
   Customer customer = Customer();
   User user = User();
+  ListenController listenController = ListenController();
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -30,6 +32,18 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
     setState(() {
       isLoading = false;
     });
+  }
+
+  @override
+  void initState() {
+    listenController.addListener(() async {
+      customer = await CustomerApi().bankAccountList(user.customerId!);
+      setState(() {
+        isLoading = false;
+      });
+    });
+
+    super.initState();
   }
 
   @override
@@ -67,7 +81,9 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: ActionButton(
               onClick: () {
-                Navigator.of(context).pushNamed(AddBankAccountPage.routeName);
+                Navigator.of(context).pushNamed(AddBankAccountPage.routeName,
+                    arguments: AddBankAccountPageArguments(
+                        listenController: listenController));
               },
               icon: Icon(
                 Icons.add,
@@ -84,7 +100,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                 color: buttonColor,
               ),
             )
-          : customer.rows!.length == 0
+          : customer.rows?.length == 0
               ? Column(
                   children: [
                     Lottie.asset('assets/lottie/empty.json', height: 200),
