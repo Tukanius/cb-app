@@ -189,24 +189,10 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         ),
                         color: darkGrey,
                       ),
-                      child: Column(children: [
-                        Text(currentValue.toString()),
-                        Slider(
-                          min: 0,
-                          max: double.parse(get.balance.toString()),
-                          thumbColor: buttonColor,
-                          activeColor: white,
-                          inactiveColor: grey.withOpacity(0.2),
-                          label: '${currentValue}',
-                          divisions: 5,
-                          value: currentValue,
-                          onChanged: (double value) {
-                            setState(() {
-                              currentValue = value;
-                            });
-                          },
-                        ),
-                      ]),
+                      child: Text(
+                        currentValue.toString(),
+                        style: TextStyle(),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 20, bottom: 10),
@@ -261,6 +247,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       ),
                     ),
                     Container(
+                      margin: EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
                         color: darkGrey,
                         borderRadius: BorderRadius.circular(10),
