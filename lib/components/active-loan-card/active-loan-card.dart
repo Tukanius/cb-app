@@ -71,7 +71,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      '${double.parse(widget.data!.totalPayAmount.toString())}',
+                      '${double.parse(widget.data!.totalPayAmount.toString()).toStringAsFixed(2)}',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,
