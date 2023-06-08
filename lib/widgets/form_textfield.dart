@@ -139,7 +139,7 @@ class _FormTextFieldState extends State<FormTextField> {
               widget.onComplete!();
             }
           },
-          style: const TextStyle(color: Colors.black, fontSize: 14),
+          style: const TextStyle(color: Colors.white, fontSize: 14),
 
           decoration: widget.decoration ??
               InputDecoration(
@@ -153,11 +153,11 @@ class _FormTextFieldState extends State<FormTextField> {
                         icon: isPasswordVisible == true
                             ? Icon(
                                 Icons.visibility,
-                                color: darkGrey,
+                                color: greyDark,
                               )
                             : Icon(
                                 Icons.visibility_off,
-                                color: darkGrey,
+                                color: greyDark,
                               ),
                       )
                     : widget.suffixIcon,
@@ -169,7 +169,7 @@ class _FormTextFieldState extends State<FormTextField> {
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 filled: true,
-                hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+                hintStyle: const TextStyle(color: greyDark, fontSize: 14),
                 fillColor: widget.color,
               ),
 

@@ -185,15 +185,16 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                     Container(
                       height: 50,
                       child: FormBuilderDropdown(
+                        dropdownColor: mainColor,
                         initialValue: 'Холбоо хамаарал сонгох',
                         icon: Container(
                           decoration: BoxDecoration(
-                            color: white,
+                            color: darkGrey,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: const Icon(
                             Icons.arrow_drop_down,
-                            color: black,
+                            color: white,
                           ),
                         ),
                         name: 'whoTypes',
@@ -204,19 +205,17 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                         },
                         decoration: InputDecoration(
                           hintText: 'Холбоо хамаарал сонгох',
-                          hintStyle: TextStyle(fontSize: 14),
+                          hintStyle: TextStyle(fontSize: 14, color: greyDark),
                           filled: true,
-                          fillColor: white,
+                          fillColor: darkGrey,
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 12, horizontal: 15),
                           border: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: white, width: 0),
+                            borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(color: white, width: 0),
+                            borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
@@ -237,7 +236,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                                       Text(
                                         '${item.name}',
                                         style: TextStyle(
-                                            fontSize: 14, color: black),
+                                            fontSize: 14, color: white),
                                       ),
                                     ],
                                   ),
@@ -253,7 +252,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                     FormTextField(
                       name: 'lastName',
                       labelText: "Овог",
-                      color: white,
+                      color: darkGrey,
                       hintText: 'Овог',
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -266,7 +265,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                     FormTextField(
                       labelText: "Нэр",
                       name: 'firstName',
-                      color: white,
+                      color: darkGrey,
                       hintText: 'Нэр',
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -279,7 +278,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                     FormTextField(
                       labelText: "Утасны дугаар",
                       name: 'phone',
-                      color: white,
+                      color: darkGrey,
                       showCounter: false,
                       maxLenght: 8,
                       hintText: 'Утасны дугаар',

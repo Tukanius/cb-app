@@ -175,7 +175,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.text,
                       name: 'familyName',
                       hintText: 'Ургын овог',
-                      color: white,
+                      color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Ургын овог оруулна уу')
@@ -193,18 +193,19 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
+                      dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Яс үндэс сонгоно уу.')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
-                          color: white,
+                          color: darkGrey,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: const Icon(
                           Icons.arrow_drop_down,
-                          color: black,
+                          color: white,
                         ),
                       ),
                       onChanged: (value) {
@@ -214,9 +215,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Яс үндэс',
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
                         filled: true,
-                        fillColor: white,
+                        fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -227,7 +228,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10)),
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
+                          borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -237,7 +238,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                               value: item,
                               child: Text(
                                 '${item.name}',
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: white,
+                                ),
                               ),
                             ),
                           )
@@ -255,18 +259,19 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
+                      dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Боловсролын зэрэг оруулна уу.')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
-                          color: white,
+                          color: darkGrey,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: const Icon(
                           Icons.arrow_drop_down,
-                          color: black,
+                          color: white,
                         ),
                       ),
                       onChanged: (value) {
@@ -276,9 +281,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Боловсролын зэрэг сонгоно уу',
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
                         filled: true,
-                        fillColor: white,
+                        fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -289,7 +294,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10)),
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
+                          borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -299,7 +304,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                               value: item,
                               child: Text(
                                 '${item.name}',
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: white,
+                                ),
                               ),
                             ),
                           )
@@ -317,18 +325,19 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
+                      dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Гэрлэлтийн байдал сонгоно уу.')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
-                          color: white,
+                          color: darkGrey,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: const Icon(
                           Icons.arrow_drop_down,
-                          color: black,
+                          color: white,
                         ),
                       ),
                       onChanged: (value) {
@@ -338,9 +347,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Гэрлэлтийн байдал',
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
                         filled: true,
-                        fillColor: white,
+                        fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -351,7 +360,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10)),
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
+                          borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -361,7 +370,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                               value: item,
                               child: Text(
                                 '${item.name}',
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: white,
+                                ),
                               ),
                             ),
                           )
@@ -375,7 +387,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.number,
                       name: 'familyCount',
                       hintText: 'Ам бүлийн тоо',
-                      color: white,
+                      color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Ам бүлийн тоо оруулна уу')
@@ -389,7 +401,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.number,
                       name: 'incomeAmountMonth',
                       hintText: 'Сарын орлого',
-                      color: white,
+                      color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Сарын орлого оруулна уу')
@@ -407,18 +419,19 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
+                      dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Хүйс сонгоно уу.')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
-                          color: white,
+                          color: darkGrey,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: const Icon(
                           Icons.arrow_drop_down,
-                          color: black,
+                          color: white,
                         ),
                       ),
                       onChanged: (value) {
@@ -428,9 +441,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Хүйс',
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
                         filled: true,
-                        fillColor: white,
+                        fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -441,7 +454,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10)),
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
+                          borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -451,7 +464,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                               value: item,
                               child: Text(
                                 '${item.name}',
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: white,
+                                ),
                               ),
                             ),
                           )
@@ -465,7 +481,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.number,
                       name: 'birthPlace',
                       hintText: 'Төрсөн газар',
-                      color: white,
+                      color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Сарын орлого оруулна уу')
@@ -483,18 +499,19 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
+                      dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Ажил эрхлэлтийн байдал сонгох.')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
-                          color: white,
+                          color: darkGrey,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: const Icon(
                           Icons.arrow_drop_down,
-                          color: black,
+                          color: white,
                         ),
                       ),
                       onChanged: (value) {
@@ -504,9 +521,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Ажил эрхлэлтийн байдал сонгох',
-                        hintStyle: TextStyle(fontSize: 14),
+                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
                         filled: true,
-                        fillColor: white,
+                        fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -517,7 +534,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10)),
                         border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: white, width: 0),
+                          borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -527,7 +544,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                               value: item,
                               child: Text(
                                 '${item.name}',
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: white,
+                                ),
                               ),
                             ),
                           )

@@ -1,6 +1,7 @@
 import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/get.dart';
@@ -16,20 +17,24 @@ import 'package:lottie/lottie.dart';
 class PaymentPageArguments {
   String id;
   String loanResidual;
+  ListenController listenController;
   PaymentPageArguments({
     required this.loanResidual,
     required this.id,
+    required this.listenController,
   });
 }
 
 class PaymentPage extends StatefulWidget {
   final String loanResidual;
   final String id;
+  final ListenController listenController;
   static const routeName = 'PaymentPage';
   const PaymentPage({
     Key? key,
     required this.loanResidual,
     required this.id,
+    required this.listenController,
   }) : super(key: key);
 
   @override
@@ -56,6 +61,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
       customer.loanId = widget.id;
       customer.paidDate = DateTime.now().toString();
       await CustomerApi().pay(customer);
+      widget.listenController.changeVariable("loadpayment");
       await show(context);
     } catch (e) {
       print(e.toString());

@@ -2,6 +2,7 @@ import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/components/loan/schedule.dart';
 import 'package:bank_core/models/customer.dart';
@@ -20,10 +21,20 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:rainbow_color/rainbow_color.dart';
+import 'package:lottie/lottie.dart';
+import 'package:moment_dart/moment_dart.dart';
+
+class LoanPageArguments {
+  ListenController listenController;
+  LoanPageArguments({
+    required this.listenController,
+  });
+}
 
 class LoanPage extends StatefulWidget {
   static const routeName = 'LoanPage';
-  const LoanPage({super.key});
+  final ListenController listenController;
+  const LoanPage({super.key, required this.listenController});
 
   @override
   State<LoanPage> createState() => _LoanPageState();
@@ -40,6 +51,7 @@ class _LoanPageState extends State<LoanPage>
   String seletedDayId = "";
   String selectedMethod = "";
   bool isLoading = false;
+  bool isModalLoading = false;
   Customer bankList = Customer();
   General general = General();
   User user = User();
@@ -51,6 +63,8 @@ class _LoanPageState extends State<LoanPage>
   bool isValueError = false;
   late AnimationController controller;
   late Animation<Color> _colorAnim;
+  DateTime futureDate = DateTime.now();
+
   @override
   void initState() {
     super.initState();
@@ -89,13 +103,7 @@ class _LoanPageState extends State<LoanPage>
     });
   }
 
-  allowClear() {
-    setState(() {
-      textController.text = '';
-    });
-  }
-
-  onSubmit() async {
+  showModal() async {
     if (currentValue < 50000) {
       setState(() {
         isValueError = true;
@@ -115,509 +123,217 @@ class _LoanPageState extends State<LoanPage>
       print("error bank ===> ${selectedMethod}");
     }
     if (isBankError == false && isDateError == false && isValueError == false) {
-      show(context);
+      showVerifyModal();
     } else {
       print("error");
     }
   }
 
-  show(ctx) {
+  onSubmit(ctx) async {
+    if (fbKey.currentState!.saveAndValidate()) {
+      user.password = textController.text;
+      user.id = user.customerId;
+      var res = await AuthApi().checkPassword(user);
+      if (res == true) {
+        loan.amount = currentValue;
+        loan.customerId = user.customerId;
+        loan.loanDate = DateTime.now().toString();
+        loan.loanRate = '3';
+        loan.loanTimeId = seletedDayId;
+        user.id = user.id;
+        await LoanApi().createLoan(loan);
+        setState(() {
+          isLoading = false;
+        });
+        widget.listenController.changeVariable("loanCreate");
+        Navigator.of(context).pop();
+        showSuccess(context);
+        Navigator.of(ctx).pop();
+      } else {
+        showError(context);
+      }
+    }
+  }
+
+  showSuccess(ctx) async {
     showDialog(
-      context: ctx,
-      builder: (context) {
-        return Material(
-          type: MaterialType.transparency,
-          child: Container(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 150),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: white,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 30),
-                      child: Text(
-                        'Зээлийн нөхцөл',
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.only(top: 75),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text(
+                        'Амжилттай',
                         style: TextStyle(
-                          color: black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            color: dark,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Divider(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Хугацаа',
-                                style: TextStyle(
-                                  color: black.withOpacity(0.7),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                '2023.03.23 /${selectedDay} хоног/',
-                                style: TextStyle(
-                                  color: black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Зээлийн үндсэн дүн',
-                                style: TextStyle(
-                                  color: black.withOpacity(0.7),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                "${Utils().formatCurrency("${currentValue}")}",
-                                style: TextStyle(
-                                  color: black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Сарын хүү 4.5%',
-                                style: TextStyle(
-                                  color: black.withOpacity(0.7),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                "2'000.00₮",
-                                style: TextStyle(
-                                  color: black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Үйлчилгээний шимтгэл',
-                                style: TextStyle(
-                                  color: black.withOpacity(0.7),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                "2'000.00₮",
-                                style: TextStyle(
-                                  color: black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Нийт төлөх дүн',
-                                style: TextStyle(
-                                  color: black.withOpacity(0.7),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                "2'000.00₮",
-                                style: TextStyle(
-                                  color: black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const Text(
+                        'Зээлийн хүсэлт амжилттай илгээгдлээ.',
+                        textAlign: TextAlign.center,
+                      ),
+                      ButtonBar(
+                        buttonMinWidth: 100,
+                        alignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          TextButton(
+                            child: const Text(
+                              "За",
+                              style: TextStyle(color: dark),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 30),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 20, right: 4),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
-                              color: buttonColor,
-                            ),
-                          ),
-                          child: CustomButton(
-                            labelColor: white,
-                            labelText: 'Татгалзах',
-                            boxShadow: false,
-                            onClick: () {
-                              Navigator.of(context).pop();
-                            },
-                            textColor: buttonColor,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(right: 20, left: 4),
-                          child: CustomButton(
-                            labelColor: buttonColor,
-                            labelText: 'Зөвшөөрөх',
-                            boxShadow: true,
-                            onClick: () {
-                              Navigator.of(context).pop;
-                              showConfrim(context);
-                            },
-                            textColor: white,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
-                )
+                ),
+                Lottie.asset('assets/lottie/success.json',
+                    height: 150, repeat: false),
               ],
             ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
 
-  showConfrim(context) {
+  showError(ctx) async {
     showDialog(
-      context: context,
-      builder: (context) {
-        return Material(
-          type: MaterialType.transparency,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 150),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: white,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: <Widget>[
                 Container(
+                  margin: const EdgeInsets.only(top: 75),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
                   child: Column(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 10, top: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                          child: Icon(
-                            Icons.highlight_remove_sharp,
-                            color: black,
-                          ),
-                        ),
-                        alignment: Alignment.topRight,
-                      ),
-                      Container(
-                        child: Text(
-                          'Баталгаажуулах',
-                          style: TextStyle(
-                            color: black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Divider(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      FormBuilder(
-                        key: fbKey,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          child: FormTextField(
-                            obscureText: true,
-                            inputType: TextInputType.visiblePassword,
-                            controller: textController,
-                            name: 'password',
-                            suffixIcon: InkWell(
-                              onTap: () {
-                                allowClear();
-                              },
-                              child: Icon(
-                                Icons.clear,
-                                color: buttonColor,
-                              ),
-                            ),
-                            hintText: 'Нууц үг',
-                            validators: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(
-                                  errorText: 'Заавал оруулна уу')
-                            ]),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Нууц үгээ оруулж баталгаажуулна уу.',
-                        style: TextStyle(
-                          color: black.withOpacity(0.7),
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.only(left: 25, right: 25, bottom: 25),
-                  child: CustomButton(
-                    textColor: white,
-                    labelColor: buttonColor,
-                    boxShadow: true,
-                    labelText: "Баталгаажуулах",
-                    onClick: () async {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      try {
-                        user.id = user.customerId;
-                        user.password = textController.text;
-                        var res = await AuthApi().checkPassword(user);
-                        if (res == true) {
-                          loan.amount = currentValue;
-                          loan.customerId = user.customerId;
-                          loan.loanDate = DateTime.now().toString();
-                          loan.loanRate = '3';
-                          loan.loanTimeId = seletedDayId;
-                          user.id = user.id;
-                          await LoanApi().createLoan(loan);
-                          setState(() {
-                            isLoading = false;
-                          });
-                          showSuccesful(context);
-                        }
-                      } catch (e) {
-                        print(e.toString());
-                        setState(() {
-                          isLoading = false;
-                        });
-                        showError(context);
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  showSuccesful(context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Material(
-          type: MaterialType.transparency,
-          child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 150),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: buttonColor, width: 3),
-                        ),
-                        child: Icon(
-                          Icons.check,
-                          color: buttonColor,
-                          size: 40,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Танд амжилт хүсье',
-                        style: TextStyle(
-                            color: black.withOpacity(0.7), fontSize: 14),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        'Амжилттай',
-                        style: TextStyle(
-                          color: black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 50,
-                          right: 50,
-                        ),
-                        child: CustomButton(
-                          textColor: white,
-                          labelColor: buttonColor,
-                          boxShadow: true,
-                          labelText: "Ок",
-                          onClick: () {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-        );
-      },
-    );
-  }
-
-  showError(ctx) {
-    showDialog(
-      context: ctx,
-      builder: (context) {
-        return Material(
-          type: MaterialType.transparency,
-          child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 150),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: white,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: buttonColor, width: 3),
-                        ),
-                        child: Icon(
-                          Icons.error,
-                          color: buttonColor,
-                          size: 40,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Танд амжилт хүсье',
-                        style: TextStyle(
-                            color: black.withOpacity(0.7), fontSize: 14),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text(
                         'Амжилтгүй',
                         style: TextStyle(
-                          color: black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            color: dark,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
                       ),
-                      SizedBox(
-                        height: 20,
+                      const SizedBox(
+                        height: 16,
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 50,
-                          right: 50,
-                        ),
-                        child: CustomButton(
-                          textColor: white,
-                          labelColor: buttonColor,
-                          boxShadow: true,
-                          labelText: "Ок",
-                          onClick: () {
-                            Navigator.of(ctx).pop();
-                            Navigator.of(ctx).pop();
-                            Navigator.of(context).pop();
-                          },
-                        ),
+                      const Text(
+                        'Та мэдээлэлээ дахин шалгана уу.',
+                        textAlign: TextAlign.center,
+                      ),
+                      ButtonBar(
+                        buttonMinWidth: 100,
+                        alignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          TextButton(
+                            child: const Text(
+                              "За",
+                              style: TextStyle(color: dark),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       ),
                     ],
-                  )
-                ],
-              )),
+                  ),
+                ),
+                Lottie.asset('assets/lottie/error.json',
+                    height: 150, repeat: false),
+              ],
+            ),
+          );
+        });
+  }
+
+  showVerifyModal() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          color: mainColor,
+          height: 270,
+          padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                  bottom: 30,
+                ),
+                child: Text(
+                  "Баталгаажуулалт",
+                  style: TextStyle(
+                    color: white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              FormBuilder(
+                key: fbKey,
+                child: Column(
+                  children: [
+                    FormTextField(
+                      name: "password",
+                      controller: textController,
+                      hintText: 'Нууц үгээ оруулна уу',
+                      inputType: TextInputType.text,
+                      obscureText: true,
+                      labelText: "Нууц үг",
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: 'Нэвтрэх нэрээ оруулна уу.')
+                      ]),
+                      color: darkGrey,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CustomButton(
+                      boxShadow: true,
+                      labelText: "Баталгаажуулах",
+                      onClick: () {
+                        onSubmit(context);
+                      },
+                      textColor: white,
+                      labelColor: buttonColor,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
@@ -625,13 +341,15 @@ class _LoanPageState extends State<LoanPage>
 
   @override
   Widget build(BuildContext context) {
-    general = Provider.of<GeneralProvider>(context, listen: false).general;
-    user = Provider.of<UserProvider>(context, listen: false).user;
+    general = Provider.of<GeneralProvider>(context, listen: true).general;
+    user = Provider.of<UserProvider>(context, listen: true).user;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
         elevation: 0,
+        centerTitle: true,
         automaticallyImplyLeading: false,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -654,21 +372,21 @@ class _LoanPageState extends State<LoanPage>
             fontWeight: FontWeight.w600,
           ),
         ),
-        actions: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: ActionButton(
-              onClick: () {
-                Navigator.of(context).pop();
-              },
-              icon: Icon(
-                Icons.more_horiz,
-                color: white,
-                size: 20,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   Container(
+        //     margin: const EdgeInsets.symmetric(horizontal: 10),
+        //     child: ActionButton(
+        //       onClick: () {
+        //         Navigator.of(context).pop();
+        //       },
+        //       icon: Icon(
+        //         Icons.more_horiz,
+        //         color: white,
+        //         size: 20,
+        //       ),
+        //     ),
+        //   ),
+        // ],
         bottom: PreferredSize(
             child: Container(
               height: 1,
@@ -793,21 +511,13 @@ class _LoanPageState extends State<LoanPage>
                                 'Зээлийн хугацаа сонгох: ',
                                 style: TextStyle(color: grey, fontSize: 12),
                               ),
-                              selectedDay == ""
-                                  ? Text(
-                                      '/Хугацаа сонгоно уу/',
-                                      style: TextStyle(
-                                        color: white,
-                                        fontSize: 12,
-                                      ),
-                                    )
-                                  : Text(
-                                      '/${selectedDay}/',
-                                      style: TextStyle(
-                                        color: white,
-                                        fontSize: 12,
-                                      ),
-                                    )
+                              Text(
+                                '/Хугацаа сонгоно уу/',
+                                style: TextStyle(
+                                  color: white,
+                                  fontSize: 12,
+                                ),
+                              )
                             ],
                           ),
                         ],
@@ -826,6 +536,9 @@ class _LoanPageState extends State<LoanPage>
                                   selectedDay = item.day!;
                                   seletedDayId = item.id!;
                                   isDateError = false;
+                                  DateTime now = DateTime.now();
+                                  futureDate = now.add(
+                                      Duration(days: int.parse(selectedDay)));
                                 });
                               },
                             ),
@@ -881,7 +594,7 @@ class _LoanPageState extends State<LoanPage>
                             ),
                           ),
                           Text(
-                            "2023.03.23",
+                            "${Moment.parse(futureDate.toString()).format("YYYY-MM-DD")}",
                             style: TextStyle(
                               color: white,
                               fontWeight: FontWeight.w600,
@@ -1003,8 +716,7 @@ class _LoanPageState extends State<LoanPage>
                         textColor: white,
                         labelColor: buttonColor,
                         onClick: () {
-                          // show(context);
-                          onSubmit();
+                          showModal();
                         },
                         labelText: 'Үргэлжлүүлэх',
                       ),

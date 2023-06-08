@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 FormBuilderValidators.required(
                                     errorText: 'Нэвтрэх нэрээ оруулна уу.')
                               ]),
-                              color: white,
+                              color: darkGrey,
                             ),
                           ),
                           Container(
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               name: 'password',
                               hintText: 'Нууц үг',
                               obscureText: isVisible,
-                              color: white,
+                              color: darkGrey,
                               validators: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(
                                     errorText: 'Нууц үгээ оруулна уу.')

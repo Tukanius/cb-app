@@ -79,8 +79,12 @@ class MyApp extends StatelessWidget {
                         return const MainPage();
                       });
                     case LoanPage.routeName:
+                      LoanPageArguments arguments =
+                          settings.arguments as LoanPageArguments;
                       return MaterialPageRoute(builder: (context) {
-                        return const LoanPage();
+                        return LoanPage(
+                          listenController: arguments.listenController,
+                        );
                       });
                     case AddWhoTypePage.routeName:
                       AddWhoTypePageArguments arguments =
@@ -184,6 +188,7 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return LoanDetailPage(
                           id: arguments.id,
+                          listenController: arguments.listenController,
                         );
                       });
                     case LoanSchedulePage.routeName:
@@ -201,6 +206,7 @@ class MyApp extends StatelessWidget {
                         return PaymentPage(
                           loanResidual: arguments.loanResidual,
                           id: arguments.id,
+                          listenController: arguments.listenController,
                         );
                       });
                     default:

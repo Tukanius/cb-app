@@ -162,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           inputType: TextInputType.text,
                           name: 'lastName',
                           hintText: "Овогоо оруулна уу",
-                          color: white,
+                          color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             FormBuilderValidators.required(
                                 errorText: 'Овогоо оруулна уу')
@@ -176,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           inputType: TextInputType.text,
                           name: 'firstName',
                           hintText: "Нэрээ оруулна уу",
-                          color: white,
+                          color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             FormBuilderValidators.required(
                                 errorText: 'Нэрээ оруулна уу')
@@ -190,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           inputType: TextInputType.text,
                           name: 'registerNo',
                           hintText: "Регистерийн дугаар",
-                          color: white,
+                          color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             (value) {
                               return validateRegisterNo(
@@ -206,7 +206,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           inputType: TextInputType.phone,
                           name: 'phone',
                           hintText: "Утасны дугаараа оруулна уу",
-                          color: white,
+                          color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             (value) {
                               return validatePhone(value.toString(), context);
@@ -221,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           inputType: TextInputType.emailAddress,
                           name: 'email',
                           hintText: "И-Мейлээ оруулна уу",
-                          color: white,
+                          color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             (value) {
                               return validateEmail(value.toString(), context);
@@ -236,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           obscureText: true,
                           name: 'password',
                           hintText: "Нууц үгээ оруулна уу",
-                          color: white,
+                          color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             (value) {
                               return validatePassword(
@@ -254,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           hintText: "Нууц үгээ давтан оруулна уу",
                           inputAction: TextInputAction.done,
                           obscureText: true,
-                          color: white,
+                          color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             FormBuilderValidators.required(
                                 errorText: "Нууц үгээ давтан оруулна уу"),

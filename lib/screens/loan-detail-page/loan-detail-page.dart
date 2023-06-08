@@ -1,3 +1,4 @@
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/api/customer-api.dart';
@@ -13,17 +14,21 @@ import 'package:after_layout/after_layout.dart';
 
 class LoanDetailPageArguments {
   String id;
+  ListenController listenController;
   LoanDetailPageArguments({
     required this.id,
+    required this.listenController,
   });
 }
 
 class LoanDetailPage extends StatefulWidget {
   final String id;
+  final ListenController listenController;
   static const routeName = 'LoanDetailPage';
   const LoanDetailPage({
     Key? key,
     required this.id,
+    required this.listenController,
   }) : super(key: key);
 
   @override
@@ -301,9 +306,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                         PaymentPage.routeName,
                         arguments: PaymentPageArguments(
                             id: widget.id,
-                            loanResidual: customer.totalPayAmount.toString()
-                            // totalAmount.toString(),
-                            ),
+                            loanResidual: customer.totalPayAmount.toString(),
+                            listenController: widget.listenController),
                       );
                     },
                     child: Row(

@@ -177,12 +177,12 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   ]),
                   icon: Container(
                     decoration: BoxDecoration(
-                      color: white,
+                      color: darkGrey,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: const Icon(
                       Icons.arrow_drop_down,
-                      color: black,
+                      color: white,
                     ),
                   ),
                   onChanged: (value) {
@@ -190,11 +190,13 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       selectedMethod = value?.id;
                     });
                   },
+                  dropdownColor: mainColor,
+                  elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Оршин сууж байгаа хаягын төрөл',
-                    hintStyle: TextStyle(fontSize: 14),
+                    hintStyle: TextStyle(fontSize: 14, color: greyDark),
                     filled: true,
-                    fillColor: white,
+                    fillColor: darkGrey,
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -205,7 +207,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(10)),
                     border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: white, width: 0),
+                      borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
@@ -215,7 +217,10 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                           value: item,
                           child: Text(
                             '${item.name}',
-                            style: TextStyle(fontSize: 14),
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       )
@@ -229,7 +234,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   inputType: TextInputType.text,
                   name: 'provinceId',
                   hintText: 'Аймаг / Хот',
-                  color: white,
+                  color: darkGrey,
                   validators: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Заавал оруулна уу')
@@ -243,7 +248,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   inputType: TextInputType.text,
                   hintText: 'Сум / Дүүрэг',
                   name: 'districtId',
-                  color: white,
+                  color: darkGrey,
                   validators: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Заавал оруулна уу')
@@ -257,7 +262,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   inputType: TextInputType.text,
                   name: 'khorooId',
                   hintText: 'Баг / Хороо',
-                  color: white,
+                  color: darkGrey,
                   validators: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Заавал оруулна уу')
@@ -271,7 +276,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   inputType: TextInputType.text,
                   hintText: "Тоот",
                   name: 'address',
-                  color: white,
+                  color: darkGrey,
                   validators: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Заавал оруулна уу')

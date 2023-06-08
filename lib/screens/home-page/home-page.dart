@@ -1,6 +1,7 @@
 import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/active-loan-card/active-loan-card.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
 import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/result.dart';
@@ -35,9 +36,24 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   bool isLoading = true;
   int page = 1;
   int limit = 5;
+  Get get = Get();
+  User user = User();
   Result loan = Result(count: 0, rows: []);
+  ListenController listenController = ListenController();
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
+
+  @override
+  void initState() {
+    listenController.addListener(() async {
+      get = await AuthApi().accountGet(user.customerId!);
+      list(limit, page);
+      setState(() {
+        isLoading = false;
+      });
+    });
+    super.initState();
+  }
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -58,17 +74,17 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
     });
   }
 
-  Get get = Get();
-  User user = User();
-
   void _onRefresh() async {
     await Future.delayed(Duration(milliseconds: 1000));
+    get = await AuthApi().accountGet(user.customerId!);
     setState(() {
       isLoading = true;
     });
     await list(page, limit);
     refreshController.refreshCompleted();
-    isLoading = false;
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -127,7 +143,9 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                   PotentialBalanceCard(
                     data: get,
                     onClick: () {
-                      Navigator.of(context).pushNamed(LoanPage.routeName);
+                      Navigator.of(context).pushNamed(LoanPage.routeName,
+                          arguments: LoanPageArguments(
+                              listenController: listenController));
                     },
                   ),
                   loan.rows!.length != 0
@@ -159,7 +177,10 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                                 LoanDetailPage.routeName,
                                                 arguments:
                                                     LoanDetailPageArguments(
-                                                        id: data.loanId),
+                                                  id: data.loanId,
+                                                  listenController:
+                                                      listenController,
+                                                ),
                                               );
                                             },
                                           ),

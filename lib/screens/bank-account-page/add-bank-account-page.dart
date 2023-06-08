@@ -172,18 +172,19 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   ),
                 ),
                 DropdownButtonFormField(
+                  dropdownColor: mainColor,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Банкаа оруулна уу.')
                   ]),
                   icon: Container(
                     decoration: BoxDecoration(
-                      color: white,
+                      color: darkGrey,
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: const Icon(
                       Icons.arrow_drop_down,
-                      color: black,
+                      color: white,
                     ),
                   ),
                   onChanged: (value) {
@@ -193,9 +194,9 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   },
                   decoration: InputDecoration(
                     hintText: 'Банк сонгоно уу',
-                    hintStyle: TextStyle(fontSize: 14),
+                    hintStyle: TextStyle(fontSize: 14, color: greyDark),
                     filled: true,
-                    fillColor: white,
+                    fillColor: darkGrey,
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -206,7 +207,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(10)),
                     border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: white, width: 0),
+                      borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
@@ -216,7 +217,10 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                           value: item,
                           child: Text(
                             '${item.name}',
-                            style: TextStyle(fontSize: 14),
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: white,
+                            ),
                           ),
                         ),
                       )
@@ -229,7 +233,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   labelText: "Дансны дугаар",
                   name: 'accountNumber',
                   hintText: 'Дансны дугаараа оруулна уу',
-                  color: white,
+                  color: darkGrey,
                   validators: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Дансаа оруулна уу.')
