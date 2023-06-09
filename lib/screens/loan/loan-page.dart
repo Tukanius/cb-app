@@ -24,6 +24,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:rainbow_color/rainbow_color.dart';
 import 'package:lottie/lottie.dart';
 import 'package:moment_dart/moment_dart.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoanPageArguments {
   ListenController listenController;
@@ -58,7 +59,6 @@ class _LoanPageState extends State<LoanPage>
   User user = User();
   Get get = Get();
   Loan loan = Loan();
-
   bool isDateError = false;
   bool isBankError = false;
   bool isValueError = false;
@@ -66,6 +66,7 @@ class _LoanPageState extends State<LoanPage>
   late Animation<Color> _colorAnim;
   DateTime futureDate = DateTime.now();
   ListenController listenController = ListenController();
+
   @override
   void initState() {
     super.initState();
@@ -445,25 +446,79 @@ class _LoanPageState extends State<LoanPage>
                         SizedBox(
                           height: 20,
                         ),
-                        Slider(
-                          min: 0,
-                          max: 500000,
-                          thumbColor: buttonColor,
-                          activeColor: white,
-                          inactiveColor: grey.withOpacity(0.2),
-                          label: '${currentValue}',
-                          divisions: 5,
-                          value: currentValue,
-                          onChanged: (double value) {
-                            setState(() {
-                              currentValue = value;
-                              if (currentValue > 50000) {
-                                isValueError = false;
-                              } else {
-                                isValueError = true;
-                              }
-                            });
-                          },
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                if (currentValue > 0) {
+                                  setState(() {
+                                    currentValue -= 10000;
+                                  });
+                                }
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: darkGrey,
+                                ),
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 6),
+                                  child: SvgPicture.asset(
+                                    'assets/svg/minus.svg',
+                                    color: white,
+                                    theme: SvgTheme(currentColor: white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Slider(
+                                min: 0,
+                                max: double.parse(get.balance.toString()),
+                                thumbColor: buttonColor,
+                                divisions: 5,
+                                activeColor: white,
+                                inactiveColor: grey.withOpacity(0.2),
+                                label: '${currentValue}',
+                                value: currentValue,
+                                onChanged: (double value) {
+                                  setState(() {
+                                    currentValue = value;
+                                    if (currentValue > 50000) {
+                                      isValueError = false;
+                                    } else {
+                                      isValueError = true;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                if (currentValue <
+                                    double.parse("${get.balance}")) {
+                                  setState(() {
+                                    currentValue += 10000;
+                                  });
+                                }
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: darkGrey,
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  color: white,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),
