@@ -3,6 +3,7 @@ import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/active-loan-card/active-loan-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
+import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
   PageController pageController = PageController(viewportFraction: 0.35);
+  Customer customers = Customer();
 
   @override
   void initState() {
@@ -59,6 +61,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
 
   @override
   afterFirstLayout(BuildContext context) async {
+    customers = await LoanApi().loanProduct(true);
     get = await CustomerApi().accountGet(user.customerId!);
     list(limit, page);
     setState(() {
@@ -136,7 +139,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       margin:
                           const EdgeInsets.only(left: 15, bottom: 15, top: 20),
                       child: Text(
-                        'Дижитал зээл',
+                        'Зээл',
                         style: TextStyle(
                           color: white,
                           fontWeight: FontWeight.w600,
@@ -148,15 +151,16 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       height: 170,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: ["", "", ""].length,
+                        itemCount: customers.rows?.length,
                         padding: EdgeInsets.only(left: 15, right: 15),
                         controller: pageController,
                         itemBuilder: (context, index) {
                           return Card(
                             color: transparent,
                             elevation: 0,
-                            key: ValueKey(["", "", ""][index]),
+                            key: ValueKey(customers.rows?[index]),
                             child: PotentialBalanceCard(
+                              customer: customers.rows?[index],
                               data: get,
                               onClick: () {
                                 Navigator.of(context).pushNamed(

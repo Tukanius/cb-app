@@ -1,3 +1,4 @@
+import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/get.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/utils/utils.dart';
@@ -6,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PotentialBalanceCard extends StatefulWidget {
+  final Customer? customer;
   final Function()? onClick;
   final Get? data;
   final bool? button;
   const PotentialBalanceCard({
+    this.customer,
     this.data,
     this.button,
     Key? key,
@@ -26,7 +29,6 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
   @override
   Widget build(BuildContext context) {
     isView = Provider.of<UserProvider>(context, listen: true).isView;
-
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       alignment: Alignment.center,
@@ -39,10 +41,24 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 30),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    '${widget.customer?.name}',
+                    style: TextStyle(
+                      color: grey,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Center(
                   child: Text(
                     'Боломжит үлдэгдэл',
                     style: TextStyle(
@@ -56,20 +72,24 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                   height: 4,
                 ),
                 isView == false
-                    ? Text(
-                        "${Utils().formatCurrency(widget.data?.balance)}₮",
-                        style: TextStyle(
-                          color: white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                    ? Center(
+                        child: Text(
+                          "${Utils().formatCurrency(widget.data?.balance)}₮",
+                          style: TextStyle(
+                            color: white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
                         ),
                       )
-                    : Text(
-                        '*******',
-                        style: TextStyle(
-                          color: white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                    : Center(
+                        child: Text(
+                          '*******',
+                          style: TextStyle(
+                            color: white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
                         ),
                       ),
               ],

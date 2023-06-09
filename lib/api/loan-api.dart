@@ -37,4 +37,9 @@ class LoanApi extends HttpRequest {
     var res = await get("/loan/verify/$id", handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
+
+  loanProduct(bool handler) async {
+    var res = await get("/loanProduct/list", handler: handler);
+    return Customer.fromJson(res as Map<String, dynamic>);
+  }
 }
