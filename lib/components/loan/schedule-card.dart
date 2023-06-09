@@ -27,6 +27,9 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 5,
+          ),
           Text(
             '${widget.data!.payDate}',
             style: TextStyle(
@@ -39,7 +42,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
             height: 5,
           ),
           Divider(
-            color: grey,
+            color: grey.withOpacity(0.3),
           ),
           SizedBox(
             height: 5,

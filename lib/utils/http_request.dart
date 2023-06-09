@@ -10,8 +10,8 @@ import 'http_handler.dart';
 import '../main.dart';
 
 class HttpRequest {
-  static const host = "http://dev-cb-admin.zto.mn";
-  // static const host = 'http://192.168.1.59:30840';
+  // static const host = "http://dev-cb-admin.zto.mn";
+  static const host = 'http://192.168.1.59:30840';
 
   static const version = '/api';
 

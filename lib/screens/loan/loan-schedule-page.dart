@@ -77,16 +77,14 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: loanSchedule.rows!
-              .map(
-                (e) => LoanScheduleCard(
-                  data: e,
-                ),
-              )
-              .toList(),
-        ),
+      body: ListView.builder(
+        itemCount: loanSchedule.rows?.length,
+        itemBuilder: (context, index) {
+          return LoanScheduleCard(
+            key: ValueKey(loanSchedule.rows![index]),
+            data: loanSchedule.rows![index],
+          );
+        },
       ),
     );
   }

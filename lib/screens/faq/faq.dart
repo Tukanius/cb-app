@@ -1,3 +1,6 @@
+import 'package:bank_core/api/general-api.dart';
+import 'package:bank_core/components/accordion.dart';
+import 'package:bank_core/models/answer.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -13,9 +16,12 @@ class FaqPage extends StatefulWidget {
 
 class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
   bool isLoading = true;
+  Answer answer = Answer();
 
   @override
   void afterFirstLayout(BuildContext context) async {
+    answer = await GeneralApi().faqList();
+    print(answer);
     setState(() {
       isLoading = false;
     });
@@ -60,7 +66,14 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
-                  children: [],
+                  children: answer.rows!
+                      .map(
+                        (data) => Accordion(
+                          title: data.string.toString(),
+                          content: data.answer.toString(),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             )
