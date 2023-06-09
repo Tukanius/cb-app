@@ -1,9 +1,11 @@
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/add-address-page/add-address-page.dart';
+import 'package:bank_core/screens/profile-page/address/add-page.dart';
+import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/screens/auth/login.dart';
-import 'package:bank_core/screens/faq/faq.dart';
+import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
+import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:bank_core/screens/loan/loan-detail-page.dart';
 import 'package:bank_core/screens/loan/loan-page.dart';
 import 'package:bank_core/screens/loan/loan-schedule-page.dart';
@@ -11,16 +13,16 @@ import 'package:bank_core/screens/main-page.dart';
 import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
-import 'package:bank_core/screens/add-address-page/address.dart';
+import 'package:bank_core/screens/profile-page/address/address.dart';
 import 'package:bank_core/screens/profile-page/add-information-page.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
 import 'package:bank_core/screens/qpay/qpay.dart';
 import 'package:bank_core/screens/splash/splash.dart';
-import 'package:bank_core/screens/term/term.dart';
-import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
-import 'package:bank_core/screens/who-type-page/who-type-page.dart';
+import 'package:bank_core/screens/profile-page/term/term.dart';
+import 'package:bank_core/screens/profile-page/who-type-page/add-who-type-page.dart';
+import 'package:bank_core/screens/profile-page/who-type-page/who-type-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
 import 'package:bank_core/widgets/dialog_manager/dialog_manager.dart';
@@ -110,6 +112,14 @@ class MyApp extends StatelessWidget {
                     case LoginScreen.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const LoginScreen();
+                      });
+                    case ChangePasswordPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const ChangePasswordPage();
+                      });
+                    case ForgotPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const ForgotPage();
                       });
                     case ProfileDetailPage.routeName:
                       return MaterialPageRoute(builder: (context) {

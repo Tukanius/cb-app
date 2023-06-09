@@ -40,17 +40,27 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
   User user = User();
   Banks bank = Banks();
   Customer save = Customer();
+  bool isSubmit = false;
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
+      setState(() {
+        isSubmit = true;
+      });
       try {
         save = Customer.fromJson(fbKey.currentState!.value);
         save.customerId = user.customerId;
         save.bankId = bank.id;
         await CustomerApi().createBankAccount(save);
         widget.listenController.changeVariable("refresh");
+        setState(() {
+          isSubmit = false;
+        });
         await show(context);
       } catch (e) {
+        setState(() {
+          isSubmit = false;
+        });
         print(e.toString());
       }
     }
@@ -247,7 +257,11 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                     boxShadow: false,
                     labelColor: buttonColor,
                     labelText: 'Нэмэх',
-                    onClick: onSubmit,
+                    onClick: () {
+                      if (isSubmit == false) {
+                        onSubmit();
+                      }
+                    },
                     textColor: white,
                   ),
                 ),

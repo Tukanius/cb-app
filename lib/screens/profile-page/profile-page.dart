@@ -1,15 +1,16 @@
-import 'package:bank_core/screens/faq/faq.dart';
-import 'package:bank_core/screens/term/term.dart';
+import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
+import 'package:bank_core/screens/profile-page/faq/faq.dart';
+import 'package:bank_core/screens/profile-page/term/term.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
-import 'package:bank_core/screens/add-address-page/address.dart';
+import 'package:bank_core/screens/profile-page/address/address.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
-import 'package:bank_core/screens/who-type-page/who-type-page.dart';
+import 'package:bank_core/screens/profile-page/who-type-page/who-type-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,10 +26,17 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   User user = User();
+  bool isSubmit = false;
 
   logout() async {
+    setState(() {
+      isSubmit = true;
+    });
     await Provider.of<UserProvider>(context, listen: false).logout();
     Navigator.of(context).pushNamed(SplashScreen.routeName);
+    setState(() {
+      isSubmit = false;
+    });
   }
 
   @override
@@ -168,32 +176,37 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: darkGrey,
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.lock,
-                      color: white,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Нэвтрэх тохиргоо",
-                      style: TextStyle(
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(ChangePasswordPage.routeName);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: darkGrey,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.lock,
                         color: white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "Нэвтрэх тохиргоо",
+                        style: TextStyle(
+                          color: white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(

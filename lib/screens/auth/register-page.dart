@@ -7,7 +7,6 @@ import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -20,29 +19,31 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
+class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
   User user = User();
   bool isVisible = true;
   bool isVisible1 = true;
+  bool isSubmit = false;
   String? pVal;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  afterFirstLayout(BuildContext context) async {}
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
+      setState(() {
+        isSubmit = true;
+      });
       try {
         User data = User.fromJson(fbKey.currentState!.value);
         await Provider.of<UserProvider>(context, listen: false).register(data);
         await show(context);
+        setState(() {
+          isSubmit = false;
+        });
         await Navigator.of(context).pushNamed(LoginScreen.routeName);
       } catch (e) {
+        setState(() {
+          isSubmit = false;
+        });
         print(e.toString());
       }
     }

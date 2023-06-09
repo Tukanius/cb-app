@@ -5,6 +5,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
     id: json['id'] != null ? json['id'] as String : null,
     createdAt: json['createdAt'] != null ? json['createdAt'] as String : null,
     updatedAt: json['updatedAt'] != null ? json['updatedAt'] as String : null,
+    oldPassword:
+        json['oldPassword'] != null ? json['oldPassword'] as String : null,
     deletedAt: json['deletedAt'] != null ? json['deletedAt'] as String : null,
     sessionId: json['sessionId'] != null ? json['sessionId'] as String : null,
     isActive: json['isActive'] != null ? json['isActive'] as bool : null,
@@ -91,6 +93,7 @@ Map<String, dynamic> _$UserToJson(User instance) {
   if (instance.createdAt != null) json['createdAt'] = instance.createdAt;
   if (instance.updatedAt != null) json['updatedAt'] = instance.updatedAt;
   if (instance.deletedAt != null) json['deletedAt'] = instance.deletedAt;
+  if (instance.oldPassword != null) json['oldPassword'] = instance.oldPassword;
   if (instance.sessionId != null) json['sessionId'] = instance.sessionId;
   if (instance.isActive != null) json['isActive'] = instance.isActive;
   if (instance.email != null) json['email'] = instance.email;

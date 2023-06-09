@@ -53,6 +53,7 @@ class _LoanPageState extends State<LoanPage>
   String seletedDayId = "";
   String selectedMethod = "";
   bool isLoading = false;
+  bool isSubmit = false;
   bool isModalLoading = false;
   Customer bankList = Customer();
   General general = General();
@@ -142,6 +143,9 @@ class _LoanPageState extends State<LoanPage>
 
   onSubmit(ctx) async {
     if (fbKey.currentState!.saveAndValidate()) {
+      setState(() {
+        isSubmit = true;
+      });
       user.password = textController.text;
       user.id = user.customerId;
       var res = await AuthApi().checkPassword(user);
@@ -154,7 +158,7 @@ class _LoanPageState extends State<LoanPage>
         user.id = user.id;
         await LoanApi().createLoan(loan);
         setState(() {
-          isLoading = false;
+          isSubmit = false;
         });
         widget.listenController.changeVariable("loanCreate");
         Navigator.of(context).pop();
@@ -162,6 +166,9 @@ class _LoanPageState extends State<LoanPage>
         Navigator.of(ctx).pop();
       } else {
         showError(context);
+        setState(() {
+          isSubmit = false;
+        });
       }
     }
   }

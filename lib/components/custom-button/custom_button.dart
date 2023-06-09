@@ -31,9 +31,9 @@ class _CustomButtonState extends State<CustomButton> {
           boxShadow: [
             widget.boxShadow == true || widget.boxShadow == null
                 ? BoxShadow(
-                    blurRadius: 5,
+                    blurRadius: 12,
                     color: buttonColor.withOpacity(0.5),
-                    offset: Offset(3, 3),
+                    offset: Offset(0, 3),
                   )
                 : BoxShadow(
                     blurRadius: 0,

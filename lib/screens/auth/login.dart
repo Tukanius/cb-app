@@ -1,6 +1,7 @@
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -132,7 +133,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         TextButton(
-                          onPressed: () => {},
+                          onPressed: () => {
+                            Navigator.of(context)
+                                .pushNamed(ForgotPage.routeName),
+                          },
                           child: Container(
                             margin: EdgeInsets.symmetric(horizontal: 10),
                             child: Text(
@@ -153,7 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: "Нэвтрэх",
                           textColor: white,
                           onClick: () {
-                            onSubmit();
+                            if (isSubmit == false) {
+                              onSubmit();
+                            }
                           },
                         ),
                       ],

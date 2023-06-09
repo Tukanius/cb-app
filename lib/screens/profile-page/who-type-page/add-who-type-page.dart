@@ -43,7 +43,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
     if (fbkey.currentState!.saveAndValidate()) {
       try {
         setState(() {
-          isSubmit = false;
+          isSubmit = true;
         });
         User save = User.fromJson(fbkey.currentState!.value);
         save.customerId = user.customerId;

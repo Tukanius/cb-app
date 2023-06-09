@@ -44,6 +44,7 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
   User user = User();
   bool isLoading = true;
+  bool isSubmit = false;
   String paymentType = "";
 
   @override
@@ -55,6 +56,9 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
 
   onSubmit() async {
     try {
+      setState(() {
+        isSubmit = true;
+      });
       Customer customer = Customer();
       customer.amount = double.parse(widget.loanResidual.toString());
       customer.payerUserId = user.customerId;
@@ -63,7 +67,13 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
       await CustomerApi().pay(customer);
       widget.listenController.changeVariable("loadpayment");
       await show(context);
+      setState(() {
+        isSubmit = false;
+      });
     } catch (e) {
+      setState(() {
+        isSubmit = false;
+      });
       print(e.toString());
     }
   }

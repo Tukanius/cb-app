@@ -1,33 +1,34 @@
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/address-card/address-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
-import 'package:bank_core/components/who-type-card/who-type.card.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/who-type-page/add-who-type-page.dart';
+import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
-class WhoTypePage extends StatefulWidget {
-  static const routeName = 'WhoTypePage';
-  const WhoTypePage({Key? key}) : super(key: key);
+class AddAddress extends StatefulWidget {
+  static const routeName = 'AddAddress';
+  const AddAddress({Key? key}) : super(key: key);
 
   @override
-  State<WhoTypePage> createState() => _WhoTypePageState();
+  State<AddAddress> createState() => _AddAddressState();
 }
 
-class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
-  Customer customer = Customer();
-  bool isLoading = true;
+class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
   User user = User();
+  bool isLoading = true;
+  Customer customer = Customer();
   ListenController listenController = ListenController();
+
   @override
   afterFirstLayout(BuildContext context) async {
-    customer = await CustomerApi().relatedPersonList(user.customerId!);
+    customer = await CustomerApi().addressList(user.customerId!);
     setState(() {
       isLoading = false;
     });
@@ -36,7 +37,7 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
   @override
   void initState() {
     listenController.addListener(() async {
-      customer = await CustomerApi().relatedPersonList(user.customerId!);
+      customer = await CustomerApi().addressList(user.customerId!);
       setState(() {
         isLoading = false;
       });
@@ -46,7 +47,7 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
 
   @override
   Widget build(BuildContext context) {
-    user = Provider.of<UserProvider>(context, listen: true).user;
+    user = Provider.of<UserProvider>(context, listen: false).user;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -67,7 +68,7 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
           ),
         ),
         title: Text(
-          'Холбоо хамаарал',
+          'Оршин суугаа хаяг',
           style: TextStyle(
             color: white,
             fontWeight: FontWeight.bold,
@@ -75,21 +76,27 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
           ),
         ),
         actions: [
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: ActionButton(
-              onClick: () {
-                Navigator.of(context).pushNamed(AddWhoTypePage.routeName,
-                    arguments: AddWhoTypePageArguments(
-                        listenController: listenController));
-              },
-              icon: Icon(
-                Icons.add,
-                color: white,
-                size: 14,
-              ),
-            ),
-          )
+          isLoading == false
+              ? customer.rows!.length >= 3
+                  ? SizedBox()
+                  : Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      child: ActionButton(
+                        onClick: () {
+                          Navigator.of(context).pushNamed(
+                              AddAddressPage.routeName,
+                              arguments: AddAddressPageArguments(
+                                  listenController: listenController));
+                        },
+                        icon: Icon(
+                          Icons.add,
+                          color: white,
+                          size: 14,
+                        ),
+                      ),
+                    )
+              : SizedBox(),
         ],
       ),
       body: isLoading == true
@@ -98,14 +105,10 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
                 color: buttonColor,
               ),
             )
-          : customer.rows!.length == 0
-              ? Column(children: [
-                  Lottie.asset('assets/lottie/empty.json', height: 300),
-                  Text(
-                    "Хоосон байна",
-                    style: TextStyle(color: grey),
-                  ),
-                ])
+          : customer.rows?.length == 0
+              ? Center(
+                  child: Lottie.asset('assets/lottie/empty.json', height: 300),
+                )
               : SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +117,7 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
                         margin: const EdgeInsets.only(
                             left: 15, bottom: 10, top: 20),
                         child: Text(
-                          'Жагсаалт',
+                          'Оршин суугаа хаяг',
                           style: TextStyle(
                             color: white,
                             fontSize: 14,
@@ -125,12 +128,15 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
                       Column(
                         children: customer.rows!
                             .map(
-                              (e) => WhoTypeCard(
-                                data: e,
+                              (data) => AddressCard(
+                                data: data,
                               ),
                             )
                             .toList(),
-                      )
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
                     ],
                   ),
                 ),

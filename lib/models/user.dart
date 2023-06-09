@@ -30,6 +30,7 @@ class User {
   String? customerId;
   User? customer;
   User? regUser;
+  String? oldPassword;
 
   String? userId;
   String? tokenType;
@@ -61,6 +62,7 @@ class User {
     this.isActive,
     this.email,
     this.username,
+    this.oldPassword,
     this.isEmailVerified,
     this.emailVerifiedDate,
     this.phone,

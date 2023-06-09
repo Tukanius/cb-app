@@ -45,9 +45,13 @@ class _AddInformationPageState extends State<AddInformationPage> {
   String? workStatus;
   Customer customer = Customer();
   User user = User();
+  bool isSubmit = false;
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
+      setState(() {
+        isSubmit = true;
+      });
       try {
         customer = Customer.fromJson(fbKey.currentState!.value);
         customer.nationalityTypeId = nationalityType;
@@ -57,8 +61,15 @@ class _AddInformationPageState extends State<AddInformationPage> {
         customer.workStatusId = workStatus;
         await CustomerApi().profileUpdate(user.customerId!, customer);
         widget.listenController.changeVariable('refresh');
+        setState(() {
+          isSubmit = false;
+        });
         await show(context);
-      } catch (e) {}
+      } catch (e) {
+        setState(() {
+          isSubmit = false;
+        });
+      }
     }
   }
 
