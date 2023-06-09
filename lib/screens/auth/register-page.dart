@@ -158,6 +158,21 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                     child: Column(
                       children: [
                         FormTextField(
+                          labelText: "И-Мейл",
+                          inputType: TextInputType.emailAddress,
+                          name: 'email',
+                          hintText: "И-Мейлээ оруулна уу",
+                          color: darkGrey,
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return validateEmail(value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
                           labelText: "Овог",
                           inputType: TextInputType.text,
                           name: 'lastName',
@@ -210,21 +225,6 @@ class _RegisterPageState extends State<RegisterPage> with AfterLayoutMixin {
                           validators: FormBuilderValidators.compose([
                             (value) {
                               return validatePhone(value.toString(), context);
-                            }
-                          ]),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FormTextField(
-                          labelText: "И-Мейл",
-                          inputType: TextInputType.emailAddress,
-                          name: 'email',
-                          hintText: "И-Мейлээ оруулна уу",
-                          color: darkGrey,
-                          validators: FormBuilderValidators.compose([
-                            (value) {
-                              return validateEmail(value.toString(), context);
                             }
                           ]),
                         ),

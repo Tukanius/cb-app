@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePageArguments {
   String id;
@@ -35,13 +36,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   bool isLoading = true;
   int page = 1;
-  int limit = 5;
+  int limit = 10;
   Get get = Get();
   User user = User();
   Result loan = Result(count: 0, rows: []);
   ListenController listenController = ListenController();
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
+  PageController pageController = PageController(viewportFraction: 0.35);
 
   @override
   void initState() {
@@ -166,28 +168,48 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   ),
                                 ),
                               ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: loan.rows!
-                                      .map((data) => Container(
-                                            margin: EdgeInsets.only(left: 15),
-                                            child: ActiveLoanCard(
-                                              data: data,
-                                              onClick: () {
-                                                Navigator.of(context).pushNamed(
-                                                  LoanDetailPage.routeName,
-                                                  arguments:
-                                                      LoanDetailPageArguments(
-                                                    id: data.loanId,
-                                                    listenController:
-                                                        listenController,
-                                                  ),
-                                                );
-                                              },
+                              Container(
+                                height: 245,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: loan.rows!.length,
+                                  padding: EdgeInsets.only(left: 15, right: 15),
+                                  controller: pageController,
+                                  itemBuilder: (context, index) {
+                                    return Card(
+                                      color: backgroundColor,
+                                      key: ValueKey(loan.rows![index]),
+                                      child: ActiveLoanCard(
+                                        data: loan.rows![index],
+                                        onClick: () {
+                                          Navigator.of(context).pushNamed(
+                                            LoanDetailPage.routeName,
+                                            arguments: LoanDetailPageArguments(
+                                              id: loan.rows![index].loanId,
+                                              listenController:
+                                                  listenController,
                                             ),
-                                          ))
-                                      .toList(),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 10),
+                                width: MediaQuery.of(context).size.width,
+                                alignment: Alignment.center,
+                                child: SmoothPageIndicator(
+                                  controller: pageController,
+                                  count: loan.rows!.length,
+                                  effect: WormEffect(
+                                    dotColor: greyDark,
+                                    dotHeight: 10,
+                                    dotWidth: 10,
+                                    activeDotColor: buttonColor,
+                                  ),
+                                  onDotClicked: (index) {},
                                 ),
                               ),
                             ],

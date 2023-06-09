@@ -13,9 +13,11 @@ class HttpRequest {
   static const host = "http://dev-cb-admin.zto.mn";
   // static const host = 'http://192.168.1.59:30840';
 
-  static const version = '/api/mobile';
+  static const version = '/api';
 
   static const uri = host;
+
+  static const part = "/mobile";
 
   Dio dio = Dio();
 
@@ -24,7 +26,7 @@ class HttpRequest {
     Response? response;
     final String uri;
 
-    uri = '$host$version$api';
+    uri = '$host$version$part$api';
     debugPrint(uri);
 
     debugPrint('+++++++++++++++++++++++++++++++++++++++++++++++++++');

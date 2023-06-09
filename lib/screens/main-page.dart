@@ -168,43 +168,53 @@ class _MainPageState extends State<MainPage>
             ),
             bottomNavigationBar: Material(
               color: backgroundColor,
-              child: TabBar(
-                overlayColor:
-                    MaterialStateColor.resolveWith((states) => backgroundColor),
-                controller: tabController,
-                labelColor: buttonColor,
-                indicatorSize: TabBarIndicatorSize.label,
-                unselectedLabelColor: greyDark,
-                labelPadding: EdgeInsets.only(
-                  top: 5,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: backgroundColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(15.0),
+                    topRight: Radius.circular(15.0),
+                  ),
                 ),
-                indicator: TopIndicator(),
-                tabs: <Widget>[
-                  Tab(
-                      icon: SvgPicture.asset(
-                        "assets/svg/home1.svg",
-                        height: 24,
-                        width: 24,
-                        color: currentIndex == 0 ? buttonColor : greyDark,
-                      ),
-                      text: 'Нүүр'),
-                  Tab(
-                      icon: SvgPicture.asset(
-                        "assets/svg/lend.svg",
-                        height: 24,
-                        width: 24,
-                        color: currentIndex == 1 ? buttonColor : greyDark,
-                      ),
-                      text: 'Зээл'),
-                  Tab(
-                      icon: SvgPicture.asset(
-                        "assets/svg/shop.svg",
-                        height: 24,
-                        width: 24,
-                        color: currentIndex == 2 ? buttonColor : greyDark,
-                      ),
-                      text: 'Дэлгүүр'),
-                ],
+                child: TabBar(
+                  splashBorderRadius: BorderRadius.circular(20),
+                  overlayColor: MaterialStateColor.resolveWith(
+                      (states) => backgroundColor),
+                  controller: tabController,
+                  labelColor: buttonColor,
+                  indicatorSize: TabBarIndicatorSize.label,
+                  unselectedLabelColor: greyDark,
+                  labelPadding: EdgeInsets.only(
+                    top: 5,
+                  ),
+                  indicator: TopIndicator(),
+                  tabs: <Widget>[
+                    Tab(
+                        icon: SvgPicture.asset(
+                          "assets/svg/home1.svg",
+                          height: 24,
+                          width: 24,
+                          color: currentIndex == 0 ? buttonColor : greyDark,
+                        ),
+                        text: 'Нүүр'),
+                    Tab(
+                        icon: SvgPicture.asset(
+                          "assets/svg/lend.svg",
+                          height: 24,
+                          width: 24,
+                          color: currentIndex == 1 ? buttonColor : greyDark,
+                        ),
+                        text: 'Зээл'),
+                    Tab(
+                        icon: SvgPicture.asset(
+                          "assets/svg/shop.svg",
+                          height: 24,
+                          width: 24,
+                          color: currentIndex == 2 ? buttonColor : greyDark,
+                        ),
+                        text: 'Дэлгүүр'),
+                  ],
+                ),
               ),
             ),
           ),

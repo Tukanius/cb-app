@@ -178,7 +178,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Ургын овог оруулна уу')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                     ),
                     Container(
@@ -196,7 +196,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Яс үндэс сонгоно уу.')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
@@ -262,7 +262,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Боловсролын зэрэг оруулна уу.')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
@@ -328,7 +328,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Гэрлэлтийн байдал сонгоно уу.')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
@@ -390,7 +390,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Ам бүлийн тоо оруулна уу')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                     ),
                     SizedBox(
@@ -404,7 +404,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Сарын орлого оруулна уу')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                     ),
                     Container(
@@ -422,7 +422,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Хүйс сонгоно уу.')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(
@@ -478,13 +478,13 @@ class _AddInformationPageState extends State<AddInformationPage> {
                     ),
                     FormTextField(
                       labelText: "Төрсөн газар",
-                      inputType: TextInputType.number,
+                      inputType: TextInputType.text,
                       name: 'birthPlace',
                       hintText: 'Төрсөн газар',
                       color: darkGrey,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Сарын орлого оруулна уу')
+                            errorText: 'Заавал оруулна уу')
                       ]),
                     ),
                     Container(
@@ -502,7 +502,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       dropdownColor: mainColor,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Ажил эрхлэлтийн байдал сонгох.')
+                            errorText: 'Заавал оруулна уу.')
                       ]),
                       icon: Container(
                         decoration: BoxDecoration(

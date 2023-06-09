@@ -12,6 +12,7 @@ import 'package:bank_core/models/loan.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
@@ -64,10 +65,19 @@ class _LoanPageState extends State<LoanPage>
   late AnimationController controller;
   late Animation<Color> _colorAnim;
   DateTime futureDate = DateTime.now();
-
+  ListenController listenController = ListenController();
   @override
   void initState() {
     super.initState();
+    listenController.addListener(() async {
+      setState(() {
+        isLoading = true;
+      });
+      bankList = await CustomerApi().bankAccountList(user.customerId!);
+      setState(() {
+        isLoading = false;
+      });
+    });
     controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
     _colorAnim =
@@ -373,21 +383,6 @@ class _LoanPageState extends State<LoanPage>
             fontWeight: FontWeight.w600,
           ),
         ),
-        // actions: [
-        //   Container(
-        //     margin: const EdgeInsets.symmetric(horizontal: 10),
-        //     child: ActionButton(
-        //       onClick: () {
-        //         Navigator.of(context).pop();
-        //       },
-        //       icon: Icon(
-        //         Icons.more_horiz,
-        //         color: white,
-        //         size: 20,
-        //       ),
-        //     ),
-        //   ),
-        // ],
         bottom: PreferredSize(
             child: Container(
               height: 1,
@@ -403,7 +398,7 @@ class _LoanPageState extends State<LoanPage>
             )
           : SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -452,7 +447,7 @@ class _LoanPageState extends State<LoanPage>
                         ),
                         Slider(
                           min: 0,
-                          max: double.parse("${get.balance}"),
+                          max: 500000,
                           thumbColor: buttonColor,
                           activeColor: white,
                           inactiveColor: grey.withOpacity(0.2),
@@ -615,90 +610,115 @@ class _LoanPageState extends State<LoanPage>
                         ),
                       ),
                     ),
-                    DropdownButtonFormField(
-                      onChanged: (value) {
-                        setState(() {
-                          selectedMethod = "${value?.name}";
-                          isBankError = false;
-                        });
-                        ;
-                      },
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: "Заавал сонгоно уу"),
-                      ]),
-                      alignment: Alignment.center,
-                      isExpanded: true,
-                      dropdownColor: mainColor,
-                      menuMaxHeight: 300,
-                      elevation: 2,
-                      borderRadius: BorderRadius.circular(10),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        color: white,
-                      ),
-                      decoration: InputDecoration(
-                        hintText: 'Данс сонгоно уу',
-                        hintStyle: TextStyle(color: grey, fontSize: 14),
-                        filled: true,
-                        fillColor: darkGrey,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
+                    if (bankList.rows?.length != 0)
+                      DropdownButtonFormField(
+                        onChanged: (value) {
+                          setState(() {
+                            selectedMethod = "${value?.name}";
+                            isBankError = false;
+                          });
+                          ;
+                        },
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: "Заавал сонгоно уу"),
+                        ]),
+                        dropdownColor: mainColor,
+                        itemHeight: 70,
+                        menuMaxHeight: 400,
+                        elevation: 2,
+                        isExpanded: true,
+                        borderRadius: BorderRadius.circular(10),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          color: white,
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
+                        decoration: InputDecoration(
+                          hintText: 'Данс сонгоно уу',
+                          hintStyle: TextStyle(color: grey, fontSize: 14),
+                          filled: true,
+                          fillColor: darkGrey,
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
-                      items: bankList.rows!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              enabled: true,
-                              value: item,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: black,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image(
-                                        image: AssetImage('images/4.png'),
-                                        height: 30,
-                                        width: 30,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${item.bank?.name}",
-                                        style: TextStyle(
-                                            fontSize: 8, color: white),
-                                      ),
-                                      Text(
-                                        "${item.accountNumber}",
-                                        style: TextStyle(
-                                          color: white,
-                                          fontSize: 12,
+                        items: bankList.rows
+                            ?.map(
+                              (item) => DropdownMenuItem(
+                                enabled: true,
+                                value: item,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage("images/4.png"),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ],
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "${item.accountNumber} / ${item.bank?.name}",
+                                          style: TextStyle(
+                                            color: white,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                          .toList(),
-                    ),
+                            )
+                            .toList(),
+                      )
+                    else
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: mainColor,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Холбосон данс байхгүй байна",
+                                style: TextStyle(color: greyDark, fontSize: 12),
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                        AddBankAccountPage.routeName,
+                                        arguments: AddBankAccountPageArguments(
+                                            listenController:
+                                                listenController));
+                                  },
+                                  child: Text(
+                                    "Данс холбох",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ))
+                            ],
+                          )),
                     isBankError == true
                         ? Container(
                             margin: EdgeInsets.symmetric(
