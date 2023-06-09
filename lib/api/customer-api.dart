@@ -1,5 +1,5 @@
 import 'package:bank_core/models/customer.dart';
-import 'package:bank_core/models/result.dart';
+import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/utils/http_request.dart';
 
@@ -13,6 +13,11 @@ class CustomerApi extends HttpRequest {
     var res = await post("/customerRelatedPerson",
         data: data.toJson(), handler: true);
     return res;
+  }
+
+  accountGet(String id) async {
+    var res = await get("/account/$id", handler: true);
+    return Get.fromJson(res as Map<String, dynamic>);
   }
 
   Future<Customer> bankAccountList(String id) async {
@@ -37,37 +42,8 @@ class CustomerApi extends HttpRequest {
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 
-  Future<Result> activeList(ResultArguments resultArguments, String id) async {
-    var res =
-        await get("/Loans/$id", data: resultArguments.toJson(), handler: true);
-    return Result.fromJson(res, Customer.fromJson);
-  }
-
-  activeLoanGet(String id) async {
-    var res = await get("/loanPayBack/$id", handler: true);
-    return Customer.fromJson(res as Map<String, dynamic>);
-  }
-
-  Future<Result> paidList(ResultArguments resultArguments, String id) async {
-    var res = await get("/loanPayBackPaidList/$id",
-        data: resultArguments.toJson(), handler: true);
-    return Result.fromJson(res, Customer.fromJson);
-  }
-
-  Future<Result> loanSchedule(
-      ResultArguments resultArguments, String id) async {
-    var res = await get("/loanPayBackList/$id",
-        data: resultArguments.toJson(), handler: true);
-    return Result.fromJson(res, Customer.fromJson);
-  }
-
   pay(Customer data) async {
     var res = await post("/payment/create", data: data.toJson(), handler: true);
-    return Customer.fromJson(res as Map<String, dynamic>);
-  }
-
-  Future<Customer> verify(String id) async {
-    var res = await get("/loan/verify/$id", handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 

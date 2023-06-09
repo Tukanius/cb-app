@@ -28,7 +28,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
     isView = Provider.of<UserProvider>(context, listen: true).isView;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15),
+      width: MediaQuery.of(context).size.width - 40,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),

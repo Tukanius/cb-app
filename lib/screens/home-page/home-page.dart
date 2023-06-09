@@ -1,5 +1,5 @@
-import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
+import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/active-loan-card/active-loan-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   @override
   void initState() {
     listenController.addListener(() async {
-      get = await AuthApi().accountGet(user.customerId!);
+      get = await CustomerApi().accountGet(user.customerId!);
       list(limit, page);
       setState(() {
         isLoading = false;
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
 
   @override
   afterFirstLayout(BuildContext context) async {
-    get = await AuthApi().accountGet(user.customerId!);
+    get = await CustomerApi().accountGet(user.customerId!);
     list(limit, page);
     setState(() {
       isLoading = false;
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   list(limit, page) async {
     Offset offset = Offset(page: page, limit: limit);
     Filter filter = Filter(query: '');
-    loan = await CustomerApi().activeList(
+    loan = await LoanApi().activeList(
         ResultArguments(offset: offset, filter: filter), user.customerId!);
     setState(() {
       isLoading = false;
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
 
   void _onRefresh() async {
     await Future.delayed(Duration(milliseconds: 1000));
-    get = await AuthApi().accountGet(user.customerId!);
+    get = await CustomerApi().accountGet(user.customerId!);
     setState(() {
       isLoading = true;
     });
@@ -144,14 +144,32 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                         ),
                       ),
                     ),
-                    PotentialBalanceCard(
-                      data: get,
-                      onClick: () {
-                        Navigator.of(context).pushNamed(LoanPage.routeName,
-                            arguments: LoanPageArguments(
-                                listenController: listenController));
-                      },
+                    Container(
+                      height: 170,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: ["", "", ""].length,
+                        padding: EdgeInsets.only(left: 15, right: 15),
+                        controller: pageController,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            color: transparent,
+                            elevation: 0,
+                            key: ValueKey(["", "", ""][index]),
+                            child: PotentialBalanceCard(
+                              data: get,
+                              onClick: () {
+                                Navigator.of(context).pushNamed(
+                                    LoanPage.routeName,
+                                    arguments: LoanPageArguments(
+                                        listenController: listenController));
+                              },
+                            ),
+                          );
+                        },
+                      ),
                     ),
+
                     loan.rows!.length != 0
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

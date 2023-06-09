@@ -1,4 +1,4 @@
-import 'package:bank_core/api/customer-api.dart';
+import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/loan/schedule-card.dart';
 import 'package:bank_core/models/result.dart';
@@ -40,7 +40,7 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
   list(page, limit) async {
     Offset offset = Offset(page: page, limit: limit);
     Filter filter = Filter();
-    loanSchedule = await CustomerApi().loanSchedule(
+    loanSchedule = await LoanApi().loanSchedule(
         ResultArguments(offset: offset, filter: filter), widget.id);
     setState(() {
       isLoading = false;

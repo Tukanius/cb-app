@@ -1,7 +1,7 @@
+import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/paid-back-card/paid-back-card.dart';
 import 'package:bank_core/models/customer.dart';
@@ -47,7 +47,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
     setState(() {
       isLoading = true;
     });
-    customer = await CustomerApi().activeLoanGet(widget.id);
+    customer = await LoanApi().activeLoanGet(widget.id);
 
     paidList(page, limit);
     setState(() {
@@ -58,7 +58,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
   paidList(page, limit) async {
     Offset offset = Offset(limit: limit, page: page);
     Filter filter = Filter(query: '');
-    list = await CustomerApi()
+    list = await LoanApi()
         .paidList(ResultArguments(offset: offset, filter: filter), widget.id);
   }
 

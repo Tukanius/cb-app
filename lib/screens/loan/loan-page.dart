@@ -106,7 +106,7 @@ class _LoanPageState extends State<LoanPage>
     setState(() {
       isLoading = true;
     });
-    get = await AuthApi().accountGet(user.customerId!);
+    get = await CustomerApi().accountGet(user.customerId!);
     bankList = await CustomerApi().bankAccountList(user.customerId!);
     setState(() {
       isLoading = false;
