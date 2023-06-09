@@ -5,6 +5,7 @@ import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -207,7 +208,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                               height: 10,
                             ),
                             Text(
-                              widget.loanResidual.toString(),
+                              Utils().formatCurrency(widget.loanResidual),
                               style: TextStyle(
                                 color: white,
                                 fontSize: 24,

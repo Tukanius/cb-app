@@ -310,6 +310,7 @@ class _LoanPageState extends State<LoanPage>
                       hintText: 'Нууц үгээ оруулна уу',
                       inputType: TextInputType.text,
                       obscureText: true,
+                      autoFocus: true,
                       labelText: "Нууц үг",
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(

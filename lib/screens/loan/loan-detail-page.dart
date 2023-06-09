@@ -6,7 +6,7 @@ import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/paid-back-card/paid-back-card.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/result.dart';
-import 'package:bank_core/screens/loan-schedule-page/loan-schedule-page.dart';
+import 'package:bank_core/screens/loan/loan-schedule-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -325,7 +325,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset('images/lend.svg'),
+                                SvgPicture.asset('assets/svg/lend.svg'),
                                 SizedBox(
                                   height: 15,
                                 ),
