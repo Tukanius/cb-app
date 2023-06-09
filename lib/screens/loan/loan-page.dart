@@ -149,6 +149,7 @@ class _LoanPageState extends State<LoanPage>
       user.password = textController.text;
       user.id = user.customerId;
       var res = await AuthApi().checkPassword(user);
+      await LoanApi().verify(user.customerId!);
       if (res == true) {
         loan.amount = currentValue;
         loan.customerId = user.customerId;

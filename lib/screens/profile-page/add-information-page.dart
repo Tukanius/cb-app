@@ -9,11 +9,13 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:lottie/lottie.dart';
+import 'package:moment_dart/moment_dart.dart';
 
 class AddInformationPageArguments {
   ListenController listenController;
@@ -46,6 +48,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
   Customer customer = Customer();
   User user = User();
   bool isSubmit = false;
+  DateTime? dateTime;
+  bool dateTimeError = false;
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
@@ -54,6 +58,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
       });
       try {
         customer = Customer.fromJson(fbKey.currentState!.value);
+        customer.birthDate = dateTime.toString();
         customer.nationalityTypeId = nationalityType;
         customer.educationTypeId = educationType;
         customer.marriageStatusId = marriageStatuses;
@@ -172,6 +177,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FormBuilder(
                 key: fbKey,
@@ -566,6 +572,72 @@ class _AddInformationPageState extends State<AddInformationPage> {
                     ),
                   ],
                 ),
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 8, top: 8),
+                child: Text(
+                  'Төрсөн өдөр сонгоно уу',
+                  style: TextStyle(
+                    color: white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: darkGrey,
+                  ),
+                  child: dateTime == null
+                      ? Text(
+                          'Төрсөн өдөр сонгоно уу',
+                          style: TextStyle(color: greyDark),
+                        )
+                      : Text(
+                          '${dateTime?.format(payload: "YYYY-MM-DD")}',
+                          style: TextStyle(
+                            color: white,
+                            fontSize: 14,
+                          ),
+                        ),
+                ),
+                onTap: () {
+                  showCupertinoModalPopup(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        color: white,
+                        height: 250,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Болсон"),
+                            ),
+                            Expanded(
+                              child: CupertinoDatePicker(
+                                mode: CupertinoDatePickerMode.date,
+                                onDateTimeChanged: (value) {
+                                  setState(() {
+                                    dateTime = value;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
               SizedBox(
                 height: 40,
