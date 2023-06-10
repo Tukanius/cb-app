@@ -49,10 +49,19 @@ class _AddInformationPageState extends State<AddInformationPage> {
   User user = User();
   bool isSubmit = false;
   DateTime? dateTime;
-  bool dateTimeError = false;
+  bool dateError = false;
+
+  onValidate() {
+    if (dateTime == null) {
+      setState(() {
+        dateError = true;
+      });
+    }
+    onSubmit();
+  }
 
   onSubmit() async {
-    if (fbKey.currentState!.saveAndValidate()) {
+    if (fbKey.currentState!.saveAndValidate() && dateError == false) {
       setState(() {
         isSubmit = true;
       });
@@ -181,6 +190,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
             children: [
               FormBuilder(
                 key: fbKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -628,6 +638,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                                 onDateTimeChanged: (value) {
                                   setState(() {
                                     dateTime = value;
+                                    dateError = false;
                                   });
                                 },
                               ),
@@ -639,11 +650,22 @@ class _AddInformationPageState extends State<AddInformationPage> {
                   );
                 },
               ),
+              if (dateError == true)
+                Container(
+                  margin: EdgeInsets.only(top: 8, left: 15),
+                  child: Text(
+                    "Төрсөн өдөрөө оруулна уу",
+                    style: TextStyle(
+                      color: red,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
               SizedBox(
                 height: 40,
               ),
               CustomButton(
-                onClick: onSubmit,
+                onClick: onValidate,
                 labelColor: buttonColor,
                 labelText: 'Баталгаажуулах',
                 textColor: white,
