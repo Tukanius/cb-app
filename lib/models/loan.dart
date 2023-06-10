@@ -6,8 +6,10 @@ class Loan {
   String? loanDate;
   String? loanRate;
   String? loanTimeId;
+  String? accountId;
 
   Loan({
+    this.accountId,
     this.amount,
     this.customerId,
     this.loanDate,

@@ -72,7 +72,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      '${Utils().formatCurrency(widget.data!.totalPayAmount)}₮',
+                      '${Utils().formatCurrency(widget.data!.total_pay_amount)}₮',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,
@@ -94,7 +94,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      '${widget.data!.payDate}',
+                      '${widget.data!.pay_date}',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,

@@ -149,13 +149,14 @@ class _LoanPageState extends State<LoanPage>
       user.password = textController.text;
       user.id = user.customerId;
       var res = await AuthApi().checkPassword(user);
-      await LoanApi().verify(user.customerId!);
+      // await LoanApi().verify(user.customerId!);
       if (res == true) {
         loan.amount = currentValue;
         loan.customerId = user.customerId;
         loan.loanDate = DateTime.now().toString();
         loan.loanRate = '3';
         loan.loanTimeId = seletedDayId;
+        loan.accountId = selectedMethod;
         user.id = user.id;
         await LoanApi().createLoan(loan);
         setState(() {
@@ -677,8 +678,11 @@ class _LoanPageState extends State<LoanPage>
                       DropdownButtonFormField(
                         onChanged: (value) {
                           setState(() {
-                            selectedMethod = "${value?.name}";
+                            selectedMethod = "${value?.id}";
                             isBankError = false;
+                            print('=====selected====');
+                            print(selectedMethod.toString());
+                            print('=====selected====');
                           });
                           ;
                         },

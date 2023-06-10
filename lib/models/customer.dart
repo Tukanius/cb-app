@@ -31,7 +31,7 @@ class Customer {
   Customer? khoroo;
   Customer? addressType;
   String? totalPayAmount;
-  String? payDate;
+  String? pay_date;
   String? loanStatusId;
   Customer? loan;
   String? loanId;
@@ -66,6 +66,8 @@ class Customer {
   Customer? gender;
   Customer? workStatus;
 
+  String? total_pay_amount;
+
   String getPostDate() {
     final now = Moment.now();
     var res = now.format(createdAt.toString());
@@ -73,6 +75,7 @@ class Customer {
   }
 
   Customer({
+    this.total_pay_amount,
     this.educationType,
     this.marriageStatus,
     this.nationalityType,
@@ -104,7 +107,7 @@ class Customer {
     this.rateCalcDay,
     this.loanId,
     this.totalPayAmount,
-    this.payDate,
+    this.pay_date,
     this.loanStatusId,
     this.loan,
     this.province,
