@@ -47,7 +47,6 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
-    print(customer.marriageStatus?.toJson());
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -177,7 +176,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                   height: 5,
                                 ),
                                 Text(
-                                  "${customer.result?.incomeAmountMonth}",
+                                  "${customer.result?.nationalityType?.name}",
                                   style: TextStyle(
                                     color: white,
                                     fontSize: 14,
@@ -249,6 +248,41 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                           ),
                           Text(
                             "${customer.result?.firstName}",
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: darkGrey,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Төрсөн өдөр',
+                            style: TextStyle(
+                              color: grey,
+                              fontSize: 12,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "${customer.result?.birthDate}",
                             style: TextStyle(
                               color: white,
                               fontSize: 14,

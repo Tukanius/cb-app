@@ -199,12 +199,12 @@ class _MainPageState extends State<MainPage>
                         text: 'Нүүр'),
                     Tab(
                         icon: SvgPicture.asset(
-                          "assets/svg/lend.svg",
+                          "assets/svg/list.svg",
                           height: 24,
                           width: 24,
                           color: currentIndex == 1 ? buttonColor : greyDark,
                         ),
-                        text: 'Зээл'),
+                        text: 'Түүх'),
                     Tab(
                         icon: SvgPicture.asset(
                           "assets/svg/shop.svg",
