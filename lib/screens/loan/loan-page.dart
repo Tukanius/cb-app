@@ -430,7 +430,7 @@ class _LoanPageState extends State<LoanPage>
                           height: 5,
                         ),
                         Text(
-                          '${Utils().formatCurrency("${currentValue}")}₮',
+                          '${Utils().formatCurrency("${currentValue.toInt()}")}₮',
                           style: TextStyle(
                             color:
                                 isValueError == true ? _colorAnim.value : white,
@@ -493,6 +493,9 @@ class _LoanPageState extends State<LoanPage>
                                 min: 0,
                                 max: double.parse(get.balance.toString()),
                                 thumbColor: buttonColor,
+                                divisions:
+                                    double.parse(get.balance.toString()) ~/
+                                        5000,
                                 activeColor: white,
                                 inactiveColor: grey.withOpacity(0.2),
                                 label: '${currentValue}',
@@ -689,9 +692,6 @@ class _LoanPageState extends State<LoanPage>
                           setState(() {
                             selectedMethod = "${value?.id}";
                             isBankError = false;
-                            print('=====selected====');
-                            print(selectedMethod.toString());
-                            print('=====selected====');
                           });
                           ;
                         },
