@@ -203,9 +203,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         FormTextField(
                           labelText: "Регистер №",
+                          maxLenght: 10,
                           inputType: TextInputType.text,
                           name: 'registerNo',
                           hintText: "Регистерийн дугаар",
+                          showCounter: false,
                           color: darkGrey,
                           validators: FormBuilderValidators.compose([
                             (value) {
@@ -219,7 +221,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         FormTextField(
                           labelText: "Утаны дугаар",
+                          maxLenght: 8,
                           inputType: TextInputType.phone,
+                          showCounter: false,
                           name: 'phone',
                           hintText: "Утасны дугаараа оруулна уу",
                           color: darkGrey,

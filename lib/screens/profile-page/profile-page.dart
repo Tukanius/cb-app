@@ -265,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 15,
                       ),
                       Text(
-                        "Тусламж",
+                        "Түгээмэл асуултууд",
                         style: TextStyle(
                           color: white,
                           fontSize: 14,

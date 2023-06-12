@@ -1,6 +1,7 @@
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/check-biometric.dart';
+import 'package:bank_core/screens/otp/otp-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
@@ -83,6 +84,10 @@ class MyApp extends StatelessWidget {
                     case MainPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const MainPage();
+                      });
+                    case OtpVerifyPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const OtpVerifyPage();
                       });
                     case LoanPage.routeName:
                       LoanPageArguments arguments =
