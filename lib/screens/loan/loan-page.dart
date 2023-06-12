@@ -441,20 +441,20 @@ class _LoanPageState extends State<LoanPage>
                         isValueError == true
                             ? Container(
                                 width: 240,
-                                margin: EdgeInsets.symmetric(vertical: 8),
+                                height: 40,
+                                padding: EdgeInsets.only(top: 8),
                                 child: Text(
                                   'Хамгийн багадаа 50,000₮ өөр зээл авах боломжтой',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: red,
-                                    fontSize: 14,
+                                    fontSize: 13,
                                   ),
                                 ),
                               )
-                            : SizedBox(),
-                        SizedBox(
-                          height: 20,
-                        ),
+                            : SizedBox(
+                                height: 40,
+                              ),
                         Row(
                           children: [
                             GestureDetector(
@@ -463,6 +463,11 @@ class _LoanPageState extends State<LoanPage>
                                   setState(() {
                                     currentValue -= 10000;
                                   });
+                                  if (currentValue < 50000) {
+                                    setState(() {
+                                      isValueError = true;
+                                    });
+                                  }
                                 }
                               },
                               child: Container(
@@ -488,7 +493,6 @@ class _LoanPageState extends State<LoanPage>
                                 min: 0,
                                 max: double.parse(get.balance.toString()),
                                 thumbColor: buttonColor,
-                                divisions: 5,
                                 activeColor: white,
                                 inactiveColor: grey.withOpacity(0.2),
                                 label: '${currentValue}',
@@ -512,6 +516,11 @@ class _LoanPageState extends State<LoanPage>
                                   setState(() {
                                     currentValue += 10000;
                                   });
+                                  if (currentValue >= 50000) {
+                                    setState(() {
+                                      isValueError = false;
+                                    });
+                                  }
                                 }
                               },
                               child: Container(
