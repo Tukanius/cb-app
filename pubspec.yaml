@@ -62,6 +62,8 @@ dev_dependencies:
   pull_to_refresh: ^2.0.0
   persistent_bottom_nav_bar: ^5.0.2
   smooth_page_indicator: ^1.1.0
+  pin_code_fields: ^7.4.0
+  pinput: ^2.2.31
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -107,7 +109,6 @@ flutter:
           weight: 700
         - asset: assets/fonts/Rubik-ExtraBold.ttf
           weight: 800
-        
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

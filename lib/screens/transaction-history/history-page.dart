@@ -19,8 +19,7 @@ class _HistoryPageState extends State<HistoryPage>
 
   @override
   void initState() {
-    tabController =
-        TabController(length: 3, vsync: this, animationDuration: Duration.zero);
+    tabController = TabController(length: 3, vsync: this);
     tabController.index = currentIndex;
     super.initState();
   }
@@ -239,7 +238,6 @@ class _HistoryPageState extends State<HistoryPage>
                 TransactionHistoryCard(
                   onClick: () {
                     show(context);
-                    print('1111');
                   },
                   isIncome: true,
                 ),
