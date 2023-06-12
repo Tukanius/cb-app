@@ -66,8 +66,9 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
                     hintText: "Шинэ утасны дугаар оруулах",
                     color: darkGrey,
                     validators: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: "Утасны дугаар оруулах"),
+                      (value) {
+                        return validatePhone(value.toString(), context);
+                      }
                     ]),
                   ),
                 ],
@@ -87,5 +88,18 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
         ),
       ),
     );
+  }
+}
+
+String? validatePhone(String value, context) {
+  RegExp regex = RegExp(r'[(9|8]{1}[0-9]{7}$');
+  if (value.isEmpty) {
+    return 'Утасны дугаараа оруулна уу';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Утасны дугаараа шалгана уу';
+    } else {
+      return null;
+    }
   }
 }
