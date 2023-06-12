@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Bank Core',
+        title: 'T-Wallet',
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
                         DialogManager(child: loading(context, widget)),
                   ),
                 ),
-                title: 'Bank Core',
+                title: 'T-Wallet',
                 debugShowCheckedModeBanner: false,
                 initialRoute: SplashScreen.routeName,
                 onGenerateRoute: (RouteSettings settings) {

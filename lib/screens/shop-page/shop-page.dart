@@ -1,6 +1,7 @@
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:lottie/lottie.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -30,7 +31,7 @@ class _ShopPageState extends State<ShopPage> {
         slivers: <Widget>[
           SliverToBoxAdapter(
             child: Container(
-              height: 300,
+              height: 500,
               padding: EdgeInsets.symmetric(vertical: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,37 +106,47 @@ class _ShopPageState extends State<ShopPage> {
                       ),
                     ),
                   ),
+                  Container(
+                    child: Column(
+                      children: [
+                        Lottie.asset('assets/lottie/empty.json', height: 200),
+                        Text(
+                          "Дэлгүүр одоогоор хоосон байна",
+                          style: TextStyle(color: grey),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 4.0,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: white,
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
-                      ),
-                    ),
-                    Text("123"),
-                  ],
-                );
-              },
-              childCount: 20,
-            ),
-          )
+          // SliverGrid(
+          //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          //     maxCrossAxisExtent: 200.0,
+          //     mainAxisSpacing: 10.0,
+          //     crossAxisSpacing: 10.0,
+          //     childAspectRatio: 4.0,
+          //   ),
+          //   delegate: SliverChildBuilderDelegate(
+          //     (BuildContext context, int index) {
+          //       return Column(
+          //         children: [
+          //           Container(
+          //             decoration: BoxDecoration(
+          //               color: white,
+          //               borderRadius: BorderRadius.circular(
+          //                 10,
+          //               ),
+          //             ),
+          //           ),
+          //           Text("123"),
+          //         ],
+          //       );
+          //     },
+          //     childCount: 20,
+          //   ),
+          // )
         ],
       ),
     );
