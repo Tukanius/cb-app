@@ -182,69 +182,66 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                             fontWeight: FontWeight.w500),
                       ),
                     ),
-                    Container(
-                      height: 50,
-                      child: FormBuilderDropdown(
-                        dropdownColor: mainColor,
-                        initialValue: 'Холбоо хамаарал сонгох',
-                        icon: Container(
-                          decoration: BoxDecoration(
-                            color: darkGrey,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: const Icon(
-                            Icons.arrow_drop_down,
-                            color: white,
-                          ),
+                    FormBuilderDropdown(
+                      dropdownColor: mainColor,
+                      initialValue: 'Холбоо хамаарал сонгох',
+                      icon: Container(
+                        decoration: BoxDecoration(
+                          color: darkGrey,
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        name: 'whoTypes',
-                        onChanged: (value) async {
-                          setState(() {
-                            selectedValue = value.toString();
-                          });
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Холбоо хамаарал сонгох',
-                          hintStyle: TextStyle(fontSize: 14, color: greyDark),
-                          filled: true,
-                          fillColor: darkGrey,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 15),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                        child: const Icon(
+                          Icons.arrow_drop_down,
+                          color: white,
                         ),
-                        items: general.whoTypes!
-                            .map(
-                              (item) => DropdownMenuItem(
-                                onTap: () {
-                                  setState(() {
-                                    whoTypeId = item.id;
-                                  });
-                                },
-                                value: item,
-                                child: Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        '${item.name}',
-                                        style: TextStyle(
-                                            fontSize: 14, color: white),
-                                      ),
-                                    ],
-                                  ),
+                      ),
+                      name: 'whoTypes',
+                      onChanged: (value) async {
+                        setState(() {
+                          selectedValue = value.toString();
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Холбоо хамаарал сонгох',
+                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                        filled: true,
+                        fillColor: darkGrey,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 15),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      items: general.whoTypes!
+                          .map(
+                            (item) => DropdownMenuItem(
+                              onTap: () {
+                                setState(() {
+                                  whoTypeId = item.id;
+                                });
+                              },
+                              value: item,
+                              child: Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '${item.name}',
+                                      style:
+                                          TextStyle(fontSize: 14, color: white),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            )
-                            .toList(),
-                      ),
+                            ),
+                          )
+                          .toList(),
                     ),
                     SizedBox(
                       height: 10,
