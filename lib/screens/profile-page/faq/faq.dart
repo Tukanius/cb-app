@@ -77,8 +77,10 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
                 ),
               ),
             )
-          : CircularProgressIndicator(
-              color: black,
+          : Center(
+              child: CircularProgressIndicator(
+                color: buttonColor,
+              ),
             ),
     );
   }

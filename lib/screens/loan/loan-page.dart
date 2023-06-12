@@ -12,7 +12,7 @@ import 'package:bank_core/models/loan.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/bank-account-page/add-bank-account-page.dart';
+import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';

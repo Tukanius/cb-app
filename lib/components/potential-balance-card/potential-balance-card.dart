@@ -30,7 +30,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
   Widget build(BuildContext context) {
     isView = Provider.of<UserProvider>(context, listen: true).isView;
     return Container(
-      width: MediaQuery.of(context).size.width - 40,
+      width: MediaQuery.of(context).size.width - 38,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),

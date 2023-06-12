@@ -17,7 +17,7 @@ class _BankAccountCardState extends State<BankAccountCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -67,13 +67,6 @@ class _BankAccountCardState extends State<BankAccountCard> {
               ),
             ],
           ),
-          Text(
-            "${widget.data?.getPostDate()}",
-            style: TextStyle(
-              color: white,
-              fontWeight: FontWeight.w600,
-            ),
-          )
         ],
       ),
     );

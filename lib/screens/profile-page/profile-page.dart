@@ -6,11 +6,10 @@ import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/bank-account-page/bank-accounts.dart';
+import 'package:bank_core/screens/profile-page/bank-account-page/bank-accounts.dart';
 import 'package:bank_core/screens/profile-page/address/address.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
-import 'package:bank_core/screens/profile-page/who-type-page/who-type-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -267,39 +266,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         "Тусламж",
-                        style: TextStyle(
-                          color: white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(WhoTypePage.routeName);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.person,
-                        color: white,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "Холбоо хамаарал",
                         style: TextStyle(
                           color: white,
                           fontSize: 14,

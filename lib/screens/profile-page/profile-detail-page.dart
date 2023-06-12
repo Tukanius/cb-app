@@ -1,14 +1,19 @@
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/controller/listen.dart';
+import 'package:bank_core/components/custom-button/custom_button.dart';
+import 'package:bank_core/components/description.dart';
+import 'package:bank_core/components/who-type-card/who-type.card.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/add-information-page.dart';
+import 'package:bank_core/screens/profile-page/add-who-type-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class ProfileDetailPage extends StatefulWidget {
   static const routeName = "ProfileDetailPage";
@@ -21,6 +26,8 @@ class ProfileDetailPage extends StatefulWidget {
 class _ProfileDetailPageState extends State<ProfileDetailPage>
     with AfterLayoutMixin {
   Customer customer = Customer();
+  Customer relatedList = Customer();
+
   ListenController listenController = ListenController();
   User user = User();
   bool isLoading = true;
@@ -28,6 +35,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   @override
   afterFirstLayout(BuildContext context) async {
     customer = await CustomerApi().customerGet(user.customerId!);
+    relatedList = await CustomerApi().relatedPersonList(user.customerId!);
     setState(() {
       isLoading = false;
     });
@@ -37,6 +45,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   void initState() {
     listenController.addListener(() async {
       customer = await CustomerApi().customerGet(user.customerId!);
+      relatedList = await CustomerApi().relatedPersonList(user.customerId!);
       setState(() {
         isLoading = false;
       });
@@ -74,25 +83,6 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
             fontSize: 16,
           ),
         ),
-        actions: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15),
-            child: ActionButton(
-              onClick: () {
-                Navigator.of(context).pushNamed(
-                  AddInformationPage.routeName,
-                  arguments: AddInformationPageArguments(
-                      listenController: listenController),
-                );
-              },
-              icon: Icon(
-                Icons.add,
-                color: white,
-                size: 14,
-              ),
-            ),
-          )
-        ],
       ),
       body: isLoading == true
           ? Center(
@@ -107,523 +97,133 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 30, bottom: 8),
+                      margin: EdgeInsets.symmetric(vertical: 8),
                       child: Text(
-                        "Дэлгэрэнгүй",
+                        "Бүртгэл",
                         style: TextStyle(
                           color: white,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    customer.result?.familyName != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Ургын овог',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.familyName}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
+                    Description(
+                      isDone: true,
+                      label: 'Утасны дугаар',
+                      name: '99865922',
+                      onTap: () {
+                        print("Утасны дугаар");
+                      },
+                    ),
                     SizedBox(
                       height: 8,
                     ),
-                    customer.result?.nationalityTypeId != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Яс үндэс',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.nationalityType?.name}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
+                    Description(
+                      isDone: false,
+                      label: 'И-мейл',
+                      name: 'moodyzeromn@gmail.com',
+                      onTap: () {
+                        print("И-мейл");
+                      },
+                    ),
                     SizedBox(
                       height: 8,
+                    ),
+                    Description(
+                      isDone: false,
+                      label: 'Хур систем /DAN/',
+                      name: 'Хур систем',
+                      onTap: () {
+                        print("Хур систем");
+                      },
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    CustomButton(
+                      labelColor: buttonColor,
+                      textColor: white,
+                      onClick: () {
+                        Navigator.of(context).pushNamed(
+                            AddInformationPage.routeName,
+                            arguments: AddInformationPageArguments(
+                                listenController: listenController));
+                      },
+                      labelText: "Нэмэлт мэдээлэл бөглөх",
+                      boxShadow: true,
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: darkGrey,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Овог',
-                            style: TextStyle(
-                              color: grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "${customer.result?.lastName}",
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
+                      margin: EdgeInsets.only(bottom: 8, top: 30),
+                      child: Text(
+                        "Гэр бүлийн мэдээлэл",
+                        style: TextStyle(
+                          color: white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: darkGrey,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Нэр',
-                            style: TextStyle(
-                              color: grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "${customer.result?.firstName}",
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
+                    relatedList.rows?.length == 0
+                        ? Column(
+                            children: [
+                              Lottie.asset('assets/lottie/empty.json',
+                                  height: 200),
+                              Text(
+                                "Гэр бүлийн мэдээлэл хоосон байна",
+                                style: TextStyle(color: grey),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              CustomButton(
+                                labelColor: buttonColor,
+                                textColor: white,
+                                onClick: () {
+                                  Navigator.of(context).pushNamed(
+                                      AddWhoTypePage.routeName,
+                                      arguments: AddWhoTypePageArguments(
+                                          listenController: listenController));
+                                },
+                                labelText: "Гэр бүлийн мэдээлэл нэмэх",
+                                boxShadow: true,
+                              ),
+                            ],
                           )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: darkGrey,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Төрсөн өдөр',
-                            style: TextStyle(
-                              color: grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "${customer.result?.birthDate}",
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        : Column(
+                            children: [
+                              Column(
+                                children: relatedList.rows!
+                                    .map((e) => Container(
+                                          child: Column(
+                                            children: [
+                                              WhoTypeCard(
+                                                data: e,
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                            ],
+                                          ),
+                                        ))
+                                    .toList(),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              if (relatedList.rows!.length < 3)
+                                CustomButton(
+                                  labelColor: buttonColor,
+                                  textColor: white,
+                                  onClick: () {
+                                    Navigator.of(context).pushNamed(
+                                        AddWhoTypePage.routeName,
+                                        arguments: AddWhoTypePageArguments(
+                                            listenController:
+                                                listenController));
+                                  },
+                                  labelText: "Гишүүн нэмэх",
+                                  boxShadow: true,
+                                ),
+                            ],
                           )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: darkGrey,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Утасны дугаар',
-                            style: TextStyle(
-                              color: grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "${customer.result?.phone}",
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: darkGrey,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'И-мэйл хаяг',
-                            style: TextStyle(
-                              color: grey,
-                              fontSize: 12,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "${customer.result?.email}",
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.marriageStatusId != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Гэрлэсэн эсэх',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.marriageStatus?.name}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.educationTypeId != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Боловсролын зэрэг',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.educationType?.name}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.familyCount != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Ам бүлийн тоо',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.familyCount}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.incomeAmountMonth != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Сарын орлого',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.incomeAmountMonth}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.genderId != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Хүйс',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.gender?.name}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.birthPlace != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Төрсөн газар',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.birthPlace}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.workStatusId != null
-                        ? Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: darkGrey,
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Ажил эрхлэлт',
-                                  style: TextStyle(
-                                    color: grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "${customer.result?.workStatus?.name}",
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox(),
-                    SizedBox(
-                      height: 50,
-                    ),
                   ],
                 ),
               ),

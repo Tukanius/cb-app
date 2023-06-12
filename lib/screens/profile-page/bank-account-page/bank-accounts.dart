@@ -2,10 +2,11 @@ import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/bank-account-card/bank-account-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
+import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/bank-account-page/add-bank-account-page.dart';
+import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -76,23 +77,6 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
             fontSize: 16,
           ),
         ),
-        actions: [
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: ActionButton(
-              onClick: () {
-                Navigator.of(context).pushNamed(AddBankAccountPage.routeName,
-                    arguments: AddBankAccountPageArguments(
-                        listenController: listenController));
-              },
-              icon: Icon(
-                Icons.add,
-                color: white,
-                size: 14,
-              ),
-            ),
-          ),
-        ],
       ),
       body: isLoading == true
           ? Center(
@@ -133,6 +117,24 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                               ),
                             )
                             .toList(),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: CustomButton(
+                          labelColor: buttonColor,
+                          textColor: white,
+                          onClick: () {
+                            Navigator.of(context).pushNamed(
+                                AddBankAccountPage.routeName,
+                                arguments: AddBankAccountPageArguments(
+                                    listenController: listenController));
+                          },
+                          labelText: "Данс нэмэх",
+                          boxShadow: true,
+                        ),
                       ),
                     ],
                   ),

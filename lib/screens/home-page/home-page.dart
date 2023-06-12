@@ -1,6 +1,6 @@
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/api/loan-api.dart';
-import 'package:bank_core/components/active-loan-card/active-loan-card.dart';
+import 'package:bank_core/components/loan/active-loan-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
 import 'package:bank_core/models/customer.dart';
