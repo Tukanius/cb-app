@@ -128,34 +128,32 @@ class _HistoryPageState extends State<HistoryPage>
             )
           ];
         },
-        body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: TabBarView(
-            controller: tabController,
-            children: [
-              Column(
-                children: [
-                  TransactionHistoryCard(
-                    isIncome: true,
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  TransactionHistoryCard(
-                    isIncome: true,
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  TransactionHistoryCard(
-                    isIncome: false,
-                  ),
-                ],
-              ),
-            ],
-          ),
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: tabController,
+          children: [
+            Column(
+              children: [
+                TransactionHistoryCard(
+                  isIncome: true,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                TransactionHistoryCard(
+                  isIncome: true,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                TransactionHistoryCard(
+                  isIncome: false,
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

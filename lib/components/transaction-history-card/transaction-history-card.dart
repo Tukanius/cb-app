@@ -16,6 +16,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
