@@ -61,7 +61,7 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
                   ),
                   FormTextField(
                     labelText: "Шинэ утасны дугаар оруулах",
-                    inputType: TextInputType.emailAddress,
+                    inputType: TextInputType.number,
                     name: 'newPhoneNumber',
                     hintText: "Шинэ утасны дугаар оруулах",
                     color: darkGrey,
