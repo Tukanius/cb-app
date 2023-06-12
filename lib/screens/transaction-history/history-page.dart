@@ -10,29 +10,153 @@ class HistoryPage extends StatefulWidget {
   _HistoryPageState createState() => _HistoryPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
+class _HistoryPageState extends State<HistoryPage>
+    with SingleTickerProviderStateMixin {
+  int currentIndex = 0;
+
+  late TabController tabController;
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    tabController =
+        TabController(length: 3, vsync: this, animationDuration: Duration.zero);
+    tabController.index = currentIndex;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  changePage(index) {
+    setState(() {
+      tabController.index = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 30, bottom: 10),
-            child: Text(
-              "Гүйлгээний түүх",
-              style: TextStyle(color: white, fontWeight: FontWeight.w500),
-            ),
+    return DefaultTabController(
+      length: 3,
+      child: NestedScrollView(
+        controller: scrollController,
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverToBoxAdapter(
+              child: Container(
+                  margin: const EdgeInsets.only(top: 10, bottom: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          changePage(0);
+                        },
+                        child: Container(
+                          width: 80,
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: BoxDecoration(
+                            color: tabController.index == 0
+                                ? darkGrey
+                                : transparent,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Бүгд',
+                              style: TextStyle(
+                                color: tabController.index == 0 ? white : grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          changePage(1);
+                        },
+                        child: Container(
+                          width: 80,
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: BoxDecoration(
+                            color: tabController.index == 1
+                                ? darkGrey
+                                : transparent,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Орлого',
+                              style: TextStyle(
+                                color: tabController.index == 1 ? white : grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          changePage(2);
+                        },
+                        child: Container(
+                          width: 80,
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          decoration: BoxDecoration(
+                            color: tabController.index == 2
+                                ? darkGrey
+                                : transparent,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Зарлага',
+                              style: TextStyle(
+                                color: tabController.index == 2 ? white : grey,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            )
+          ];
+        },
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: TabBarView(
+            controller: tabController,
+            children: [
+              Column(
+                children: [
+                  TransactionHistoryCard(
+                    isIncome: true,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  TransactionHistoryCard(
+                    isIncome: true,
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  TransactionHistoryCard(
+                    isIncome: false,
+                  ),
+                ],
+              ),
+            ],
           ),
-          TransactionHistoryCard(),
-          SizedBox(
-            height: 8,
-          ),
-          TransactionHistoryCard(
-            isIncome: true,
-          ),
-        ],
+        ),
       ),
     );
   }
