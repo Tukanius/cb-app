@@ -23,6 +23,7 @@ import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
 import 'package:bank_core/screens/profile-page/who-type-page/add-who-type-page.dart';
 import 'package:bank_core/screens/profile-page/who-type-page/who-type-page.dart';
+import 'package:bank_core/screens/transaction-history/history-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
 import 'package:bank_core/widgets/dialog_manager/dialog_manager.dart';
@@ -128,6 +129,10 @@ class MyApp extends StatelessWidget {
                     case BankAccounts.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const BankAccounts();
+                      });
+                    case HistoryPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const HistoryPage();
                       });
                     case AddBankAccountPage.routeName:
                       AddBankAccountPageArguments arguments =

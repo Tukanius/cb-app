@@ -3,6 +3,8 @@ import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:after_layout/after_layout.dart';
+import 'package:intl/intl.dart';
 
 class ActiveLoanCard extends StatefulWidget {
   final Customer? data;
@@ -17,7 +19,25 @@ class ActiveLoanCard extends StatefulWidget {
   State<ActiveLoanCard> createState() => _ActiveLoanCardState();
 }
 
-class _ActiveLoanCardState extends State<ActiveLoanCard> {
+class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
+  Duration duration = Duration();
+  bool isLoading = true;
+  @override
+  afterFirstLayout(BuildContext context) async {
+    String dateString = widget.data!.pay_date.toString();
+
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+
+    DateTime expirationDate = dateFormat.parse(dateString);
+
+    DateTime currentDate = DateTime.now();
+
+    duration = expirationDate.difference(currentDate);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,14 +58,16 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
               center: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    '5',
-                    style: TextStyle(
-                      color: white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  isLoading == false
+                      ? Text(
+                          "${duration.inDays}",
+                          style: TextStyle(
+                            color: white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      : Text(""),
                   Text(
                     'хоног',
                     style: TextStyle(
@@ -116,7 +138,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> {
                       ),
                     ),
                     Text(
-                      '${widget.data!.loan!.loanStatusId}',
+                      '${widget.data!.loan?.loanType?.name}',
                       style: TextStyle(
                         color: white,
                         fontSize: 12,

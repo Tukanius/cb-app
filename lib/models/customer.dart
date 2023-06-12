@@ -24,6 +24,7 @@ class Customer {
   String? addressTypeId;
   String? provinceId;
   String? districtId;
+  Customer? loanType;
   String? khorooId;
   String? address;
   Customer? province;
@@ -80,6 +81,7 @@ class Customer {
     this.marriageStatus,
     this.nationalityType,
     this.gender,
+    this.loanType,
     this.workStatus,
     this.result,
     this.familyName,

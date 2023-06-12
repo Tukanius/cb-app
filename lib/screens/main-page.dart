@@ -7,6 +7,7 @@ import 'package:bank_core/screens/home-page/home-page.dart';
 import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/shop-page/shop-page.dart';
+import 'package:bank_core/screens/transaction-history/history-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -162,7 +163,7 @@ class _MainPageState extends State<MainPage>
               controller: tabController,
               children: [
                 HomePage(),
-                ShopPage(),
+                HistoryPage(),
                 ShopPage(),
               ],
             ),

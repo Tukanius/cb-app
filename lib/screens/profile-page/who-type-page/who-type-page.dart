@@ -100,7 +100,7 @@ class _WhoTypePageState extends State<WhoTypePage> with AfterLayoutMixin {
             )
           : customer.rows!.length == 0
               ? Column(children: [
-                  Lottie.asset('assets/lottie/empty.json', height: 300),
+                  Lottie.asset('assets/lottie/empty.json', height: 200),
                   Text(
                     "Хоосон байна",
                     style: TextStyle(color: grey),

@@ -106,9 +106,13 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
               ),
             )
           : customer.rows?.length == 0
-              ? Center(
-                  child: Lottie.asset('assets/lottie/empty.json', height: 300),
-                )
+              ? Column(children: [
+                  Lottie.asset('assets/lottie/empty.json', height: 200),
+                  Text(
+                    "Хоосон байна",
+                    style: TextStyle(color: grey),
+                  ),
+                ])
               : SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
