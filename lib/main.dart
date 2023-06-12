@@ -1,5 +1,6 @@
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/auth/check-biometric.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
@@ -123,6 +124,10 @@ class MyApp extends StatelessWidget {
                     case ChangeEmailPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const ChangeEmailPage();
+                      });
+                    case CheckBiometric.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const CheckBiometric();
                       });
                     case SettingsPage.routeName:
                       return MaterialPageRoute(builder: (context) {

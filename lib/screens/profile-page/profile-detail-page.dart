@@ -137,6 +137,23 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                       },
                     ),
                     SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: buttonColor,
+                      ),
+                      child: Column(
+                        children: [
+                          Text("data"),
+                          Text("data"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
                       height: 20,
                     ),
                     CustomButton(

@@ -6,11 +6,13 @@ class CustomButton extends StatefulWidget {
   final String labelText;
   final Function()? onClick;
   final Color? labelColor;
+  final bool? isLoading;
   final Color? textColor;
   CustomButton({
     this.boxShadow,
     this.textColor,
     this.labelColor,
+    this.isLoading = false,
     this.onClick,
     this.labelText = '',
     Key? key,
@@ -43,14 +45,31 @@ class _CustomButtonState extends State<CustomButton> {
           ],
         ),
         child: ElevatedButton(
-          onPressed: widget.onClick,
-          child: Text(
-            widget.labelText.toString(),
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: widget.textColor == null ? white : widget.textColor,
-            ),
+          onPressed: widget.isLoading == false ? widget.onClick : () {},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (widget.isLoading == true)
+                Container(
+                  margin: EdgeInsets.only(
+                    right: 15,
+                  ),
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    color: backgroundColor,
+                    strokeWidth: 2.5,
+                  ),
+                ),
+              Text(
+                widget.labelText.toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: widget.textColor == null ? white : widget.textColor,
+                ),
+              ),
+            ],
           ),
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
