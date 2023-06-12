@@ -137,7 +137,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                       },
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 20,
                     ),
                     CustomButton(
                       labelColor: buttonColor,
