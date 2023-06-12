@@ -4,7 +4,9 @@ import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/screens/auth/login.dart';
+import 'package:bank_core/screens/profile-page/change-email/change-email-page.dart';
 import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
+import 'package:bank_core/screens/profile-page/change-phone/change-phone-page.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:bank_core/screens/loan/loan-detail-page.dart';
 import 'package:bank_core/screens/loan/loan-page.dart';
@@ -18,6 +20,7 @@ import 'package:bank_core/screens/profile-page/add-information-page.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
+import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
 import 'package:bank_core/screens/qpay/qpay.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
@@ -112,6 +115,18 @@ class MyApp extends StatelessWidget {
                     case LoginScreen.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const LoginScreen();
+                      });
+                    case ChangePhonePage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const ChangePhonePage();
+                      });
+                    case ChangeEmailPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const ChangeEmailPage();
+                      });
+                    case SettingsPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const SettingsPage();
                       });
                     case ChangePasswordPage.routeName:
                       return MaterialPageRoute(builder: (context) {

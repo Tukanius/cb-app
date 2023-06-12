@@ -1,0 +1,91 @@
+import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/custom-button/custom_button.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
+import 'package:bank_core/widgets/form_textfield.dart';
+import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+
+class ChangeEmailPage extends StatefulWidget {
+  static const routeName = 'ChangeEmailPage';
+  const ChangeEmailPage({Key? key}) : super(key: key);
+
+  @override
+  State<ChangeEmailPage> createState() => _ChangeEmailPageState();
+}
+
+class _ChangeEmailPageState extends State<ChangeEmailPage> {
+  GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        backgroundColor: backgroundColor,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        leading: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: ActionButton(
+            onClick: () {
+              Navigator.of(context).pop();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: white,
+              size: 10,
+            ),
+          ),
+        ),
+        title: Text(
+          'И-мэйл солих',
+          style: TextStyle(
+            color: white,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: FormBuilder(
+          key: fbKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  FormTextField(
+                    labelText: "Шинэ И-мэйл оруулах",
+                    inputType: TextInputType.emailAddress,
+                    name: 'newEmail',
+                    hintText: "Шинэ И-мэйл оруулна уу",
+                    color: darkGrey,
+                    validators: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(
+                          errorText: "И-мэйл оруулна уу"),
+                    ]),
+                  ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 30),
+                child: CustomButton(
+                  onClick: () {},
+                  boxShadow: true,
+                  labelColor: buttonColor,
+                  labelText: "Үргэлжлүүлэх",
+                  textColor: white,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,5 +1,5 @@
-import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
+import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
@@ -177,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(ChangePasswordPage.routeName);
+                  Navigator.of(context).pushNamed(SettingsPage.routeName);
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 10),
@@ -190,14 +190,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Row(
                     children: [
                       Icon(
-                        Icons.lock,
+                        Icons.settings,
                         color: white,
                       ),
                       SizedBox(
                         width: 15,
                       ),
                       Text(
-                        "Нэвтрэх тохиргоо",
+                        "Тохиргоо",
                         style: TextStyle(
                           color: white,
                           fontSize: 14,
