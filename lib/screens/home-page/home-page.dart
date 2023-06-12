@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                           Navigator.of(context).pushNamed(
                                             LoanDetailPage.routeName,
                                             arguments: LoanDetailPageArguments(
-                                              id: loan.rows![index].loanId,
+                                              id: loan.rows![index].loan.id,
                                               listenController:
                                                   listenController,
                                             ),
