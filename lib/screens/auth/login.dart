@@ -52,146 +52,149 @@ class _LoginScreenState extends State<LoginScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: backgroundColor,
-          body: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 20,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 80),
-                      height: 110,
-                      width: 110,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(45),
-                        color: darkGrey,
+          body: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 20,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 80),
+                        height: 110,
+                        width: 110,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(45),
+                          color: darkGrey,
+                        ),
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset(
+                          walletIcon,
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      alignment: Alignment.center,
-                      child: SvgPicture.asset(
-                        walletIcon,
+                      SizedBox(
                         height: 50,
-                        width: 50,
-                        fit: BoxFit.cover,
                       ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    FormBuilder(
-                      key: fbKey,
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                              bottom: 10,
+                      FormBuilder(
+                        key: fbKey,
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(
+                                bottom: 10,
+                              ),
+                              child: FormTextField(
+                                labelText: "Е-Мэйл",
+                                inputType: TextInputType.text,
+                                name: 'email',
+                                hintText: 'Нэвтрэх нэр',
+                                validators: FormBuilderValidators.compose([
+                                  FormBuilderValidators.required(
+                                      errorText: 'Нэвтрэх нэрээ оруулна уу.')
+                                ]),
+                                color: darkGrey,
+                              ),
                             ),
-                            child: FormTextField(
-                              labelText: "Е-Мэйл",
-                              inputType: TextInputType.text,
-                              name: 'email',
-                              hintText: 'Нэвтрэх нэр',
-                              validators: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(
-                                    errorText: 'Нэвтрэх нэрээ оруулна уу.')
-                              ]),
-                              color: darkGrey,
+                            Container(
+                              child: FormTextField(
+                                labelText: "Нууц үг",
+                                inputType: TextInputType.visiblePassword,
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      isVisible = !isVisible;
+                                    });
+                                  },
+                                  icon: isVisible == true
+                                      ? Icon(Icons.visibility, color: darkGrey)
+                                      : Icon(Icons.visibility_off,
+                                          color: darkGrey),
+                                ),
+                                name: 'password',
+                                hintText: 'Нууц үг',
+                                obscureText: isVisible,
+                                color: darkGrey,
+                                validators: FormBuilderValidators.compose([
+                                  FormBuilderValidators.required(
+                                      errorText: 'Нууц үгээ оруулна уу.')
+                                ]),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          TextButton(
+                            onPressed: () => {
+                              Navigator.of(context)
+                                  .pushNamed(ForgotPage.routeName),
+                            },
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                "Нууц үгээ мартсан?",
+                                style: TextStyle(
+                                  color: white,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ),
-                          Container(
-                            child: FormTextField(
-                              labelText: "Нууц үг",
-                              inputType: TextInputType.visiblePassword,
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                  });
-                                },
-                                icon: isVisible == true
-                                    ? Icon(Icons.visibility, color: darkGrey)
-                                    : Icon(Icons.visibility_off,
-                                        color: darkGrey),
-                              ),
-                              name: 'password',
-                              hintText: 'Нууц үг',
-                              obscureText: isVisible,
-                              color: darkGrey,
-                              validators: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(
-                                    errorText: 'Нууц үгээ оруулна уу.')
-                              ]),
-                            ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          CustomButton(
+                            boxShadow: false,
+                            labelColor: buttonColor,
+                            labelText: "Нэвтрэх",
+                            textColor: white,
+                            onClick: () {
+                              if (isSubmit == false) {
+                                onSubmit();
+                              }
+                            },
                           ),
                         ],
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () => {
-                            Navigator.of(context)
-                                .pushNamed(ForgotPage.routeName),
-                          },
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            child: Text(
-                              "Нууц үгээ мартсан?",
-                              style: TextStyle(
-                                color: white,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Бүртгэл үүсгэх бол энд дарна уу",
+                        style: TextStyle(
+                          color: white,
+                          fontSize: 12,
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        CustomButton(
-                          boxShadow: false,
-                          labelColor: buttonColor,
-                          labelText: "Нэвтрэх",
-                          textColor: white,
-                          onClick: () {
-                            if (isSubmit == false) {
-                              onSubmit();
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Бүртгэл үүсгэх бол энд дарна уу",
-                      style: TextStyle(
-                        color: white,
-                        fontSize: 12,
                       ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(RegisterPage.routeName);
-                      },
-                      child: Text(
-                        "Бүртгүүлэх",
-                        style: TextStyle(color: buttonColor),
+                      SizedBox(
+                        width: 5,
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(RegisterPage.routeName);
+                        },
+                        child: Text(
+                          "Бүртгүүлэх",
+                          style: TextStyle(color: buttonColor),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

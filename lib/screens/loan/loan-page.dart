@@ -489,27 +489,35 @@ class _LoanPageState extends State<LoanPage>
                               ),
                             ),
                             Expanded(
-                              child: Slider(
-                                min: 0,
-                                max: double.parse(get.balance.toString()),
-                                thumbColor: buttonColor,
-                                divisions:
-                                    double.parse(get.balance.toString()) ~/
-                                        5000,
-                                activeColor: white,
-                                inactiveColor: grey.withOpacity(0.2),
-                                label: '${currentValue}',
-                                value: currentValue,
-                                onChanged: (double value) {
-                                  setState(() {
-                                    currentValue = value;
-                                    if (currentValue > 50000) {
-                                      isValueError = false;
-                                    } else {
-                                      isValueError = true;
-                                    }
-                                  });
-                                },
+                              child: SliderTheme(
+                                data: SliderThemeData(
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 10),
+                                  tickMarkShape: RoundSliderTickMarkShape(
+                                      tickMarkRadius: 0),
+                                ),
+                                child: Slider(
+                                  min: 0,
+                                  max: double.parse(get.balance.toString()),
+                                  thumbColor: buttonColor,
+                                  divisions:
+                                      double.parse(get.balance.toString()) ~/
+                                          5000,
+                                  activeColor: white,
+                                  inactiveColor: grey.withOpacity(0.2),
+                                  label: '${currentValue}',
+                                  value: currentValue,
+                                  onChanged: (double value) {
+                                    setState(() {
+                                      currentValue = value;
+                                      if (currentValue > 50000) {
+                                        isValueError = false;
+                                      } else {
+                                        isValueError = true;
+                                      }
+                                    });
+                                  },
+                                ),
                               ),
                             ),
                             GestureDetector(
@@ -782,10 +790,11 @@ class _LoanPageState extends State<LoanPage>
                               TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pushNamed(
-                                        AddBankAccountPage.routeName,
-                                        arguments: AddBankAccountPageArguments(
-                                            listenController:
-                                                listenController));
+                                      AddBankAccountPage.routeName,
+                                      arguments: AddBankAccountPageArguments(
+                                        listenController: listenController,
+                                      ),
+                                    );
                                   },
                                   child: Text(
                                     "Данс холбох",
