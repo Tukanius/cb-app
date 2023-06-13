@@ -7,6 +7,8 @@ class CustomButton extends StatefulWidget {
   final Function()? onClick;
   final Color? labelColor;
   final bool? isLoading;
+  final double? borderWidth;
+  final Color? borderColor;
   final Color? textColor;
   CustomButton({
     this.boxShadow,
@@ -15,6 +17,8 @@ class CustomButton extends StatefulWidget {
     this.isLoading = false,
     this.onClick,
     this.labelText = '',
+    this.borderWidth = 0,
+    this.borderColor = transparent,
     Key? key,
   }) : super(key: key);
 
@@ -30,6 +34,9 @@ class _CustomButtonState extends State<CustomButton> {
         width: MediaQuery.of(context).size.width,
         height: 42,
         decoration: BoxDecoration(
+          border: Border.all(
+              color: widget.borderColor!, width: widget.borderWidth!),
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             widget.boxShadow == true || widget.boxShadow == null
                 ? BoxShadow(

@@ -32,12 +32,13 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   final LocalAuthentication auth = LocalAuthentication();
   final SecureStorage secureStorage = SecureStorage();
   String walletIcon = "assets/svg/wallet.svg";
-  String bieMetric = "assets/svg/biometric.svg";
+  String fingerPrintIcon = "assets/svg/finger-print.svg";
   bool useBiometricAuth = false;
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
   bool isVisible = true;
   bool isSubmit = false;
   bool isBioMetric = false;
+  bool activeBio = false;
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -48,6 +49,13 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
         isBioMetric = true;
       });
     }
+    // ···
+    final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
+    final bool canAuthenticate =
+        canAuthenticateWithBiometrics || await auth.isDeviceSupported();
+    setState(() {
+      activeBio = canAuthenticate;
+    });
   }
 
   @override
@@ -189,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                                       color: buttonColor,
                                     ),
                                     child: SvgPicture.asset(
-                                      bieMetric,
+                                      fingerPrintIcon,
                                       height: 20,
                                       color: white,
                                       width: 20,
@@ -241,6 +249,8 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   void _performLogin(BuildContext context) async {
     final String email;
     final String password;
+    final List<BiometricType> availableBiometrics =
+        await auth.getAvailableBiometrics();
     if (fbKey.currentState!.saveAndValidate()) {
       email = fbKey.currentState?.fields['email']?.value;
       password = fbKey.currentState?.fields['password']?.value;
@@ -248,10 +258,16 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
         setState(() {
           isSubmit = true;
         });
+
         User save = User.fromJson(fbKey.currentState!.value);
         await Provider.of<UserProvider>(context, listen: false).login(save);
         await _storeCredentials(email, password);
-        Navigator.of(context).pushNamed(CheckBiometric.routeName);
+        if (activeBio == true && availableBiometrics.isNotEmpty) {
+          Navigator.of(context).pushNamed(CheckBiometric.routeName);
+        } else {
+          // Navigator.of(context).pushNamed(CheckBiometric.routeName);
+          Navigator.of(context).pushNamed(SplashScreen.routeName);
+        }
       } catch (e) {
         debugPrint(e.toString());
         setState(() {
