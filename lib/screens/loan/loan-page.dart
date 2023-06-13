@@ -510,7 +510,7 @@ class _LoanPageState extends State<LoanPage>
                                   onChanged: (double value) {
                                     setState(() {
                                       currentValue = value;
-                                      if (currentValue > 50000) {
+                                      if (currentValue >= 50000) {
                                         isValueError = false;
                                       } else {
                                         isValueError = true;
@@ -819,6 +819,7 @@ class _LoanPageState extends State<LoanPage>
                     ),
                     Container(
                       child: CustomButton(
+                        isLoading: isSubmit,
                         textColor: white,
                         labelColor: buttonColor,
                         onClick: () {

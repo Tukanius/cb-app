@@ -254,6 +254,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                 ),
                 Container(
                   child: CustomButton(
+                    isLoading: isSubmit,
                     boxShadow: false,
                     labelColor: buttonColor,
                     labelText: 'Нэмэх',

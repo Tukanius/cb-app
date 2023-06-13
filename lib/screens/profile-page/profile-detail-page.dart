@@ -140,34 +140,106 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                       height: 8,
                     ),
                     Container(
-                      height: 100,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: buttonColor,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                        color: darkGrey,
                       ),
                       child: Column(
                         children: [
-                          Text("data"),
-                          Text("data"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Овог:',
+                                style: TextStyle(
+                                  color: grey,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                'Пүрэвдорж',
+                                style: TextStyle(
+                                  color: white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Нэр:',
+                                style: TextStyle(
+                                  color: grey,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                'Энхманлай',
+                                style: TextStyle(
+                                  color: white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        color: buttonColor,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            AddInformationPage.routeName,
+                            arguments: AddInformationPageArguments(
+                              listenController: listenController,
+                            ),
+                          );
+                        },
+                        child: Center(
+                          child: Text(
+                            "Нэмэлт мэдээлэл бөглөх",
+                            style: TextStyle(
+                              color: white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    CustomButton(
-                      labelColor: buttonColor,
-                      textColor: white,
-                      onClick: () {
-                        Navigator.of(context).pushNamed(
-                            AddInformationPage.routeName,
-                            arguments: AddInformationPageArguments(
-                                listenController: listenController));
-                      },
-                      labelText: "Нэмэлт мэдээлэл бөглөх",
-                      boxShadow: true,
-                    ),
+                    // CustomButton(
+                    //   labelColor: buttonColor,
+                    //   textColor: white,
+                    //   onClick: () {
+                    //     Navigator.of(context).pushNamed(
+                    //         AddInformationPage.routeName,
+                    //         arguments: AddInformationPageArguments(
+                    //             listenController: listenController));
+                    //   },
+                    //   labelText: "Нэмэлт мэдээлэл бөглөх",
+                    //   boxShadow: true,
+                    // ),
                     Container(
                       margin: EdgeInsets.only(bottom: 8, top: 30),
                       child: Text(

@@ -52,7 +52,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
           children: [
             CircularPercentIndicator(
               radius: 50,
-              percent: 0.3,
+              percent: 1 - (13 / 14),
               progressColor: buttonColor,
               backgroundColor: black,
               center: Column(

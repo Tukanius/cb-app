@@ -291,6 +291,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                 height: 30,
               ),
               CustomButton(
+                isLoading: isSubmit,
                 boxShadow: false,
                 labelColor: buttonColor,
                 labelText: 'Нэмэх',
