@@ -1,24 +1,43 @@
 import 'dart:async';
 
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:after_layout/after_layout.dart';
+
+class OtpVerifyPageArguments {
+  String? username;
+  OtpVerifyPageArguments({
+    this.username,
+  });
+}
 
 class OtpVerifyPage extends StatefulWidget {
   static const routeName = 'OtpVerifyPage';
-  const OtpVerifyPage({Key? key}) : super(key: key);
+  final String? username;
+  const OtpVerifyPage({Key? key, this.username}) : super(key: key);
 
   @override
   State<OtpVerifyPage> createState() => _OtpVerifyPageState();
 }
 
-class _OtpVerifyPageState extends State<OtpVerifyPage> {
+class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
   int _counter = 120;
   TextEditingController controller = TextEditingController();
   bool isGetCode = false;
   bool isSubmit = false;
   late Timer _timer;
+  String username = "";
+
+  @override
+  afterFirstLayout(BuildContext context) {
+    _startTimer();
+    setState(() {
+      username = widget.username!;
+    });
+  }
 
   String intToTimeLeft(int value) {
     int h, m, s;
@@ -68,19 +87,37 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
   }
 
   final defaultPinTheme = PinTheme(
+    width: 50,
     height: 50,
-    width: 45,
+    textStyle: TextStyle(
+        fontSize: 20, color: buttonColor, fontWeight: FontWeight.w600),
     decoration: BoxDecoration(
-      color: white,
-      border: Border.all(
-        color: Color(0xffC6C6C8),
-      ),
-      borderRadius: BorderRadius.circular(5),
+      color: darkGrey,
+      borderRadius: BorderRadius.circular(20),
     ),
   );
 
   @override
   Widget build(BuildContext context) {
+    var text = RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        children: <TextSpan>[
+          TextSpan(text: 'Таны ', style: TextStyle(color: greyDark)),
+          TextSpan(
+            text: username,
+            style: TextStyle(
+              color: buttonColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          TextSpan(
+              text: ' И-Мейл хаягруу явуулсан 6 оронтой тоог оруулна уу.',
+              style: TextStyle(color: greyDark)),
+        ],
+      ),
+    );
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -116,8 +153,16 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
               padding: const EdgeInsets.only(top: 20, right: 15, left: 15),
               child: Column(
                 children: [
+                  // Text(
+                  //   "Таны ${widget.username} И-Мейл хаягруу явуулсан 6 оронтой тоог оруулна уу.",
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //     color: greyDark,
+                  //   ),
+                  // ),
+                  text,
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   if (isGetCode == false)
                     Row(
@@ -128,7 +173,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14.0,
-                              color: greyDark),
+                              color: white),
                         ),
                         Text(
                           '0${intToTimeLeft(_counter)} ',
@@ -141,9 +186,10 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
                         const Text(
                           'секунд',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.0,
-                              color: greyDark),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                            color: white,
+                          ),
                         ),
                       ],
                     )
@@ -162,11 +208,11 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
                             children: const [
                               Icon(
                                 Icons.refresh,
-                                color: orange,
+                                color: buttonColor,
                               ),
                               Text(
                                 "Код дахин авах",
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(color: white),
                               ),
                             ],
                           ),
@@ -176,12 +222,16 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  Directionality(
-                    textDirection: TextDirection.ltr,
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15,
+                    ),
                     child: Pinput(
                       autofocus: true,
                       keyboardType: TextInputType.number,
-                      onCompleted: (value) => '123456',
+                      onCompleted: (value) => {
+                        Navigator.of(context).pushNamed(SplashScreen.routeName),
+                      },
                       validator: (value) {
                         return value == "123456" ? null : "Буруу байна";
                       },
@@ -190,7 +240,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> {
                       defaultPinTheme: defaultPinTheme,
                       submittedPinTheme: defaultPinTheme.copyWith(
                         decoration: defaultPinTheme.decoration!.copyWith(
-                          color: white,
+                          color: darkGrey,
                         ),
                       ),
                       errorPinTheme: defaultPinTheme.copyBorderWith(

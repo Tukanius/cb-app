@@ -1,5 +1,6 @@
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
+import 'package:bank_core/screens/otp/otp-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -24,6 +25,9 @@ class _ForgotPageState extends State<ForgotPage> {
       setState(() {
         isSubmit = true;
       });
+      Navigator.of(context).pushNamed(OtpVerifyPage.routeName,
+          arguments: OtpVerifyPageArguments(
+              username: fbKey.currentState?.value["email"]));
       print(fbKey.currentState!.value);
       setState(() {
         isSubmit = false;
@@ -69,6 +73,7 @@ class _ForgotPageState extends State<ForgotPage> {
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: FormBuilder(
               key: fbKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

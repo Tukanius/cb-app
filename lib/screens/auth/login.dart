@@ -33,12 +33,14 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   final SecureStorage secureStorage = SecureStorage();
   String walletIcon = "assets/svg/wallet.svg";
   String fingerPrintIcon = "assets/svg/finger-print.svg";
+  String faceIdIcon = "assets/svg/face-id.svg";
   bool useBiometricAuth = false;
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
   bool isVisible = true;
   bool isSubmit = false;
   bool isBioMetric = false;
   bool activeBio = false;
+  String bioType = "";
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -56,6 +58,21 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
     setState(() {
       activeBio = canAuthenticate;
     });
+
+    if (activeBio == true) {
+      final List<BiometricType> availableBiometrics =
+          await auth.getAvailableBiometrics();
+      if (availableBiometrics.contains(BiometricType.face)) {
+        setState(() {
+          bioType = "FACE";
+        });
+      }
+      if (availableBiometrics.contains(BiometricType.fingerprint)) {
+        setState(() {
+          bioType = "FINGER_PRINT";
+        });
+      }
+    }
   }
 
   @override
@@ -105,6 +122,9 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                               ),
                               child: FormTextField(
                                 labelText: "Е-Мэйл",
+                                onChanged: (value) {
+                                  secureStorage.deleteAll();
+                                },
                                 inputType: TextInputType.text,
                                 name: 'email',
                                 controller: emailController,
@@ -197,7 +217,9 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                                       color: buttonColor,
                                     ),
                                     child: SvgPicture.asset(
-                                      fingerPrintIcon,
+                                      bioType == "FACE"
+                                          ? faceIdIcon
+                                          : fingerPrintIcon,
                                       height: 20,
                                       color: white,
                                       width: 20,

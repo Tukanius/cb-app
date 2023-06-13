@@ -86,8 +86,12 @@ class MyApp extends StatelessWidget {
                         return const MainPage();
                       });
                     case OtpVerifyPage.routeName:
+                      OtpVerifyPageArguments arguments =
+                          settings.arguments as OtpVerifyPageArguments;
                       return MaterialPageRoute(builder: (context) {
-                        return const OtpVerifyPage();
+                        return OtpVerifyPage(
+                          username: arguments.username,
+                        );
                       });
                     case LoanPage.routeName:
                       LoanPageArguments arguments =
