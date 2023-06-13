@@ -17,6 +17,7 @@ class SecureStorage {
 
   Future deleteAll() async {
     await storage.deleteAll();
+    print("ALL STORAGE DELETED");
   }
 
   Future setPassWord(String password) async {

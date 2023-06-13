@@ -190,7 +190,6 @@ class _AddInformationPageState extends State<AddInformationPage> {
             children: [
               FormBuilder(
                 key: fbKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

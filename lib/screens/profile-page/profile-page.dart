@@ -1,13 +1,13 @@
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
+import 'package:bank_core/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/bank-accounts.dart';
-import 'package:bank_core/screens/profile-page/address/address.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -26,6 +26,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   User user = User();
   bool isSubmit = false;
+  final SecureStorage secureStorage = SecureStorage();
 
   logout() async {
     setState(() {
@@ -278,7 +279,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(AddAddress.routeName);
+                  // Navigator.of(context).pushNamed(AddAddress.routeName);
+                  secureStorage.deleteAll();
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 10),
