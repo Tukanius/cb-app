@@ -32,7 +32,7 @@ class Customer {
   Customer? khoroo;
   Customer? addressType;
   String? totalPayAmount;
-  String? payDate;
+  String? pay_date;
   String? loanStatusId;
   Customer? loan;
   String? loanId;
@@ -140,7 +140,7 @@ class Customer {
     this.rateCalcDay,
     this.loanId,
     this.totalPayAmount,
-    this.payDate,
+    this.pay_date,
     this.loanStatusId,
     this.loan,
     this.province,

@@ -31,7 +31,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
             height: 5,
           ),
           Text(
-            '${widget.data!.payDate}',
+            '${widget.data!.pay_date}',
             style: TextStyle(
               color: white,
               fontSize: 12,
