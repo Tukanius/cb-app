@@ -1,3 +1,4 @@
+import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/controller/listen.dart';
@@ -7,12 +8,15 @@ import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
+import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bank_core/components/payment-type/payment-type-card.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class PaymentPageArguments {
   String id;
@@ -43,9 +47,12 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
   User user = User();
+  User loan = User();
   bool isLoading = true;
   bool isSubmit = false;
   String paymentType = "";
+  GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
+  TextEditingController textController = TextEditingController();
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -54,28 +61,98 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
     });
   }
 
-  onSubmit() async {
-    try {
-      setState(() {
-        isSubmit = true;
-      });
-      Customer customer = Customer();
-      customer.amount = double.parse(widget.loanResidual.toString());
-      customer.payerUserId = user.customerId;
-      customer.loanId = widget.id;
-      customer.paidDate = DateTime.now().toString();
-      await CustomerApi().pay(customer);
-      widget.listenController.changeVariable("loadpayment");
-      await show(context);
-      setState(() {
-        isSubmit = false;
-      });
-    } catch (e) {
-      setState(() {
-        isSubmit = false;
-      });
-      print(e.toString());
+  onSubmit(context) async {
+    if (fbKey.currentState!.saveAndValidate()) {
+      try {
+        setState(() {
+          isSubmit = true;
+        });
+        User loan = User.fromJson(fbKey.currentState!.value);
+        loan.id = user.customerId;
+        await AuthApi().checkPassword(loan);
+        Customer customer = Customer();
+        customer.amount = double.parse(widget.loanResidual.toString());
+        customer.payerUserId = user.customerId;
+        customer.loanId = widget.id;
+        customer.paidDate = DateTime.now().toString();
+        await CustomerApi().pay(customer);
+        widget.listenController.changeVariable("loadpayment");
+        await show(context);
+        setState(() {
+          isSubmit = false;
+        });
+      } catch (e) {
+        setState(() {
+          isSubmit = false;
+        });
+        print(e.toString());
+      }
     }
+  }
+
+  showVerifyModal() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          color: mainColor,
+          height: 270,
+          padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                  bottom: 30,
+                ),
+                child: Text(
+                  "Баталгаажуулалт",
+                  style: TextStyle(
+                    color: white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              FormBuilder(
+                key: fbKey,
+                child: Column(
+                  children: [
+                    FormTextField(
+                      name: "password",
+                      controller: textController,
+                      hintText: 'Нууц үгээ оруулна уу',
+                      inputType: TextInputType.text,
+                      obscureText: true,
+                      autoFocus: true,
+                      labelText: "Нууц үг",
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                          errorText: 'Нэвтрэх нэрээ оруулна уу.',
+                        )
+                      ]),
+                      color: darkGrey,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CustomButton(
+                      boxShadow: true,
+                      isLoading: isSubmit,
+                      labelText: "Баталгаажуулах",
+                      onClick: () {
+                        onSubmit(context);
+                      },
+                      textColor: white,
+                      labelColor: buttonColor,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   show(ctx) async {
@@ -351,7 +428,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         labelColor: buttonColor,
                         labelText: 'Төлбөр хийх',
                         onClick: () {
-                          onSubmit();
+                          showVerifyModal();
                         },
                         textColor: white,
                       ),

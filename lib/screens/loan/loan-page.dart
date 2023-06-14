@@ -346,7 +346,13 @@ class _LoanPageState extends State<LoanPage>
                       isLoading: isSubmit,
                       labelText: "Баталгаажуулах",
                       onClick: () {
+                        setState(() {
+                          isSubmit = true;
+                        });
                         onSubmit(context);
+                        setState(() {
+                          isSubmit = false;
+                        });
                       },
                       textColor: white,
                       labelColor: buttonColor,
