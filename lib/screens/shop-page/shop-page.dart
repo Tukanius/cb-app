@@ -1,4 +1,3 @@
-import 'package:bank_core/components/animated-button.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -35,68 +34,63 @@ class _ShopPageState extends State<ShopPage> {
               height: 500,
               padding: EdgeInsets.symmetric(vertical: 15),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AnimatedButton(),
-                  // Column(
-                  //   children: [
-                  //     CarouselSlider(
-                  //       carouselController: carouselController,
-                  //       options: CarouselOptions(
-                  //         height: 200.0,
-                  //         autoPlay: true,
-                  //         onPageChanged: (index, reason) {
-                  //           setState(() {
-                  //             _current = index;
-                  //           });
-                  //         },
-                  //       ),
-                  //       items: imgList.map((data) {
-                  //         return Builder(
-                  //           builder: (BuildContext context) {
-                  //             return Container(
-                  //               width: MediaQuery.of(context).size.width,
-                  //               margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  //               decoration: BoxDecoration(
-                  //                 borderRadius: BorderRadius.circular(10),
-                  //                 image: DecorationImage(
-                  //                   image: NetworkImage(data),
-                  //                 ),
-                  //               ),
-                  //               alignment: Alignment.center,
-                  //             );
-                  //           },
-                  //         );
-                  //       }).toList(),
-                  //     ),
-                  //     SizedBox(
-                  //       height: 8,
-                  //     ),
-                  //     Row(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: imgList.asMap().entries.map((entry) {
-                  //         return GestureDetector(
-                  //           onTap: () =>
-                  //               carouselController.animateToPage(entry.key),
-                  //           child: Container(
-                  //             width: 12.0,
-                  //             height: 12.0,
-                  //             margin: EdgeInsets.symmetric(
-                  //                 vertical: 8.0, horizontal: 4.0),
-                  //             decoration: BoxDecoration(
-                  //                 shape: BoxShape.circle,
-                  //                 color: (Theme.of(context).brightness ==
-                  //                             Brightness.dark
-                  //                         ? Colors.white
-                  //                         : Colors.black)
-                  //                     .withOpacity(
-                  //                         _current == entry.key ? 0.9 : 0.4)),
-                  //           ),
-                  //         );
-                  //       }).toList(),
-                  //     ),
-                  //   ],
-                  // ),
+                  Column(
+                    children: [
+                      CarouselSlider(
+                        carouselController: carouselController,
+                        options: CarouselOptions(
+                          height: 200.0,
+                          autoPlay: true,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                            });
+                          },
+                        ),
+                        items: imgList.map((data) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    image: NetworkImage(data),
+                                  ),
+                                ),
+                                alignment: Alignment.center,
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: imgList.asMap().entries.map((entry) {
+                          return GestureDetector(
+                            onTap: () =>
+                                carouselController.animateToPage(entry.key),
+                            child: Container(
+                              width: 10.0,
+                              height: 10.0,
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 4.0),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _current == entry.key
+                                      ? buttonColor
+                                      : darkGrey),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     width: MediaQuery.of(context).size.width,
@@ -111,7 +105,13 @@ class _ShopPageState extends State<ShopPage> {
                   Container(
                     child: Column(
                       children: [
-                        Lottie.asset('assets/lottie/empty.json', height: 200),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Lottie.asset('assets/lottie/empty.json', height: 100),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Text(
                           "Дэлгүүр одоогоор хоосон байна",
                           style: TextStyle(color: grey),
@@ -123,32 +123,6 @@ class _ShopPageState extends State<ShopPage> {
               ),
             ),
           ),
-          // SliverGrid(
-          //   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          //     maxCrossAxisExtent: 200.0,
-          //     mainAxisSpacing: 10.0,
-          //     crossAxisSpacing: 10.0,
-          //     childAspectRatio: 4.0,
-          //   ),
-          //   delegate: SliverChildBuilderDelegate(
-          //     (BuildContext context, int index) {
-          //       return Column(
-          //         children: [
-          //           Container(
-          //             decoration: BoxDecoration(
-          //               color: white,
-          //               borderRadius: BorderRadius.circular(
-          //                 10,
-          //               ),
-          //             ),
-          //           ),
-          //           Text("123"),
-          //         ],
-          //       );
-          //     },
-          //     childCount: 20,
-          //   ),
-          // )
         ],
       ),
     );

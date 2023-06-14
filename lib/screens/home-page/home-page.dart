@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                   children: [
                     Container(
                       margin:
-                          const EdgeInsets.only(left: 15, bottom: 15, top: 20),
+                          const EdgeInsets.only(left: 25, bottom: 4, top: 20),
                       child: Text(
                         'Зээл',
                         style: TextStyle(
@@ -237,10 +237,10 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                           )
                         : SizedBox(),
                     SizedBox(
-                      height: 30,
+                      height: 15,
                     ),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(),
                       height: 160,
                       width: MediaQuery.of(context).size.width,
@@ -254,7 +254,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                   ],
                 ),
