@@ -105,17 +105,31 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                 ),
-                color: buttonColor,
+                color: widget.data!.balance == "0.00" &&
+                        widget.data!.loanAmount == "0.00"
+                    ? Colors.amber
+                    : buttonColor,
               ),
-              child: Text(
-                'Зээл авах',
-                style: TextStyle(
-                  color: white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              child: widget.data!.balance == "0.00" &&
+                      widget.data!.loanAmount == "0.00"
+                  ? Text(
+                      'Зээлийн эрх шинэчлэх',
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.center,
+                    )
+                  : Text(
+                      'Зээл авах',
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
             ),
           )
         ],

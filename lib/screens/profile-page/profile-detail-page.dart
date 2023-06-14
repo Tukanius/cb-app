@@ -5,6 +5,7 @@ import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/components/description.dart';
 import 'package:bank_core/components/who-type-card/who-type.card.dart';
 import 'package:bank_core/models/customer.dart';
+import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/add-information-page.dart';
@@ -26,7 +27,9 @@ class ProfileDetailPage extends StatefulWidget {
 class _ProfileDetailPageState extends State<ProfileDetailPage>
     with AfterLayoutMixin {
   Customer customer = Customer();
-  Customer relatedList = Customer();
+  Result relatedList = Result(rows: [], count: 0);
+  int page = 1;
+  int limit = 10;
 
   ListenController listenController = ListenController();
   User user = User();
@@ -35,17 +38,24 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   @override
   afterFirstLayout(BuildContext context) async {
     customer = await CustomerApi().customerGet(user.customerId!);
-    relatedList = await CustomerApi().relatedPersonList(user.customerId!);
+    list(page, limit);
     setState(() {
       isLoading = false;
     });
+  }
+
+  list(page, limit) async {
+    Offset offset = Offset(page: page, limit: limit);
+    Filter filter = Filter();
+    relatedList = await CustomerApi()
+        .relatedPersonList(ResultArguments(filter: filter, offset: offset));
   }
 
   @override
   void initState() {
     listenController.addListener(() async {
       customer = await CustomerApi().customerGet(user.customerId!);
-      relatedList = await CustomerApi().relatedPersonList(user.customerId!);
+      list(page, limit);
       setState(() {
         isLoading = false;
       });

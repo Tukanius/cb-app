@@ -1,12 +1,14 @@
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/get.dart';
+import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/utils/http_request.dart';
 
 class CustomerApi extends HttpRequest {
-  Future<Customer> relatedPersonList(String id) async {
-    var res = await get('/customerRelatedPerson/list/$id');
-    return Customer.fromJson(res as Map<String, dynamic>);
+  Future<Result> relatedPersonList(ResultArguments resultArguments) async {
+    var res = await get('/customer-related-person/list',
+        data: resultArguments.toJson());
+    return Result.fromJson(res, Customer.fromJson);
   }
 
   createRelatedPerson(User data) async {
@@ -20,8 +22,8 @@ class CustomerApi extends HttpRequest {
     return Get.fromJson(res as Map<String, dynamic>);
   }
 
-  Future<Customer> bankAccountList(String id) async {
-    var res = await get("/customerAccount/list/$id", handler: true);
+  Future<Customer> bankAccountList() async {
+    var res = await get("/customer-account/list", handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 

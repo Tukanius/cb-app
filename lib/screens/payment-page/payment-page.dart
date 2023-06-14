@@ -19,25 +19,25 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class PaymentPageArguments {
-  String id;
+  String loanId;
   String loanResidual;
   ListenController listenController;
   PaymentPageArguments({
     required this.loanResidual,
-    required this.id,
+    required this.loanId,
     required this.listenController,
   });
 }
 
 class PaymentPage extends StatefulWidget {
   final String loanResidual;
-  final String id;
+  final String loanId;
   final ListenController listenController;
   static const routeName = 'PaymentPage';
   const PaymentPage({
     Key? key,
     required this.loanResidual,
-    required this.id,
+    required this.loanId,
     required this.listenController,
   }) : super(key: key);
 
@@ -72,8 +72,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
         await AuthApi().checkPassword(loan);
         Customer customer = Customer();
         customer.amount = double.parse(widget.loanResidual.toString());
-        customer.payerUserId = user.customerId;
-        customer.loanId = widget.id;
+        customer.loanId = widget.loanId;
         customer.paidDate = DateTime.now().toString();
         await CustomerApi().pay(customer);
         widget.listenController.changeVariable("loadpayment");

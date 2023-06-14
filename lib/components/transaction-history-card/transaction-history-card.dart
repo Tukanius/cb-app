@@ -1,11 +1,14 @@
+import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class TransactionHistoryCard extends StatefulWidget {
   final bool? isIncome;
+  final Customer? data;
   final Function()? onClick;
   const TransactionHistoryCard({
     this.onClick,
+    this.data,
     Key? key,
     this.isIncome,
   }) : super(key: key);
@@ -29,13 +32,28 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              '2023-6-10',
-              style: TextStyle(
-                color: widget.isIncome == true ? green : red,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '2023-6-10',
+                  style: TextStyle(
+                    color: grey,
+                    fontSize: 12,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  '${widget.data?.description}',
+                  style: TextStyle(
+                    color: white,
+                  ),
+                ),
+              ],
             ),
-            widget.isIncome == true
+            widget.data?.type != "зарлага"
                 ? Text(
                     '+300,000.00₮',
                     style: TextStyle(

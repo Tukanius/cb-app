@@ -162,11 +162,17 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                             child: PotentialBalanceCard(
                               customer: customers.rows?[index],
                               data: get,
-                              onClick: () {
-                                Navigator.of(context).pushNamed(
-                                    LoanPage.routeName,
-                                    arguments: LoanPageArguments(
-                                        listenController: listenController));
+                              onClick: () async {
+                                try {
+                                  await LoanApi().verify();
+                                  await LoanApi().scoring();
+                                  await Navigator.of(context).pushNamed(
+                                      LoanPage.routeName,
+                                      arguments: LoanPageArguments(
+                                          listenController: listenController));
+                                } catch (e) {
+                                  print(e.toString());
+                                }
                               },
                             ),
                           );
@@ -206,7 +212,8 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                           Navigator.of(context).pushNamed(
                                             LoanDetailPage.routeName,
                                             arguments: LoanDetailPageArguments(
-                                              id: loan.rows![index].loan.id,
+                                              loanId: loan.rows![index].loan.id,
+                                              id: loan.rows![index].id,
                                               listenController:
                                                   listenController,
                                             ),

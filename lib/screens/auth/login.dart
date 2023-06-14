@@ -26,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController bioContoller = TextEditingController();
   final LocalAuthentication auth = LocalAuthentication();
@@ -120,13 +120,13 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                               bottom: 10,
                             ),
                             child: FormTextField(
-                              labelText: "Е-Мэйл",
+                              labelText: "Утасны дугаар",
                               onChanged: (value) {
                                 secureStorage.deleteAll();
                               },
                               inputType: TextInputType.text,
-                              name: 'email',
-                              controller: emailController,
+                              name: 'phone',
+                              controller: phoneController,
                               hintText: 'Нэвтрэх нэр',
                               validators: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(
@@ -266,12 +266,12 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   }
 
   void _performLogin(BuildContext context) async {
-    final String email;
+    final String phone;
     final String password;
     final List<BiometricType> availableBiometrics =
         await auth.getAvailableBiometrics();
     if (fbKey.currentState!.saveAndValidate()) {
-      email = fbKey.currentState?.fields['email']?.value;
+      phone = fbKey.currentState?.fields['phone']?.value;
       password = fbKey.currentState?.fields['password']?.value;
       try {
         setState(() {
@@ -280,7 +280,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
 
         User save = User.fromJson(fbKey.currentState!.value);
         await Provider.of<UserProvider>(context, listen: false).login(save);
-        await _storeCredentials(email, password);
+        await _storeCredentials(phone, password);
         if (activeBio == true && availableBiometrics.isNotEmpty) {
           Navigator.of(context).pushNamed(CheckBiometric.routeName);
         } else {
@@ -316,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
         Future<String?> password = secureStorage.getPassWord();
         String resultUsername = await username ?? "";
         String resultPassword = await password ?? "";
-        save.email = resultUsername;
+        save.phone = resultUsername;
         save.password = resultPassword;
         await Provider.of<UserProvider>(context, listen: false).login(save);
         Navigator.of(context).pushNamed(SplashScreen.routeName);
@@ -336,8 +336,8 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
     }
   }
 
-  _storeCredentials(String email, String password) async {
-    await secureStorage.setUserName(email);
+  _storeCredentials(String phone, String password) async {
+    await secureStorage.setUserName(phone);
     await secureStorage.setPassWord(password);
   }
 }
