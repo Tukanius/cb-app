@@ -13,6 +13,7 @@ class HttpRequest {
   static const host = "http://dev-cb-admin.zto.mn";
   // static const host = 'http://192.168.1.59:30840';
 
+  // static const version = '/app';
   static const version = '/api';
 
   static const uri = host;

@@ -20,7 +20,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
     return GestureDetector(
       onTap: widget.onClick,
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

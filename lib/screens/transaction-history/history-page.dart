@@ -1,6 +1,11 @@
-import 'package:bank_core/components/transaction-history-card/transaction-history-card.dart';
+import 'package:bank_core/api/loan-api.dart';
+import 'package:bank_core/models/result.dart';
+import 'package:bank_core/screens/transaction-history/tabs/all.dart';
+import 'package:bank_core/screens/transaction-history/tabs/expenditure.dart';
+import 'package:bank_core/screens/transaction-history/tabs/income.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:after_layout/after_layout.dart';
 
 class HistoryPage extends StatefulWidget {
   static const routeName = 'HistoryPage';
@@ -11,8 +16,11 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AfterLayoutMixin {
   int currentIndex = 0;
+  int page = 1;
+  int limit = 5;
+  Result transactionList = Result(rows: [], count: 0);
 
   late TabController tabController;
   ScrollController scrollController = ScrollController();
@@ -22,6 +30,18 @@ class _HistoryPageState extends State<HistoryPage>
     tabController = TabController(length: 3, vsync: this);
     tabController.index = currentIndex;
     super.initState();
+  }
+
+  @override
+  afterFirstLayout(BuildContext context) async {
+    list(page, limit);
+  }
+
+  list(page, limit) async {
+    Offset offset = Offset(page: page, limit: limit);
+    Filter filter = Filter();
+    transactionList = await LoanApi()
+        .transactionList(ResultArguments(offset: offset, filter: filter));
   }
 
   @override
@@ -233,30 +253,9 @@ class _HistoryPageState extends State<HistoryPage>
           physics: NeverScrollableScrollPhysics(),
           controller: tabController,
           children: [
-            Column(
-              children: [
-                TransactionHistoryCard(
-                  onClick: () {
-                    show(context);
-                  },
-                  isIncome: true,
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                TransactionHistoryCard(
-                  isIncome: true,
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                TransactionHistoryCard(
-                  isIncome: false,
-                ),
-              ],
-            ),
+            All(),
+            Income(),
+            Expenditure(),
           ],
         ),
       ),
