@@ -109,7 +109,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                     Description(
                       isDone: true,
                       label: 'Утасны дугаар',
-                      name: '99865922',
+                      name: '${user.phone}',
                       onTap: () {
                         print("Утасны дугаар");
                       },
@@ -120,7 +120,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                     Description(
                       isDone: false,
                       label: 'И-мейл',
-                      name: 'moodyzeromn@gmail.com',
+                      name: '${user.email}',
                       onTap: () {
                         print("И-мейл");
                       },
@@ -162,7 +162,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                       ),
                                     ),
                                     Text(
-                                      'Пүрэвдорж',
+                                      '${user.lastName}',
                                       style: TextStyle(
                                         color: white,
                                         fontWeight: FontWeight.w500,
@@ -184,7 +184,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                       ),
                                     ),
                                     Text(
-                                      'Энхманлай',
+                                      '${user.firstName}',
                                       style: TextStyle(
                                         color: white,
                                         fontWeight: FontWeight.w500,

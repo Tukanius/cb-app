@@ -11,6 +11,7 @@ import 'package:bank_core/widgets/form_textfield.dart';
 import 'package:bank_core/widgets/register-number/letter.dart';
 import 'package:bank_core/widgets/register-number/letters.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -255,19 +256,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
                               errorText: 'Заавал бөглөнө үү'),
-                          // ignore: unnecessary_null_comparison
-                          (dynamic value) => value.toString() != null
+                          (dynamic value) => value.toString() != ""
                               ? (validateStructure(
                                       letters.join(), value.toString())
                                   ? null
                                   : "Регистерийн дугаараа оруулна уу!")
                               : null,
-                          (dynamic value) {
-                            if (registerNoError == false) {
-                              return "Регистерийн дугаар бүртгэлтэй байна!";
-                            }
-                            return null;
-                          }
                         ]),
                         builder: (FormFieldState<dynamic> field) {
                           return InputDecorator(
@@ -276,6 +270,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
                               errorText: field.errorText,
+                              fillColor: darkGrey,
+                              filled: true,
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 0, horizontal: 15),
                               errorBorder: OutlineInputBorder(
@@ -299,6 +295,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,
                                     title: letters[0],
+                                    backgroundColor: transparent,
                                     length: CYRILLIC_ALPHABETS_LIST.length,
                                     itemBuilder: (ctx, i) => RegisterLetter(
                                       text: CYRILLIC_ALPHABETS_LIST[i],
@@ -317,6 +314,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     title: letters[1],
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,
+                                    backgroundColor: transparent,
                                     length: CYRILLIC_ALPHABETS_LIST.length,
                                     itemBuilder: (ctx, i) => RegisterLetter(
                                       text: CYRILLIC_ALPHABETS_LIST[i],
@@ -347,7 +345,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                       inputType: TextInputType.number,
                                       name: 'registerNumber',
                                       hintText: 'Регистерийн дугаар',
-                                      color: darkGrey,
+                                      color: transparent,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]')),
+                                      ],
                                     ),
                                   ),
                                   SizedBox(
