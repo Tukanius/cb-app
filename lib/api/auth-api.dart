@@ -9,7 +9,7 @@ class AuthApi extends HttpRequest {
 
   changePassword(User user) async {
     var res =
-        await post('/auth/password/change', data: user.toJson(), handler: true);
+        await post('/password/change', data: user.toJson(), handler: true);
     return User.fromJson(res as Map<String, dynamic>);
   }
 
@@ -19,16 +19,14 @@ class AuthApi extends HttpRequest {
   }
 
   register(User user) async {
-    var res =
-        await post("/customer/create", data: user.toJson(), handler: true);
+    var res = await post("/auth/register", data: user.toJson(), handler: true);
     return User.fromJson(res as Map<String, dynamic>);
   }
 
   checkPassword(User data) async {
     Map<String, dynamic> json = {};
     json['password'] = data.password;
-    json['id'] = data.id;
-    var res = await post("/auth/checkPassword", data: json);
+    var res = await post("/auth/check-password", data: json);
     return res == true;
   }
 }

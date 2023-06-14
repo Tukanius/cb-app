@@ -69,7 +69,7 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
           ),
         ),
         title: Text(
-          'Зээл төлөх',
+          'Төлбөрийн хуваарь',
           style: TextStyle(
             color: white,
             fontSize: 14,

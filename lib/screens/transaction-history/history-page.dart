@@ -166,13 +166,18 @@ class _HistoryPageState extends State<HistoryPage>
             SizedBox(
               height: 30,
             ),
-            TransactionHistoryCard(
-              isIncome: true,
-            ),
-            TransactionHistoryCard(),
-            TransactionHistoryCard(
-              isIncome: true,
-            ),
+            Column(
+              children: transactionList.rows!
+                  .map(
+                    (item) => TransactionHistoryCard(
+                      onClick: () {
+                        show(context);
+                      },
+                      data: item,
+                    ),
+                  )
+                  .toList(),
+            )
           ],
         ),
       ),

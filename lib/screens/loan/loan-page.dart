@@ -11,7 +11,6 @@ import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/loan.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
-import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -75,7 +74,7 @@ class _LoanPageState extends State<LoanPage>
       setState(() {
         isLoading = true;
       });
-      bankList = await CustomerApi().bankAccountList(user.customerId!);
+      bankList = await CustomerApi().bankAccountList();
       setState(() {
         isLoading = false;
       });
@@ -109,7 +108,7 @@ class _LoanPageState extends State<LoanPage>
       isLoading = true;
     });
     get = await CustomerApi().accountGet(user.customerId!);
-    bankList = await CustomerApi().bankAccountList(user.customerId!);
+    bankList = await CustomerApi().bankAccountList();
     setState(() {
       isLoading = false;
     });
@@ -147,17 +146,13 @@ class _LoanPageState extends State<LoanPage>
         isSubmit = true;
       });
       user.password = textController.text;
-      user.id = user.customerId;
       var res = await AuthApi().checkPassword(user);
-      // await LoanApi().verify(user.customerId!);
       if (res == true) {
         loan.amount = currentValue;
-        loan.customerId = user.customerId;
         loan.loanDate = DateTime.now().toString();
         loan.loanRate = '3';
         loan.loanTimeId = seletedDayId;
         loan.accountId = selectedMethod;
-        user.id = user.id;
         await LoanApi().createLoan(loan);
         setState(() {
           isSubmit = false;
@@ -370,7 +365,6 @@ class _LoanPageState extends State<LoanPage>
   @override
   Widget build(BuildContext context) {
     general = Provider.of<GeneralProvider>(context, listen: true).general;
-    user = Provider.of<UserProvider>(context, listen: true).user;
 
     return Scaffold(
       backgroundColor: backgroundColor,

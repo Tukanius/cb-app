@@ -54,7 +54,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     totalPayAmount: json['totalPayAmount'] != null
         ? json['totalPayAmount'] as String
         : null,
-    pay_date: json['pay_date'] != null ? json['pay_date'] as String : null,
+    payDate: json['payDate'] != null ? json['payDate'] as String : null,
     loanStatusId:
         json['loanStatusId'] != null ? json['loanStatusId'] as String : null,
     loanType: json['loanType'] != null
@@ -132,13 +132,82 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     total_pay_amount: json['total_pay_amount'] != null
         ? json['total_pay_amount'] as String
         : null,
+
+    type: json['type'] != null ? json['type'] as String : null,
+    transactionStatus: json['transactionStatus'] != null
+        ? json['transactionStatus'] as String
+        : null,
+    paymentId: json['paymentId'] != null ? json['paymentId'] as String : null,
+    paymentMethod:
+        json['paymentMethod'] != null ? json['paymentMethod'] as String : null,
+    creditAccountBank: json['creditAccountBank'] != null
+        ? json['creditAccountBank'] as String
+        : null,
+    creditAccountId: json['creditAccountId'] != null
+        ? json['creditAccountId'] as String
+        : null,
+    creditAccountNumber: json['creditAccountNumber'] != null
+        ? json['creditAccountNumber'] as String
+        : null,
+    creditAccountCurrency: json['creditAccountCurrency'] != null
+        ? json['creditAccountCurrency'] as String
+        : null,
+    creditAccountName: json['creditAccountName'] != null
+        ? json['creditAccountName'] as String
+        : null,
+    debitAccountId: json['debitAccountId'] != null
+        ? json['debitAccountId'] as String
+        : null,
+    debitAccountBank: json['debitAccountBank'] != null
+        ? json['debitAccountBank'] as String
+        : null,
+    debitAccountNumber: json['debitAccountNumber'] != null
+        ? json['debitAccountNumber'] as String
+        : null,
+    debitAccountName: json['debitAccountName'] != null
+        ? json['debitAccountName'] as String
+        : null,
+    debitAccountCurrency: json['debitAccountCurrency'] != null
+        ? json['debitAccountCurrency'] as String
+        : null,
+    description:
+        json['description'] != null ? json['description'] as String : null,
+    addInfo: json['addInfo'] != null ? json['addInfo'] as String : null,
   );
 }
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
-  if (instance.pay_date != null) json['pay_date'] = instance.pay_date;
+  if (instance.type != null) json['type'] = instance.type;
+  if (instance.transactionStatus != null)
+    json['transactionStatus'] = instance.transactionStatus;
+  if (instance.paymentId != null) json['paymentId'] = instance.paymentId;
+  if (instance.paymentMethod != null)
+    json['paymentMethod'] = instance.paymentMethod;
+  if (instance.creditAccountBank != null)
+    json['creditAccountBank'] = instance.creditAccountBank;
+  if (instance.creditAccountId != null)
+    json['creditAccountId'] = instance.creditAccountId;
+  if (instance.creditAccountNumber != null)
+    json['creditAccountNumber'] = instance.creditAccountNumber;
+  if (instance.creditAccountCurrency != null)
+    json['creditAccountCurrency'] = instance.creditAccountCurrency;
+  if (instance.creditAccountName != null)
+    json['creditAccountName'] = instance.creditAccountName;
+  if (instance.debitAccountId != null)
+    json['debitAccountId'] = instance.debitAccountId;
+  if (instance.debitAccountBank != null)
+    json['debitAccountBank'] = instance.debitAccountBank;
+  if (instance.debitAccountNumber != null)
+    json['debitAccountNumber'] = instance.debitAccountNumber;
+  if (instance.debitAccountName != null)
+    json['debitAccountName'] = instance.debitAccountName;
+  if (instance.debitAccountCurrency != null)
+    json['debitAccountCurrency'] = instance.debitAccountCurrency;
+  if (instance.description != null) json['description'] = instance.description;
+  if (instance.addInfo != null) json['addInfo'] = instance.addInfo;
+  if (instance.payDate != null) json['payDate'] = instance.payDate;
   if (instance.total_pay_amount != null)
     json['total_pay_amount'] = instance.total_pay_amount;
   if (instance.educationType != null)

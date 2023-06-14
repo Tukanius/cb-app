@@ -227,6 +227,7 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return LoanDetailPage(
                           id: arguments.id,
+                          loanId: arguments.loanId,
                           listenController: arguments.listenController,
                         );
                       });
@@ -244,7 +245,7 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return PaymentPage(
                           loanResidual: arguments.loanResidual,
-                          id: arguments.id,
+                          loanId: arguments.loanId,
                           listenController: arguments.listenController,
                         );
                       });

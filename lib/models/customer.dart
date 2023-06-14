@@ -32,7 +32,7 @@ class Customer {
   Customer? khoroo;
   Customer? addressType;
   String? totalPayAmount;
-  String? pay_date;
+  String? payDate;
   String? loanStatusId;
   Customer? loan;
   String? loanId;
@@ -60,14 +60,29 @@ class Customer {
   String? avatar;
   String? birthPlaceNote;
   Customer? result;
-
   Customer? educationType;
   Customer? marriageStatus;
   Customer? nationalityType;
   Customer? gender;
   Customer? workStatus;
-
   String? total_pay_amount;
+
+  String? type;
+  String? transactionStatus;
+  String? paymentId;
+  String? paymentMethod;
+  String? creditAccountBank;
+  String? creditAccountId;
+  String? creditAccountNumber;
+  String? creditAccountCurrency;
+  String? creditAccountName;
+  String? debitAccountId;
+  String? debitAccountBank;
+  String? debitAccountNumber;
+  String? debitAccountName;
+  String? debitAccountCurrency;
+  String? description;
+  String? addInfo;
 
   String getPostDate() {
     final now = Moment.now();
@@ -76,6 +91,22 @@ class Customer {
   }
 
   Customer({
+    this.type,
+    this.transactionStatus,
+    this.paymentId,
+    this.paymentMethod,
+    this.creditAccountBank,
+    this.creditAccountId,
+    this.creditAccountNumber,
+    this.creditAccountCurrency,
+    this.creditAccountName,
+    this.debitAccountId,
+    this.debitAccountBank,
+    this.debitAccountNumber,
+    this.debitAccountName,
+    this.debitAccountCurrency,
+    this.description,
+    this.addInfo,
     this.total_pay_amount,
     this.educationType,
     this.marriageStatus,
@@ -109,7 +140,7 @@ class Customer {
     this.rateCalcDay,
     this.loanId,
     this.totalPayAmount,
-    this.pay_date,
+    this.payDate,
     this.loanStatusId,
     this.loan,
     this.province,

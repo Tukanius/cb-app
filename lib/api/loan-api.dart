@@ -10,7 +10,7 @@ class LoanApi extends HttpRequest {
   }
 
   activeLoanGet(String id) async {
-    var res = await get("/loanPayBack/$id", handler: true);
+    var res = await get("/loan/loan-info/$id", handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 
@@ -22,30 +22,35 @@ class LoanApi extends HttpRequest {
 
   Future<Result> loanSchedule(
       ResultArguments resultArguments, String id) async {
-    var res = await get("/loanPayBackList/$id",
+    var res = await get("/loan/loan-pay-back/list/$id",
         data: resultArguments.toJson(), handler: true);
     return Result.fromJson(res, Customer.fromJson);
   }
 
   Future<Result> activeList(ResultArguments resultArguments, String id) async {
-    var res =
-        await get("/Loans/$id", data: resultArguments.toJson(), handler: true);
+    var res = await get("/loan/active-loans/$id",
+        data: resultArguments.toJson(), handler: true);
     return Result.fromJson(res, Customer.fromJson);
   }
 
-  Future<Customer> verify(String id) async {
-    var res = await get("/loan/verify/$id", handler: true);
+  Future<Customer> verify() async {
+    var res = await get("/loan/verify", handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 
   loanProduct(bool handler) async {
-    var res = await get("/loanProduct/list", handler: handler);
+    var res = await get("/loan-product/list", handler: handler);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 
   Future<Result> transactionList(ResultArguments resultArguments) async {
     var res = await get('/transaction/list',
         data: resultArguments.toJson(), handler: true);
-    return Result.fromJson(res, Loan.fromJson);
+    return Result.fromJson(res, Customer.fromJson);
+  }
+
+  Future<Customer> scoring() async {
+    var res = await get('/loan/scoring', handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
   }
 }

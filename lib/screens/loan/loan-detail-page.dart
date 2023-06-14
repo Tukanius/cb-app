@@ -1,6 +1,5 @@
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/controller/listen.dart';
-import 'package:bank_core/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/paid-back-card/paid-back-card.dart';
@@ -13,19 +12,23 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:after_layout/after_layout.dart';
 
 class LoanDetailPageArguments {
+  String loanId;
   String id;
   ListenController listenController;
   LoanDetailPageArguments({
+    required this.loanId,
     required this.id,
     required this.listenController,
   });
 }
 
 class LoanDetailPage extends StatefulWidget {
+  final String loanId;
   final String id;
   final ListenController listenController;
   static const routeName = 'LoanDetailPage';
   const LoanDetailPage({
+    required this.loanId,
     Key? key,
     required this.id,
     required this.listenController,
@@ -142,7 +145,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                           height: 5,
                         ),
                         Text(
-                          "${Utils().formatCurrency(customer.totalPayAmount)}₮",
+                          // "${Utils().formatCurrency(customer.totalPayAmount)}₮",
+                          "${customer.totalPayAmount}",
                           style: TextStyle(
                             color: white,
                             fontSize: 24,
@@ -185,7 +189,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${Utils().formatCurrency("${customer.loan?.amount}")}₮",
+                                      // "${Utils().formatCurrency("${customer.loan?.amount}")}₮",
+                                      "${customer.loan?.amount}",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -211,7 +216,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${customer.loanRate}%",
+                                      "${customer.loan?.loanRate}%",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -258,7 +263,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${Utils().formatCurrency(customer.loanResidual)}₮",
+                                      // "${Utils().formatCurrency(customer.loanResidual)}₮",
+                                      "${customer.loanResidual}",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -284,7 +290,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       height: 5,
                                     ),
                                     Text(
-                                      "${Utils().formatCurrency(customer.rateAmount)}₮",
+                                      // "${Utils().formatCurrency(customer.rateAmount)}₮",
+                                      "${customer.rateAmount}",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -305,7 +312,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                       Navigator.of(context).pushNamed(
                         PaymentPage.routeName,
                         arguments: PaymentPageArguments(
-                            id: widget.id,
+                            loanId: widget.loanId,
                             loanResidual: customer.totalPayAmount.toString(),
                             listenController: widget.listenController),
                       );
@@ -377,7 +384,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         LoanSchedulePage.routeName,
-                        arguments: LoanSchedulePageArguments(id: widget.id),
+                        arguments: LoanSchedulePageArguments(id: widget.loanId),
                       );
                     },
                     child: Container(
