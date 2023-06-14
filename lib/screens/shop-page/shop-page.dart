@@ -21,7 +21,7 @@ class ShopPage extends StatefulWidget {
 
 class _ShopPageState extends State<ShopPage> {
   CarouselController carouselController = CarouselController();
-  // int _current = 0;
+  int _current = 0;
 
   @override
   Widget build(BuildContext context) {

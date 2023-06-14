@@ -30,18 +30,26 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '300,000.00₮',
-              style: TextStyle(
-                color: widget.isIncome == true ? green : red,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(
               '2023-6-10',
               style: TextStyle(
                 color: widget.isIncome == true ? green : red,
               ),
             ),
+            widget.isIncome == true
+                ? Text(
+                    '+300,000.00₮',
+                    style: TextStyle(
+                      color: green,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                : Text(
+                    '-300,000.00₮',
+                    style: TextStyle(
+                      color: red,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
           ],
         ),
       ),

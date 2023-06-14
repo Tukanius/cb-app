@@ -1,8 +1,6 @@
 import 'package:bank_core/api/loan-api.dart';
+import 'package:bank_core/components/transaction-history-card/transaction-history-card.dart';
 import 'package:bank_core/models/result.dart';
-import 'package:bank_core/screens/transaction-history/tabs/all.dart';
-import 'package:bank_core/screens/transaction-history/tabs/expenditure.dart';
-import 'package:bank_core/screens/transaction-history/tabs/income.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -160,102 +158,21 @@ class _HistoryPageState extends State<HistoryPage>
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: NestedScrollView(
-        controller: scrollController,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverToBoxAdapter(
-              child: Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 30),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          changePage(0);
-                        },
-                        child: Container(
-                          width: 80,
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          decoration: BoxDecoration(
-                            color: tabController.index == 0
-                                ? darkGrey
-                                : transparent,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Бүгд',
-                              style: TextStyle(
-                                color: tabController.index == 0 ? white : grey,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          changePage(1);
-                        },
-                        child: Container(
-                          width: 80,
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          decoration: BoxDecoration(
-                            color: tabController.index == 1
-                                ? darkGrey
-                                : transparent,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Орлого',
-                              style: TextStyle(
-                                color: tabController.index == 1 ? white : grey,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          changePage(2);
-                        },
-                        child: Container(
-                          width: 80,
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          decoration: BoxDecoration(
-                            color: tabController.index == 2
-                                ? darkGrey
-                                : transparent,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Зарлага',
-                              style: TextStyle(
-                                color: tabController.index == 2 ? white : grey,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
-            )
-          ];
-        },
-        body: TabBarView(
-          physics: NeverScrollableScrollPhysics(),
-          controller: tabController,
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            All(),
-            Income(),
-            Expenditure(),
+            SizedBox(
+              height: 30,
+            ),
+            TransactionHistoryCard(
+              isIncome: true,
+            ),
+            TransactionHistoryCard(),
+            TransactionHistoryCard(
+              isIncome: true,
+            ),
           ],
         ),
       ),

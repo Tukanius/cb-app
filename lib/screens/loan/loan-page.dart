@@ -343,6 +343,7 @@ class _LoanPageState extends State<LoanPage>
                     ),
                     CustomButton(
                       boxShadow: true,
+                      isLoading: isSubmit,
                       labelText: "Баталгаажуулах",
                       onClick: () {
                         onSubmit(context);
