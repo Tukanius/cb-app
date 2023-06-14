@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                             children: [
                               Container(
                                 margin: const EdgeInsets.only(
-                                    left: 15, bottom: 20, top: 30),
+                                    left: 25, bottom: 4, top: 30),
                                 child: Text(
                                   'Идэвхтэй зээл',
                                   style: TextStyle(
@@ -217,22 +217,22 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   },
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.center,
-                                child: SmoothPageIndicator(
-                                  controller: pageController,
-                                  count: loan.rows!.length,
-                                  effect: WormEffect(
-                                    dotColor: greyDark,
-                                    dotHeight: 10,
-                                    dotWidth: 10,
-                                    activeDotColor: buttonColor,
-                                  ),
-                                  onDotClicked: (index) {},
-                                ),
-                              ),
+                              // Container(
+                              //   margin: EdgeInsets.only(top: 10),
+                              //   width: MediaQuery.of(context).size.width,
+                              //   alignment: Alignment.center,
+                              //   child: SmoothPageIndicator(
+                              //     controller: pageController,
+                              //     count: loan.rows!.length,
+                              //     effect: WormEffect(
+                              //       dotColor: greyDark,
+                              //       dotHeight: 10,
+                              //       dotWidth: 10,
+                              //       activeDotColor: buttonColor,
+                              //     ),
+                              //     onDotClicked: (index) {},
+                              //   ),
+                              // ),
                             ],
                           )
                         : SizedBox(),
