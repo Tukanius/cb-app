@@ -140,108 +140,95 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                       height: 8,
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)),
+                        borderRadius: BorderRadius.circular(15),
                         color: darkGrey,
                       ),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Овог:',
-                                style: TextStyle(
-                                  color: grey,
-                                  fontWeight: FontWeight.w500,
+                          Container(
+                            padding: EdgeInsets.all(15),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Овог:',
+                                      style: TextStyle(
+                                        color: grey,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Пүрэвдорж',
+                                      style: TextStyle(
+                                        color: white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Нэр:',
+                                      style: TextStyle(
+                                        color: grey,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Энхманлай',
+                                      style: TextStyle(
+                                        color: white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                AddInformationPage.routeName,
+                                arguments: AddInformationPageArguments(
+                                    listenController: listenController),
+                              );
+                            },
+                            child: Container(
+                              height: 50,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: buttonColor,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15),
                                 ),
                               ),
-                              Text(
-                                'Пүрэвдорж',
+                              child: Text(
+                                "Нэмэлт мэдээлэл бөглөх",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: white,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Нэр:',
-                                style: TextStyle(
-                                  color: grey,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Text(
-                                'Энхманлай',
-                                style: TextStyle(
-                                  color: white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                        color: buttonColor,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                            AddInformationPage.routeName,
-                            arguments: AddInformationPageArguments(
-                              listenController: listenController,
-                            ),
-                          );
-                        },
-                        child: Center(
-                          child: Text(
-                            "Нэмэлт мэдээлэл бөглөх",
-                            style: TextStyle(
-                              color: white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    // CustomButton(
-                    //   labelColor: buttonColor,
-                    //   textColor: white,
-                    //   onClick: () {
-                    //     Navigator.of(context).pushNamed(
-                    //         AddInformationPage.routeName,
-                    //         arguments: AddInformationPageArguments(
-                    //             listenController: listenController));
-                    //   },
-                    //   labelText: "Нэмэлт мэдээлэл бөглөх",
-                    //   boxShadow: true,
-                    // ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8, top: 30),
+                      margin: EdgeInsets.only(bottom: 8, top: 20),
                       child: Text(
                         "Гэр бүлийн мэдээлэл",
                         style: TextStyle(

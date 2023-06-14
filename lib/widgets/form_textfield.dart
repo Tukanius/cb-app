@@ -21,6 +21,7 @@ class FormTextField extends StatefulWidget {
   final bool obscureText;
   final bool hasObscureControl;
   final bool password;
+  final Color? textColor;
   final bool autoFocus;
   final bool readOnly;
   final FocusNode? focusNode;
@@ -65,6 +66,7 @@ class FormTextField extends StatefulWidget {
       this.showCounter = true,
       this.errorText,
       this.onChanged,
+      this.textColor,
       this.focus,
       this.nextFocus,
       this.prefixIcon,
@@ -139,7 +141,9 @@ class _FormTextFieldState extends State<FormTextField> {
               widget.onComplete!();
             }
           },
-          style: const TextStyle(color: Colors.white, fontSize: 14),
+          style: TextStyle(
+              color: widget.textColor != null ? widget.textColor : Colors.white,
+              fontSize: 14),
 
           decoration: widget.decoration ??
               InputDecoration(
