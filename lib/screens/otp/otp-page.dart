@@ -190,6 +190,16 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
                   //   ),
                   // ),
                   text,
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Code: ${user.otpCode}',
+                    style: TextStyle(
+                      color: white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),

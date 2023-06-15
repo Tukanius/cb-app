@@ -44,8 +44,8 @@ class _RegisterItemState extends State<RegisterLetter> {
             color: greyDark.withOpacity(0.2),
           ),
           borderRadius: BorderRadius.all(widget.radius)),
-      child: TextButton(
-        onPressed: widget.onPressed ?? () {},
+      child: GestureDetector(
+        onTap: widget.onPressed ?? () {},
         child: Text(
           widget.text ?? "A",
           style: TextStyle(color: widget.textColor, fontSize: widget.fontSize),
