@@ -7,7 +7,7 @@ import '../dialog_wrapper.dart';
 class ErrorDialog {
   final BuildContext? context;
   final DialogService? dialogService;
-  final Duration duration = const Duration(milliseconds: 1500);
+  final Duration duration = const Duration(seconds: 10);
 
   ErrorDialog({this.context, this.dialogService});
 

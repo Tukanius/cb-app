@@ -45,7 +45,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
           color: darkGrey,
         ),
         child: Column(

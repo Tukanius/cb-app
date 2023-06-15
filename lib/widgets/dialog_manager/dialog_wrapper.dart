@@ -44,17 +44,7 @@ class _DialogWrapperState extends State<DialogWrapper>
           child: ScaleTransition(
             scale: scaleAnimation,
             child: Container(
-              decoration: ShapeDecoration(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: widget.child,
-              ),
+              child: widget.child,
             ),
           ),
         ),
