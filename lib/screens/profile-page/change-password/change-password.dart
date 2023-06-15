@@ -98,8 +98,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                               style: TextStyle(color: dark),
                             ),
                             onPressed: () {
-                              Navigator.of(context).pop();
-                              Navigator.of(ctx).pop();
+                              if (widget.isForgot != false) {
+                                Navigator.of(context).pop();
+                                Navigator.of(ctx).pop();
+                              } else {
+                                Navigator.of(context).pop();
+                                Navigator.of(ctx).pop();
+                                Navigator.of(ctx).pop();
+                                Navigator.of(ctx).pop();
+                              }
                             },
                           ),
                         ],

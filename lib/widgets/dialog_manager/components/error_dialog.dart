@@ -1,6 +1,7 @@
 import 'package:bank_core/services/dialog.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
-
+import 'package:lottie/lottie.dart';
 import '../dialog_wrapper.dart';
 
 class ErrorDialog {
@@ -17,36 +18,67 @@ class ErrorDialog {
       builder: (context) {
         Future.delayed(duration, () {
           dialogService!.dialogComplete();
-
           // ignore: unnecessary_null_comparison
           if (context == null) return;
           if (Navigator.of(context, rootNavigator: true).canPop()) {
             Navigator.of(context).pop(true);
           }
         });
-
         return DialogWrapper(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const SizedBox(height: 10.0),
-              const Center(
-                child: Icon(
-                  Icons.error,
-                  size: 65.0,
-                  // color: red,
-                ),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 75),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding:
+                        const EdgeInsets.only(top: 90, left: 20, right: 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const Text(
+                          'Амжилтгүй',
+                          style: TextStyle(
+                              color: dark,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        Text(
+                          message,
+                          textAlign: TextAlign.center,
+                        ),
+                        ButtonBar(
+                          buttonMinWidth: 100,
+                          alignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            TextButton(
+                              child: const Text(
+                                "За",
+                                style: TextStyle(color: dark),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                ],
               ),
-              const SizedBox(height: 10.0),
-              Text(
-                message,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.grey,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 10.0),
+              Lottie.asset('assets/lottie/error.json',
+                  height: 150, repeat: false)
             ],
           ),
         );

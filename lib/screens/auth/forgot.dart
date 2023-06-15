@@ -110,8 +110,10 @@ class _ForgotPageState extends State<ForgotPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FormTextField(
+                        showCounter: false,
+                        maxLenght: 8,
                         labelText: "Утасны дугаар",
-                        inputType: TextInputType.emailAddress,
+                        inputType: TextInputType.phone,
                         name: 'phone',
                         hintText: "Утасны дугаар оруулна уу",
                         color: darkGrey,

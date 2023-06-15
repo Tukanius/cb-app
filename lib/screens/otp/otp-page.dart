@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
@@ -41,6 +42,15 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
   late Timer _timer;
   String username = "";
   User user = User();
+  ListenController listenController = ListenController();
+
+  @override
+  void initState() {
+    listenController.addListener(() async {
+      await Provider.of<UserProvider>(context, listen: false).getOtp();
+    });
+    super.initState();
+  }
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -216,12 +226,15 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        InkWell(
+                        GestureDetector(
                           onTap: () async {
                             setState(() {
                               isSubmit = true;
                             });
                             _startTimer();
+                            await Provider.of<UserProvider>(context,
+                                    listen: false)
+                                .getOtp();
                           },
                           child: Column(
                             children: const [
