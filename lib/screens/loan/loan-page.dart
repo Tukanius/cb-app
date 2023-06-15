@@ -11,6 +11,7 @@ import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/loan.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/general_provider.dart';
+import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -365,6 +366,7 @@ class _LoanPageState extends State<LoanPage>
   @override
   Widget build(BuildContext context) {
     general = Provider.of<GeneralProvider>(context, listen: true).general;
+    user = Provider.of<UserProvider>(context, listen: true).user;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -499,11 +501,12 @@ class _LoanPageState extends State<LoanPage>
                                 ),
                                 child: Slider(
                                   min: 0,
-                                  max: double.parse(get.balance.toString()),
+                                  max: 500000,
                                   thumbColor: buttonColor,
                                   divisions:
-                                      double.parse(get.balance.toString()) ~/
-                                          5000,
+                                      // double.parse(get.balance.toString()) ~/
+                                      //     5000,
+                                      5,
                                   activeColor: white,
                                   inactiveColor: grey.withOpacity(0.2),
                                   label: '${currentValue}',

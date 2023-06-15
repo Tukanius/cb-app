@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 class PotentialBalanceCard extends StatefulWidget {
   final Customer? customer;
   final Function()? onClick;
+  final bool? isLoading;
   final Get? data;
   final bool? button;
   const PotentialBalanceCard({
@@ -17,6 +18,7 @@ class PotentialBalanceCard extends StatefulWidget {
     this.button,
     Key? key,
     this.onClick,
+    this.isLoading,
   }) : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
   @override
   Widget build(BuildContext context) {
     isView = Provider.of<UserProvider>(context, listen: true).isView;
+
     return Container(
       width: MediaQuery.of(context).size.width - 38,
       alignment: Alignment.center,
@@ -48,7 +51,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 15),
                   child: Text(
-                    '${widget.customer?.name}',
+                    '${widget.customer?.loanProduct?.name}',
                     style: TextStyle(
                       color: grey,
                       fontSize: 12,
@@ -74,7 +77,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                 isView == false
                     ? Center(
                         child: Text(
-                          "${Utils().formatCurrency(widget.data?.balance)}₮",
+                          "${Utils().formatCurrency(widget.customer?.balance)}₮",
                           style: TextStyle(
                             color: white,
                             fontWeight: FontWeight.bold,
@@ -105,21 +108,30 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
                 ),
-                color: widget.data!.balance == "0.00" &&
-                        widget.data!.loanAmount == "0.00"
+                color: widget.customer?.balance == "0.00" &&
+                        widget.customer?.loanAmount == "0.00"
                     ? Colors.amber
                     : buttonColor,
               ),
-              child: widget.data!.balance == "0.00" &&
-                      widget.data!.loanAmount == "0.00"
-                  ? Text(
-                      'Зээлийн эрх шинэчлэх',
-                      style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                      textAlign: TextAlign.center,
+              child: widget.customer?.balance == "0.00" &&
+                      widget.customer?.loanAmount == "0.00"
+                  ? Row(
+                      children: [
+                        widget.isLoading == true
+                            ? CircularProgressIndicator(
+                                color: darkGrey,
+                              )
+                            : SizedBox(),
+                        Text(
+                          'Зээлийн эрх шинэчлэх',
+                          style: TextStyle(
+                            color: white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        )
+                      ],
                     )
                   : Text(
                       'Зээл авах',

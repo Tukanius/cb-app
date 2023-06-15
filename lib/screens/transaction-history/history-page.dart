@@ -19,6 +19,7 @@ class _HistoryPageState extends State<HistoryPage>
   int page = 1;
   int limit = 5;
   Result transactionList = Result(rows: [], count: 0);
+  bool isLoading = true;
 
   late TabController tabController;
   ScrollController scrollController = ScrollController();
@@ -33,6 +34,9 @@ class _HistoryPageState extends State<HistoryPage>
   @override
   afterFirstLayout(BuildContext context) async {
     list(page, limit);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   list(page, limit) async {
@@ -160,27 +164,33 @@ class _HistoryPageState extends State<HistoryPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            Column(
-              children: transactionList.rows!
-                  .map(
-                    (item) => TransactionHistoryCard(
-                      onClick: () {
-                        show(context);
-                      },
-                      data: item,
-                    ),
-                  )
-                  .toList(),
+      body: isLoading == true
+          ? Center(
+              child: CircularProgressIndicator(
+                color: buttonColor,
+              ),
             )
-          ],
-        ),
-      ),
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Column(
+                    children: transactionList.rows!
+                        .map(
+                          (item) => TransactionHistoryCard(
+                            onClick: () {
+                              show(context);
+                            },
+                            data: item,
+                          ),
+                        )
+                        .toList(),
+                  )
+                ],
+              ),
+            ),
     );
   }
 }

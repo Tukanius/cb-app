@@ -66,7 +66,6 @@ class Customer {
   Customer? gender;
   Customer? workStatus;
   String? total_pay_amount;
-
   String? type;
   String? transactionStatus;
   String? paymentId;
@@ -84,6 +83,10 @@ class Customer {
   String? description;
   String? addInfo;
 
+  Customer? loanProduct;
+  String? balance;
+  String? loanAmount;
+
   String getPostDate() {
     final now = Moment.now();
     var res = now.format(createdAt.toString());
@@ -91,6 +94,9 @@ class Customer {
   }
 
   Customer({
+    this.loanAmount,
+    this.balance,
+    this.loanProduct,
     this.type,
     this.transactionStatus,
     this.paymentId,

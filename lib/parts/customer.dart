@@ -173,12 +173,21 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     description:
         json['description'] != null ? json['description'] as String : null,
     addInfo: json['addInfo'] != null ? json['addInfo'] as String : null,
+    balance: json['balance'] != null ? json['balance'] as String : null,
+    loanAmount:
+        json['loanAmount'] != null ? json['loanAmount'] as String : null,
+    loanProduct: json['loanProduct'] != null
+        ? Customer.fromJson(json['loanProduct'] as Map<String, dynamic>)
+        : null,
   );
 }
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.loanAmount != null) json['loanAmount'] = instance.loanAmount;
+  if (instance.balance != null) json['balance'] = instance.balance;
+  if (instance.loanProduct != null) json['loanProduct'] = instance.loanProduct;
   if (instance.type != null) json['type'] = instance.type;
   if (instance.transactionStatus != null)
     json['transactionStatus'] = instance.transactionStatus;

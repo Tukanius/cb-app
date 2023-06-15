@@ -291,7 +291,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 children: [
                                   RegisterLetters(
                                     width: DeviceSize.width(3, context),
-                                    height: DeviceSize.height(80, context),
+                                    height: DeviceSize.height(90, context),
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,
                                     title: letters[0],
@@ -310,7 +310,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   RegisterLetters(
                                     width: DeviceSize.width(3, context),
-                                    height: DeviceSize.height(80, context),
+                                    height: DeviceSize.height(90, context),
                                     title: letters[1],
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,

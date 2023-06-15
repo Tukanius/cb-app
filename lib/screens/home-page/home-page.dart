@@ -1,10 +1,10 @@
-import 'package:bank_core/api/customer-api.dart';
+import 'dart:async';
+
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/loan/active-loan-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
 import 'package:bank_core/models/customer.dart';
-import 'package:bank_core/models/get.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
@@ -36,9 +36,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   bool isLoading = true;
+  bool isLoadingPage = true;
   int page = 1;
   int limit = 10;
-  Get get = Get();
   User user = User();
   Result loan = Result(count: 0, rows: []);
   ListenController listenController = ListenController();
@@ -50,10 +50,11 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   @override
   void initState() {
     listenController.addListener(() async {
-      get = await CustomerApi().accountGet(user.customerId!);
+      customers = await LoanApi().loanProduct(true);
       list(limit, page);
       setState(() {
         isLoading = false;
+        isLoadingPage = false;
       });
     });
     super.initState();
@@ -62,10 +63,9 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   @override
   afterFirstLayout(BuildContext context) async {
     customers = await LoanApi().loanProduct(true);
-    get = await CustomerApi().accountGet(user.customerId!);
     list(limit, page);
     setState(() {
-      isLoading = false;
+      isLoadingPage = false;
     });
   }
 
@@ -81,7 +81,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
 
   void _onRefresh() async {
     await Future.delayed(Duration(milliseconds: 1000));
-    get = await CustomerApi().accountGet(user.customerId!);
     setState(() {
       isLoading = true;
     });
@@ -96,7 +95,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
 
-    return isLoading == true
+    return isLoadingPage == true
         ? Center(
             child: CircularProgressIndicator(
               color: buttonColor,
@@ -160,18 +159,29 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                             elevation: 0,
                             key: ValueKey(customers.rows?[index]),
                             child: PotentialBalanceCard(
+                              isLoading: isLoading,
                               customer: customers.rows?[index],
-                              data: get,
                               onClick: () async {
-                                try {
-                                  await LoanApi().verify();
-                                  await LoanApi().scoring();
-                                  await Navigator.of(context).pushNamed(
+                                if (customers.rows?[index].loanAmount ==
+                                        "0.00" &&
+                                    customers.rows?[index].balance == "0.00") {
+                                  try {
+                                    await LoanApi().scoring();
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    Timer.periodic(Duration(seconds: 4),
+                                        (timer) {
+                                      listenController.changeVariable('change');
+                                    });
+                                  } catch (e) {
+                                    print(e.toString());
+                                  }
+                                } else {
+                                  Navigator.of(context).pushNamed(
                                       LoanPage.routeName,
                                       arguments: LoanPageArguments(
                                           listenController: listenController));
-                                } catch (e) {
-                                  print(e.toString());
                                 }
                               },
                             ),
