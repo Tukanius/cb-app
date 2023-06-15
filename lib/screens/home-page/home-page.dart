@@ -68,6 +68,11 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
     });
   }
 
+  void dispose() {
+    listenController.dispose();
+    super.dispose();
+  }
+
   list(limit, page) async {
     Offset offset = Offset(page: page, limit: limit);
     Filter filter = Filter(query: '');
@@ -169,9 +174,8 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                     setState(() {
                                       isLoading = true;
                                     });
-                                    Timer.periodic(Duration(seconds: 4),
-                                        (timer) {
-                                      listenController.changeVariable('change');
+                                    Future.delayed(Duration(seconds: 5), () {
+                                      listenController.refreshList('change');
                                     });
                                   } catch (e) {
                                     print(e.toString());

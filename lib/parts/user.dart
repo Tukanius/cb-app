@@ -72,12 +72,16 @@ User _$UserFromJson(Map<String, dynamic> json) {
     genderId: json['genderId'] != null ? json['genderId'] as String : null,
     birthDate: json['birthDate'] != null ? json['birthDate'] as String : null,
     whoTypeId: json['whoTypeId'] != null ? json['whoTypeId'] as String : null,
+    otpCode: json['otpCode'] != null ? json['otpCode'] as String : null,
+    otpMethod: json['otpMethod'] != null ? json['otpMethod'] as String : null,
   );
 }
 
 Map<String, dynamic> _$UserToJson(User instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.otpCode != null) json['otpCode'] = instance.otpCode;
+  if (instance.otpMethod != null) json['otpMethod'] = instance.otpMethod;
   if (instance.whoTypeId != null) json['whoTypeId'] = instance.whoTypeId;
   if (instance.registerNo != null) json['registerNo'] = instance.registerNo;
   if (instance.genderId != null) json['genderId'] = instance.genderId;

@@ -92,6 +92,7 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return OtpVerifyPage(
                           username: arguments.username,
+                          data: arguments.data,
                         );
                       });
                     case LoanPage.routeName:
@@ -108,6 +109,14 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return AddWhoTypePage(
                           listenController: arguments.listenController,
+                        );
+                      });
+                    case ChangePasswordPage.routeName:
+                      ChangePasswordPageArguments arguments =
+                          settings.arguments as ChangePasswordPageArguments;
+                      return MaterialPageRoute(builder: (context) {
+                        return ChangePasswordPage(
+                          isForgot: arguments.isForgot,
                         );
                       });
                     case MainPage.routeName:

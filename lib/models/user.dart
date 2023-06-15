@@ -31,20 +31,22 @@ class User {
   User? customer;
   User? regUser;
   String? oldPassword;
-
   String? userId;
   String? tokenType;
   String? accessToken;
   String? refreshToken;
   String? sessionState;
-
   String? registerNo;
   String? genderId;
   String? birthDate;
-
   String? whoTypeId;
 
+  String? otpMethod;
+  String? otpCode;
+
   User({
+    this.otpMethod,
+    this.otpCode,
     this.whoTypeId,
     this.registerNo,
     this.genderId,

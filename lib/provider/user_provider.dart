@@ -50,4 +50,16 @@ class UserProvider extends ChangeNotifier {
     setAccessToken(user.accessToken);
     return user;
   }
+
+  getOtp() async {
+    User res = await AuthApi().getOtp();
+    await setAccessToken(res.accessToken);
+    return res;
+  }
+
+  forgot(User data) async {
+    User res = await AuthApi().forgot(data);
+    await setAccessToken(res.accessToken);
+    return res;
+  }
 }

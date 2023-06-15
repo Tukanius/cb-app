@@ -36,8 +36,7 @@ class _ForgotPageState extends State<ForgotPage> {
         User data = User.fromJson(fbKey.currentState!.value);
         data.registerNo =
             '${letters.join()}${fbKey.currentState?.value["registerNo"]}';
-        await Provider.of<UserProvider>(context, listen: false).register(data);
-        // await show(context);
+        await Provider.of<UserProvider>(context, listen: false).forgot(data);
         setState(() {
           isSubmit = false;
         });
@@ -104,7 +103,6 @@ class _ForgotPageState extends State<ForgotPage> {
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: FormBuilder(
               key: fbKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -119,7 +117,7 @@ class _ForgotPageState extends State<ForgotPage> {
                         color: darkGrey,
                         validators: FormBuilderValidators.compose([
                           (value) {
-                            return validateEmail(value.toString(), context);
+                            return validatePhone(value.toString(), context);
                           }
                         ]),
                       ),
@@ -271,13 +269,13 @@ class _ForgotPageState extends State<ForgotPage> {
   }
 }
 
-String? validateEmail(String value, context) {
-  RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+String? validatePhone(String value, context) {
+  RegExp regex = RegExp(r'[(9|8]{1}[0-9]{7}$');
   if (value.isEmpty) {
-    return 'И-Мейлээ оруулна уу';
+    return 'Утасны дугаараа оруулна уу';
   } else {
     if (!regex.hasMatch(value)) {
-      return 'И-Мейлээ шалгана уу';
+      return 'Утасны дугаараа шалгана уу';
     } else {
       return null;
     }

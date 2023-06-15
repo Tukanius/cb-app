@@ -1,23 +1,33 @@
 import 'dart:async';
-
+import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/components/action-button.dart';
-import 'package:bank_core/screens/splash/splash.dart';
+import 'package:bank_core/models/user.dart';
+import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:provider/provider.dart';
 
 class OtpVerifyPageArguments {
   String? username;
+  User? data;
   OtpVerifyPageArguments({
+    this.data,
     this.username,
   });
 }
 
 class OtpVerifyPage extends StatefulWidget {
+  final User? data;
   static const routeName = 'OtpVerifyPage';
   final String? username;
-  const OtpVerifyPage({Key? key, this.username}) : super(key: key);
+  const OtpVerifyPage({
+    Key? key,
+    this.username,
+    this.data,
+  }) : super(key: key);
 
   @override
   State<OtpVerifyPage> createState() => _OtpVerifyPageState();
@@ -30,13 +40,15 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
   bool isSubmit = false;
   late Timer _timer;
   String username = "";
+  User user = User();
 
   @override
-  afterFirstLayout(BuildContext context) {
+  afterFirstLayout(BuildContext context) async {
     _startTimer();
     setState(() {
       username = widget.username!;
     });
+    user = await Provider.of<UserProvider>(context, listen: false).getOtp();
   }
 
   String intToTimeLeft(int value) {
@@ -46,6 +58,13 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
     s = value - (h * 3600) - (m * 60);
     String result = "$m:$s";
     return result;
+  }
+
+  checkOpt(value) async {
+    user.otpCode = value;
+    await AuthApi().otpVerify(user);
+    await Navigator.of(context).pushNamed(ChangePasswordPage.routeName,
+        arguments: ChangePasswordPageArguments(isForgot: false));
   }
 
   void _startTimer() async {
@@ -112,7 +131,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
             ),
           ),
           TextSpan(
-              text: ' И-Мейл хаягруу явуулсан 6 оронтой тоог оруулна уу.',
+              text: ' утасны дугаарлуу явуулсан 4 оронтой тоог оруулна уу.',
               style: TextStyle(color: greyDark)),
         ],
       ),
@@ -198,7 +217,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
-                          onTap: () {
+                          onTap: () async {
                             setState(() {
                               isSubmit = true;
                             });
@@ -229,13 +248,13 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
                     child: Pinput(
                       autofocus: true,
                       keyboardType: TextInputType.number,
-                      onCompleted: (value) => {
-                        Navigator.of(context).pushNamed(SplashScreen.routeName),
-                      },
-                      validator: (value) {
-                        return value == "123456" ? null : "Буруу байна";
-                      },
-                      length: 6,
+                      onCompleted: (value) => checkOpt(value),
+                      // validator: (value) {
+                      //   return value == "${user.otpCode}"
+                      //       ? null
+                      //       : "Буруу байна";
+                      // },
+                      length: 4,
                       hapticFeedbackType: HapticFeedbackType.lightImpact,
                       defaultPinTheme: defaultPinTheme,
                       submittedPinTheme: defaultPinTheme.copyWith(

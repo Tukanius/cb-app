@@ -116,31 +116,46 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
               child: widget.customer?.balance == "0.00" &&
                       widget.customer?.loanAmount == "0.00"
                   ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         widget.isLoading == true
-                            ? CircularProgressIndicator(
-                                color: darkGrey,
+                            ? Center(
+                                child: SizedBox(
+                                  child: CircularProgressIndicator(
+                                    color: darkGrey,
+                                    strokeWidth: 2,
+                                  ),
+                                  height: 15,
+                                  width: 15,
+                                ),
                               )
                             : SizedBox(),
-                        Text(
-                          'Зээлийн эрх шинэчлэх',
-                          style: TextStyle(
-                            color: white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Center(
+                          child: Text(
+                            'Зээлийн эрх шинэчлэх',
+                            style: TextStyle(
+                              color: white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         )
                       ],
                     )
-                  : Text(
-                      'Зээл авах',
-                      style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                  : Center(
+                      child: Text(
+                        'Зээл авах',
+                        style: TextStyle(
+                          color: white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
             ),
           )

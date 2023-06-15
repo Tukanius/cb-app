@@ -9,9 +9,20 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:lottie/lottie.dart';
 
+class ChangePasswordPageArguments {
+  bool? isForgot;
+  ChangePasswordPageArguments({
+    this.isForgot,
+  });
+}
+
 class ChangePasswordPage extends StatefulWidget {
   static const routeName = 'ChangePasswordPage';
-  const ChangePasswordPage({Key? key}) : super(key: key);
+  final bool? isForgot;
+  const ChangePasswordPage({
+    Key? key,
+    this.isForgot,
+  }) : super(key: key);
 
   @override
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
@@ -208,18 +219,20 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 children: [
                   Column(
                     children: [
-                      FormTextField(
-                        labelText: "Хуучин нууц үг",
-                        inputType: TextInputType.text,
-                        obscureText: true,
-                        name: 'oldPassword',
-                        hintText: "Хуучин нууц үгээ оруулна уу",
-                        color: darkGrey,
-                        validators: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: 'Хуучин нууц үгээ оруулна уу')
-                        ]),
-                      ),
+                      widget.isForgot == true || widget.isForgot == null
+                          ? FormTextField(
+                              labelText: "Хуучин нууц үг",
+                              inputType: TextInputType.text,
+                              obscureText: true,
+                              name: 'oldPassword',
+                              hintText: "Хуучин нууц үгээ оруулна уу",
+                              color: darkGrey,
+                              validators: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(
+                                    errorText: 'Хуучин нууц үгээ оруулна уу')
+                              ]),
+                            )
+                          : SizedBox(),
                       SizedBox(
                         height: 8,
                       ),

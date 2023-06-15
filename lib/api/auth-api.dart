@@ -29,4 +29,22 @@ class AuthApi extends HttpRequest {
     var res = await post("/auth/check-password", data: json);
     return res == true;
   }
+
+  otpVerify(User data) async {
+    Map<String, dynamic> json = {};
+    json['otpCode'] = data.otpCode;
+    json['otpMethod'] = data.otpMethod;
+    var res = await post('/otp/verify', data: json, handler: true);
+    return res;
+  }
+
+  forgot(User data) async {
+    var res = await post('/auth/forgot', data: data.toJson());
+    return User.fromJson(res);
+  }
+
+  getOtp() async {
+    var res = await get('/otp/get?otpMethod=FORGOT', handler: true);
+    return User.fromJson(res as Map<String, dynamic>);
+  }
 }
