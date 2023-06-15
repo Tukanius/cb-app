@@ -54,7 +54,7 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     totalPayAmount: json['totalPayAmount'] != null
         ? json['totalPayAmount'] as String
         : null,
-    payDate: json['payDate'] != null ? json['payDate'] as String : null,
+    pay_date: json['pay_date'] != null ? json['pay_date'] as String : null,
     loanStatusId:
         json['loanStatusId'] != null ? json['loanStatusId'] as String : null,
     loanType: json['loanType'] != null
@@ -216,7 +216,7 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
     json['debitAccountCurrency'] = instance.debitAccountCurrency;
   if (instance.description != null) json['description'] = instance.description;
   if (instance.addInfo != null) json['addInfo'] = instance.addInfo;
-  if (instance.payDate != null) json['payDate'] = instance.payDate;
+  if (instance.pay_date != null) json['pay_date'] = instance.pay_date;
   if (instance.total_pay_amount != null)
     json['total_pay_amount'] = instance.total_pay_amount;
   if (instance.educationType != null)

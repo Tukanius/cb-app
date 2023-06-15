@@ -16,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePageArguments {
   String id;
@@ -195,7 +194,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                             children: [
                               Container(
                                 margin: const EdgeInsets.only(
-                                    left: 15, bottom: 20, top: 30),
+                                    left: 25, bottom: 4, top: 30),
                                 child: Text(
                                   'Идэвхтэй зээл',
                                   style: TextStyle(
@@ -234,22 +233,22 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   },
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.center,
-                                child: SmoothPageIndicator(
-                                  controller: pageController,
-                                  count: loan.rows!.length,
-                                  effect: WormEffect(
-                                    dotColor: greyDark,
-                                    dotHeight: 10,
-                                    dotWidth: 10,
-                                    activeDotColor: buttonColor,
-                                  ),
-                                  onDotClicked: (index) {},
-                                ),
-                              ),
+                              // Container(
+                              //   margin: EdgeInsets.only(top: 10),
+                              //   width: MediaQuery.of(context).size.width,
+                              //   alignment: Alignment.center,
+                              //   child: SmoothPageIndicator(
+                              //     controller: pageController,
+                              //     count: loan.rows!.length,
+                              //     effect: WormEffect(
+                              //       dotColor: greyDark,
+                              //       dotHeight: 10,
+                              //       dotWidth: 10,
+                              //       activeDotColor: buttonColor,
+                              //     ),
+                              //     onDotClicked: (index) {},
+                              //   ),
+                              // ),
                             ],
                           )
                         : SizedBox(),
