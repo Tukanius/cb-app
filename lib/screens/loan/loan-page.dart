@@ -28,15 +28,22 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class LoanPageArguments {
   ListenController listenController;
+  String maxRate;
   LoanPageArguments({
     required this.listenController,
+    required this.maxRate,
   });
 }
 
 class LoanPage extends StatefulWidget {
+  final String maxRate;
   static const routeName = 'LoanPage';
   final ListenController listenController;
-  const LoanPage({super.key, required this.listenController});
+  const LoanPage({
+    super.key,
+    required this.listenController,
+    required this.maxRate,
+  });
 
   @override
   State<LoanPage> createState() => _LoanPageState();
@@ -151,7 +158,7 @@ class _LoanPageState extends State<LoanPage>
       if (res == true) {
         loan.amount = currentValue;
         loan.loanDate = DateTime.now().toString();
-        loan.loanRate = '3';
+        loan.loanRate = '5';
         loan.loanTimeId = seletedDayId;
         loan.accountId = selectedMethod;
         await LoanApi().createLoan(loan);
@@ -501,15 +508,15 @@ class _LoanPageState extends State<LoanPage>
                                 ),
                                 child: Slider(
                                   min: 0,
-                                  max: 500000,
+                                  max: double.parse(get.balance.toString()),
                                   thumbColor: buttonColor,
                                   divisions:
-                                      // double.parse(get.balance.toString()) ~/
-                                      //     5000,
-                                      5,
+                                      double.parse(get.balance.toString()) ~/
+                                          5000,
+                                  // 5,
                                   activeColor: white,
                                   inactiveColor: grey.withOpacity(0.2),
-                                  label: '${currentValue}',
+                                  label: '${currentValue.toInt()}',
                                   value: currentValue,
                                   onChanged: (double value) {
                                     setState(() {
@@ -649,7 +656,7 @@ class _LoanPageState extends State<LoanPage>
                             ),
                           ),
                           Text(
-                            "4.5%",
+                            "${widget.maxRate}%",
                             style: TextStyle(
                               color: white,
                               fontWeight: FontWeight.w600,

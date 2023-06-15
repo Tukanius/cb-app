@@ -49,7 +49,6 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
       });
       try {
         save = Customer.fromJson(fbKey.currentState!.value);
-        save.customerId = user.customerId;
         save.bankId = bank.id;
         await CustomerApi().createBankAccount(save);
         widget.listenController.changeVariable("refresh");

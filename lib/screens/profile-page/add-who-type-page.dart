@@ -46,7 +46,6 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
           isSubmit = true;
         });
         User save = User.fromJson(fbkey.currentState!.value);
-        save.customerId = user.customerId;
         save.whoTypeId = whoTypeId;
         await CustomerApi().createRelatedPerson(save);
         widget.listenController.changeVariable("whotypes");
@@ -276,6 +275,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       labelText: "Утасны дугаар",
                       name: 'phone',
                       color: darkGrey,
+                      inputType: TextInputType.phone,
                       showCounter: false,
                       maxLenght: 8,
                       hintText: 'Утасны дугаар',

@@ -197,6 +197,21 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       height: 30,
                     ),
                     FormTextField(
+                      labelText: "И-Мэйл",
+                      inputType: TextInputType.text,
+                      name: 'email',
+                      hintText: 'И-мэйл оруулна уу',
+                      color: darkGrey,
+                      validators: FormBuilderValidators.compose([
+                        (value) {
+                          return validateEmail(value.toString(), context);
+                        }
+                      ]),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    FormTextField(
                       labelText: "Ургийн овог",
                       inputType: TextInputType.text,
                       name: 'familyName',
@@ -678,5 +693,18 @@ class _AddInformationPageState extends State<AddInformationPage> {
         ),
       ),
     );
+  }
+}
+
+String? validateEmail(String value, context) {
+  RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  if (value.isEmpty) {
+    return 'И-Мейлээ оруулна уу';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'И-Мейлээ шалгана уу';
+    } else {
+      return null;
+    }
   }
 }

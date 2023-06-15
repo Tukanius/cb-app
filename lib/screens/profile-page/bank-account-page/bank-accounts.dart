@@ -92,6 +92,24 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                       "Данс холбоогүй байна",
                       style: TextStyle(color: grey),
                     ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: CustomButton(
+                        labelColor: buttonColor,
+                        textColor: white,
+                        onClick: () {
+                          Navigator.of(context).pushNamed(
+                              AddBankAccountPage.routeName,
+                              arguments: AddBankAccountPageArguments(
+                                  listenController: listenController));
+                        },
+                        labelText: "Данс нэмэх",
+                        boxShadow: true,
+                      ),
+                    ),
                   ],
                 )
               : SingleChildScrollView(

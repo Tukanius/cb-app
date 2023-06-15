@@ -38,6 +38,8 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   @override
   afterFirstLayout(BuildContext context) async {
     customer = await CustomerApi().customerGet(user.customerId!);
+    print(customer.result?.email);
+    print('=======customer======');
     list(page, limit);
     setState(() {
       isLoading = false;
@@ -119,7 +121,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                     Description(
                       isDone: true,
                       label: 'Утасны дугаар',
-                      name: '${user.phone}',
+                      name: '${customer.result?.phone}',
                       onTap: () {
                         print("Утасны дугаар");
                       },
@@ -127,14 +129,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                     SizedBox(
                       height: 8,
                     ),
-                    Description(
-                      isDone: false,
-                      label: 'И-мейл',
-                      name: '${user.email}',
-                      onTap: () {
-                        print("И-мейл");
-                      },
-                    ),
+                    customer.result?.email == null
+                        ? SizedBox()
+                        : Description(
+                            isDone: false,
+                            label: 'И-мейл',
+                            name: '${customer.result?.email}',
+                            onTap: () {
+                              print("И-мейл");
+                            },
+                          ),
                     SizedBox(
                       height: 8,
                     ),
@@ -172,7 +176,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                       ),
                                     ),
                                     Text(
-                                      '${user.lastName}',
+                                      '${customer.result?.lastName}',
                                       style: TextStyle(
                                         color: white,
                                         fontWeight: FontWeight.w500,
@@ -194,7 +198,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                       ),
                                     ),
                                     Text(
-                                      '${user.firstName}',
+                                      '${customer.result?.firstName}',
                                       style: TextStyle(
                                         color: white,
                                         fontWeight: FontWeight.w500,
@@ -202,38 +206,160 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                customer.result?.email == null
+                                    ? SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'И-Мэйл:',
+                                            style: TextStyle(
+                                              color: grey,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${customer.result?.email}',
+                                            style: TextStyle(
+                                              color: white,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                customer.result?.birthDate == null
+                                    ? SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Төрсөн өдөр:',
+                                            style: TextStyle(
+                                              color: grey,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${customer.result?.birthDate}',
+                                            style: TextStyle(
+                                              color: white,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                customer.result?.educationType == null
+                                    ? SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Боловсролын зэрэг :',
+                                            style: TextStyle(
+                                              color: grey,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${customer.result?.educationType?.name}',
+                                            style: TextStyle(
+                                              color: white,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                customer.result?.nationalityType == null
+                                    ? SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Яс үндэс :',
+                                            style: TextStyle(
+                                              color: grey,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${customer.result?.nationalityType?.name}',
+                                            style: TextStyle(
+                                              color: white,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                customer.result?.gender == null
+                                    ? SizedBox()
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Хүйс :',
+                                            style: TextStyle(
+                                              color: grey,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${customer.result?.gender?.name}',
+                                            style: TextStyle(
+                                              color: white,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                               ],
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                AddInformationPage.routeName,
-                                arguments: AddInformationPageArguments(
-                                    listenController: listenController),
-                              );
-                            },
-                            child: Container(
-                              height: 50,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: buttonColor,
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(15),
-                                  bottomRight: Radius.circular(15),
+                          customer.result?.nationalityType != null
+                              ? SizedBox()
+                              : GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(
+                                      AddInformationPage.routeName,
+                                      arguments: AddInformationPageArguments(
+                                          listenController: listenController),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: buttonColor,
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Нэмэлт мэдээлэл бөглөх",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              child: Text(
-                                "Нэмэлт мэдээлэл бөглөх",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),

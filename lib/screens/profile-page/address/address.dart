@@ -28,7 +28,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
 
   @override
   afterFirstLayout(BuildContext context) async {
-    customer = await CustomerApi().addressList(user.customerId!);
+    customer = await CustomerApi().addressList();
     setState(() {
       isLoading = false;
     });
@@ -37,7 +37,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
   @override
   void initState() {
     listenController.addListener(() async {
-      customer = await CustomerApi().addressList(user.customerId!);
+      customer = await CustomerApi().addressList();
       setState(() {
         isLoading = false;
       });

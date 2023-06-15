@@ -62,7 +62,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                '${widget.data.provinceId}',
+                '${widget.data.province?.name}',
                 style: TextStyle(
                   color: white,
                   fontSize: 14,
@@ -86,7 +86,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                '${widget.data.districtId}',
+                '${widget.data.district?.name}',
                 style: TextStyle(
                   color: white,
                   fontSize: 14,
@@ -110,7 +110,7 @@ class _AddressCardState extends State<AddressCard> {
                 ),
               ),
               Text(
-                '${widget.data.khorooId}',
+                '${widget.data.khoroo?.name}',
                 style: TextStyle(
                   color: white,
                   fontSize: 14,

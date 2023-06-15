@@ -12,7 +12,7 @@ class CustomerApi extends HttpRequest {
   }
 
   createRelatedPerson(User data) async {
-    var res = await post("/customerRelatedPerson",
+    var res = await post("/customer-related-person/create",
         data: data.toJson(), handler: true);
     return res;
   }
@@ -28,19 +28,19 @@ class CustomerApi extends HttpRequest {
   }
 
   createBankAccount(Customer data) async {
-    var res = await post("/customerAccount/create",
+    var res = await post("/customer-account/create",
         data: data.toJson(), handler: true);
     return res;
   }
 
   customerAddress(Customer data) async {
-    var res = await post('/customerAddress/create',
+    var res = await post('/customer-address/create',
         data: data.toJson(), handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 
-  Future<Customer> addressList(String id) async {
-    var res = await get("/customerAddress/list/$id", handler: true);
+  Future<Customer> addressList() async {
+    var res = await get("/customer-address/list", handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 

@@ -9,7 +9,7 @@ class GeneralApi extends HttpRequest {
   }
 
   faqList() async {
-    var res = await get('/answerQuestion/list', handler: false);
+    var res = await get('/answer-question/list', handler: false);
     print(res);
     return Answer.fromJson(res as Map<String, dynamic>);
   }

@@ -1,3 +1,4 @@
+import 'package:bank_core/screens/profile-page/address/address.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
@@ -279,8 +280,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Navigator.of(context).pushNamed(AddAddress.routeName);
-                  secureStorage.deleteAll();
+                  Navigator.of(context).pushNamed(AddAddress.routeName);
+                  // secureStorage.deleteAll();
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 10),

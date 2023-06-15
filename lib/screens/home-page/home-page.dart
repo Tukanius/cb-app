@@ -182,9 +182,11 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   }
                                 } else {
                                   Navigator.of(context).pushNamed(
-                                      LoanPage.routeName,
-                                      arguments: LoanPageArguments(
-                                          listenController: listenController));
+                                    LoanPage.routeName,
+                                    arguments: LoanPageArguments(
+                                        listenController: listenController,
+                                        maxRate: '5'),
+                                  );
                                 }
                               },
                             ),

@@ -14,10 +14,9 @@ class LoanApi extends HttpRequest {
     return Customer.fromJson(res as Map<String, dynamic>);
   }
 
-  Future<Result> paidList(ResultArguments resultArguments, String id) async {
-    var res = await get("/loanPayBackPaidList/$id",
-        data: resultArguments.toJson(), handler: true);
-    return Result.fromJson(res, Customer.fromJson);
+  Future<Customer> paidList(String id) async {
+    var res = await get("/loan/loan-pay-back-paid/list/$id", handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
   }
 
   Future<Result> loanSchedule(

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/paid-back-card/paid-back-card.dart';
 import 'package:bank_core/models/customer.dart';
-import 'package:bank_core/models/result.dart';
 import 'package:bank_core/screens/loan/loan-schedule-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -42,8 +41,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
   bool isLoading = false;
   int page = 1;
   int limit = 5;
-  Result list = Result(rows: [], count: 0);
   double? totalAmount = 0;
+  Customer payBackList = Customer();
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -51,18 +50,10 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
       isLoading = true;
     });
     customer = await LoanApi().activeLoanGet(widget.id);
-
-    paidList(page, limit);
+    payBackList = await LoanApi().paidList(widget.id);
     setState(() {
       isLoading = false;
     });
-  }
-
-  paidList(page, limit) async {
-    Offset offset = Offset(limit: limit, page: page);
-    Filter filter = Filter(query: '');
-    list = await LoanApi()
-        .paidList(ResultArguments(offset: offset, filter: filter), widget.id);
   }
 
   Customer customer = Customer();
@@ -146,7 +137,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                         ),
                         Text(
                           // "${Utils().formatCurrency(customer.totalPayAmount)}₮",
-                          "${customer.totalPayAmount}",
+                          "${customer.totalPayAmount}₮",
                           style: TextStyle(
                             color: white,
                             fontSize: 24,
@@ -264,7 +255,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                     ),
                                     Text(
                                       // "${Utils().formatCurrency(customer.loanResidual)}₮",
-                                      "${customer.loanResidual}",
+                                      "${customer.loanResidual}₮",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -291,7 +282,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                     ),
                                     Text(
                                       // "${Utils().formatCurrency(customer.rateAmount)}₮",
-                                      "${customer.rateAmount}",
+                                      "${customer.rateAmount}₮",
                                       style: TextStyle(
                                         color: white,
                                         fontSize: 12,
@@ -412,7 +403,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                       ),
                     ),
                   ),
-                  list.rows!.length == 0
+                  payBackList.rows?.length == 0
                       ? SizedBox()
                       : Container(
                           margin: const EdgeInsets.only(
@@ -426,9 +417,15 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                             ),
                           ),
                         ),
-                  Column(
-                    children: list.rows!.map((e) => PaidBackCard()).toList(),
-                  ),
+                  payBackList.rows == null
+                      ? SizedBox()
+                      : Column(
+                          children: payBackList.rows!
+                              .map((e) => PaidBackCard(
+                                    data: e,
+                                  ))
+                              .toList(),
+                        ),
                   SizedBox(
                     height: 50,
                   ),

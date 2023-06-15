@@ -82,10 +82,12 @@ class Customer {
   String? debitAccountCurrency;
   String? description;
   String? addInfo;
-
   Customer? loanProduct;
   String? balance;
   String? loanAmount;
+
+  List<Customer>? loanProductRate;
+  String? maxRate;
 
   String getPostDate() {
     final now = Moment.now();
@@ -94,6 +96,8 @@ class Customer {
   }
 
   Customer({
+    this.maxRate,
+    this.loanProductRate,
     this.loanAmount,
     this.balance,
     this.loanProduct,

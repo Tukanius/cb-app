@@ -101,6 +101,7 @@ class MyApp extends StatelessWidget {
                       return MaterialPageRoute(builder: (context) {
                         return LoanPage(
                           listenController: arguments.listenController,
+                          maxRate: arguments.maxRate,
                         );
                       });
                     case AddWhoTypePage.routeName:
