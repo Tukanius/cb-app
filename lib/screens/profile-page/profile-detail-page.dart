@@ -269,11 +269,19 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                               color: grey,
                                             ),
                                           ),
-                                          Text(
-                                            '${customer.result?.educationType?.name}',
-                                            style: TextStyle(
-                                              color: white,
-                                              fontWeight: FontWeight.w500,
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              '${customer.result?.educationType?.name}',
+                                              style: TextStyle(
+                                                color: white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                              softWrap: false,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.fade,
                                             ),
                                           ),
                                         ],
