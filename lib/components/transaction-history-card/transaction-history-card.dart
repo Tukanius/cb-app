@@ -47,18 +47,20 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                 SizedBox(
                   height: 5,
                 ),
-                Text(
-                  '${widget.data?.description}',
-                  style: TextStyle(
-                    color: white,
-                  ),
-                ),
+                widget.data?.description != null
+                    ? Text(
+                        '${widget.data?.description}',
+                        style: TextStyle(
+                          color: white,
+                        ),
+                      )
+                    : SizedBox(),
               ],
             ),
             Text(
               '${widget.data?.amount}',
               style: TextStyle(
-                color: widget.data?.type != "зарлага" ? red : green,
+                color: widget.data?.type != "ЗАРЛАГА" ? red : green,
                 fontWeight: FontWeight.w500,
               ),
             )
