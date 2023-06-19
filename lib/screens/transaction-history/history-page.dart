@@ -4,6 +4,7 @@ import 'package:bank_core/models/result.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:lottie/lottie.dart';
 
 class HistoryPage extends StatefulWidget {
   static const routeName = 'HistoryPage';
@@ -170,27 +171,49 @@ class _HistoryPageState extends State<HistoryPage>
                 color: buttonColor,
               ),
             )
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 30,
+          : transactionList.rows?.length == 0
+              ? Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Center(
+                      child:
+                          Lottie.asset('assets/lottie/empty.json', height: 150),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Гүйлгээний түүх хоосон байна",
+                      style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Column(
+                        children: transactionList.rows!
+                            .map(
+                              (item) => TransactionHistoryCard(
+                                onClick: () {
+                                  show(context);
+                                },
+                                data: item,
+                              ),
+                            )
+                            .toList(),
+                      )
+                    ],
                   ),
-                  Column(
-                    children: transactionList.rows!
-                        .map(
-                          (item) => TransactionHistoryCard(
-                            onClick: () {
-                              show(context);
-                            },
-                            data: item,
-                          ),
-                        )
-                        .toList(),
-                  )
-                ],
-              ),
-            ),
+                ),
     );
   }
 }
