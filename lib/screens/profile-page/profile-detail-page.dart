@@ -272,17 +272,15 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                              '${customer.result?.educationType?.name}',
-                                              style: TextStyle(
-                                                color: white,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                              softWrap: false,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.fade,
+                                          Text(
+                                            '${customer.result?.educationType?.name}',
+                                            style: TextStyle(
+                                              color: white,
+                                              fontWeight: FontWeight.w500,
                                             ),
+                                            softWrap: false,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.fade,
                                           ),
                                         ],
                                       ),
@@ -443,7 +441,10 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                   boxShadow: true,
                                 ),
                             ],
-                          )
+                          ),
+                    SizedBox(
+                      height: 50,
+                    ),
                   ],
                 ),
               ),

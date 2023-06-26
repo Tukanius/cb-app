@@ -219,6 +219,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   controller: pageController,
                                   itemBuilder: (context, index) {
                                     return Card(
+                                      shadowColor: transparent,
                                       color: backgroundColor,
                                       key: ValueKey(loan.rows![index]),
                                       child: ActiveLoanCard(

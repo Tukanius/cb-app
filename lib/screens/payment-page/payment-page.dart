@@ -6,6 +6,8 @@ import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/bank-transfer-page/bank-transfer-page.dart';
+import 'package:bank_core/screens/qpay/qpay.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/form_textfield.dart';
@@ -14,7 +16,6 @@ import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:bank_core/components/payment-type/payment-type-card.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
@@ -314,18 +315,78 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         ),
                       ),
                     ),
-                    Column(
-                        children: ["QPAY", "SOCIALPAY", "BANK_TRANSPER"]
-                            .map((e) => PaymentTypeCard(
-                                  data: e,
-                                  onClick: () {
-                                    setState(() {
-                                      paymentType = e;
-                                    });
-                                  },
-                                  value: paymentType == e,
-                                ))
-                            .toList()),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(QpayPage.routeName);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 4),
+                        decoration: BoxDecoration(
+                          color: darkGrey,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 15),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image(
+                                image: AssetImage('images/3.png'),
+                                height: 24,
+                                width: 24,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "QPay",
+                              style: TextStyle(
+                                color: white,
+                                fontSize: 16,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(BankTransferPage.routeName);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 4),
+                        decoration: BoxDecoration(
+                          color: darkGrey,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 15),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: SvgPicture.asset(
+                                'assets/svg/bank.svg',
+                                color: white,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Банкаар шилжүүлэх",
+                              style: TextStyle(
+                                color: white,
+                                fontSize: 16,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                     Container(
                       margin: EdgeInsets.only(top: 20, bottom: 10),
                       child: Text(
@@ -431,6 +492,9 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         },
                         textColor: white,
                       ),
+                    ),
+                    SizedBox(
+                      height: 50,
                     ),
                   ],
                 ),

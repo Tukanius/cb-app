@@ -1,12 +1,16 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class QpayPageArguments {
   final double? amount;
   final String? accountId;
 
-  QpayPageArguments({this.accountId, this.amount});
+  QpayPageArguments({
+    this.accountId,
+    this.amount,
+  });
 }
 
 class QpayPage extends StatefulWidget {
@@ -14,7 +18,11 @@ class QpayPage extends StatefulWidget {
   final String? accountId;
 
   static const routeName = "QPayPage";
-  const QpayPage({Key? key, this.accountId, this.amount}) : super(key: key);
+  const QpayPage({
+    Key? key,
+    this.accountId,
+    this.amount,
+  }) : super(key: key);
 
   @override
   QpayPageState createState() => QpayPageState();
@@ -37,6 +45,7 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
         headerSliverBuilder: (BuildContext context, bool isScrolled) {
           return <Widget>[
             const SliverAppBar(
+              iconTheme: IconThemeData(color: white),
               floating: true,
               backgroundColor: backgroundColor,
               elevation: 0.0,
@@ -56,44 +65,46 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(border: Border.all()),
-                      height: 230,
-                      width: 230,
-                      // child: Image.memory(base64Decode("123"), width: 200),
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: Container(
+                    height: 230,
+                    width: 230,
+                    // child: Image.memory(base64Decode("123"), width: 200),
+                    child: SvgPicture.asset(
+                      'assets/svg/qrCode.svg',
+                      color: white,
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  "QPay ашиглан төлбөрөө хийх",
+                  style: TextStyle(
+                      color: white, fontSize: 20, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: GridView.count(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(10),
+                    crossAxisCount: 3,
+                    children: [
+                      for (int i = 0; i < 3; i++) card(context),
+                    ],
                   ),
-                  const Text(
-                    "QPay ашиглан төлбөрөө хийх",
-                    style: TextStyle(
-                        color: white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    child: GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(10),
-                      crossAxisCount: 3,
-                      children: [
-                        for (int i = 0; i < 3; i++) card(context),
-                      ],
-                    ),
-                  ),
-                ]),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -108,7 +119,6 @@ Widget card(BuildContext context) {
     key: UniqueKey(),
     onTap: () {
       _launchInBrowser("");
-
       Navigator.of(context).pop();
     },
     child: Container(

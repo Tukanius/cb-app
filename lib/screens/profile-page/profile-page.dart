@@ -1,4 +1,5 @@
 import 'package:bank_core/screens/profile-page/address/address.dart';
+import 'package:bank_core/screens/profile-page/benefit-ratio/benefit-ratio.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
@@ -301,6 +302,39 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       Text(
                         "Гэрийн хаяг нэмэх",
+                        style: TextStyle(
+                          color: white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(BenefitRatio.routeName);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: darkGrey,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.balance_outlined,
+                        color: white,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "Өр орлогын харьцаа",
                         style: TextStyle(
                           color: white,
                           fontSize: 14,

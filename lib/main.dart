@@ -1,11 +1,13 @@
 import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/check-biometric.dart';
+import 'package:bank_core/screens/bank-transfer-page/bank-transfer-page.dart';
 import 'package:bank_core/screens/otp/otp-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
 import 'package:bank_core/screens/auth/login.dart';
+import 'package:bank_core/screens/profile-page/benefit-ratio/benefit-ratio.dart';
 import 'package:bank_core/screens/profile-page/change-email/change-email-page.dart';
 import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
 import 'package:bank_core/screens/profile-page/change-phone/change-phone-page.dart';
@@ -172,6 +174,14 @@ class MyApp extends StatelessWidget {
                     case HistoryPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const HistoryPage();
+                      });
+                    case BankTransferPage.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const BankTransferPage();
+                      });
+                    case BenefitRatio.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const BenefitRatio();
                       });
                     case AddBankAccountPage.routeName:
                       AddBankAccountPageArguments arguments =
