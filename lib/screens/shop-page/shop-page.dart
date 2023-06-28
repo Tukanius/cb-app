@@ -1,7 +1,8 @@
+import 'package:bank_core/screens/shop-page/company/company.dart';
+import 'package:bank_core/screens/shop-page/product/product.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:lottie/lottie.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -19,112 +20,188 @@ class ShopPage extends StatefulWidget {
   State<ShopPage> createState() => _ShopPageState();
 }
 
-class _ShopPageState extends State<ShopPage> {
+class _ShopPageState extends State<ShopPage>
+    with SingleTickerProviderStateMixin {
   CarouselController carouselController = CarouselController();
-  int _current = 0;
+  late TabController tabController;
+  int currentIndex = 0;
+
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Container(
-              height: 500,
-              padding: EdgeInsets.symmetric(vertical: 15),
-              child: Column(
-                children: [
-                  Column(
-                    children: [
-                      CarouselSlider(
-                        carouselController: carouselController,
-                        options: CarouselOptions(
-                          height: 200.0,
-                          autoPlay: true,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _current = index;
-                            });
-                          },
+    return DefaultTabController(
+      length: 2,
+      child: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverToBoxAdapter(
+              child: Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: darkGrey,
+                ),
+                child: TabBar(
+                  unselectedLabelColor: Colors.grey,
+                  indicatorColor: white,
+                  indicator: UnderlineTabIndicator(
+                      insets: EdgeInsets.symmetric(horizontal: 16.0)),
+                  labelColor: white,
+                  tabs: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Tab(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            'Бараа бүтээгдэхүүн',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        items: imgList.map((data) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image: NetworkImage(data),
-                                  ),
-                                ),
-                                alignment: Alignment.center,
-                              );
-                            },
-                          );
-                        }).toList(),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: imgList.asMap().entries.map((entry) {
-                          return GestureDetector(
-                            onTap: () =>
-                                carouselController.animateToPage(entry.key),
-                            child: Container(
-                              width: 10.0,
-                              height: 10.0,
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 4.0),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == entry.key
-                                      ? buttonColor
-                                      : darkGrey),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      'Дэлгүүр',
-                      style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 15,
+                    Container(
+                      child: Tab(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            'Компани',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        Lottie.asset('assets/lottie/empty.json', height: 100),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          "Дэлгүүр одоогоор хоосон байна",
-                          style: TextStyle(color: grey),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ];
+        },
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            Product(),
+            Company(),
+          ],
+        ),
       ),
+      // child: Column(
+      //   children: [
+      //     Container(
+      //       height: MediaQuery.of(context).size.width,
+      //       width: MediaQuery.of(context).size.width,
+      //       child: CustomScrollView(
+      //         slivers: <Widget>[
+      //           SliverToBoxAdapter(
+      //             child: Container(
+      //               height: 500,
+      //               padding: EdgeInsets.symmetric(vertical: 15),
+      //               child: Column(
+      //                 children: [
+      //                   Column(
+      //                     children: [
+      //                       CarouselSlider(
+      //                         carouselController: carouselController,
+      //                         options: CarouselOptions(
+      //                           height: 200.0,
+      //                           autoPlay: true,
+      //                           onPageChanged: (index, reason) {
+      //                             setState(() {
+      //                               _current = index;
+      //                             });
+      //                           },
+      //                         ),
+      //                         items: imgList.map((data) {
+      //                           return Builder(
+      //                             builder: (BuildContext context) {
+      //                               return Container(
+      //                                 width:
+      //                                     MediaQuery.of(context).size.width,
+      //                                 margin: EdgeInsets.symmetric(
+      //                                     horizontal: 5.0),
+      //                                 decoration: BoxDecoration(
+      //                                   borderRadius:
+      //                                       BorderRadius.circular(10),
+      //                                   image: DecorationImage(
+      //                                     image: NetworkImage(data),
+      //                                   ),
+      //                                 ),
+      //                                 alignment: Alignment.center,
+      //                               );
+      //                             },
+      //                           );
+      //                         }).toList(),
+      //                       ),
+      //                       SizedBox(
+      //                         height: 8,
+      //                       ),
+      //                       Row(
+      //                         mainAxisAlignment: MainAxisAlignment.center,
+      //                         children: imgList.asMap().entries.map((entry) {
+      //                           return GestureDetector(
+      //                             onTap: () => carouselController
+      //                                 .animateToPage(entry.key),
+      //                             child: Container(
+      //                               width: 10.0,
+      //                               height: 10.0,
+      //                               margin: EdgeInsets.symmetric(
+      //                                   vertical: 8.0, horizontal: 4.0),
+      //                               decoration: BoxDecoration(
+      //                                   shape: BoxShape.circle,
+      //                                   color: _current == entry.key
+      //                                       ? buttonColor
+      //                                       : darkGrey),
+      //                             ),
+      //                           );
+      //                         }).toList(),
+      //                       ),
+      //                     ],
+      //                   ),
+      //                   Container(
+      //                     padding: EdgeInsets.symmetric(horizontal: 15),
+      //                     width: MediaQuery.of(context).size.width,
+      //                     child: Text(
+      //                       'Дэлгүүр',
+      //                       style: TextStyle(
+      //                         color: white,
+      //                         fontWeight: FontWeight.bold,
+      //                       ),
+      //                     ),
+      //                   ),
+      //                   Container(
+      //                     child: Column(
+      //                       children: [
+      //                         SizedBox(
+      //                           height: 15,
+      //                         ),
+      //                         Lottie.asset('assets/lottie/empty.json',
+      //                             height: 100),
+      //                         SizedBox(
+      //                           height: 15,
+      //                         ),
+      //                         Text(
+      //                           "Дэлгүүр одоогоор хоосон байна",
+      //                           style: TextStyle(color: grey),
+      //                         ),
+      //                       ],
+      //                     ),
+      //                   ),
+      //                 ],
+      //               ),
+      //             ),
+      //           ),
+      //         ],
+      //       ),
+      //     ),
+      //   ],
+      // )
     );
   }
 }

@@ -203,6 +203,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                               Navigator.of(context).pop();
                               Navigator.of(ctx).pop();
                               Navigator.of(ctx).pop();
+                              Navigator.of(ctx).pop();
                             },
                           ),
                         ],

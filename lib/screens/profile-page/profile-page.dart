@@ -1,5 +1,4 @@
 import 'package:bank_core/screens/profile-page/address/address.dart';
-import 'package:bank_core/screens/profile-page/benefit-ratio/benefit-ratio.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
@@ -247,7 +246,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(FaqPage.routeName);
+                  Navigator.of(context).pushNamed(SupportService.routeName);
                 },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 10),
@@ -268,7 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 15,
                       ),
                       Text(
-                        "Түгээмэл асуултууд",
+                        "Тусламж",
                         style: TextStyle(
                           color: white,
                           fontSize: 14,

@@ -26,6 +26,8 @@ class _MainPageState extends State<MainPage>
   User user = User();
   bool isView = false;
   int currentIndex = 0;
+  bool isDarkMode = false;
+
   late TabController tabController;
 
   @override
@@ -73,6 +75,9 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
     isView = Provider.of<UserProvider>(context, listen: true).isView;
+    isDarkMode = Provider.of<UserProvider>(context, listen: true).check;
+    final themeChange = Provider.of<UserProvider>(context);
+
     return WillPopScope(
       onWillPop: () => _onWillPop(context),
       child: Container(
@@ -127,6 +132,30 @@ class _MainPageState extends State<MainPage>
                 ],
               ),
               actions: [
+                ActionButton(
+                  icon: isDarkMode == false
+                      ? SvgPicture.asset(
+                          "assets/svg/dark-mode.svg",
+                          height: 24,
+                          width: 24,
+                          color: black,
+                        )
+                      : SvgPicture.asset(
+                          "assets/svg/dark-mode.svg",
+                          height: 24,
+                          width: 24,
+                          color: white,
+                        ),
+                  onClick: () {
+                    Provider.of<UserProvider>(context, listen: false)
+                        .toggleDarkMode(!isDarkMode);
+                    themeChange.darkTheme = !themeChange.darkTheme;
+                    print(isDarkMode);
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 ActionButton(
                   icon: isView == false
                       ? Icon(

@@ -25,6 +25,10 @@ import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
+import 'package:bank_core/screens/profile-page/support-service/support-service.dart';
+import 'package:bank_core/screens/profile-page/support-service/to-contact.dart';
+import 'package:bank_core/screens/shop-page/company/company-information.dart';
+import 'package:bank_core/screens/shop-page/product/product-information.dart';
 import 'package:bank_core/screens/qpay/qpay.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
@@ -218,6 +222,22 @@ class MyApp extends StatelessWidget {
                     case NotificationPage.routeName:
                       return MaterialPageRoute(builder: (context) {
                         return const NotificationPage();
+                      });
+                    case ProductInformation.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const ProductInformation();
+                      });
+                    case CompanyInformation.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const CompanyInformation();
+                      });
+                    case SupportService.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const SupportService();
+                      });
+                    case ToContact.routeName:
+                      return MaterialPageRoute(builder: (context) {
+                        return const ToContact();
                       });
                     case FaqPage.routeName:
                       return MaterialPageRoute(builder: (context) {

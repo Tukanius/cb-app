@@ -264,7 +264,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Боловсролын зэрэг :',
+                                            'Боловсрол:',
                                             style: TextStyle(
                                               color: grey,
                                             ),

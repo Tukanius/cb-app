@@ -52,7 +52,7 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
           ),
         ),
         title: const Text(
-          "Тусламж",
+          "Түгээмэл асуултууд",
           style: TextStyle(
             fontSize: 16,
             color: white,
