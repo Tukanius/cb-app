@@ -124,7 +124,7 @@ class _HistoryPageState extends State<HistoryPage>
                     enablePullUp: true,
                     controller: refreshController,
                     header: WaterDropHeader(
-                      waterDropColor: invoiceColor,
+                      waterDropColor: buttonColor,
                     ),
                     onRefresh: _onRefresh,
                     onLoading: _onLoading,
@@ -134,7 +134,9 @@ class _HistoryPageState extends State<HistoryPage>
                         if (mode == LoadStatus.idle) {
                           body = const Text("");
                         } else if (mode == LoadStatus.loading) {
-                          body = const CupertinoActivityIndicator();
+                          body = const CupertinoActivityIndicator(
+                            color: buttonColor,
+                          );
                         } else if (mode == LoadStatus.failed) {
                           body = const Text("Алдаа гарлаа. Дахин үзнэ үү!");
                         } else {

@@ -729,6 +729,8 @@ class _LoanPageState extends State<LoanPage>
                           color: white,
                         ),
                         decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
                           hintText: 'Данс сонгоно уу',
                           hintStyle: TextStyle(color: grey, fontSize: 14),
                           filled: true,
@@ -763,18 +765,12 @@ class _LoanPageState extends State<LoanPage>
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "${item.accountNumber} / ${item.bank?.name}",
-                                          style: TextStyle(
-                                            color: white,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      "${item.accountNumber} / ${item.bank?.name}",
+                                      style: TextStyle(
+                                        color: white,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -784,37 +780,39 @@ class _LoanPageState extends State<LoanPage>
                       )
                     else
                       Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: mainColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Холбосон данс байхгүй байна",
-                                style: TextStyle(color: greyDark, fontSize: 12),
+                        width: MediaQuery.of(context).size.width,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: mainColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Холбосон данс байхгүй байна",
+                              style: TextStyle(color: greyDark, fontSize: 12),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                  AddBankAccountPage.routeName,
+                                  arguments: AddBankAccountPageArguments(
+                                    listenController: listenController,
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Данс холбох",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
                               ),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                      AddBankAccountPage.routeName,
-                                      arguments: AddBankAccountPageArguments(
-                                        listenController: listenController,
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    "Данс холбох",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  ))
-                            ],
-                          )),
+                            ),
+                          ],
+                        ),
+                      ),
                     isBankError == true
                         ? Container(
                             margin: EdgeInsets.symmetric(

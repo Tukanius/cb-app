@@ -95,6 +95,17 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
     });
   }
 
+  void _onLoading() async {
+    setState(() {
+      limit += 10;
+    });
+    await list(page, limit);
+    refreshController.refreshCompleted();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
@@ -113,6 +124,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
               header: WaterDropHeader(
                 waterDropColor: grey,
               ),
+              onLoading: _onLoading,
               onRefresh: _onRefresh,
               footer: CustomFooter(
                 builder: (context, mode) {
