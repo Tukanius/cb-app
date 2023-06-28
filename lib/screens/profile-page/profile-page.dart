@@ -1,6 +1,7 @@
 import 'package:bank_core/screens/profile-page/address/address.dart';
-import 'package:bank_core/screens/profile-page/faq/faq.dart';
+import 'package:bank_core/screens/profile-page/benefit-ratio/benefit-ratio.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
+import 'package:bank_core/screens/profile-page/support-service/support-service.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
 import 'package:bank_core/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
