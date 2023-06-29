@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: CircularProgressIndicator(
           color: buttonColor,

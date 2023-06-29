@@ -38,6 +38,7 @@ import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/dialog_manager/dialog_manager.dart';
+import 'package:bank_core/widgets/theme/custom-theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
@@ -57,249 +58,248 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'T-Wallet',
-        theme: ThemeData(
-          primarySwatch: Colors.grey,
-        ),
-        home: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => UserProvider()),
-            ChangeNotifierProvider(create: (_) => GeneralProvider()),
-          ],
-          child: Stack(
-            children: [
-              MaterialApp(
-                theme:
-                    ThemeData(primarySwatch: Colors.grey, fontFamily: "Rubik"),
-                builder: (context, widget) => Navigator(
-                  onGenerateRoute: (settings) => MaterialPageRoute(
-                    builder: (context) =>
-                        DialogManager(child: loading(context, widget)),
-                  ),
+      debugShowCheckedModeBanner: false,
+      title: 'T-Wallet',
+      theme: ThemeData(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => UserProvider()),
+          ChangeNotifierProvider(create: (_) => GeneralProvider()),
+        ],
+        child: Consumer<UserProvider>(
+          builder: (context, userProvider, _) {
+            return MaterialApp(
+              theme: MyThemes.lightTheme,
+              darkTheme: MyThemes.darkTheme,
+              themeMode: Provider.of<UserProvider>(context).themeMode,
+              builder: (context, widget) => Navigator(
+                onGenerateRoute: (settings) => MaterialPageRoute(
+                  builder: (context) =>
+                      DialogManager(child: loading(context, widget)),
                 ),
-                title: 'T-Wallet',
-                debugShowCheckedModeBanner: false,
-                initialRoute: SplashScreen.routeName,
-                onGenerateRoute: (RouteSettings settings) {
-                  switch (settings.name) {
-                    case SplashScreen.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const SplashScreen();
-                      });
-
-                    case MainPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const MainPage();
-                      });
-                    case OtpVerifyPage.routeName:
-                      OtpVerifyPageArguments arguments =
-                          settings.arguments as OtpVerifyPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return OtpVerifyPage(
-                          username: arguments.username,
-                          data: arguments.data,
-                        );
-                      });
-                    case LoanPage.routeName:
-                      LoanPageArguments arguments =
-                          settings.arguments as LoanPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return LoanPage(
-                          listenController: arguments.listenController,
-                          maxRate: arguments.maxRate,
-                        );
-                      });
-                    case AddWhoTypePage.routeName:
-                      AddWhoTypePageArguments arguments =
-                          settings.arguments as AddWhoTypePageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return AddWhoTypePage(
-                          listenController: arguments.listenController,
-                        );
-                      });
-                    case ChangePasswordPage.routeName:
-                      ChangePasswordPageArguments arguments =
-                          settings.arguments as ChangePasswordPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return ChangePasswordPage(
-                          isForgot: arguments.isForgot,
-                        );
-                      });
-                    case MainPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const MainPage();
-                      });
-
-                    case AddInformationPage.routeName:
-                      AddInformationPageArguments arguments =
-                          settings.arguments as AddInformationPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return AddInformationPage(
-                          listenController: arguments.listenController,
-                        );
-                      });
-                    case LoginScreen.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const LoginScreen();
-                      });
-                    case ChangePhonePage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ChangePhonePage();
-                      });
-                    case ChangeEmailPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ChangeEmailPage();
-                      });
-                    case CheckBiometric.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const CheckBiometric();
-                      });
-                    case SettingsPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const SettingsPage();
-                      });
-                    case ChangePasswordPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ChangePasswordPage();
-                      });
-                    case ForgotPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ForgotPage();
-                      });
-                    case ProfileDetailPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ProfileDetailPage();
-                      });
-                    case BankAccounts.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const BankAccounts();
-                      });
-                    case HistoryPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const HistoryPage();
-                      });
-                    case BankTransferPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const BankTransferPage();
-                      });
-                    case BenefitRatio.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const BenefitRatio();
-                      });
-                    case AddBankAccountPage.routeName:
-                      AddBankAccountPageArguments arguments =
-                          settings.arguments as AddBankAccountPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return AddBankAccountPage(
-                          listenController: arguments.listenController,
-                        );
-                      });
-                    case QpayPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const QpayPage();
-                      });
-                    case ProfilePage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ProfilePage();
-                      });
-                    case RegisterPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const RegisterPage();
-                      });
-                    case AddAddressPage.routeName:
-                      AddAddressPageArguments arguments =
-                          settings.arguments as AddAddressPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return AddAddressPage(
-                          listenController: arguments.listenController,
-                        );
-                      });
-                    case AddAddress.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const AddAddress();
-                      });
-                    case NotificationPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const NotificationPage();
-                      });
-                    case ProductInformation.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ProductInformation();
-                      });
-                    case CompanyInformation.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const CompanyInformation();
-                      });
-                    case SupportService.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const SupportService();
-                      });
-                    case ToContact.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const ToContact();
-                      });
-                    case FaqPage.routeName:
-                      return MaterialPageRoute(builder: (context) {
-                        return const FaqPage();
-                      });
-                    case TermofPolicyPage.routeName:
-                      return PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const TermofPolicyPage(),
-                        transitionsBuilder:
-                            (context, animation, secondaryAnimation, child) {
-                          var begin = const Offset(0.0, 1.0);
-                          var end = Offset.zero;
-                          var curve = Curves.ease;
-
-                          var tween = Tween(begin: begin, end: end)
-                              .chain(CurveTween(curve: curve));
-
-                          return SlideTransition(
-                            position: animation.drive(tween),
-                            child: child,
-                          );
-                        },
-                      );
-                    case LoanDetailPage.routeName:
-                      LoanDetailPageArguments arguments =
-                          settings.arguments as LoanDetailPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return LoanDetailPage(
-                          id: arguments.id,
-                          loanId: arguments.loanId,
-                          listenController: arguments.listenController,
-                        );
-                      });
-                    case LoanSchedulePage.routeName:
-                      LoanSchedulePageArguments arguments =
-                          settings.arguments as LoanSchedulePageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return LoanSchedulePage(
-                          id: arguments.id,
-                        );
-                      });
-                    case PaymentPage.routeName:
-                      PaymentPageArguments arguments =
-                          settings.arguments as PaymentPageArguments;
-                      return MaterialPageRoute(builder: (context) {
-                        return PaymentPage(
-                          loanResidual: arguments.loanResidual,
-                          loanId: arguments.loanId,
-                          listenController: arguments.listenController,
-                        );
-                      });
-                    default:
-                      return MaterialPageRoute(
-                        builder: (_) => const MainPage(),
-                      );
-                  }
-                },
               ),
-            ],
-          ),
-        ));
+              title: 'T-Wallet',
+              debugShowCheckedModeBanner: false,
+              initialRoute: SplashScreen.routeName,
+              onGenerateRoute: (RouteSettings settings) {
+                switch (settings.name) {
+                  case SplashScreen.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const SplashScreen();
+                    });
+
+                  case MainPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const MainPage();
+                    });
+                  case OtpVerifyPage.routeName:
+                    OtpVerifyPageArguments arguments =
+                        settings.arguments as OtpVerifyPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return OtpVerifyPage(
+                        username: arguments.username,
+                        data: arguments.data,
+                      );
+                    });
+                  case LoanPage.routeName:
+                    LoanPageArguments arguments =
+                        settings.arguments as LoanPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return LoanPage(
+                        listenController: arguments.listenController,
+                        maxRate: arguments.maxRate,
+                      );
+                    });
+                  case AddWhoTypePage.routeName:
+                    AddWhoTypePageArguments arguments =
+                        settings.arguments as AddWhoTypePageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return AddWhoTypePage(
+                        listenController: arguments.listenController,
+                      );
+                    });
+                  case ChangePasswordPage.routeName:
+                    ChangePasswordPageArguments arguments =
+                        settings.arguments as ChangePasswordPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return ChangePasswordPage(
+                        isForgot: arguments.isForgot,
+                      );
+                    });
+                  case MainPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const MainPage();
+                    });
+                  case AddInformationPage.routeName:
+                    AddInformationPageArguments arguments =
+                        settings.arguments as AddInformationPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return AddInformationPage(
+                        listenController: arguments.listenController,
+                      );
+                    });
+                  case LoginScreen.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const LoginScreen();
+                    });
+                  case ChangePhonePage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ChangePhonePage();
+                    });
+                  case ChangeEmailPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ChangeEmailPage();
+                    });
+                  case CheckBiometric.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const CheckBiometric();
+                    });
+                  case SettingsPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const SettingsPage();
+                    });
+                  case ChangePasswordPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ChangePasswordPage();
+                    });
+                  case ForgotPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ForgotPage();
+                    });
+                  case ProfileDetailPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ProfileDetailPage();
+                    });
+                  case BankAccounts.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const BankAccounts();
+                    });
+                  case HistoryPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const HistoryPage();
+                    });
+                  case BankTransferPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const BankTransferPage();
+                    });
+                  case BenefitRatio.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const BenefitRatio();
+                    });
+                  case AddBankAccountPage.routeName:
+                    AddBankAccountPageArguments arguments =
+                        settings.arguments as AddBankAccountPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return AddBankAccountPage(
+                        listenController: arguments.listenController,
+                      );
+                    });
+                  case QpayPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const QpayPage();
+                    });
+                  case ProfilePage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ProfilePage();
+                    });
+                  case RegisterPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const RegisterPage();
+                    });
+                  case AddAddressPage.routeName:
+                    AddAddressPageArguments arguments =
+                        settings.arguments as AddAddressPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return AddAddressPage(
+                        listenController: arguments.listenController,
+                      );
+                    });
+                  case AddAddress.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const AddAddress();
+                    });
+                  case NotificationPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const NotificationPage();
+                    });
+                  case ProductInformation.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ProductInformation();
+                    });
+                  case CompanyInformation.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const CompanyInformation();
+                    });
+                  case SupportService.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const SupportService();
+                    });
+                  case ToContact.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ToContact();
+                    });
+                  case FaqPage.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const FaqPage();
+                    });
+                  case TermofPolicyPage.routeName:
+                    return PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const TermofPolicyPage(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        var begin = const Offset(0.0, 1.0);
+                        var end = Offset.zero;
+                        var curve = Curves.ease;
+
+                        var tween = Tween(begin: begin, end: end)
+                            .chain(CurveTween(curve: curve));
+
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    );
+                  case LoanDetailPage.routeName:
+                    LoanDetailPageArguments arguments =
+                        settings.arguments as LoanDetailPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return LoanDetailPage(
+                        id: arguments.id,
+                        loanId: arguments.loanId,
+                        listenController: arguments.listenController,
+                      );
+                    });
+                  case LoanSchedulePage.routeName:
+                    LoanSchedulePageArguments arguments =
+                        settings.arguments as LoanSchedulePageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return LoanSchedulePage(
+                        id: arguments.id,
+                      );
+                    });
+                  case PaymentPage.routeName:
+                    PaymentPageArguments arguments =
+                        settings.arguments as PaymentPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return PaymentPage(
+                        loanResidual: arguments.loanResidual,
+                        loanId: arguments.loanId,
+                        listenController: arguments.listenController,
+                      );
+                    });
+                  default:
+                    return MaterialPageRoute(
+                      builder: (_) => const MainPage(),
+                    );
+                }
+              },
+            );
+          },
+        ),
+      ),
+    );
   }
 }
 

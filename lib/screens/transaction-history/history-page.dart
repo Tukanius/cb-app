@@ -88,7 +88,7 @@ class _HistoryPageState extends State<HistoryPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: isLoading == true
           ? Center(
               child: CircularProgressIndicator(
@@ -118,13 +118,13 @@ class _HistoryPageState extends State<HistoryPage>
                   ],
                 )
               : Container(
-                  color: backgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   child: SmartRefresher(
                     enablePullDown: true,
                     enablePullUp: true,
                     controller: refreshController,
                     header: WaterDropHeader(
-                      waterDropColor: buttonColor,
+                      waterDropColor: darkGrey,
                     ),
                     onRefresh: _onRefresh,
                     onLoading: _onLoading,

@@ -117,12 +117,12 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
             ),
           )
         : Container(
-            color: backgroundColor,
+            color: Theme.of(context).colorScheme.background,
             child: SmartRefresher(
               enablePullDown: true,
               controller: refreshController,
               header: WaterDropHeader(
-                waterDropColor: grey,
+                waterDropColor: darkGrey,
               ),
               onLoading: _onLoading,
               onRefresh: _onRefresh,
@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       child: Text(
                         'Зээл',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
                         ),
@@ -216,7 +216,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                 child: Text(
                                   'Идэвхтэй зээл',
                                   style: TextStyle(
-                                    color: white,
+                                    color: Theme.of(context).iconTheme.color,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 14,
                                   ),
@@ -232,7 +232,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   itemBuilder: (context, index) {
                                     return Card(
                                       shadowColor: transparent,
-                                      color: backgroundColor,
                                       key: ValueKey(loan.rows![index]),
                                       child: ActiveLoanCard(
                                         data: loan.rows![index],

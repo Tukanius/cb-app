@@ -1,20 +1,28 @@
 import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/models/user.dart';
-import 'package:bank_core/widgets/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {
-  DarkThemePreference darkThemePreference = DarkThemePreference();
   User user = User();
   bool isView = false;
-  bool _darkTheme = false;
   bool check = false;
-  bool get darkTheme => _darkTheme;
 
-  set darkTheme(bool value) {
-    _darkTheme = value;
-    darkThemePreference.setDarkTheme(value);
+  //
+  ThemeMode themeMode = ThemeMode.system;
+
+  bool get isDarkMode {
+    if (themeMode == ThemeMode.system) {
+      final brightness = SchedulerBinding.instance.window.platformBrightness;
+      return brightness == Brightness.dark;
+    } else {
+      return themeMode == ThemeMode.dark;
+    }
+  }
+
+  void toggleTheme(bool value) {
+    themeMode = value ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
 
@@ -22,6 +30,7 @@ class UserProvider extends ChangeNotifier {
     check = value;
     notifyListeners();
   }
+//
 
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

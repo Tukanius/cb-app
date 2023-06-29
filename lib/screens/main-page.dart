@@ -76,20 +76,19 @@ class _MainPageState extends State<MainPage>
     user = Provider.of<UserProvider>(context, listen: true).user;
     isView = Provider.of<UserProvider>(context, listen: true).isView;
     isDarkMode = Provider.of<UserProvider>(context, listen: true).check;
-    final themeChange = Provider.of<UserProvider>(context);
 
     return WillPopScope(
       onWillPop: () => _onWillPop(context),
       child: Container(
-        color: backgroundColor,
+        color: Theme.of(context).colorScheme.background,
         child: SafeArea(
           bottom: true,
           top: false,
           child: Scaffold(
-            backgroundColor: backgroundColor,
+            backgroundColor: Theme.of(context).colorScheme.background,
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              backgroundColor: backgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
               elevation: 0,
               title: Row(
                 children: [
@@ -100,7 +99,7 @@ class _MainPageState extends State<MainPage>
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: white,
+                        color: Theme.of(context).canvasColor,
                       ),
                       height: 40,
                       width: 40,
@@ -115,14 +114,14 @@ class _MainPageState extends State<MainPage>
                       Text(
                         'Сайн уу? 👋',
                         style: TextStyle(
-                          color: grey,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 12,
                         ),
                       ),
                       Text(
                         '${user.firstName}',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -149,8 +148,10 @@ class _MainPageState extends State<MainPage>
                   onClick: () {
                     Provider.of<UserProvider>(context, listen: false)
                         .toggleDarkMode(!isDarkMode);
-                    themeChange.darkTheme = !themeChange.darkTheme;
-                    print(isDarkMode);
+                    final provider =
+                        Provider.of<UserProvider>(context, listen: false);
+                    provider.toggleTheme(!provider.isDarkMode);
+                    print(!provider.isDarkMode);
                   },
                 ),
                 SizedBox(
@@ -160,11 +161,11 @@ class _MainPageState extends State<MainPage>
                   icon: isView == false
                       ? Icon(
                           Icons.visibility,
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                         )
                       : Icon(
                           Icons.visibility_off,
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                         ),
                   onClick: () async {
                     await Provider.of<UserProvider>(context, listen: false)
@@ -180,7 +181,7 @@ class _MainPageState extends State<MainPage>
                   },
                   icon: Icon(
                     Icons.notifications,
-                    color: white,
+                    color: Theme.of(context).hoverColor,
                   ),
                 ),
                 SizedBox(
@@ -197,10 +198,10 @@ class _MainPageState extends State<MainPage>
               ],
             ),
             bottomNavigationBar: Material(
-              color: backgroundColor,
+              color: Theme.of(context).colorScheme.background,
               child: Container(
                 decoration: BoxDecoration(
-                  color: backgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15.0),
                     topRight: Radius.circular(15.0),

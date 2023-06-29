@@ -25,7 +25,7 @@ class _ActionButtonState extends State<ActionButton> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: grey.withOpacity(0.12), width: 0.5),
-          color: grey.withOpacity(0.05),
+          color: Theme.of(context).focusColor,
         ),
         child: widget.icon,
       ),
