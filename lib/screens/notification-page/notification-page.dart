@@ -1,6 +1,5 @@
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/notification-card/notification-card.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -15,17 +14,17 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text(
           'Мэдэгдэл',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
         ),
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Container(
@@ -33,7 +32,7 @@ class _NotificationPageState extends State<NotificationPage> {
           child: ActionButton(
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
             onClick: () {

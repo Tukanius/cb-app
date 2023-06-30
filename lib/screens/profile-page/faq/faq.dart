@@ -32,10 +32,10 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: Container(
@@ -46,16 +46,16 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           "Түгээмэл асуултууд",
           style: TextStyle(
             fontSize: 16,
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
           ),
         ),

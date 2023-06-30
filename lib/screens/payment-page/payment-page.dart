@@ -95,7 +95,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
       context: context,
       builder: (context) {
         return Container(
-          color: mainColor,
+          color: Theme.of(context).colorScheme.background,
           height: 270,
           padding: EdgeInsets.only(left: 15, right: 15, top: 20),
           child: Column(
@@ -107,7 +107,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                 child: Text(
                   "Баталгаажуулалт",
                   style: TextStyle(
-                    color: white,
+                    color: Theme.of(context).iconTheme.color,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -223,9 +223,9 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: false).user;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Container(
@@ -236,7 +236,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -244,7 +244,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
         title: Text(
           'Зээл төлөх',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
@@ -267,7 +267,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       child: Text(
                         "Төлөх дүн",
                         style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 16),
                       ),
@@ -310,7 +310,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       child: Text(
                         'Төлөх',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -393,7 +393,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       child: Text(
                         'Дараагийн төлөлт',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),

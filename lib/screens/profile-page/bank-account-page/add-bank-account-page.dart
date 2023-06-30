@@ -133,10 +133,10 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
     user = Provider.of<UserProvider>(context, listen: false).user;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -146,7 +146,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -154,7 +154,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
         title: Text(
           'Данс холбох',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -174,14 +174,14 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   child: Text(
                     'Банк сонгох',
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
                 DropdownButtonFormField(
-                  dropdownColor: mainColor,
+                  dropdownColor: Colors.grey,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Банкаа оруулна уу.')
@@ -203,7 +203,8 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   },
                   decoration: InputDecoration(
                     hintText: 'Банк сонгоно уу',
-                    hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                    hintStyle: TextStyle(
+                        fontSize: 14, color: Theme.of(context).hintColor),
                     filled: true,
                     fillColor: darkGrey,
                     errorBorder: OutlineInputBorder(

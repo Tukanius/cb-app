@@ -40,14 +40,14 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
       return const SizedBox();
     }
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool isScrolled) {
           return <Widget>[
-            const SliverAppBar(
-              iconTheme: IconThemeData(color: white),
+            SliverAppBar(
+              iconTheme: IconThemeData(color: Theme.of(context).hoverColor),
               floating: true,
-              backgroundColor: backgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
               elevation: 0.0,
               pinned: false,
               snap: true,
@@ -55,7 +55,8 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
                 centerTitle: true,
                 title: Text(
                   "QPay",
-                  style: TextStyle(color: white, fontSize: 16),
+                  style: TextStyle(
+                      color: Theme.of(context).iconTheme.color, fontSize: 16),
                 ),
               ),
             )
@@ -77,17 +78,19 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
                     // child: Image.memory(base64Decode("123"), width: 200),
                     child: SvgPicture.asset(
                       'assets/svg/qrCode.svg',
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                const Text(
+                Text(
                   "QPay ашиглан төлбөрөө хийх",
                   style: TextStyle(
-                      color: white, fontSize: 20, fontWeight: FontWeight.w700),
+                      color: Theme.of(context).iconTheme.color,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(
                   height: 20,

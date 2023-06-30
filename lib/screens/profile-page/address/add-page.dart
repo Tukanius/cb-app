@@ -129,10 +129,10 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
     general = Provider.of<GeneralProvider>(context, listen: true).general;
     user = Provider.of<UserProvider>(context, listen: true).user;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -142,7 +142,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -150,7 +150,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
         title: Text(
           'Гэрийн хаяг нэмэх',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -169,7 +169,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   child: Text(
                     'Хаяг',
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -197,11 +197,12 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       print('=====addresstypeid=====');
                     });
                   },
-                  dropdownColor: mainColor,
+                  dropdownColor: Colors.grey,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Оршин сууж байгаа хаягын төрөл',
-                    hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                    hintStyle: TextStyle(
+                        fontSize: 14, color: Theme.of(context).hintColor),
                     filled: true,
                     fillColor: darkGrey,
                     errorBorder: OutlineInputBorder(
@@ -241,7 +242,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   child: Text(
                     'Аймаг / Хот',
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -267,11 +268,12 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       provinceId = value?.id;
                     });
                   },
-                  dropdownColor: mainColor,
+                  dropdownColor: Colors.grey,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Аймаг / Хот',
-                    hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                    hintStyle: TextStyle(
+                        fontSize: 14, color: Theme.of(context).hintColor),
                     filled: true,
                     fillColor: darkGrey,
                     errorBorder: OutlineInputBorder(
@@ -311,7 +313,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   child: Text(
                     'Сум / Дүүрэг',
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -337,11 +339,12 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       districtId = value?.id;
                     });
                   },
-                  dropdownColor: mainColor,
+                  dropdownColor: Colors.grey,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Сум / Дүүрэг',
-                    hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                    hintStyle: TextStyle(
+                        fontSize: 14, color: Theme.of(context).hintColor),
                     filled: true,
                     fillColor: darkGrey,
                     errorBorder: OutlineInputBorder(
@@ -383,7 +386,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   child: Text(
                     'Баг / Хороо',
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
@@ -409,11 +412,12 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       khoroosId = value?.id;
                     });
                   },
-                  dropdownColor: mainColor,
+                  dropdownColor: Colors.grey,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Баг / Хороо',
-                    hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                    hintStyle: TextStyle(
+                        fontSize: 14, color: Theme.of(context).hintColor),
                     filled: true,
                     fillColor: darkGrey,
                     errorBorder: OutlineInputBorder(

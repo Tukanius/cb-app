@@ -51,10 +51,10 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -64,7 +64,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -72,7 +72,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
         title: Text(
           'Дансны мэдээлэл',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -121,7 +121,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                         child: Text(
                           'Холбогдсон данс',
                           style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                           ),

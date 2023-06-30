@@ -33,7 +33,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   decoration: BoxDecoration(
-                    color: black,
+                    color: black.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -183,7 +183,9 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
             Text(
               '${widget.data?.amount}',
               style: TextStyle(
-                color: widget.data?.type != "ЗАРЛАГА" ? red : green,
+                color: widget.data?.type != "ЗАРЛАГА"
+                    ? Colors.red.shade600
+                    : lightgreen,
                 fontWeight: FontWeight.w500,
               ),
             )

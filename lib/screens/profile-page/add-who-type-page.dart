@@ -127,10 +127,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
     user = Provider.of<UserProvider>(context, listen: false).user;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -141,7 +141,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
             icon: Icon(
               Icons.arrow_back_ios_new,
               size: 10,
-              color: white,
+              color: Theme.of(context).hoverColor,
             ),
           ),
         ),
@@ -158,7 +158,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
               Text(
                 'Холбоо хамааралтай хүн нэмэх',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -174,16 +174,19 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                     Container(
                       margin: EdgeInsets.only(bottom: 8),
                       child: Text(
-                        "Таны хэн болох ?",
+                        "Таны хэн болох",
                         style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontSize: 12,
                             fontWeight: FontWeight.w500),
                       ),
                     ),
                     FormBuilderDropdown(
-                      dropdownColor: mainColor,
-                      initialValue: 'Холбоо хамаарал сонгох',
+                      dropdownColor: Colors.grey,
+                      initialValue: Text(
+                        'Холбоо хамаарал сонгох',
+                        style: TextStyle(color: Theme.of(context).hintColor),
+                      ),
                       icon: Container(
                         decoration: BoxDecoration(
                           color: darkGrey,
@@ -202,7 +205,8 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Холбоо хамаарал сонгох',
-                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: Theme.of(context).hintColor),
                         filled: true,
                         fillColor: darkGrey,
                         contentPadding: const EdgeInsets.symmetric(

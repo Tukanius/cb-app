@@ -232,6 +232,9 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   itemBuilder: (context, index) {
                                     return Card(
                                       shadowColor: transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
                                       key: ValueKey(loan.rows![index]),
                                       child: ActiveLoanCard(
                                         data: loan.rows![index],

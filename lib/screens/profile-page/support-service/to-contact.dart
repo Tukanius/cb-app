@@ -16,7 +16,7 @@ class _ToContactState extends State<ToContact> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         centerTitle: true,
         leading: Container(
@@ -27,7 +27,7 @@ class _ToContactState extends State<ToContact> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -36,12 +36,12 @@ class _ToContactState extends State<ToContact> {
           " Холбоо барих",
           style: TextStyle(
             fontSize: 16,
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Column(

@@ -20,9 +20,9 @@ class _BankTransferPageState extends State<BankTransferPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -32,7 +32,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -40,7 +40,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
         title: Text(
           'Банкны шилжүүлэг',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.w600,
             fontSize: 16,
           ),
@@ -56,7 +56,9 @@ class _BankTransferPageState extends State<BankTransferPage> {
             ),
             Text(
               'Шилжүүлэх данс',
-              style: TextStyle(color: white, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: Theme.of(context).iconTheme.color,
+                  fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: 8,
@@ -92,7 +94,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                       Clipboard.setData(ClipboardData(text: '2209250401')).then(
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text('Амжилттай хуулсан'),
                             ),
                           );
@@ -117,7 +119,9 @@ class _BankTransferPageState extends State<BankTransferPage> {
             ),
             Text(
               'Гүйлгээний утга',
-              style: TextStyle(color: white, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: Theme.of(context).iconTheme.color,
+                  fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: 8,
@@ -143,7 +147,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                       Clipboard.setData(ClipboardData(text: '2209250401')).then(
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text('Амжилттай хуулсан'),
                             ),
                           );
@@ -168,7 +172,9 @@ class _BankTransferPageState extends State<BankTransferPage> {
             ),
             Text(
               'Гүйлгээний дүн',
-              style: TextStyle(color: white, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: Theme.of(context).iconTheme.color,
+                  fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: 8,
@@ -194,7 +200,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                       Clipboard.setData(ClipboardData(text: '480,000.00')).then(
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text('Амжилттай хуулсан'),
                             ),
                           );

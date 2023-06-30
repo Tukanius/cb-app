@@ -2,7 +2,6 @@ import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/loan/schedule-card.dart';
 import 'package:bank_core/models/result.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 
@@ -50,9 +49,9 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Container(
@@ -63,7 +62,7 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -71,7 +70,7 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
         title: Text(
           'Төлбөрийн хуваарь',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),

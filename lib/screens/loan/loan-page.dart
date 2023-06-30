@@ -305,7 +305,7 @@ class _LoanPageState extends State<LoanPage>
       context: context,
       builder: (context) {
         return Container(
-          color: mainColor,
+          color: Theme.of(context).colorScheme.background,
           height: 270,
           padding: EdgeInsets.only(left: 15, right: 15, top: 20),
           child: Column(
@@ -317,7 +317,7 @@ class _LoanPageState extends State<LoanPage>
                 child: Text(
                   "Баталгаажуулалт",
                   style: TextStyle(
-                    color: white,
+                    color: Theme.of(context).iconTheme.color,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -376,9 +376,9 @@ class _LoanPageState extends State<LoanPage>
     user = Provider.of<UserProvider>(context, listen: true).user;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -390,7 +390,7 @@ class _LoanPageState extends State<LoanPage>
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -398,7 +398,7 @@ class _LoanPageState extends State<LoanPage>
         title: Text(
           'Зээл авах',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
@@ -406,7 +406,7 @@ class _LoanPageState extends State<LoanPage>
         bottom: PreferredSize(
             child: Container(
               height: 1,
-              color: grey.withOpacity(0.12),
+              color: Theme.of(context).shadowColor,
             ),
             preferredSize: Size.fromHeight(3)),
       ),
@@ -430,7 +430,7 @@ class _LoanPageState extends State<LoanPage>
                           child: Text(
                             'Боломжит үлдэгдэл',
                             style: TextStyle(
-                              color: grey,
+                              color: Colors.grey,
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
                             ),
@@ -442,8 +442,9 @@ class _LoanPageState extends State<LoanPage>
                         Text(
                           '${Utils().formatCurrency("${currentValue.toInt()}")}₮',
                           style: TextStyle(
-                            color:
-                                isValueError == true ? _colorAnim.value : white,
+                            color: isValueError == true
+                                ? _colorAnim.value
+                                : Theme.of(context).iconTheme.color,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
@@ -514,8 +515,8 @@ class _LoanPageState extends State<LoanPage>
                                       double.parse(get.balance.toString()) ~/
                                           5000,
                                   // 5,
-                                  activeColor: white,
-                                  inactiveColor: grey.withOpacity(0.2),
+                                  activeColor: Theme.of(context).canvasColor,
+                                  inactiveColor: Theme.of(context).shadowColor,
                                   label: '${currentValue.toInt()}',
                                   value: currentValue,
                                   onChanged: (double value) {
@@ -568,12 +569,12 @@ class _LoanPageState extends State<LoanPage>
                               Text(
                                 '0',
                                 style: TextStyle(
-                                  color: grey,
+                                  color: Colors.grey,
                                 ),
                               ),
                               Text(
                                 '${get.balance.toString()}',
-                                style: TextStyle(color: grey),
+                                style: TextStyle(color: Colors.grey),
                               ),
                             ],
                           ),
@@ -588,7 +589,7 @@ class _LoanPageState extends State<LoanPage>
                           Text(
                             'Хугацаа',
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
@@ -600,12 +601,13 @@ class _LoanPageState extends State<LoanPage>
                             children: [
                               Text(
                                 'Зээлийн хугацаа сонгох: ',
-                                style: TextStyle(color: grey, fontSize: 12),
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 12),
                               ),
                               Text(
                                 '/Хугацаа сонгоно уу/',
                                 style: TextStyle(
-                                  color: white,
+                                  color: Theme.of(context).iconTheme.color,
                                   fontSize: 12,
                                 ),
                               )
@@ -699,7 +701,7 @@ class _LoanPageState extends State<LoanPage>
                       child: Text(
                         'Хүлээн авах данс',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -718,7 +720,7 @@ class _LoanPageState extends State<LoanPage>
                           FormBuilderValidators.required(
                               errorText: "Заавал сонгоно уу"),
                         ]),
-                        dropdownColor: mainColor,
+                        dropdownColor: Colors.grey,
                         itemHeight: 70,
                         menuMaxHeight: 400,
                         elevation: 2,

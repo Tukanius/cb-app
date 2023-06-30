@@ -61,9 +61,9 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Container(
@@ -74,7 +74,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -82,7 +82,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
         title: Text(
           'Зээлийн дэлгэрэнгүй',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
@@ -104,7 +104,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                     child: Text(
                       'Дижитал зээл',
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

@@ -19,7 +19,7 @@ class _SupportServiceState extends State<SupportService> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         centerTitle: true,
         leading: Container(
@@ -30,7 +30,7 @@ class _SupportServiceState extends State<SupportService> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -39,12 +39,12 @@ class _SupportServiceState extends State<SupportService> {
           "Тусламж",
           style: TextStyle(
             fontSize: 16,
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),

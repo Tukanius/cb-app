@@ -49,10 +49,10 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: false).user;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -62,7 +62,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -70,7 +70,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
         title: Text(
           'Оршин суугаа хаяг',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -91,7 +91,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
                         },
                         icon: Icon(
                           Icons.add,
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                           size: 14,
                         ),
                       ),
@@ -123,7 +123,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
                         child: Text(
                           'Оршин суугаа хаяг',
                           style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                           ),

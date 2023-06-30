@@ -69,10 +69,10 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -82,7 +82,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -90,7 +90,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
         title: Text(
           'Миний мэдээлэл',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -113,7 +113,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                       child: Text(
                         "Бүртгэл",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -374,7 +374,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                       child: Text(
                         "Гэр бүлийн мэдээлэл",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -386,7 +386,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                   height: 200),
                               Text(
                                 "Гэр бүлийн мэдээлэл хоосон байна",
-                                style: TextStyle(color: grey),
+                                style: TextStyle(color: Colors.grey),
                               ),
                               SizedBox(
                                 height: 10,

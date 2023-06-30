@@ -17,9 +17,9 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         elevation: 0,
         leading: Container(
@@ -30,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -38,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
         title: Text(
           'Тохиргоо',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),

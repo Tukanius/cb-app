@@ -1,4 +1,3 @@
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -98,7 +97,7 @@ class _FormTextFieldState extends State<FormTextField> {
                   "${widget.labelText}",
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.white,
+                    color: Theme.of(context).iconTheme.color,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -157,11 +156,11 @@ class _FormTextFieldState extends State<FormTextField> {
                         icon: isPasswordVisible == true
                             ? Icon(
                                 Icons.visibility,
-                                color: greyDark,
+                                color: Colors.grey.shade700,
                               )
                             : Icon(
                                 Icons.visibility_off,
-                                color: greyDark,
+                                color: Colors.grey.shade700,
                               ),
                       )
                     : widget.suffixIcon,
@@ -173,7 +172,8 @@ class _FormTextFieldState extends State<FormTextField> {
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 filled: true,
-                hintStyle: const TextStyle(color: greyDark, fontSize: 14),
+                hintStyle:
+                    TextStyle(color: Theme.of(context).hintColor, fontSize: 14),
                 fillColor: widget.color,
               ),
 

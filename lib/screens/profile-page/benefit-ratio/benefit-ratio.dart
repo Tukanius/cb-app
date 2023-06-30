@@ -14,15 +14,15 @@ class _BenefitRatioState extends State<BenefitRatio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         centerTitle: true,
         title: Text(
           'Өр орлогын харьцаа',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
@@ -35,7 +35,7 @@ class _BenefitRatioState extends State<BenefitRatio> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -146,7 +146,7 @@ class _BenefitRatioState extends State<BenefitRatio> {
                     Text(
                       '20,000,000.00₮',
                       style: TextStyle(
-                        color: buttonColor,
+                        color: lightgreen,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),

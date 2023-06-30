@@ -20,9 +20,9 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         elevation: 0,
         leading: Container(
@@ -33,7 +33,7 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -41,7 +41,7 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
         title: Text(
           'Утасны дугаар солих',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),

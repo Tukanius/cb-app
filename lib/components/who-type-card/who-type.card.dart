@@ -28,7 +28,7 @@ class _WhoTypeCardState extends State<WhoTypeCard> {
           Text(
             "${widget.data?.whoType?.name}",
             style: TextStyle(
-              color: greyDark,
+              color: grey,
             ),
           ),
           Text(

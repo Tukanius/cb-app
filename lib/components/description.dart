@@ -62,7 +62,7 @@ class Description extends StatelessWidget {
                         child: Text(
                           "Баталгаажуулах",
                           style: TextStyle(
-                            color: greyDark,
+                            color: Theme.of(context).hintColor,
                             decoration: TextDecoration.underline,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -75,7 +75,7 @@ class Description extends StatelessWidget {
                       child: Text(
                         "Баталгаажсан",
                         style: TextStyle(
-                          color: buttonColor,
+                          color: lightgreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),

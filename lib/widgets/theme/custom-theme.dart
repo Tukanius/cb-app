@@ -14,12 +14,11 @@ class MyThemes {
     hoverColor: Colors.white,
     shadowColor: grey.withOpacity(0.12),
     cardColor: darkGrey,
-    hintColor: darkGrey,
+    hintColor: greyDark,
   );
 
   static final lightTheme = ThemeData(
       hintColor: grey,
-      cardColor: Colors.white.withOpacity(0.4),
       fontFamily: "Rubik",
       shadowColor: Colors.grey.withOpacity(0.5),
       splashColor: red,
@@ -29,7 +28,7 @@ class MyThemes {
       colorScheme: ColorScheme.light(background: white), // bgColor
       iconTheme: IconThemeData(color: black), // text
       // appBarTheme: AppBarTheme(backgroundColor: Colors.white),
-      canvasColor: Colors.black.withOpacity(0.2),
+      canvasColor: Colors.black.withOpacity(0.6),
       focusColor: Colors.grey.withOpacity(0.24),
       hoverColor: Colors.black,
       textTheme: TextTheme(bodySmall: TextStyle(color: red)));

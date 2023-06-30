@@ -27,16 +27,17 @@ class _TermofPolicyPageState extends State<TermofPolicyPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         elevation: 0.1,
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           "Нууцлалын журам",
           style: TextStyle(
             fontSize: 16,
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -45,9 +46,9 @@ class _TermofPolicyPageState extends State<TermofPolicyPage>
             onPressed: () {
               Navigator.of(context).pop();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.close,
-              color: white,
+              color: Theme.of(context).iconTheme.color,
             ),
           ),
         ],
@@ -68,7 +69,7 @@ class _TermofPolicyPageState extends State<TermofPolicyPage>
               ),
             )
           : CircularProgressIndicator(
-              color: black,
+              color: buttonColor,
             ),
     );
   }
