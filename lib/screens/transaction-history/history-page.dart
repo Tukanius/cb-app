@@ -111,7 +111,7 @@ class _HistoryPageState extends State<HistoryPage>
                     Text(
                       "Гүйлгээний түүх хоосон байна",
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).hoverColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

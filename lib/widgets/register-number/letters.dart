@@ -69,7 +69,7 @@ class RegisterLetters extends StatefulWidget {
 class _RegisterLettersState extends State<RegisterLetters> {
   void _onButtonPressed() {
     showModalBottomSheet(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       isDismissible: widget.isDismissible,
       isScrollControlled: true,
       context: context,
@@ -101,7 +101,9 @@ class _RegisterLettersState extends State<RegisterLetters> {
                         child: Text(
                       widget.oneTitle ?? "Title",
                       textAlign: TextAlign.center,
-                      style: const TextStyle(color: white, fontSize: 16),
+                      style: TextStyle(
+                          color: Theme.of(context).iconTheme.color,
+                          fontSize: 16),
                     )),
                     widget.isShowIcon
                         ? GestureDetector(
@@ -112,9 +114,9 @@ class _RegisterLettersState extends State<RegisterLetters> {
                             child: Container(
                               width: 30,
                               height: 30,
-                              child: const Icon(
+                              child: Icon(
                                 Icons.close,
-                                color: white,
+                                color: Theme.of(context).iconTheme.color,
                                 size: 24,
                               ),
                             ),

@@ -148,9 +148,9 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
     );
 
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         leading: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: ActionButton(
@@ -159,7 +159,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: white,
+              color: Theme.of(context).hoverColor,
               size: 10,
             ),
           ),
@@ -167,7 +167,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
         title: Text(
           "Баталгаажуулалт",
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
@@ -197,12 +197,13 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
+                        Text(
                           'Дахин код авах ',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14.0,
-                              color: white),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
                         ),
                         Text(
                           '0${intToTimeLeft(_counter)} ',
@@ -212,12 +213,12 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
                             color: buttonColor,
                           ),
                         ),
-                        const Text(
+                        Text(
                           'секунд',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14.0,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                         ),
                       ],
@@ -237,14 +238,15 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
                                 .getOtp();
                           },
                           child: Column(
-                            children: const [
+                            children: [
                               Icon(
                                 Icons.refresh,
                                 color: buttonColor,
                               ),
                               Text(
                                 "Код дахин авах",
-                                style: TextStyle(color: white),
+                                style: TextStyle(
+                                    color: Theme.of(context).iconTheme.color),
                               ),
                             ],
                           ),

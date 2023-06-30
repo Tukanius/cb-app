@@ -78,10 +78,10 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           body: Container(
             padding: EdgeInsets.symmetric(
               horizontal: 15,
@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                             child: Text(
                               "Нууц үгээ мартсан?",
                               style: TextStyle(
-                                color: white,
+                                color: Theme.of(context).iconTheme.color,
                                 fontSize: 12,
                               ),
                             ),
@@ -239,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                     Text(
                       "Бүртгэл үүсгэх бол энд дарна уу",
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontSize: 12,
                       ),
                     ),

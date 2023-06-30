@@ -51,7 +51,10 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(ChangePasswordPage.routeName);
+                  Navigator.of(context).pushNamed(
+                    ChangePasswordPage.routeName,
+                    arguments: ChangePasswordPageArguments(isForgot: false),
+                  );
                 },
                 child: Container(
                   margin: const EdgeInsets.only(top: 30),

@@ -186,14 +186,14 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: SafeArea(
         bottom: true,
         child: Scaffold(
-          backgroundColor: backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: backgroundColor,
+            backgroundColor: Theme.of(context).colorScheme.background,
             automaticallyImplyLeading: false,
             leading: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -203,7 +203,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 },
                 icon: Icon(
                   Icons.arrow_back_ios_new,
-                  color: white,
+                  color: Theme.of(context).hoverColor,
                   size: 10,
                 ),
               ),
@@ -211,7 +211,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             title: Text(
               'Нууц үг солих',
               style: TextStyle(
-                color: white,
+                color: Theme.of(context).iconTheme.color,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),

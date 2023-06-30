@@ -154,9 +154,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
     general = Provider.of<GeneralProvider>(context, listen: false).general;
     user = Provider.of<UserProvider>(context, listen: false).user;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         automaticallyImplyLeading: false,
         leading: Container(
@@ -175,7 +175,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
         title: Text(
           "Нэмэлт мэдээлэл бөглөх",
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).hoverColor,
             fontWeight: FontWeight.w600,
             fontSize: 14,
           ),
@@ -227,14 +227,14 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       child: Text(
                         'Яс үндэс сонгох',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: mainColor,
+                      dropdownColor: Colors.grey,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -256,7 +256,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Яс үндэс',
-                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: Theme.of(context).hintColor),
                         filled: true,
                         fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
@@ -293,14 +294,14 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       child: Text(
                         'Боловсролын зэрэг сонгох',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: mainColor,
+                      dropdownColor: Colors.grey,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -322,7 +323,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Боловсролын зэрэг сонгоно уу',
-                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: Theme.of(context).hintColor),
                         filled: true,
                         fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
@@ -359,14 +361,14 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       child: Text(
                         'Гэрлэлтийн байдал сонгох',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: mainColor,
+                      dropdownColor: Colors.grey,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -388,7 +390,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Гэрлэлтийн байдал',
-                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: Theme.of(context).hintColor),
                         filled: true,
                         fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
@@ -453,14 +456,14 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       child: Text(
                         'Хүйс сонгох',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: mainColor,
+                      dropdownColor: Colors.grey,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -482,7 +485,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Хүйс',
-                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: Theme.of(context).hintColor),
                         filled: true,
                         fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
@@ -533,14 +537,14 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       child: Text(
                         'Ажил эрхлэлтийн байдал сонгох',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).hoverColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: mainColor,
+                      dropdownColor: Colors.grey,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу.')
@@ -562,7 +566,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       },
                       decoration: InputDecoration(
                         hintText: 'Ажил эрхлэлтийн байдал сонгох',
-                        hintStyle: TextStyle(fontSize: 14, color: greyDark),
+                        hintStyle: TextStyle(
+                            fontSize: 14, color: Theme.of(context).hintColor),
                         filled: true,
                         fillColor: darkGrey,
                         errorBorder: OutlineInputBorder(
@@ -602,7 +607,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                 child: Text(
                   'Төрсөн өдөр сонгоно уу',
                   style: TextStyle(
-                    color: white,
+                    color: Theme.of(context).hoverColor,
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
@@ -620,7 +625,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                   child: dateTime == null
                       ? Text(
                           'Төрсөн өдөр сонгоно уу',
-                          style: TextStyle(color: greyDark),
+                          style: TextStyle(color: Theme.of(context).hintColor),
                         )
                       : Text(
                           '${dateTime?.format(payload: "YYYY-MM-DD")}',

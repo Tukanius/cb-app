@@ -68,14 +68,14 @@ class _ForgotPageState extends State<ForgotPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroundColor,
+      color: Theme.of(context).colorScheme.background,
       child: SafeArea(
         bottom: true,
         child: Scaffold(
-          backgroundColor: backgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: backgroundColor,
+            backgroundColor: Theme.of(context).colorScheme.background,
             automaticallyImplyLeading: false,
             leading: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -85,7 +85,7 @@ class _ForgotPageState extends State<ForgotPage> {
                 },
                 icon: Icon(
                   Icons.arrow_back_ios_new,
-                  color: white,
+                  color: Theme.of(context).hoverColor,
                   size: 10,
                 ),
               ),
@@ -93,7 +93,7 @@ class _ForgotPageState extends State<ForgotPage> {
             title: Text(
               'Нууц үг сэргээх',
               style: TextStyle(
-                color: white,
+                color: Theme.of(context).iconTheme.color,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
               ),
@@ -132,7 +132,7 @@ class _ForgotPageState extends State<ForgotPage> {
                           "Регистерийн дугаар",
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.white,
+                            color: Theme.of(context).iconTheme.color,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

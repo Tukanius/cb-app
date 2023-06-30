@@ -39,17 +39,19 @@ class _RegisterItemState extends State<RegisterLetter> {
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-          color: widget.color ?? backgroundColor,
+          color: widget.color ?? darkGrey,
           border: Border.all(
             color: greyDark.withOpacity(0.2),
           ),
           borderRadius: BorderRadius.all(widget.radius)),
       child: GestureDetector(
         onTap: widget.onPressed ?? () {},
-        child: Text(
-          widget.text ?? "A",
-          style: TextStyle(color: widget.textColor, fontSize: widget.fontSize),
-          textAlign: TextAlign.center,
+        child: Center(
+          child: Text(
+            widget.text ?? "A",
+            style: TextStyle(color: lightgreen, fontSize: widget.fontSize),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
