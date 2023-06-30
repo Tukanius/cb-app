@@ -720,7 +720,8 @@ class _LoanPageState extends State<LoanPage>
                           FormBuilderValidators.required(
                               errorText: "Заавал сонгоно уу"),
                         ]),
-                        dropdownColor: Colors.grey,
+                        dropdownColor:
+                            Theme.of(context).colorScheme.onBackground,
                         itemHeight: 70,
                         menuMaxHeight: 400,
                         elevation: 2,
