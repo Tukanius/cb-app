@@ -137,13 +137,13 @@ class _MainPageState extends State<MainPage>
                           "assets/svg/dark-mode.svg",
                           height: 24,
                           width: 24,
-                          color: black,
+                          color: white,
                         )
                       : SvgPicture.asset(
                           "assets/svg/dark-mode.svg",
                           height: 24,
                           width: 24,
-                          color: white,
+                          color: black,
                         ),
                   onClick: () {
                     Provider.of<UserProvider>(context, listen: false)
