@@ -197,7 +197,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       print('=====addresstypeid=====');
                     });
                   },
-                  dropdownColor: Colors.grey,
+                  dropdownColor: Theme.of(context).colorScheme.onBackground,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Оршин сууж байгаа хаягын төрөл',
@@ -268,7 +268,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       provinceId = value?.id;
                     });
                   },
-                  dropdownColor: Colors.grey,
+                  dropdownColor: Theme.of(context).colorScheme.onBackground,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Аймаг / Хот',
@@ -339,7 +339,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       districtId = value?.id;
                     });
                   },
-                  dropdownColor: Colors.grey,
+                  dropdownColor: Theme.of(context).colorScheme.onBackground,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Сум / Дүүрэг',
@@ -365,15 +365,13 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       .map(
                         (item) => DropdownMenuItem(
                           value: item,
-                          child: item.provinceId == provinceId
-                              ? Text(
-                                  '${item.name}',
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                  ),
-                                )
-                              : Text(''),
+                          child: Text(
+                            '${item.name}',
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 14,
+                            ),
+                          ),
                         ),
                       )
                       .toList(),
@@ -412,7 +410,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       khoroosId = value?.id;
                     });
                   },
-                  dropdownColor: Colors.grey,
+                  dropdownColor: Theme.of(context).colorScheme.onBackground,
                   elevation: 2,
                   decoration: InputDecoration(
                     hintText: 'Баг / Хороо',
@@ -438,15 +436,13 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                       .map(
                         (item) => DropdownMenuItem(
                           value: item,
-                          child: item.districtId == districtId
-                              ? Text(
-                                  '${item.name}',
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 14,
-                                  ),
-                                )
-                              : Text(''),
+                          child: Text(
+                            '${item.name}',
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 14,
+                            ),
+                          ),
                         ),
                       )
                       .toList(),

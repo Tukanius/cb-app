@@ -110,7 +110,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
                   Lottie.asset('assets/lottie/empty.json', height: 200),
                   Text(
                     "Хоосон байна",
-                    style: TextStyle(color: grey),
+                    style: TextStyle(color: Theme.of(context).iconTheme.color),
                   ),
                 ])
               : SingleChildScrollView(

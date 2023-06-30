@@ -182,7 +182,7 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       ),
                     ),
                     FormBuilderDropdown(
-                      dropdownColor: Colors.grey,
+                      dropdownColor: Theme.of(context).colorScheme.onBackground,
                       initialValue: Text(
                         'Холбоо хамаарал сонгох',
                         style: TextStyle(color: Theme.of(context).hintColor),

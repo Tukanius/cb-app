@@ -234,7 +234,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: Colors.grey,
+                      dropdownColor: Theme.of(context).colorScheme.onBackground,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -301,7 +301,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: Colors.grey,
+                      dropdownColor: Theme.of(context).colorScheme.onBackground,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -368,7 +368,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: Colors.grey,
+                      dropdownColor: Theme.of(context).colorScheme.onBackground,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -463,7 +463,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: Colors.grey,
+                      dropdownColor: Theme.of(context).colorScheme.onBackground,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -544,7 +544,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       ),
                     ),
                     DropdownButtonFormField(
-                      dropdownColor: Colors.grey,
+                      dropdownColor: Theme.of(context).colorScheme.onBackground,
                       validator: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу.')

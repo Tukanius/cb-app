@@ -181,7 +181,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   ),
                 ),
                 DropdownButtonFormField(
-                  dropdownColor: Colors.grey,
+                  dropdownColor: Theme.of(context).colorScheme.onBackground,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Банкаа оруулна уу.')
