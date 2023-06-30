@@ -20,8 +20,8 @@ class MyThemes {
 
   static final lightTheme = ThemeData(
     fontFamily: "Rubik",
-    colorScheme:
-        ColorScheme.light(background: white, onBackground: darkGrey), // bgColor
+    colorScheme: ColorScheme.light(
+        background: white, onBackground: mainColor), // bgColor
     iconTheme: IconThemeData(color: black), // text
     canvasColor: Colors.black.withOpacity(0.6),
     focusColor: Colors.grey.withOpacity(0.24),
