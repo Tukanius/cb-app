@@ -343,7 +343,7 @@ class _LoanPageState extends State<LoanPage>
                       labelText: "Нууц үг",
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                            errorText: 'Нэвтрэх нэрээ оруулна уу.')
+                            errorText: 'Нууц үг оруулна уу.')
                       ]),
                       color: Theme.of(context).splashColor,
                     ),
