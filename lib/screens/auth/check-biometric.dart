@@ -61,7 +61,7 @@ class _CheckBiometricState extends State<CheckBiometric> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
@@ -98,7 +98,7 @@ class _CheckBiometricState extends State<CheckBiometric> with AfterLayoutMixin {
               "Та FACE ID -ийг тохиргоог идэвхжүүлснээр цаашид апп руу нэвтрэхэд нэвтрэх нэр нууц үг хийх шаардлагагүй.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: white,
+                color: Theme.of(context).iconTheme.color,
               ),
             ),
             SizedBox(
