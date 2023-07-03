@@ -156,7 +156,7 @@ class _LoanPageState extends State<LoanPage>
       user.password = textController.text;
       var res = await AuthApi().checkPassword(user);
       if (res == true) {
-        loan.amount = currentValue;
+        loan.amount = currentValue.toInt();
         loan.loanDate = DateTime.now().toString();
         loan.loanRate = '5';
         loan.loanTimeId = seletedDayId;

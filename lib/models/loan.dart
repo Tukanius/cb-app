@@ -1,7 +1,7 @@
 part '../parts/loan.dart';
 
 class Loan {
-  double? amount;
+  int? amount;
   String? customerId;
   String? loanDate;
   String? loanRate;

@@ -3,7 +3,7 @@ part of '../models/loan.dart';
 Loan _$LoanFromJson(Map<String, dynamic> json) {
   return Loan(
     amount:
-        json['amount'] != null ? double.parse(json['amount'].toString()) : null,
+        json['amount'] != null ? int.parse(json['amount'].toString()) : null,
     customerId:
         json['customerId'] != null ? json['customerId'] as String : null,
     loanDate: json['loanDate'] != null ? json['loanDate'] as String : null,
