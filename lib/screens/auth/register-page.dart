@@ -95,10 +95,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               Positioned(
-                bottom: 0,
+                bottom: 5,
                 right: 30,
                 left: 30,
                 child: CustomButton(
+                  boxShadow: false,
                   labelColor: backgroundColor,
                   isLoading: false,
                   labelText: "Зөвшөөрөх",
