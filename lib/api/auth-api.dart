@@ -27,7 +27,7 @@ class AuthApi extends HttpRequest {
     Map<String, dynamic> json = {};
     json['password'] = data.password;
     var res = await post("/auth/check-password", data: json);
-    return res == true;
+    return res;
   }
 
   otpVerify(User data) async {

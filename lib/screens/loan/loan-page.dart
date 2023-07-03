@@ -74,6 +74,8 @@ class _LoanPageState extends State<LoanPage>
   late Animation<Color> _colorAnim;
   DateTime futureDate = DateTime.now();
   ListenController listenController = ListenController();
+  String customerAccountId = '';
+  bool isSuccess = false;
 
   @override
   void initState() {
@@ -123,7 +125,7 @@ class _LoanPageState extends State<LoanPage>
   }
 
   showModal() async {
-    if (currentValue < 50000) {
+    if (currentValue < 100) {
       setState(() {
         isValueError = true;
       });
@@ -149,10 +151,13 @@ class _LoanPageState extends State<LoanPage>
   }
 
   onSubmit(ctx) async {
+    setState(() {
+      isSuccess = true;
+    });
     if (fbKey.currentState!.saveAndValidate()) {
-      setState(() {
-        isSubmit = true;
-      });
+      // setState(() {
+      //   isSuccess = true;
+      // });
       user.password = textController.text;
       var res = await AuthApi().checkPassword(user);
       if (res == true) {
@@ -163,7 +168,7 @@ class _LoanPageState extends State<LoanPage>
         loan.accountId = selectedMethod;
         await LoanApi().createLoan(loan);
         setState(() {
-          isSubmit = false;
+          isSuccess = false;
         });
         widget.listenController.changeVariable("loanCreate");
         Navigator.of(context).pop();
@@ -172,7 +177,7 @@ class _LoanPageState extends State<LoanPage>
       } else {
         showError(context);
         setState(() {
-          isSubmit = false;
+          isSuccess = false;
         });
       }
     }
@@ -346,16 +351,15 @@ class _LoanPageState extends State<LoanPage>
                     ),
                     CustomButton(
                       boxShadow: true,
-                      isLoading: isSubmit,
+                      isLoading: isSuccess,
                       labelText: "Баталгаажуулах",
                       onClick: () {
-                        setState(() {
-                          isSubmit = true;
-                        });
-                        onSubmit(context);
-                        setState(() {
-                          isSubmit = false;
-                        });
+                        if (isSuccess == false) {
+                          onSubmit(context);
+                          setState(() {
+                            isSuccess = true;
+                          });
+                        } else {}
                       },
                       textColor: white,
                       labelColor: buttonColor,
@@ -537,9 +541,9 @@ class _LoanPageState extends State<LoanPage>
                                 if (currentValue <
                                     double.parse("${get.balance}")) {
                                   setState(() {
-                                    currentValue += 10000;
+                                    currentValue += 100;
                                   });
-                                  if (currentValue >= 50000) {
+                                  if (currentValue >= 100) {
                                     setState(() {
                                       isValueError = false;
                                     });
@@ -712,6 +716,7 @@ class _LoanPageState extends State<LoanPage>
                         onChanged: (value) {
                           setState(() {
                             selectedMethod = "${value?.id}";
+                            print(selectedMethod.toString());
                             isBankError = false;
                           });
                           ;

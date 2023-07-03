@@ -11,12 +11,17 @@ Loan _$LoanFromJson(Map<String, dynamic> json) {
     loanTimeId:
         json['loanTimeId'] != null ? json['loanTimeId'] as String : null,
     accountId: json['accountId'] != null ? json['accountId'] as String : null,
+    customerAccountId: json['customerAccountId'] != null
+        ? json['customerAccountId'] as String
+        : null,
   );
 }
 
 Map<String, dynamic> _$LoanToJson(Loan instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.customerAccountId != null)
+    json['customerAccountId'] = instance.customerAccountId;
   if (instance.accountId != null) json['accountId'] = instance.accountId;
   if (instance.amount != null) json['amount'] = instance.amount;
   if (instance.customerId != null) json['customerId'] = instance.customerId;

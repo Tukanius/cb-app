@@ -14,7 +14,7 @@ class CustomButton extends StatefulWidget {
     this.boxShadow,
     this.textColor,
     this.labelColor,
-    this.isLoading = false,
+    this.isLoading,
     this.onClick,
     this.labelText = '',
     this.borderWidth = 0,
