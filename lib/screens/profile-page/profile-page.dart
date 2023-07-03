@@ -355,6 +355,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7), color: transparent),
                 child: CustomButton(
+                  isLoading: isSubmit,
                   textColor: white,
                   labelColor: red,
                   boxShadow: false,

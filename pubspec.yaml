@@ -96,6 +96,7 @@ flutter:
     - assets/lottie/
     - assets/fonts/
     - assets/icon/
+    - assets/pdf/
 
   fonts:
     - family: Rubik

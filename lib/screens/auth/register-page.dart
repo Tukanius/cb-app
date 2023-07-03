@@ -39,6 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
     CYRILLIC_ALPHABETS_LIST[0]
   ];
   String registerNo = "";
+  bool isCheck = false;
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
@@ -63,6 +64,32 @@ class _RegisterPageState extends State<RegisterPage> {
         print(e.toString());
       }
     }
+  }
+
+  show() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Container(
+            color: grey,
+            child: Column(
+              children: [
+                CustomButton(
+                  isLoading: false,
+                  onClick: () {
+                    setState(() {
+                      isSubmit = true;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   // show(ctx) async {
@@ -361,6 +388,41 @@ class _RegisterPageState extends State<RegisterPage> {
                           );
                         },
                       ),
+                      Row(
+                        children: [
+                          Checkbox(
+                            side: MaterialStateBorderSide.resolveWith(
+                              (states) => BorderSide(
+                                color: buttonColor,
+                                width: 2,
+                              ),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            activeColor: buttonColor,
+                            value: isCheck,
+                            onChanged: (value) {
+                              setState(() {});
+                            },
+                          ),
+                          Text(
+                            'Үйлчилгээний нөхцөлтэй  ',
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              show();
+                            },
+                            child: Text(
+                              'ТАНИЛЦАХ',
+                              style: TextStyle(color: buttonColor),
+                            ),
+                          )
+                        ],
+                      )
                       // SizedBox(
                       //   height: 10,
                       // ),
@@ -406,7 +468,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 CustomButton(
-                  onClick: onSubmit,
+                  isLoading: isSubmit,
+                  onClick: () {
+                    onSubmit();
+                  },
                   labelColor: buttonColor,
                   labelText: 'Бүртгүүлэх',
                   boxShadow: false,
