@@ -55,6 +55,7 @@ class ErrorDialog {
                         Text(
                           message,
                           textAlign: TextAlign.center,
+                          style: TextStyle(color: black),
                         ),
                         ButtonBar(
                           buttonMinWidth: 100,

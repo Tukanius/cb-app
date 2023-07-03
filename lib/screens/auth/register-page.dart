@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = 'RegisterPage';
@@ -40,6 +41,14 @@ class _RegisterPageState extends State<RegisterPage> {
   ];
   String registerNo = "";
   bool isCheck = false;
+  bool isLoading = false;
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+  bool termValidate = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
@@ -69,90 +78,57 @@ class _RegisterPageState extends State<RegisterPage> {
   show() {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
       builder: (context) {
-        return SingleChildScrollView(
-          child: Container(
-            color: grey,
-            child: Column(
-              children: [
-                CustomButton(
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: backgroundColor,
+            title: const Text('Үйлчилгээний нөхцөл'),
+          ),
+          body: Stack(
+            children: [
+              Container(
+                child: SfPdfViewer.asset(
+                  'assets/svg/term-condition.pdf',
+                  key: _pdfViewerKey,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 30,
+                left: 30,
+                child: CustomButton(
+                  labelColor: backgroundColor,
                   isLoading: false,
+                  labelText: "Зөвшөөрөх",
                   onClick: () {
                     setState(() {
-                      isSubmit = true;
+                      isCheck = true;
+                      termValidate = false;
                     });
                     Navigator.of(context).pop();
                   },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
     );
   }
 
-  // show(ctx) async {
-  //   showDialog(
-  //     barrierDismissible: false,
-  //     context: context,
-  //     builder: (context) {
-  //       return Container(
-  //         alignment: Alignment.center,
-  //         margin: const EdgeInsets.symmetric(horizontal: 20),
-  //         child: Stack(
-  //           alignment: Alignment.topCenter,
-  //           children: <Widget>[
-  //             Container(
-  //               margin: const EdgeInsets.only(top: 75),
-  //               decoration: BoxDecoration(
-  //                 color: Colors.white,
-  //                 borderRadius: BorderRadius.circular(12),
-  //               ),
-  //               padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
-  //               child: Column(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: <Widget>[
-  //                   const Text(
-  //                     'Амжилттай',
-  //                     style: TextStyle(
-  //                         color: dark,
-  //                         fontWeight: FontWeight.bold,
-  //                         fontSize: 24),
-  //                   ),
-  //                   const SizedBox(
-  //                     height: 16,
-  //                   ),
-  //                   const Text(
-  //                     'Таны бүртгэл амжилттай үүслээ.',
-  //                     textAlign: TextAlign.center,
-  //                   ),
-  //                   ButtonBar(
-  //                     buttonMinWidth: 100,
-  //                     alignment: MainAxisAlignment.spaceEvenly,
-  //                     children: <Widget>[
-  //                       TextButton(
-  //                         child: const Text(
-  //                           "Нэвтрэх",
-  //                           style: TextStyle(color: dark),
-  //                         ),
-  //                         onPressed: () {
-  //                           Navigator.of(context).pop();
-  //                         },
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //             Lottie.asset('assets/lottie/success.json',
-  //                 height: 150, repeat: false),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  checkValidate() {
+    if (isCheck != true) {
+      setState(() {
+        termValidate = true;
+      });
+    } else if (isCheck == true) {
+      onSubmit();
+    } else {
+      show();
+    }
+  }
 
   DateTime dateTime = DateTime.now();
 
@@ -422,7 +398,19 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           )
                         ],
-                      )
+                      ),
+                      termValidate == true
+                          ? Container(
+                              margin: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                'Үйлчилгээний нөхцөл зөвшөөрөөгүй байна',
+                                style: TextStyle(
+                                  color: Colors.redAccent.withOpacity(0.6),
+                                  fontSize: 12,
+                                ),
+                              ),
+                            )
+                          : SizedBox(),
                       // SizedBox(
                       //   height: 10,
                       // ),
@@ -468,9 +456,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 CustomButton(
-                  isLoading: isSubmit,
+                  isLoading: false,
                   onClick: () {
-                    onSubmit();
+                    checkValidate();
                   },
                   labelColor: buttonColor,
                   labelText: 'Бүртгүүлэх',
