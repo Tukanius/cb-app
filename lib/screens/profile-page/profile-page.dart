@@ -368,6 +368,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   labelText: 'Гарах',
                 ),
               ),
+              SizedBox(
+                height: 50,
+              ),
             ],
           ),
         ),

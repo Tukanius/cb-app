@@ -1,7 +1,6 @@
 import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/auth/asdf.dart';
 import 'package:bank_core/screens/auth/check-biometric.dart';
 import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
@@ -260,20 +259,6 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                     ),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Asdf(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    color: white,
-                  ),
-                )
               ],
             ),
           ),

@@ -69,7 +69,7 @@ class RegisterLetters extends StatefulWidget {
 class _RegisterLettersState extends State<RegisterLetters> {
   void _onButtonPressed() {
     showModalBottomSheet(
-      backgroundColor: Theme.of(context).splashColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       isDismissible: widget.isDismissible,
       isScrollControlled: true,
       context: context,
@@ -157,10 +157,9 @@ class _RegisterLettersState extends State<RegisterLetters> {
         height: widget.subHeight ?? 48,
         width: widget.subWidth ?? 48,
         decoration: BoxDecoration(
-            color: widget.backgroundColor ?? darkGrey,
             borderRadius: const BorderRadius.all(
-              Radius.circular(10.0),
-            )),
+          Radius.circular(10.0),
+        )),
         child: Center(
           child: Container(
             width: widget.rightWidth ?? DeviceSize.width(5, context),
