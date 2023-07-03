@@ -77,6 +77,7 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
               Container(
                 margin: const EdgeInsets.only(bottom: 30),
                 child: CustomButton(
+                  isLoading: false,
                   onClick: () {},
                   boxShadow: true,
                   labelColor: buttonColor,

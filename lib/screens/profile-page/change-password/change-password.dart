@@ -284,12 +284,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     ],
                   ),
                   CustomButton(
+                    isLoading: isLoading,
                     labelColor: buttonColor,
                     labelText: "Үргэлжлүүлэх",
                     onClick: () {
-                      if (isLoading == false) {
-                        onSubmit();
-                      }
+                      onSubmit();
                     },
                     textColor: white,
                     boxShadow: true,

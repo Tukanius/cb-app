@@ -76,6 +76,7 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
               Container(
                 margin: const EdgeInsets.only(bottom: 30),
                 child: CustomButton(
+                  isLoading: false,
                   onClick: () {},
                   boxShadow: true,
                   labelColor: buttonColor,

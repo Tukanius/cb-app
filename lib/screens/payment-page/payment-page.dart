@@ -488,6 +488,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                     ),
                     Container(
                       child: CustomButton(
+                        isLoading: isSubmit,
                         boxShadow: true,
                         labelColor: buttonColor,
                         labelText: 'Төлбөр хийх',

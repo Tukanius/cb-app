@@ -98,6 +98,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       child: CustomButton(
+                        isLoading: isLoading,
                         labelColor: buttonColor,
                         textColor: white,
                         onClick: () {
@@ -142,6 +143,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: CustomButton(
+                          isLoading: isLoading,
                           labelColor: buttonColor,
                           textColor: white,
                           onClick: () {

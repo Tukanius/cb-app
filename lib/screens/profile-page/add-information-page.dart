@@ -695,6 +695,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                 height: 40,
               ),
               CustomButton(
+                isLoading: isSubmit,
                 onClick: onValidate,
                 labelColor: buttonColor,
                 labelText: 'Баталгаажуулах',

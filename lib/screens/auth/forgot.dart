@@ -259,6 +259,7 @@ class _ForgotPageState extends State<ForgotPage> {
                     ],
                   ),
                   CustomButton(
+                    isLoading: isSubmit,
                     labelColor: buttonColor,
                     labelText: "Үргэлжлүүлэх",
                     onClick: () {

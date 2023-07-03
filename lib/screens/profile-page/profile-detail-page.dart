@@ -34,6 +34,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   ListenController listenController = ListenController();
   User user = User();
   bool isLoading = true;
+  bool isSubmit = false;
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -49,6 +50,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   list(page, limit) async {
     Offset offset = Offset(page: page, limit: limit);
     Filter filter = Filter();
+
     relatedList = await CustomerApi()
         .relatedPersonList(ResultArguments(filter: filter, offset: offset));
   }
@@ -409,6 +411,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                 height: 10,
                               ),
                               CustomButton(
+                                isLoading: false,
                                 labelColor: buttonColor,
                                 textColor: white,
                                 onClick: () {
@@ -445,6 +448,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                               ),
                               if (relatedList.rows!.length < 3)
                                 CustomButton(
+                                  isLoading: false,
                                   labelColor: buttonColor,
                                   textColor: white,
                                   onClick: () {

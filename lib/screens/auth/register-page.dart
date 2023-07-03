@@ -390,7 +390,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             activeColor: buttonColor,
                             value: isCheck,
                             onChanged: (value) {
-                              setState(() {});
+                              show();
                             },
                           ),
                           Text(
