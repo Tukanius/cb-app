@@ -333,6 +333,7 @@ class _LoanPageState extends State<LoanPage>
                 child: Column(
                   children: [
                     FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
                       name: "password",
                       controller: textController,
                       hintText: 'Нууц үгээ оруулна уу',
@@ -344,7 +345,7 @@ class _LoanPageState extends State<LoanPage>
                         FormBuilderValidators.required(
                             errorText: 'Нэвтрэх нэрээ оруулна уу.')
                       ]),
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
                     ),
                     SizedBox(
                       height: 20,
@@ -490,14 +491,14 @@ class _LoanPageState extends State<LoanPage>
                                 width: 30,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: darkGrey,
+                                  color: Theme.of(context).splashColor,
                                 ),
                                 child: Container(
                                   margin:
                                       const EdgeInsets.symmetric(horizontal: 6),
                                   child: SvgPicture.asset(
                                     'assets/svg/minus.svg',
-                                    color: white,
+                                    color: Theme.of(context).iconTheme.color,
                                     theme: SvgTheme(currentColor: white),
                                   ),
                                 ),
@@ -555,11 +556,11 @@ class _LoanPageState extends State<LoanPage>
                                 width: 30,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: darkGrey,
+                                  color: Theme.of(context).splashColor,
                                 ),
                                 child: Icon(
                                   Icons.add,
-                                  color: white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                             ),
@@ -649,7 +650,7 @@ class _LoanPageState extends State<LoanPage>
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -657,14 +658,14 @@ class _LoanPageState extends State<LoanPage>
                           Text(
                             'Зээлийн хүү',
                             style: TextStyle(
-                              color: grey,
+                              color: Theme.of(context).disabledColor,
                               fontSize: 12,
                             ),
                           ),
                           Text(
                             "${widget.maxRate}%",
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontWeight: FontWeight.w600,
                             ),
                           )
@@ -678,7 +679,7 @@ class _LoanPageState extends State<LoanPage>
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -686,14 +687,14 @@ class _LoanPageState extends State<LoanPage>
                           Text(
                             'Төлөх огноо',
                             style: TextStyle(
-                              color: grey,
+                              color: Theme.of(context).disabledColor,
                               fontSize: 12,
                             ),
                           ),
                           Text(
                             "${Moment.parse(futureDate.toString()).format("YYYY-MM-DD")}",
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontWeight: FontWeight.w600,
                             ),
                           )
@@ -734,15 +735,17 @@ class _LoanPageState extends State<LoanPage>
                         borderRadius: BorderRadius.circular(10),
                         icon: Icon(
                           Icons.keyboard_arrow_down_outlined,
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                         ),
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 15),
                           hintText: 'Данс сонгоно уу',
-                          hintStyle: TextStyle(color: grey, fontSize: 14),
+                          hintStyle: TextStyle(
+                              color: Theme.of(context).disabledColor,
+                              fontSize: 14),
                           filled: true,
-                          fillColor: darkGrey,
+                          fillColor: Theme.of(context).splashColor,
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10),
@@ -776,7 +779,8 @@ class _LoanPageState extends State<LoanPage>
                                     Text(
                                       "${item.accountNumber} / ${item.bank?.name}",
                                       style: TextStyle(
-                                        color: white,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                         fontSize: 12,
                                       ),
                                     ),

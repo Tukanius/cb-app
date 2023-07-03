@@ -1,5 +1,4 @@
 import 'package:bank_core/components/action-button.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -67,7 +66,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+                color: Theme.of(context).splashColor,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,12 +76,14 @@ class _BankTransferPageState extends State<BankTransferPage> {
                       Text(
                         'Хаан банк: ',
                         style: TextStyle(
-                            color: white, fontWeight: FontWeight.w500),
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
                       ),
                       SelectableText(
                         '2209250401',
                         style: TextStyle(
-                            color: white, fontWeight: FontWeight.w500),
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -95,6 +96,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
+                              backgroundColor: Theme.of(context).disabledColor,
                               content: Text('Амжилттай хуулсан'),
                             ),
                           );
@@ -104,11 +106,11 @@ class _BankTransferPageState extends State<BankTransferPage> {
                     child: isCopied == false
                         ? Icon(
                             Icons.copy,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                           )
                         : Icon(
                             Icons.check,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                   ),
                 ],
@@ -130,14 +132,16 @@ class _BankTransferPageState extends State<BankTransferPage> {
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+                color: Theme.of(context).splashColor,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SelectableText(
                     'Зээлийн гэрээний дугаар',
-                    style: TextStyle(color: white, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        color: Theme.of(context).iconTheme.color,
+                        fontWeight: FontWeight.w500),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -148,6 +152,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
+                              backgroundColor: Theme.of(context).disabledColor,
                               content: Text('Амжилттай хуулсан'),
                             ),
                           );
@@ -157,11 +162,11 @@ class _BankTransferPageState extends State<BankTransferPage> {
                     child: isTap == false
                         ? Icon(
                             Icons.copy,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                           )
                         : Icon(
                             Icons.check,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                   ),
                 ],
@@ -183,14 +188,16 @@ class _BankTransferPageState extends State<BankTransferPage> {
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+                color: Theme.of(context).splashColor,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SelectableText(
                     '480,000.00₮',
-                    style: TextStyle(color: white, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        color: Theme.of(context).iconTheme.color,
+                        fontWeight: FontWeight.w500),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -201,6 +208,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
+                              backgroundColor: Theme.of(context).disabledColor,
                               content: Text('Амжилттай хуулсан'),
                             ),
                           );
@@ -210,11 +218,11 @@ class _BankTransferPageState extends State<BankTransferPage> {
                     child: isCopy == false
                         ? Icon(
                             Icons.copy,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                           )
                         : Icon(
                             Icons.check,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                           ),
                   ),
                 ],

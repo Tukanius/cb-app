@@ -185,7 +185,8 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       dropdownColor: Theme.of(context).colorScheme.onBackground,
                       initialValue: Text(
                         'Холбоо хамаарал сонгох',
-                        style: TextStyle(color: Theme.of(context).hintColor),
+                        style:
+                            TextStyle(color: Theme.of(context).disabledColor),
                       ),
                       icon: Container(
                         decoration: BoxDecoration(
@@ -206,9 +207,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       decoration: InputDecoration(
                         hintText: 'Холбоо хамаарал сонгох',
                         hintStyle: TextStyle(
-                            fontSize: 14, color: Theme.of(context).hintColor),
+                            fontSize: 14,
+                            color: Theme.of(context).disabledColor),
                         filled: true,
-                        fillColor: darkGrey,
+                        fillColor: Theme.of(context).splashColor,
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 15),
                         border: OutlineInputBorder(
@@ -236,8 +238,11 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                                   children: [
                                     Text(
                                       '${item.name}',
-                                      style:
-                                          TextStyle(fontSize: 14, color: white),
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Theme.of(context)
+                                              .iconTheme
+                                              .color),
                                     ),
                                   ],
                                 ),
@@ -250,9 +255,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       height: 10,
                     ),
                     FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
                       name: 'lastName',
                       labelText: "Овог",
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
                       hintText: 'Овог',
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -263,9 +269,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       height: 10,
                     ),
                     FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
                       labelText: "Нэр",
                       name: 'firstName',
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
                       hintText: 'Нэр',
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
@@ -276,9 +283,10 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       height: 10,
                     ),
                     FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
                       labelText: "Утасны дугаар",
                       name: 'phone',
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
                       inputType: TextInputType.phone,
                       showCounter: false,
                       maxLenght: 8,

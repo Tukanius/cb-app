@@ -1,7 +1,6 @@
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:bank_core/screens/profile-page/support-service/to-contact.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -58,7 +57,7 @@ class _SupportServiceState extends State<SupportService> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding: const EdgeInsets.all(15),
                   child: Row(
@@ -67,7 +66,7 @@ class _SupportServiceState extends State<SupportService> {
                         'assets/svg/question.svg',
                         height: 24,
                         width: 24,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -75,7 +74,7 @@ class _SupportServiceState extends State<SupportService> {
                       Text(
                         "Түгээмэл асуултууд",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -92,7 +91,7 @@ class _SupportServiceState extends State<SupportService> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding: const EdgeInsets.all(15),
                   child: Row(
@@ -101,7 +100,7 @@ class _SupportServiceState extends State<SupportService> {
                         'assets/svg/contact.svg',
                         height: 24,
                         width: 24,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -109,7 +108,7 @@ class _SupportServiceState extends State<SupportService> {
                       Text(
                         "Холбоо барих",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),

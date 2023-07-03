@@ -1,5 +1,4 @@
 import 'package:bank_core/models/customer.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class WhoTypeCard extends StatefulWidget {
@@ -20,7 +19,7 @@ class _WhoTypeCardState extends State<WhoTypeCard> {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,13 +27,13 @@ class _WhoTypeCardState extends State<WhoTypeCard> {
           Text(
             "${widget.data?.whoType?.name}",
             style: TextStyle(
-              color: grey,
+              color: Theme.of(context).disabledColor,
             ),
           ),
           Text(
             "${widget.data?.phone}",
             style: TextStyle(
-              color: white,
+              color: Theme.of(context).iconTheme.color,
               fontWeight: FontWeight.w500,
             ),
           )

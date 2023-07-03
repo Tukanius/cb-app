@@ -188,7 +188,8 @@ class _ShopPageState extends State<ShopPage> {
                         ),
                         Text(
                           "Дэлгүүр одоогоор хоосон байна",
-                          style: TextStyle(color: Colors.grey),
+                          style:
+                              TextStyle(color: Theme.of(context).disabledColor),
                         ),
                       ],
                     ),

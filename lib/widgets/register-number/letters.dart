@@ -69,7 +69,7 @@ class RegisterLetters extends StatefulWidget {
 class _RegisterLettersState extends State<RegisterLetters> {
   void _onButtonPressed() {
     showModalBottomSheet(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).splashColor,
       isDismissible: widget.isDismissible,
       isScrollControlled: true,
       context: context,

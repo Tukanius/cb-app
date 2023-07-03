@@ -47,14 +47,14 @@ class _BenefitRatioState extends State<BenefitRatio> {
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: darkGrey,
+            color: Theme.of(context).splashColor,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Таны зээлүүд /2023 оны 5-р сарын байдлаар/',
-                style: TextStyle(color: white),
+                style: TextStyle(color: Theme.of(context).iconTheme.color),
               ),
               SizedBox(
                 height: 200,
@@ -65,7 +65,7 @@ class _BenefitRatioState extends State<BenefitRatio> {
               ),
               Text(
                 'Цалингийн зээл',
-                style: TextStyle(color: white),
+                style: TextStyle(color: Theme.of(context).iconTheme.color),
               ),
               SizedBox(
                 height: 15,
@@ -75,12 +75,13 @@ class _BenefitRatioState extends State<BenefitRatio> {
                   children: [
                     Text(
                       'Таны дундаж цалин',
-                      style: TextStyle(color: white),
+                      style:
+                          TextStyle(color: Theme.of(context).iconTheme.color),
                     ),
                     Text(
                       '1,800,00.00₮',
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
@@ -97,12 +98,13 @@ class _BenefitRatioState extends State<BenefitRatio> {
                     ),
                     Text(
                       'Сарын нийт зээлийн төлбөр',
-                      style: TextStyle(color: white),
+                      style:
+                          TextStyle(color: Theme.of(context).iconTheme.color),
                     ),
                     Text(
                       '0₮',
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
@@ -119,12 +121,13 @@ class _BenefitRatioState extends State<BenefitRatio> {
                     ),
                     Text(
                       'Өр орлогын харьцаа',
-                      style: TextStyle(color: white),
+                      style:
+                          TextStyle(color: Theme.of(context).iconTheme.color),
                     ),
                     Text(
                       '60%',
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
@@ -141,7 +144,8 @@ class _BenefitRatioState extends State<BenefitRatio> {
                     ),
                     Text(
                       'Боломжит зээлийн хэмжээ',
-                      style: TextStyle(color: white),
+                      style:
+                          TextStyle(color: Theme.of(context).iconTheme.color),
                     ),
                     Text(
                       '20,000,000.00₮',

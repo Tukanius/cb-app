@@ -24,7 +24,7 @@ class Description extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +32,7 @@ class Description extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: grey,
+              color: Theme.of(context).disabledColor,
               fontSize: 12,
             ),
           ),
@@ -48,7 +48,7 @@ class Description extends StatelessWidget {
                   name,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: white,
+                    color: Theme.of(context).iconTheme.color,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
@@ -62,7 +62,7 @@ class Description extends StatelessWidget {
                         child: Text(
                           "Баталгаажуулах",
                           style: TextStyle(
-                            color: Theme.of(context).hintColor,
+                            color: Theme.of(context).disabledColor,
                             decoration: TextDecoration.underline,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,

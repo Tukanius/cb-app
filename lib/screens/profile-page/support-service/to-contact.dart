@@ -1,5 +1,4 @@
 import 'package:bank_core/components/action-button.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class ToContact extends StatefulWidget {
@@ -50,7 +49,7 @@ class _ToContactState extends State<ToContact> {
               margin: EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+                color: Theme.of(context).splashColor,
               ),
               padding: const EdgeInsets.all(15),
               child: Row(
@@ -59,14 +58,14 @@ class _ToContactState extends State<ToContact> {
                   Text(
                     'Утас:',
                     style: TextStyle(
-                      color: grey,
+                      color: Theme.of(context).disabledColor,
                       fontSize: 15,
                     ),
                   ),
                   Text(
                     "Null",
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
@@ -78,7 +77,7 @@ class _ToContactState extends State<ToContact> {
               margin: EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+                color: Theme.of(context).splashColor,
               ),
               padding: const EdgeInsets.all(15),
               child: Row(
@@ -87,14 +86,14 @@ class _ToContactState extends State<ToContact> {
                   Text(
                     'И-мэйл:',
                     style: TextStyle(
-                      color: grey,
+                      color: Theme.of(context).disabledColor,
                       fontSize: 15,
                     ),
                   ),
                   Text(
                     "Null",
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
@@ -106,7 +105,7 @@ class _ToContactState extends State<ToContact> {
               margin: EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: darkGrey,
+                color: Theme.of(context).splashColor,
               ),
               padding: const EdgeInsets.all(15),
               child: Row(
@@ -115,14 +114,14 @@ class _ToContactState extends State<ToContact> {
                   Text(
                     'Хаяг:',
                     style: TextStyle(
-                      color: grey,
+                      color: Theme.of(context).disabledColor,
                       fontSize: 15,
                     ),
                   ),
                   Text(
                     "Null",
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),

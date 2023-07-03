@@ -1,5 +1,4 @@
 import 'package:bank_core/models/customer.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class AddressCard extends StatefulWidget {
@@ -21,7 +20,7 @@ class _AddressCardState extends State<AddressCard> {
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +31,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Хаягын төрөл',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -40,7 +39,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 "${widget.data.addressType?.name}",
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -48,7 +47,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey.withOpacity(0.2),
+            color: Colors.grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +55,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Аймаг/Хот',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -64,7 +63,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 '${widget.data.province?.name}',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -72,7 +71,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey.withOpacity(0.2),
+            color: Colors.grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +79,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Дүүргэ/Сум',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -88,7 +87,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 '${widget.data.district?.name}',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -96,7 +95,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey.withOpacity(0.2),
+            color: Colors.grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,7 +103,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Хороо/Баг',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -112,7 +111,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 '${widget.data.khoroo?.name}',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -120,7 +119,7 @@ class _AddressCardState extends State<AddressCard> {
             ],
           ),
           Divider(
-            color: grey.withOpacity(0.2),
+            color: Colors.grey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,7 +127,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Хаяг/Тоот',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -136,7 +135,7 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 '${widget.data.address}',
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),

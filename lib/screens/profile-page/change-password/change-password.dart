@@ -233,7 +233,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                               obscureText: true,
                               name: 'oldPassword',
                               hintText: "Хуучин нууц үгээ оруулна уу",
-                              color: darkGrey,
+                              textColor: Theme.of(context).iconTheme.color,
+                              color: Theme.of(context).splashColor,
                               validators: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(
                                     errorText: 'Хуучин нууц үгээ оруулна уу')
@@ -247,9 +248,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         labelText: "Шинэ нууц үг",
                         inputType: TextInputType.text,
                         obscureText: true,
+                        textColor: Theme.of(context).iconTheme.color,
                         name: 'password',
                         hintText: "Шинэ нууц үг",
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                         validators: FormBuilderValidators.compose([
                           (value) {
                             return validatePassword(value.toString(), context);
@@ -260,12 +262,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         height: 8,
                       ),
                       FormTextField(
+                        textColor: Theme.of(context).iconTheme.color,
                         labelText: "Нууц үг баталгаажуулалт",
                         inputType: TextInputType.text,
                         obscureText: true,
                         name: 'passwordVerify',
                         hintText: "Шинэ нууц үгээ давтан оруулна уу",
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                         validators: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
                               errorText: "Нууц үгээ давтан оруулна уу"),

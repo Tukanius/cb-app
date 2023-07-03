@@ -204,9 +204,9 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   decoration: InputDecoration(
                     hintText: 'Банк сонгоно уу',
                     hintStyle: TextStyle(
-                        fontSize: 14, color: Theme.of(context).hintColor),
+                        fontSize: 14, color: Theme.of(context).disabledColor),
                     filled: true,
-                    fillColor: darkGrey,
+                    fillColor: Theme.of(context).splashColor,
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -229,7 +229,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                             '${item.name}',
                             style: TextStyle(
                               fontSize: 14,
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                             ),
                           ),
                         ),
@@ -243,7 +243,8 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   labelText: "Дансны дугаар",
                   name: 'accountNumber',
                   hintText: 'Дансны дугаараа оруулна уу',
-                  color: darkGrey,
+                  color: Theme.of(context).splashColor,
+                  textColor: Theme.of(context).iconTheme.color,
                   validators: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Дансаа оруулна уу.')

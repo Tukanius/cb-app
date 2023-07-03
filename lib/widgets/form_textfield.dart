@@ -172,8 +172,8 @@ class _FormTextFieldState extends State<FormTextField> {
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 filled: true,
-                hintStyle:
-                    TextStyle(color: Theme.of(context).hintColor, fontSize: 14),
+                hintStyle: TextStyle(
+                    color: Theme.of(context).disabledColor, fontSize: 14),
                 fillColor: widget.color,
               ),
 

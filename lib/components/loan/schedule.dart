@@ -1,5 +1,5 @@
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class LoanSchedule extends StatefulWidget {
   final bool? isSelected;
@@ -29,12 +29,14 @@ class _LoanScheduleState extends State<LoanSchedule> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: widget.error ? red : transparent),
-          color: widget.isSelected == true ? buttonColor : darkGrey,
+          color: widget.isSelected == true
+              ? buttonColor
+              : Theme.of(context).splashColor,
         ),
         child: Text(
           '${widget.data}',
           style: TextStyle(
-            color: white,
+            color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),

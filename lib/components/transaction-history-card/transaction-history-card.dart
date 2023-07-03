@@ -151,7 +151,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: darkGrey,
+          color: Theme.of(context).splashColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,7 +163,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                   DateFormat.yMd()
                       .format(DateTime.parse("${widget.data?.createdAt}")),
                   style: TextStyle(
-                    color: grey,
+                    color: Theme.of(context).disabledColor,
                     fontSize: 12,
                   ),
                 ),
@@ -174,7 +174,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                     ? Text(
                         '${widget.data?.description}',
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                         ),
                       )
                     : SizedBox(),
