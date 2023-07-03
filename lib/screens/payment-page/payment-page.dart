@@ -118,6 +118,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                 child: Column(
                   children: [
                     FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
                       name: "password",
                       controller: textController,
                       hintText: 'Нууц үгээ оруулна уу',
@@ -130,7 +131,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                           errorText: 'Нэвтрэх нэрээ оруулна уу.',
                         )
                       ]),
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
                     ),
                     SizedBox(
                       height: 20,
@@ -281,7 +282,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                           borderRadius: BorderRadius.all(
                             Radius.circular(12),
                           ),
-                          color: darkGrey,
+                          color: Theme.of(context).splashColor,
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -289,7 +290,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                             Text(
                               'Нийт төлөх дүн:',
                               style: TextStyle(
-                                color: white,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                             ),
                             SizedBox(
@@ -298,7 +299,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                             Text(
                               Utils().formatCurrency(widget.loanResidual),
                               style: TextStyle(
-                                color: white,
+                                color: Theme.of(context).iconTheme.color,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -323,7 +324,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: 4),
                         decoration: BoxDecoration(
-                          color: darkGrey,
+                          color: Theme.of(context).splashColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(
@@ -344,7 +345,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                             Text(
                               "QPay",
                               style: TextStyle(
-                                color: white,
+                                color: Theme.of(context).iconTheme.color,
                                 fontSize: 16,
                               ),
                             )
@@ -360,7 +361,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: 4),
                         decoration: BoxDecoration(
-                          color: darkGrey,
+                          color: Theme.of(context).splashColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: const EdgeInsets.symmetric(
@@ -371,7 +372,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                               borderRadius: BorderRadius.circular(5),
                               child: SvgPicture.asset(
                                 'assets/svg/bank.svg',
-                                color: white,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                             ),
                             SizedBox(
@@ -380,7 +381,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                             Text(
                               "Банкаар шилжүүлэх",
                               style: TextStyle(
-                                color: white,
+                                color: Theme.of(context).iconTheme.color,
                                 fontSize: 16,
                               ),
                             )
@@ -402,7 +403,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                     Container(
                       margin: EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: const EdgeInsets.symmetric(
@@ -416,6 +417,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                                 'images/schedule.svg',
                                 height: 20,
                                 width: 20,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                               SizedBox(
                                 width: 10,
@@ -423,7 +425,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                               Text(
                                 'Төлбөр хийх өдөр',
                                 style: TextStyle(
-                                  color: grey,
+                                  color: Theme.of(context).disabledColor,
                                   fontSize: 12,
                                 ),
                               )
@@ -432,7 +434,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                           Text(
                             "2024/04/12",
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),
@@ -442,7 +444,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: const EdgeInsets.symmetric(
@@ -456,6 +458,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                                 'images/schedule.svg',
                                 height: 20,
                                 width: 20,
+                                color: Theme.of(context).iconTheme.color,
                               ),
                               SizedBox(
                                 width: 10,
@@ -463,7 +466,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                               Text(
                                 'Төлбөр хийх өдөр',
                                 style: TextStyle(
-                                  color: grey,
+                                  color: Theme.of(context).disabledColor,
                                   fontSize: 12,
                                 ),
                               )
@@ -472,7 +475,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                           Text(
                             "2024/04/12",
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                             ),

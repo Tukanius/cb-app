@@ -1,6 +1,5 @@
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/utils/utils.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoanScheduleCard extends StatefulWidget {
@@ -22,7 +21,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +32,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
           Text(
             '${widget.data!.pay_date}',
             style: TextStyle(
-              color: white,
+              color: Theme.of(context).iconTheme.color,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
@@ -42,7 +41,7 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
             height: 5,
           ),
           Divider(
-            color: grey.withOpacity(0.3),
+            color: Colors.grey,
           ),
           SizedBox(
             height: 5,
@@ -53,14 +52,14 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
               Text(
                 'Төлөх дүн',
                 style: TextStyle(
-                  color: grey,
+                  color: Theme.of(context).disabledColor,
                   fontSize: 12,
                 ),
               ),
               Text(
                 "${Utils().formatCurrency(widget.data!.totalPayAmount)}₮",
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -76,14 +75,14 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
               Text(
                 'Зээлийн үлдэгдэл',
                 style: TextStyle(
-                  color: grey,
+                  color: Theme.of(context).disabledColor,
                   fontSize: 12,
                 ),
               ),
               Text(
                 "${Utils().formatCurrency(widget.data!.loanResidual)}₮",
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -99,14 +98,14 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
               Text(
                 'Зээлийн хүү',
                 style: TextStyle(
-                  color: grey,
+                  color: Theme.of(context).disabledColor,
                   fontSize: 12,
                 ),
               ),
               Text(
                 "${Utils().formatCurrency(widget.data!.rateAmount)}₮",
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -122,14 +121,14 @@ class _LoanScheduleCardState extends State<LoanScheduleCard> {
               Text(
                 'Үндсэн зээлээс',
                 style: TextStyle(
-                  color: grey,
+                  color: Theme.of(context).disabledColor,
                   fontSize: 12,
                 ),
               ),
               Text(
                 "${Utils().formatCurrency(widget.data!.mainLoanPayAmount)}₮",
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),

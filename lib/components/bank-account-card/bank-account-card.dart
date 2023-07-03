@@ -1,5 +1,4 @@
 import 'package:bank_core/models/customer.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class BankAccountCard extends StatefulWidget {
@@ -21,7 +20,7 @@ class _BankAccountCardState extends State<BankAccountCard> {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +48,7 @@ class _BankAccountCardState extends State<BankAccountCard> {
                   Text(
                     "${widget.data?.bank?.name}",
                     style: TextStyle(
-                      color: grey,
+                      color: Theme.of(context).disabledColor,
                       fontSize: 12,
                     ),
                   ),
@@ -59,7 +58,7 @@ class _BankAccountCardState extends State<BankAccountCard> {
                   Text(
                     '${widget.data!.accountNumber}',
                     style: TextStyle(
-                      color: white,
+                      color: Theme.of(context).iconTheme.color,
                       fontWeight: FontWeight.bold,
                     ),
                   )

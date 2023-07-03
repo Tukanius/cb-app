@@ -201,7 +201,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.text,
                       name: 'email',
                       hintText: 'И-мэйл оруулна уу',
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
+                      textColor: Theme.of(context).iconTheme.color,
                       validators: FormBuilderValidators.compose([
                         (value) {
                           return validateEmail(value.toString(), context);
@@ -216,7 +217,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.text,
                       name: 'familyName',
                       hintText: 'Ургын овог',
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
+                      textColor: Theme.of(context).iconTheme.color,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -257,9 +259,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       decoration: InputDecoration(
                         hintText: 'Яс үндэс',
                         hintStyle: TextStyle(
-                            fontSize: 14, color: Theme.of(context).hintColor),
+                            fontSize: 14,
+                            color: Theme.of(context).disabledColor),
                         filled: true,
-                        fillColor: darkGrey,
+                        fillColor: Theme.of(context).splashColor,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -282,7 +285,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                                 '${item.name}',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                             ),
@@ -324,9 +327,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       decoration: InputDecoration(
                         hintText: 'Боловсролын зэрэг сонгоно уу',
                         hintStyle: TextStyle(
-                            fontSize: 14, color: Theme.of(context).hintColor),
+                            fontSize: 14,
+                            color: Theme.of(context).disabledColor),
                         filled: true,
-                        fillColor: darkGrey,
+                        fillColor: Theme.of(context).splashColor,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -349,7 +353,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                                 '${item.name}',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                             ),
@@ -391,9 +395,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       decoration: InputDecoration(
                         hintText: 'Гэрлэлтийн байдал',
                         hintStyle: TextStyle(
-                            fontSize: 14, color: Theme.of(context).hintColor),
+                            fontSize: 14,
+                            color: Theme.of(context).disabledColor),
                         filled: true,
-                        fillColor: darkGrey,
+                        fillColor: Theme.of(context).splashColor,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -416,7 +421,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                                 '${item.name}',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                             ),
@@ -431,7 +436,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.number,
                       name: 'familyCount',
                       hintText: 'Ам бүлийн тоо',
-                      color: darkGrey,
+                      textColor: Theme.of(context).iconTheme.color,
+                      color: Theme.of(context).splashColor,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -441,11 +447,12 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       height: 8,
                     ),
                     FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
                       labelText: "Сарын орлого",
                       inputType: TextInputType.number,
                       name: 'incomeAmountMonth',
                       hintText: 'Сарын орлого',
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -486,9 +493,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       decoration: InputDecoration(
                         hintText: 'Хүйс',
                         hintStyle: TextStyle(
-                            fontSize: 14, color: Theme.of(context).hintColor),
+                            fontSize: 14,
+                            color: Theme.of(context).disabledColor),
                         filled: true,
-                        fillColor: darkGrey,
+                        fillColor: Theme.of(context).splashColor,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -511,7 +519,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                                 '${item.name}',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                             ),
@@ -526,7 +534,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       inputType: TextInputType.text,
                       name: 'birthPlace',
                       hintText: 'Төрсөн газар',
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
+                      textColor: Theme.of(context).iconTheme.color,
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
                             errorText: 'Заавал оруулна уу')
@@ -567,9 +576,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       decoration: InputDecoration(
                         hintText: 'Ажил эрхлэлтийн байдал сонгох',
                         hintStyle: TextStyle(
-                            fontSize: 14, color: Theme.of(context).hintColor),
+                            fontSize: 14,
+                            color: Theme.of(context).disabledColor),
                         filled: true,
-                        fillColor: darkGrey,
+                        fillColor: Theme.of(context).splashColor,
                         errorBorder: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(10),
@@ -592,7 +602,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                                 '${item.name}',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: white,
+                                  color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
                             ),
@@ -620,17 +630,18 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   child: dateTime == null
                       ? Text(
                           'Төрсөн өдөр сонгоно уу',
-                          style: TextStyle(color: Theme.of(context).hintColor),
+                          style:
+                              TextStyle(color: Theme.of(context).disabledColor),
                         )
                       : Text(
                           '${dateTime?.format(payload: "YYYY-MM-DD")}',
                           style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontSize: 14,
                           ),
                         ),

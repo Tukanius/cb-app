@@ -110,13 +110,14 @@ class _ForgotPageState extends State<ForgotPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FormTextField(
+                        textColor: Theme.of(context).iconTheme.color,
+                        color: Theme.of(context).splashColor,
                         showCounter: false,
                         maxLenght: 8,
                         labelText: "Утасны дугаар",
                         inputType: TextInputType.phone,
                         name: 'phone',
                         hintText: "Утасны дугаар оруулна уу",
-                        color: darkGrey,
                         validators: FormBuilderValidators.compose([
                           (value) {
                             return validatePhone(value.toString(), context);
@@ -157,7 +158,7 @@ class _ForgotPageState extends State<ForgotPage> {
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
                               errorText: field.errorText,
-                              fillColor: darkGrey,
+                              fillColor: Theme.of(context).splashColor,
                               filled: true,
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 0, horizontal: 15),
@@ -182,7 +183,10 @@ class _ForgotPageState extends State<ForgotPage> {
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,
                                     title: letters[0],
-                                    backgroundColor: transparent,
+                                    backgroundColor:
+                                        Theme.of(context).splashColor,
+                                    textColor:
+                                        Theme.of(context).iconTheme.color,
                                     length: CYRILLIC_ALPHABETS_LIST.length,
                                     itemBuilder: (ctx, i) => RegisterLetter(
                                       text: CYRILLIC_ALPHABETS_LIST[i],
@@ -198,10 +202,13 @@ class _ForgotPageState extends State<ForgotPage> {
                                   RegisterLetters(
                                     width: DeviceSize.width(3, context),
                                     height: DeviceSize.height(90, context),
+                                    textColor:
+                                        Theme.of(context).iconTheme.color,
                                     title: letters[1],
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,
-                                    backgroundColor: transparent,
+                                    backgroundColor:
+                                        Theme.of(context).splashColor,
                                     length: CYRILLIC_ALPHABETS_LIST.length,
                                     itemBuilder: (ctx, i) => RegisterLetter(
                                       text: CYRILLIC_ALPHABETS_LIST[i],
@@ -216,8 +223,9 @@ class _ForgotPageState extends State<ForgotPage> {
                                   ),
                                   Expanded(
                                     child: FormTextField(
+                                      textColor:
+                                          Theme.of(context).iconTheme.color,
                                       labelText: "",
-                                      textColor: white,
                                       onChanged: (value) {
                                         setState(() {
                                           registerNo = value;

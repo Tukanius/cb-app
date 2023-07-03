@@ -2,7 +2,6 @@ import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/screens/profile-page/change-email/change-email-page.dart';
 import 'package:bank_core/screens/profile-page/change-password/change-password.dart';
 import 'package:bank_core/screens/profile-page/change-phone/change-phone-page.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -62,13 +61,13 @@ class _SettingsPageState extends State<SettingsPage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   child: Row(
                     children: [
                       Icon(
                         Icons.lock,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 10,
@@ -76,7 +75,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       Text(
                         'Нууц үг солих',
                         style: TextStyle(
-                            color: white, fontWeight: FontWeight.w500),
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
                       )
                     ],
                   ),
@@ -94,13 +94,13 @@ class _SettingsPageState extends State<SettingsPage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   child: Row(
                     children: [
                       Icon(
                         Icons.email,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 10,
@@ -108,7 +108,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       Text(
                         'И-мэйл солих',
                         style: TextStyle(
-                            color: white, fontWeight: FontWeight.w500),
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
                       )
                     ],
                   ),
@@ -126,13 +127,13 @@ class _SettingsPageState extends State<SettingsPage> {
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   child: Row(
                     children: [
                       Icon(
                         Icons.phone,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 10,
@@ -140,7 +141,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       Text(
                         'Утасны дугаар солих',
                         style: TextStyle(
-                            color: white, fontWeight: FontWeight.w500),
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
                       )
                     ],
                   ),

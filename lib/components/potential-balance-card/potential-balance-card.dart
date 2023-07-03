@@ -37,7 +37,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +53,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                   child: Text(
                     '${widget.customer?.loanProduct?.name}',
                     style: TextStyle(
-                      color: grey,
+                      color: Theme.of(context).iconTheme.color,
                       fontSize: 12,
                     ),
                   ),
@@ -65,7 +65,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                   child: Text(
                     'Боломжит үлдэгдэл',
                     style: TextStyle(
-                      color: grey,
+                      color: Theme.of(context).iconTheme.color,
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
                     ),
@@ -79,7 +79,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                         child: Text(
                           "${Utils().formatCurrency(widget.customer?.balance)}₮",
                           style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                           ),
@@ -89,7 +89,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                         child: Text(
                           '*******',
                           style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                           ),

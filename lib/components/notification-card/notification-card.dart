@@ -1,4 +1,3 @@
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,13 +15,13 @@ class _NotificationCardState extends State<NotificationCard> {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
       ),
       child: Row(
         children: [
           Icon(
             Icons.notifications,
-            color: white,
+            color: Theme.of(context).iconTheme.color,
           ),
           SizedBox(
             width: 10,
@@ -33,14 +32,14 @@ class _NotificationCardState extends State<NotificationCard> {
               Text(
                 '2023-06-07',
                 style: TextStyle(
-                  color: grey,
+                  color: Theme.of(context).disabledColor,
                   fontSize: 10,
                 ),
               ),
               Text(
                 "200'000₮ зээл гарлаа",
                 style: TextStyle(
-                  color: white,
+                  color: Theme.of(context).iconTheme.color,
                   fontWeight: FontWeight.w500,
                 ),
               ),

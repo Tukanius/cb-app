@@ -60,11 +60,12 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
                     height: 30,
                   ),
                   FormTextField(
+                    textColor: Theme.of(context).iconTheme.color,
                     labelText: "Шинэ И-мэйл оруулах",
                     inputType: TextInputType.emailAddress,
                     name: 'newEmail',
                     hintText: "Шинэ И-мэйл оруулна уу",
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                     validators: FormBuilderValidators.compose([
                       FormBuilderValidators.required(
                           errorText: "И-мэйл оруулна уу"),

@@ -60,11 +60,12 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
                     height: 30,
                   ),
                   FormTextField(
+                    textColor: Theme.of(context).iconTheme.color,
                     labelText: "Шинэ утасны дугаар оруулах",
                     inputType: TextInputType.number,
                     name: 'newPhoneNumber',
                     hintText: "Шинэ утасны дугаар оруулах",
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                     validators: FormBuilderValidators.compose([
                       (value) {
                         return validatePhone(value.toString(), context);

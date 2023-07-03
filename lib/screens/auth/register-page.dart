@@ -230,7 +230,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         showCounter: false,
                         name: 'phone',
                         hintText: "Утасны дугаараа оруулна уу",
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
+                        textColor: Theme.of(context).iconTheme.color,
                         validators: FormBuilderValidators.compose([
                           (value) {
                             return validatePhone(value.toString(), context);
@@ -239,11 +240,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
 
                       FormTextField(
+                        color: Theme.of(context).splashColor,
+                        textColor: Theme.of(context).iconTheme.color,
                         labelText: "Овог",
                         inputType: TextInputType.text,
                         name: 'lastName',
                         hintText: "Овогоо оруулна уу",
-                        color: darkGrey,
                         validators: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
                               errorText: 'Овогоо оруулна уу')
@@ -253,11 +255,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 10,
                       ),
                       FormTextField(
+                        color: Theme.of(context).splashColor,
+                        textColor: Theme.of(context).iconTheme.color,
                         labelText: "Нэр",
                         inputType: TextInputType.text,
                         name: 'firstName',
                         hintText: "Нэрээ оруулна уу",
-                        color: darkGrey,
                         validators: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
                               errorText: 'Нэрээ оруулна уу')
@@ -297,7 +300,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none),
                               errorText: field.errorText,
-                              fillColor: darkGrey,
+                              fillColor: Theme.of(context).splashColor,
                               filled: true,
                               contentPadding: EdgeInsets.symmetric(
                                   vertical: 0, horizontal: 15),
@@ -322,7 +325,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,
                                     title: letters[0],
-                                    backgroundColor: transparent,
+                                    backgroundColor:
+                                        Theme.of(context).splashColor,
+                                    textColor:
+                                        Theme.of(context).iconTheme.color,
                                     length: CYRILLIC_ALPHABETS_LIST.length,
                                     itemBuilder: (ctx, i) => RegisterLetter(
                                       text: CYRILLIC_ALPHABETS_LIST[i],
@@ -341,7 +347,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                     title: letters[1],
                                     oneTitle: "Регистер сонгох",
                                     hideOnPressed: false,
-                                    backgroundColor: transparent,
+                                    backgroundColor:
+                                        Theme.of(context).splashColor,
+                                    textColor:
+                                        Theme.of(context).iconTheme.color,
                                     length: CYRILLIC_ALPHABETS_LIST.length,
                                     itemBuilder: (ctx, i) => RegisterLetter(
                                       text: CYRILLIC_ALPHABETS_LIST[i],
@@ -357,7 +366,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Expanded(
                                     child: FormTextField(
                                       labelText: "",
-                                      textColor: white,
+                                      textColor:
+                                          Theme.of(context).iconTheme.color,
                                       onChanged: (value) {
                                         setState(() {
                                           registerNo = value;

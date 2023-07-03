@@ -120,6 +120,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                               bottom: 10,
                             ),
                             child: FormTextField(
+                              textColor: Theme.of(context).iconTheme.color,
                               labelText: "Утасны дугаар",
                               onChanged: (value) {
                                 secureStorage.deleteAll();
@@ -132,11 +133,12 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                                 FormBuilderValidators.required(
                                     errorText: 'Нэвтрэх нэрээ оруулна уу.')
                               ]),
-                              color: darkGrey,
+                              color: Theme.of(context).splashColor,
                             ),
                           ),
                           Container(
                             child: FormTextField(
+                              textColor: Theme.of(context).iconTheme.color,
                               labelText: "Нууц үг",
                               controller: passwordController,
                               inputType: TextInputType.visiblePassword,
@@ -154,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                               name: 'password',
                               hintText: 'Нууц үг',
                               obscureText: isVisible,
-                              color: darkGrey,
+                              color: Theme.of(context).splashColor,
                               validators: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(
                                     errorText: 'Нууц үгээ оруулна уу.')

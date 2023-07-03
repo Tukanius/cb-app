@@ -19,7 +19,7 @@ class _PaidBackCardState extends State<PaidBackCard> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-        color: darkGrey,
+        color: Theme.of(context).splashColor,
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
@@ -39,7 +39,7 @@ class _PaidBackCardState extends State<PaidBackCard> {
               Text(
                 '2024/04/12',
                 style: TextStyle(
-                  color: grey,
+                  color: Theme.of(context).disabledColor,
                   fontSize: 12,
                 ),
               )
@@ -48,7 +48,7 @@ class _PaidBackCardState extends State<PaidBackCard> {
           Text(
             "400'000₮",
             style: TextStyle(
-              color: white,
+              color: Theme.of(context).iconTheme.color,
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),

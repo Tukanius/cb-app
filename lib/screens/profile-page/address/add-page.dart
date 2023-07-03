@@ -202,9 +202,9 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   decoration: InputDecoration(
                     hintText: 'Оршин сууж байгаа хаягын төрөл',
                     hintStyle: TextStyle(
-                        fontSize: 14, color: Theme.of(context).hintColor),
+                        fontSize: 14, color: Theme.of(context).disabledColor),
                     filled: true,
-                    fillColor: darkGrey,
+                    fillColor: Theme.of(context).splashColor,
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -226,7 +226,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                           child: Text(
                             '${item.name}',
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontSize: 14,
                             ),
                           ),
@@ -273,9 +273,9 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   decoration: InputDecoration(
                     hintText: 'Аймаг / Хот',
                     hintStyle: TextStyle(
-                        fontSize: 14, color: Theme.of(context).hintColor),
+                        fontSize: 14, color: Theme.of(context).disabledColor),
                     filled: true,
-                    fillColor: darkGrey,
+                    fillColor: Theme.of(context).splashColor,
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -297,7 +297,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                           child: Text(
                             '${item.name}',
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontSize: 14,
                             ),
                           ),
@@ -344,9 +344,9 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   decoration: InputDecoration(
                     hintText: 'Сум / Дүүрэг',
                     hintStyle: TextStyle(
-                        fontSize: 14, color: Theme.of(context).hintColor),
+                        fontSize: 14, color: Theme.of(context).disabledColor),
                     filled: true,
-                    fillColor: darkGrey,
+                    fillColor: Theme.of(context).splashColor,
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -368,7 +368,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                           child: Text(
                             '${item.name}',
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontSize: 14,
                             ),
                           ),
@@ -415,9 +415,9 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   decoration: InputDecoration(
                     hintText: 'Баг / Хороо',
                     hintStyle: TextStyle(
-                        fontSize: 14, color: Theme.of(context).hintColor),
+                        fontSize: 14, color: Theme.of(context).disabledColor),
                     filled: true,
-                    fillColor: darkGrey,
+                    fillColor: Theme.of(context).splashColor,
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -439,7 +439,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                           child: Text(
                             '${item.name}',
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontSize: 14,
                             ),
                           ),
@@ -451,11 +451,12 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                   height: 15,
                 ),
                 FormTextField(
+                  textColor: Theme.of(context).iconTheme.color,
                   labelText: "Тоот",
                   inputType: TextInputType.text,
                   hintText: "Тоот",
                   name: 'address',
-                  color: darkGrey,
+                  color: Theme.of(context).splashColor,
                   validators: FormBuilderValidators.compose([
                     FormBuilderValidators.required(
                         errorText: 'Заавал оруулна уу')

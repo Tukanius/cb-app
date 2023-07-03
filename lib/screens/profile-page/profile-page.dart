@@ -124,14 +124,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.only(bottom: 10, top: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding: const EdgeInsets.all(15),
                   child: Row(
                     children: [
                       Icon(
                         Icons.person,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -139,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Миний мэдээлэл",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -156,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -164,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Icon(
                         Icons.add_card_rounded,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -172,7 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Данс холбох",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -189,7 +189,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -197,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Icon(
                         Icons.settings,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -205,7 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Тохиргоо",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -222,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -232,6 +232,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         'assets/svg/document.svg',
                         height: 24,
                         width: 24,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -239,7 +240,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Үйлчилгээний нөхцөл",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -256,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -266,6 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         'assets/svg/faq.svg',
                         height: 24,
                         width: 24,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -273,7 +275,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Тусламж",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -291,7 +293,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -299,6 +301,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       SvgPicture.asset(
                         'assets/svg/home.svg',
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -306,7 +309,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Гэрийн хаяг нэмэх",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -323,7 +326,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   margin: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: darkGrey,
+                    color: Theme.of(context).splashColor,
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -331,7 +334,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Icon(
                         Icons.balance_outlined,
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         width: 15,
@@ -339,7 +342,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Өр орлогын харьцаа",
                         style: TextStyle(
-                          color: white,
+                          color: Theme.of(context).iconTheme.color,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),

@@ -151,7 +151,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                     margin: const EdgeInsets.symmetric(horizontal: 15),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: darkGrey,
+                      color: Theme.of(context).splashColor,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10),
@@ -172,7 +172,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                     Text(
                                       'Олгогдсон зээл',
                                       style: TextStyle(
-                                        color: grey,
+                                        color: Theme.of(context).disabledColor,
                                         fontSize: 12,
                                       ),
                                     ),
@@ -183,7 +183,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       // "${Utils().formatCurrency("${customer.loan?.amount}")}₮",
                                       "${customer.loan?.amount}",
                                       style: TextStyle(
-                                        color: white,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -199,7 +200,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                     Text(
                                       'Зээлийн хүү',
                                       style: TextStyle(
-                                        color: grey,
+                                        color: Theme.of(context).disabledColor,
                                         fontSize: 12,
                                       ),
                                     ),
@@ -209,7 +210,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                     Text(
                                       "${customer.loan?.loanRate}%",
                                       style: TextStyle(
-                                        color: white,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -224,7 +226,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                           height: 10,
                         ),
                         Divider(
-                          color: grey.withOpacity(0.2),
+                          color: Theme.of(context).disabledColor,
                           endIndent: 20,
                           indent: 20,
                         ),
@@ -245,7 +247,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       child: Text(
                                         'Зээлийн үлдэгдэл',
                                         style: TextStyle(
-                                          color: grey,
+                                          color:
+                                              Theme.of(context).disabledColor,
                                           fontSize: 12,
                                         ),
                                       ),
@@ -257,7 +260,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       // "${Utils().formatCurrency(customer.loanResidual)}₮",
                                       "${customer.loanResidual}₮",
                                       style: TextStyle(
-                                        color: white,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -273,7 +277,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                     Text(
                                       'Хуримтлагдсан хүү',
                                       style: TextStyle(
-                                        color: grey,
+                                        color: Theme.of(context).disabledColor,
                                         fontSize: 12,
                                       ),
                                     ),
@@ -284,7 +288,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                                       // "${Utils().formatCurrency(customer.rateAmount)}₮",
                                       "${customer.rateAmount}₮",
                                       style: TextStyle(
-                                        color: white,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -317,20 +322,23 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                             margin: const EdgeInsets.only(
                                 left: 15, top: 20, right: 5),
                             decoration: BoxDecoration(
-                              color: darkGrey,
+                              color: Theme.of(context).splashColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset('assets/svg/lend.svg'),
+                                SvgPicture.asset(
+                                  'assets/svg/lend.svg',
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
                                 SizedBox(
                                   height: 15,
                                 ),
                                 Text(
                                   'Зээл төлөх',
                                   style: TextStyle(
-                                    color: grey,
+                                    color: Theme.of(context).disabledColor,
                                     fontSize: 16,
                                   ),
                                 )
@@ -344,20 +352,23 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                             margin: const EdgeInsets.only(
                                 right: 15, top: 20, left: 5),
                             decoration: BoxDecoration(
-                              color: darkGrey,
+                              color: Theme.of(context).splashColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset('images/loan_close.svg'),
+                                SvgPicture.asset(
+                                  'images/loan_close.svg',
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
                                 SizedBox(
                                   height: 15,
                                 ),
                                 Text(
                                   'Зээл хаах',
                                   style: TextStyle(
-                                    color: grey,
+                                    color: Theme.of(context).disabledColor,
                                     fontSize: 16,
                                   ),
                                 )
@@ -381,21 +392,24 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 15),
                       decoration: BoxDecoration(
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: const EdgeInsets.symmetric(
                           vertical: 25, horizontal: 25),
                       child: Row(
                         children: [
-                          SvgPicture.asset('images/schedule.svg'),
+                          SvgPicture.asset(
+                            'images/schedule.svg',
+                            color: Theme.of(context).iconTheme.color,
+                          ),
                           SizedBox(
                             width: 12,
                           ),
                           Text(
                             'Зээлийн хуваарь',
                             style: TextStyle(
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                               fontSize: 16,
                             ),
                           )

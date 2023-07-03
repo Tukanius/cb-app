@@ -157,7 +157,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        color: darkGrey,
+                        color: Theme.of(context).splashColor,
                       ),
                       child: Column(
                         children: [
@@ -172,13 +172,14 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                     Text(
                                       'Овог:',
                                       style: TextStyle(
-                                        color: grey,
+                                        color: Theme.of(context).disabledColor,
                                       ),
                                     ),
                                     Text(
                                       '${customer.result?.lastName}',
                                       style: TextStyle(
-                                        color: white,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -194,13 +195,14 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                     Text(
                                       'Нэр:',
                                       style: TextStyle(
-                                        color: grey,
+                                        color: Theme.of(context).disabledColor,
                                       ),
                                     ),
                                     Text(
                                       '${customer.result?.firstName}',
                                       style: TextStyle(
-                                        color: white,
+                                        color:
+                                            Theme.of(context).iconTheme.color,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -218,13 +220,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                           Text(
                                             'И-Мэйл:',
                                             style: TextStyle(
-                                              color: grey,
+                                              color: Theme.of(context)
+                                                  .disabledColor,
                                             ),
                                           ),
                                           Text(
                                             '${customer.result?.email}',
                                             style: TextStyle(
-                                              color: white,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -242,13 +247,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                           Text(
                                             'Төрсөн өдөр:',
                                             style: TextStyle(
-                                              color: grey,
+                                              color: Theme.of(context)
+                                                  .disabledColor,
                                             ),
                                           ),
                                           Text(
                                             '${customer.result?.birthDate}',
                                             style: TextStyle(
-                                              color: white,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -266,7 +274,8 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                           Text(
                                             'Боловсрол:',
                                             style: TextStyle(
-                                              color: grey,
+                                              color: Theme.of(context)
+                                                  .disabledColor,
                                             ),
                                           ),
                                           SizedBox(
@@ -275,7 +284,9 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                           Text(
                                             '${customer.result?.educationType?.name}',
                                             style: TextStyle(
-                                              color: white,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color,
                                               fontWeight: FontWeight.w500,
                                             ),
                                             softWrap: false,
@@ -296,13 +307,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                           Text(
                                             'Яс үндэс :',
                                             style: TextStyle(
-                                              color: grey,
+                                              color: Theme.of(context)
+                                                  .disabledColor,
                                             ),
                                           ),
                                           Text(
                                             '${customer.result?.nationalityType?.name}',
                                             style: TextStyle(
-                                              color: white,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -320,13 +334,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                                           Text(
                                             'Хүйс :',
                                             style: TextStyle(
-                                              color: grey,
+                                              color: Theme.of(context)
+                                                  .disabledColor,
                                             ),
                                           ),
                                           Text(
                                             '${customer.result?.gender?.name}',
                                             style: TextStyle(
-                                              color: white,
+                                              color: Theme.of(context)
+                                                  .iconTheme
+                                                  .color,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),

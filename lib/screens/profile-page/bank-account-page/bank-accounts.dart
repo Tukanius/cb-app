@@ -90,7 +90,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
                     Lottie.asset('assets/lottie/empty.json', height: 200),
                     Text(
                       "Данс холбоогүй байна",
-                      style: TextStyle(color: grey),
+                      style: TextStyle(color: Theme.of(context).disabledColor),
                     ),
                     SizedBox(
                       height: 30,

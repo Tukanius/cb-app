@@ -46,7 +46,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: darkGrey,
+          color: Theme.of(context).splashColor,
         ),
         child: Column(
           children: [
@@ -62,7 +62,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
                       ? Text(
                           "${duration.inDays}",
                           style: TextStyle(
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -71,7 +71,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
                   Text(
                     'хоног',
                     style: TextStyle(
-                      color: grey,
+                      color: Theme.of(context).disabledColor,
                       fontSize: 14,
                     ),
                   ),
@@ -89,14 +89,14 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
                     Text(
                       'Эргэн төлөх дүн: ',
                       style: TextStyle(
-                        color: grey,
+                        color: Theme.of(context).disabledColor,
                         fontSize: 10,
                       ),
                     ),
                     Text(
                       '${Utils().formatCurrency(widget.data!.total_pay_amount)}₮',
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
@@ -111,14 +111,14 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
                     Text(
                       'Эргэн төлөх өдөр: ',
                       style: TextStyle(
-                        color: grey,
+                        color: Theme.of(context).disabledColor,
                         fontSize: 10,
                       ),
                     ),
                     Text(
                       '${widget.data!.pay_date}',
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
@@ -133,14 +133,14 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
                     Text(
                       'Зээлийн төлөв: ',
                       style: TextStyle(
-                        color: grey,
+                        color: Theme.of(context).disabledColor,
                         fontSize: 10,
                       ),
                     ),
                     Text(
                       '${widget.data!.loan?.loanType?.name}',
                       style: TextStyle(
-                        color: white,
+                        color: Theme.of(context).iconTheme.color,
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
