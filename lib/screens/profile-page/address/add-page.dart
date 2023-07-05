@@ -467,6 +467,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
                 ),
                 Container(
                   child: CustomButton(
+                    isLoading: false,
                     boxShadow: false,
                     labelColor: buttonColor,
                     labelText: 'Нэмэх',
