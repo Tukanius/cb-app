@@ -504,7 +504,7 @@ String? validatePassword(String value, context) {
     return 'Нууц үгээ оруулна уу';
   } else {
     if (!regex.hasMatch(value)) {
-      return 'Нууц үг нь дор хаяж 6 тэмдэгтээс бүрдэх ёстой';
+      return 'Нууц үг нь дор хаяж 8 үсэг, тусгай тэмдэгтээс бүрдэх ёстой';
     } else {
       return null;
     }

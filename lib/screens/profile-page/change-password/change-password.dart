@@ -209,7 +209,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               ),
             ),
             title: Text(
-              'Нууц үг солих',
+              'Нууц үг',
               style: TextStyle(
                 color: Theme.of(context).iconTheme.color,
                 fontWeight: FontWeight.bold,
@@ -245,12 +245,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         height: 8,
                       ),
                       FormTextField(
-                        labelText: "Шинэ нууц үг",
+                        labelText: "Нууц үг",
                         inputType: TextInputType.text,
                         obscureText: true,
                         textColor: Theme.of(context).iconTheme.color,
                         name: 'password',
-                        hintText: "Шинэ нууц үг",
+                        hintText: "Нууц үг",
                         color: Theme.of(context).splashColor,
                         validators: FormBuilderValidators.compose([
                           (value) {
@@ -304,12 +304,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 }
 
 String? validatePassword(String value, context) {
-  RegExp regex = RegExp(r'^.{6,20}$');
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   if (value.isEmpty) {
     return 'Нууц үгээ оруулна уу';
   } else {
     if (!regex.hasMatch(value)) {
-      return 'Нууц үг нь дор хаяж 6 тэмдэгтээс бүрдэх ёстой';
+      return 'Нууц үг багадаа 1 том үсэг 1 тэмдэгт авна';
     } else {
       return null;
     }

@@ -292,8 +292,9 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       maxLenght: 8,
                       hintText: 'Утасны дугаар',
                       validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Утасны дугаар оруулна уу')
+                        (value) {
+                          return validatePhone(value.toString(), context);
+                        }
                       ]),
                     ),
                   ],
@@ -317,5 +318,18 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
         ),
       ),
     );
+  }
+}
+
+String? validatePhone(String value, context) {
+  RegExp regex = RegExp(r'[(9|8]{1}[0-9]{7}$');
+  if (value.isEmpty) {
+    return 'Утасны дугаараа оруулна уу';
+  } else {
+    if (!regex.hasMatch(value)) {
+      return 'Утасны дугаараа шалгана уу';
+    } else {
+      return null;
+    }
   }
 }

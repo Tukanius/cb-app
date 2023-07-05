@@ -128,7 +128,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       labelText: "Нууц үг",
                       validators: FormBuilderValidators.compose([
                         FormBuilderValidators.required(
-                          errorText: 'Нэвтрэх нэрээ оруулна уу.',
+                          errorText: 'Нууц үгээ оруулна уу.',
                         )
                       ]),
                       color: Theme.of(context).splashColor,
@@ -141,7 +141,9 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                       isLoading: isSubmit,
                       labelText: "Баталгаажуулах",
                       onClick: () {
-                        onSubmit(context);
+                        if (isSubmit == false) {
+                          onSubmit(context);
+                        }
                       },
                       textColor: white,
                       labelColor: buttonColor,

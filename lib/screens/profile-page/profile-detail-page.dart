@@ -39,8 +39,6 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   @override
   afterFirstLayout(BuildContext context) async {
     customer = await CustomerApi().customerGet(user.customerId!);
-    print(customer.result?.email);
-    print('=======customer======');
     list(page, limit);
     setState(() {
       isLoading = false;
@@ -48,11 +46,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   }
 
   list(page, limit) async {
+    setState(() {
+      isLoading = true;
+    });
     Offset offset = Offset(page: page, limit: limit);
     Filter filter = Filter();
-
     relatedList = await CustomerApi()
         .relatedPersonList(ResultArguments(filter: filter, offset: offset));
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
