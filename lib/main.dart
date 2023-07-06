@@ -179,8 +179,13 @@ class MyApp extends StatelessWidget {
                       return const HistoryPage();
                     });
                   case BankTransferPage.routeName:
+                    BankTransferPageArguments arguments =
+                        settings.arguments as BankTransferPageArguments;
                     return MaterialPageRoute(builder: (context) {
-                      return const BankTransferPage();
+                      return BankTransferPage(
+                        code: arguments.code,
+                        totalPayAmount: arguments.totalPayAmount,
+                      );
                     });
                   case BenefitRatio.routeName:
                     return MaterialPageRoute(builder: (context) {
@@ -284,6 +289,8 @@ class MyApp extends StatelessWidget {
                         settings.arguments as PaymentPageArguments;
                     return MaterialPageRoute(builder: (context) {
                       return PaymentPage(
+                        code: arguments.code,
+                        totalPayAmount: arguments.totalPayAmount,
                         loanResidual: arguments.loanResidual,
                         loanId: arguments.loanId,
                         listenController: arguments.listenController,

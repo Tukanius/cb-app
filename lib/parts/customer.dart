@@ -186,12 +186,14 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
             .map((e) => Customer.fromJson(e))
             .toList()
         : null,
+    code: json['code'] != null ? json['code'] as String : null,
   );
 }
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.code != null) json['code'] = instance.code;
   if (instance.maxRate != null) json['maxRate'] = instance.maxRate;
   if (instance.loanProductRate != null)
     json['loanProductRate'] = instance.loanProductRate;

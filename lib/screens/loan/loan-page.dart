@@ -57,8 +57,8 @@ class _LoanPageState extends State<LoanPage>
   bool onTap = false;
   TextEditingController textController = TextEditingController();
   String selectedDay = "";
-  String seletedDayId = "";
-  String selectedMethod = "";
+  String loanTimeId = "";
+  String accountId = "";
   bool isLoading = false;
   bool isSubmit = false;
   bool isModalLoading = false;
@@ -137,11 +137,11 @@ class _LoanPageState extends State<LoanPage>
       });
       print("error date ===> ${selectedDay}");
     }
-    if (selectedMethod == "") {
+    if (accountId == "") {
       setState(() {
         isBankError = true;
       });
-      print("error bank ===> ${selectedMethod}");
+      print("error bank ===> ${accountId}");
     }
     if (isBankError == false && isDateError == false && isValueError == false) {
       showVerifyModal();
@@ -164,8 +164,8 @@ class _LoanPageState extends State<LoanPage>
         loan.amount = currentValue.toInt();
         loan.loanDate = DateTime.now().toString();
         loan.loanRate = '5';
-        loan.loanTimeId = seletedDayId;
-        loan.accountId = selectedMethod;
+        loan.loanTimeId = loanTimeId;
+        loan.accountId = accountId;
         await LoanApi().createLoan(loan);
         setState(() {
           isSuccess = false;
@@ -632,7 +632,7 @@ class _LoanPageState extends State<LoanPage>
                               onClick: () {
                                 setState(() {
                                   selectedDay = item.day!;
-                                  seletedDayId = item.id!;
+                                  loanTimeId = item.id!;
                                   isDateError = false;
                                   DateTime now = DateTime.now();
                                   futureDate = now.add(
@@ -716,8 +716,8 @@ class _LoanPageState extends State<LoanPage>
                       DropdownButtonFormField(
                         onChanged: (value) {
                           setState(() {
-                            selectedMethod = "${value?.id}";
-                            print(selectedMethod.toString());
+                            accountId = "${value?.id}";
+                            print(accountId.toString());
                             isBankError = false;
                           });
                           ;

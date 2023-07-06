@@ -2,9 +2,24 @@ import 'package:bank_core/components/action-button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+class BankTransferPageArguments {
+  String code;
+  String totalPayAmount;
+  BankTransferPageArguments({
+    required this.code,
+    required this.totalPayAmount,
+  });
+}
+
 class BankTransferPage extends StatefulWidget {
   static const routeName = "BankTransferPage";
-  const BankTransferPage({Key? key}) : super(key: key);
+  final String code;
+  final String totalPayAmount;
+  const BankTransferPage({
+    Key? key,
+    required this.code,
+    required this.totalPayAmount,
+  }) : super(key: key);
 
   @override
   State<BankTransferPage> createState() => _BankTransferPageState();
@@ -74,13 +89,19 @@ class _BankTransferPageState extends State<BankTransferPage> {
                   Row(
                     children: [
                       Text(
-                        'Хаан банк: ',
+                        'Транс банк - ',
                         style: TextStyle(
                             color: Theme.of(context).iconTheme.color,
                             fontWeight: FontWeight.w500),
                       ),
                       SelectableText(
-                        '2209250401',
+                        '900 004 7728',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        'MNT',
                         style: TextStyle(
                             color: Theme.of(context).iconTheme.color,
                             fontWeight: FontWeight.w500),
@@ -138,7 +159,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SelectableText(
-                    'Зээлийн гэрээний дугаар',
+                    '${widget.code}',
                     style: TextStyle(
                         color: Theme.of(context).iconTheme.color,
                         fontWeight: FontWeight.w500),
@@ -148,7 +169,8 @@ class _BankTransferPageState extends State<BankTransferPage> {
                       setState(() {
                         isTap = true;
                       });
-                      Clipboard.setData(ClipboardData(text: '2209250401')).then(
+                      Clipboard.setData(ClipboardData(text: '${widget.code}'))
+                          .then(
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -194,7 +216,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SelectableText(
-                    '480,000.00₮',
+                    '${widget.totalPayAmount}',
                     style: TextStyle(
                         color: Theme.of(context).iconTheme.color,
                         fontWeight: FontWeight.w500),
@@ -204,7 +226,9 @@ class _BankTransferPageState extends State<BankTransferPage> {
                       setState(() {
                         isCopy = true;
                       });
-                      Clipboard.setData(ClipboardData(text: '480,000.00')).then(
+                      Clipboard.setData(
+                              ClipboardData(text: '${widget.totalPayAmount}'))
+                          .then(
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

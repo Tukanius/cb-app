@@ -308,9 +308,12 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                       Navigator.of(context).pushNamed(
                         PaymentPage.routeName,
                         arguments: PaymentPageArguments(
-                            loanId: widget.loanId,
-                            loanResidual: customer.totalPayAmount.toString(),
-                            listenController: widget.listenController),
+                          code: customer.code!,
+                          loanId: widget.loanId,
+                          loanResidual: customer.totalPayAmount.toString(),
+                          listenController: widget.listenController,
+                          totalPayAmount: customer.totalPayAmount!,
+                        ),
                       );
                     },
                     child: Row(
