@@ -6,8 +6,10 @@ class Banks {
   String? updatedAt;
   String? deletedAt;
   String? name;
+  String? logoUrl;
 
   Banks({
+    this.logoUrl,
     this.id,
     this.createdAt,
     this.updatedAt,

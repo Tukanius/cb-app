@@ -32,7 +32,7 @@ class _BankAccountCardState extends State<BankAccountCard> {
                 height: 40,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('images/2.png'),
+                    image: NetworkImage('${widget.data?.bank?.logoUrl}'),
                   ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(100),

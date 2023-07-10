@@ -15,6 +15,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:after_layout/after_layout.dart';
 
 class AddBankAccountPageArguments {
   ListenController listenController;
@@ -33,7 +34,8 @@ class AddBankAccountPage extends StatefulWidget {
   State<AddBankAccountPage> createState() => _AddBankAccountPageState();
 }
 
-class _AddBankAccountPageState extends State<AddBankAccountPage> {
+class _AddBankAccountPageState extends State<AddBankAccountPage>
+    with AfterLayoutMixin {
   TextEditingController textController = TextEditingController();
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
   General general = General();
@@ -41,6 +43,11 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
   Banks bank = Banks();
   Customer save = Customer();
   bool isSubmit = false;
+
+  @override
+  afterFirstLayout(BuildContext context) async {
+    print(general.banks?.first.logoUrl);
+  }
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
@@ -224,15 +231,36 @@ class _AddBankAccountPageState extends State<AddBankAccountPage> {
                   items: general.banks!
                       .map(
                         (item) => DropdownMenuItem(
-                          value: item,
-                          child: Text(
-                            '${item.name}',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context).iconTheme.color,
-                            ),
-                          ),
-                        ),
+                            value: item,
+                            child: Row(
+                              children: [
+                                item.logoUrl != null
+                                    ? Container(
+                                        width: 24,
+                                        height: 24,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                  '${item.logoUrl}'),
+                                              fit: BoxFit.cover),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(100),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox(),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  '${item.name}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
+                                ),
+                              ],
+                            )),
                       )
                       .toList(),
                 ),

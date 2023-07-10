@@ -7,11 +7,13 @@ Banks _$BanksFromJson(Map<String, dynamic> json) {
     updatedAt: json['updatedAt'] != null ? json['updatedAt'] as String : null,
     deletedAt: json['deletedAt'] != null ? json['deletedAt'] as String : null,
     name: json['name'] != null ? json['name'] as String : null,
+    logoUrl: json['logoUrl'] != null ? json['logoUrl'] as String : null,
   );
 }
 
 Map<String, dynamic> _$BanksToJson(Banks instance) {
   Map<String, dynamic> json = {};
+  if (instance.logoUrl != null) json['logoUrl'] = instance.logoUrl;
   if (instance.id != null) json['id'] = instance.id;
   if (instance.createdAt != null) json['createdAt'] = instance.createdAt;
   if (instance.updatedAt != null) json['updatedAt'] = instance.updatedAt;

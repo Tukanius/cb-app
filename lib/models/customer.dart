@@ -86,7 +86,7 @@ class Customer {
   String? balance;
   String? code;
   String? loanAmount;
-
+  String? logoUrl;
   List<Customer>? loanProductRate;
   String? maxRate;
 
@@ -97,6 +97,7 @@ class Customer {
   }
 
   Customer({
+    this.logoUrl,
     this.code,
     this.maxRate,
     this.loanProductRate,
