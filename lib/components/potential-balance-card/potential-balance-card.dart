@@ -133,17 +133,29 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                         SizedBox(
                           width: 5,
                         ),
-                        Center(
-                          child: Text(
-                            'Зээлийн эрх шинэчлэх',
-                            style: TextStyle(
-                              color: white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
+                        widget.isLoading == false
+                            ? Center(
+                                child: Text(
+                                  'Зээлийн эрх шинэчлэх',
+                                  style: TextStyle(
+                                    color: white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )
+                            : Center(
+                                child: Text(
+                                  'Зээлийн эрх шинэчлэж байна',
+                                  style: TextStyle(
+                                    color: white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                       ],
                     )
                   : Center(

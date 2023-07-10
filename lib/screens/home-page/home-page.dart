@@ -178,27 +178,30 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                               isLoading: isLoading,
                               customer: customers.rows?[index],
                               onClick: () async {
-                                if (customers.rows?[index].loanAmount ==
-                                        "0.00" &&
-                                    customers.rows?[index].balance == "0.00") {
-                                  try {
-                                    await LoanApi().scoring();
-                                    setState(() {
-                                      isLoading = true;
-                                    });
-                                    Future.delayed(Duration(seconds: 5), () {
-                                      listenController.refreshList('change');
-                                    });
-                                  } catch (e) {
-                                    print(e.toString());
+                                if (isLoading == false) {
+                                  if (customers.rows?[index].loanAmount ==
+                                          "0.00" &&
+                                      customers.rows?[index].balance ==
+                                          "0.00") {
+                                    try {
+                                      setState(() {
+                                        isLoading = true;
+                                      });
+                                      await LoanApi().scoring();
+                                      Future.delayed(Duration(seconds: 5), () {
+                                        listenController.refreshList('change');
+                                      });
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
+                                  } else {
+                                    Navigator.of(context).pushNamed(
+                                      LoanPage.routeName,
+                                      arguments: LoanPageArguments(
+                                          listenController: listenController,
+                                          maxRate: '5'),
+                                    );
                                   }
-                                } else {
-                                  Navigator.of(context).pushNamed(
-                                    LoanPage.routeName,
-                                    arguments: LoanPageArguments(
-                                        listenController: listenController,
-                                        maxRate: '5'),
-                                  );
                                 }
                               },
                             ),
