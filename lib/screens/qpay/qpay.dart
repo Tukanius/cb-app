@@ -2,6 +2,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class QpayPageArguments {
   final double? amount;
@@ -115,13 +116,19 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
   }
 }
 
-Future<void> _launchInBrowser(String url) async {}
+Future<void> _launchInBrowser(String url) async {
+  if (await launch(url)) throw 'Could not launch $url';
+}
 
 Widget card(BuildContext context) {
+  // if (link == null) {
+  //   return const SizedBox();
+  // }
   return InkWell(
     key: UniqueKey(),
     onTap: () {
-      _launchInBrowser("");
+      // _launchInBrowser(link.link.toString(), link);
+
       Navigator.of(context).pop();
     },
     child: Container(
@@ -135,7 +142,7 @@ Widget card(BuildContext context) {
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.network(
-              "",
+              '',
               height: 50,
               fit: BoxFit.cover,
             ),
@@ -143,11 +150,11 @@ Widget card(BuildContext context) {
           const SizedBox(
             height: 5,
           ),
-          Text(
-            "123",
-            style: const TextStyle(color: white, fontSize: 12),
-            textAlign: TextAlign.center,
-          ),
+          // Text(
+          //   link.name.toString(),
+          //   style: const TextStyle(color: white, fontSize: 12),
+          //   textAlign: TextAlign.center,
+          // ),
         ],
       ),
     ),

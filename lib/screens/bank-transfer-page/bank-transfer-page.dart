@@ -1,4 +1,5 @@
 import 'package:bank_core/components/action-button.dart';
+// import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -30,6 +31,15 @@ class _BankTransferPageState extends State<BankTransferPage> {
   bool isTap = false;
   bool isCopied = false;
   bool isCopy = false;
+  bool transBank = false;
+  bool khanBank = false;
+  bool hhBank = false;
+
+  List<String> bankList = [
+    '439009927',
+    '544 733 7951',
+    '900 004 7728',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -111,9 +121,12 @@ class _BankTransferPageState extends State<BankTransferPage> {
                   GestureDetector(
                     onTap: () async {
                       setState(() {
-                        isCopied = true;
+                        transBank = true;
+                        khanBank = false;
+                        hhBank = false;
                       });
-                      Clipboard.setData(ClipboardData(text: '2209250401')).then(
+                      Clipboard.setData(ClipboardData(text: '900 004 7728'))
+                          .then(
                         (value) {
                           return ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -124,7 +137,138 @@ class _BankTransferPageState extends State<BankTransferPage> {
                         },
                       );
                     },
-                    child: isCopied == false
+                    child: transBank == false
+                        ? Icon(
+                            Icons.copy,
+                            color: Theme.of(context).iconTheme.color,
+                          )
+                        : Icon(
+                            Icons.check,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).splashColor,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Хаан банк - ',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SelectableText(
+                        '544 733 7951',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        'MNT',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      setState(() {
+                        khanBank = true;
+                        hhBank = false;
+                        transBank = false;
+                      });
+                      Clipboard.setData(ClipboardData(text: '544 733 7951'))
+                          .then(
+                        (value) {
+                          return ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Theme.of(context).disabledColor,
+                              content: Text('Амжилттай хуулсан'),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: khanBank == false
+                        ? Icon(
+                            Icons.copy,
+                            color: Theme.of(context).iconTheme.color,
+                          )
+                        : Icon(
+                            Icons.check,
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).splashColor,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'ХХБанк данс - ',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SelectableText(
+                        '439009927',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        'MNT',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      setState(() {
+                        hhBank = true;
+                        transBank = false;
+                        khanBank = false;
+                      });
+                      Clipboard.setData(ClipboardData(text: '439009927')).then(
+                        (value) {
+                          return ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Theme.of(context).disabledColor,
+                              content: Text('Амжилттай хуулсан'),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: hhBank == false
                         ? Icon(
                             Icons.copy,
                             color: Theme.of(context).iconTheme.color,
