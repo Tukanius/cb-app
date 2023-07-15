@@ -46,11 +46,14 @@ class _RegisterItemState extends State<RegisterLetter> {
           borderRadius: BorderRadius.all(widget.radius)),
       child: GestureDetector(
         onTap: widget.onPressed ?? () {},
-        child: Center(
-          child: Text(
-            widget.text ?? "A",
-            style: TextStyle(color: lightgreen, fontSize: widget.fontSize),
-            textAlign: TextAlign.center,
+        child: Container(
+          color: transparent,
+          child: Center(
+            child: Text(
+              widget.text ?? "A",
+              style: TextStyle(color: lightgreen, fontSize: widget.fontSize),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

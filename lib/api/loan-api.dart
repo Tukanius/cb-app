@@ -1,5 +1,6 @@
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/loan.dart';
+import 'package:bank_core/models/qpay.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/utils/http_request.dart';
 
@@ -50,6 +51,17 @@ class LoanApi extends HttpRequest {
 
   Future<Customer> scoring() async {
     var res = await get('/loan/scoring', handler: true);
-    return Customer.fromJson(res as Map<String, dynamic>);
+    return res;
   }
+
+  Future<Qpay> qpayment(Qpay data) async {
+    var res =
+        await post('/qpay/auth/token', data: data.toJson(), handler: true);
+    return Qpay.fromJson(res);
+  }
+
+  // Future<Qpay> qpay(Qpay transaction) async {
+  //   var res = await post('/qpay/auth/token', data: transaction.toJson());
+  //   return Qpay.fromJson(res);
+  // }
 }

@@ -63,7 +63,7 @@ class ErrorDialog {
                           children: <Widget>[
                             TextButton(
                               child: const Text(
-                                "За",
+                                "Ок",
                                 style: TextStyle(color: dark),
                               ),
                               onPressed: () {

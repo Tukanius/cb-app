@@ -220,8 +220,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       color: Theme.of(context).splashColor,
                       textColor: Theme.of(context).iconTheme.color,
                       validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
+                        (value) {
+                          return isValidCryllic(value.toString(), context);
+                        }
                       ]),
                     ),
                     Container(
@@ -537,8 +538,9 @@ class _AddInformationPageState extends State<AddInformationPage> {
                       color: Theme.of(context).splashColor,
                       textColor: Theme.of(context).iconTheme.color,
                       validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
+                        (value) {
+                          return isValidCryllic(value.toString(), context);
+                        }
                       ]),
                     ),
                     Container(
@@ -716,10 +718,24 @@ class _AddInformationPageState extends State<AddInformationPage> {
 String? validateEmail(String value, context) {
   RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   if (value.isEmpty) {
-    return 'И-Мейлээ оруулна уу';
+    return 'И-Мэйлээ оруулна уу';
   } else {
     if (!regex.hasMatch(value)) {
-      return 'И-Мейлээ шалгана уу';
+      return 'И-Мэйл буруу байна';
+    } else {
+      return null;
+    }
+  }
+}
+
+String? isValidCryllic(String name, BuildContext context) {
+  String pattern = r'(^[а-яА-ЯӨөҮүЁёӨө -]+$)';
+  RegExp isValidName = RegExp(pattern);
+  if (name.isEmpty) {
+    return "Заавар оруулна";
+  } else {
+    if (!isValidName.hasMatch(name)) {
+      return "Зөвхөн крилл үсэг ашиглана";
     } else {
       return null;
     }

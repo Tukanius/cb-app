@@ -137,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 15,
                       ),
                       Text(
-                        "Миний мэдээлэл",
+                        "Нэмэлт мэдээлэл",
                         style: TextStyle(
                           color: Theme.of(context).iconTheme.color,
                           fontSize: 14,

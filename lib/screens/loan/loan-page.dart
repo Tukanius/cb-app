@@ -224,7 +224,7 @@ class _LoanPageState extends State<LoanPage>
                         children: <Widget>[
                           TextButton(
                             child: const Text(
-                              "За",
+                              "Буцах",
                               style: TextStyle(color: dark),
                             ),
                             onPressed: () {
@@ -277,6 +277,7 @@ class _LoanPageState extends State<LoanPage>
                       ),
                       const Text(
                         'Та мэдээлэлээ дахин шалгана уу.',
+                        style: TextStyle(color: dark),
                         textAlign: TextAlign.center,
                       ),
                       ButtonBar(
@@ -285,7 +286,7 @@ class _LoanPageState extends State<LoanPage>
                         children: <Widget>[
                           TextButton(
                             child: const Text(
-                              "За",
+                              "Буцах",
                               style: TextStyle(color: dark),
                             ),
                             onPressed: () {

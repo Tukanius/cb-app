@@ -150,8 +150,7 @@ class _RegisterLettersState extends State<RegisterLetters> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(10.0),
+    return GestureDetector(
       onTap: () => widget.hideOnPressed! ? () {} : _onButtonPressed(),
       child: Container(
         height: widget.subHeight ?? 48,

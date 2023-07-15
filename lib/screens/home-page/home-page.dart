@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/loan/active-loan-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
@@ -10,19 +9,14 @@ import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/loan/loan-detail-page.dart';
 import 'package:bank_core/screens/loan/loan-page.dart';
+import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-class HomePageArguments {
-  String id;
-  HomePageArguments({
-    required this.id,
-  });
-}
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -59,6 +53,68 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
     super.initState();
   }
 
+  showSuccess(ctx) async {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsets.only(top: 75),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: const EdgeInsets.only(top: 90, left: 20, right: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text(
+                      'Амжилттай',
+                      style: TextStyle(
+                          color: dark,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      'Зээлийн эрх амжилттай тооцогдлоо.',
+                      textAlign: TextAlign.center,
+                    ),
+                    ButtonBar(
+                      buttonMinWidth: 100,
+                      alignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        TextButton(
+                          child: const Text(
+                            "Буцах",
+                            style: TextStyle(color: dark),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Lottie.asset('assets/lottie/success.json',
+                  height: 150, repeat: false),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   afterFirstLayout(BuildContext context) async {
     customers = await LoanApi().loanProduct(true);
@@ -88,6 +144,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
     setState(() {
       isLoading = true;
     });
+    customers = await LoanApi().loanProduct(true);
     await list(page, limit);
     refreshController.refreshCompleted();
     setState(() {
@@ -109,7 +166,6 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
-
     return isLoadingPage == true
         ? Center(
             child: CircularProgressIndicator(
@@ -182,18 +238,31 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                   if (customers.rows?[index].loanAmount ==
                                           "0.00" &&
                                       customers.rows?[index].balance ==
-                                          "0.00") {
+                                          "0.00" &&
+                                      user.isVerified != false) {
                                     try {
                                       setState(() {
                                         isLoading = true;
                                       });
-                                      await LoanApi().scoring();
-                                      Future.delayed(Duration(seconds: 5), () {
-                                        listenController.refreshList('change');
+                                      var res = await LoanApi().scoring();
+                                      if (res == true) {
+                                        showSuccess(context);
+                                      }
+                                      listenController.refreshList('change');
+                                      setState(() {
+                                        isLoading = false;
                                       });
                                     } catch (e) {
                                       print(e.toString());
                                     }
+                                  } else if (customers
+                                              .rows?[index].loanAmount ==
+                                          "0.00" &&
+                                      customers.rows?[index].balance ==
+                                          "0.00" &&
+                                      user.isVerified == false) {
+                                    Navigator.of(context)
+                                        .pushNamed(ProfileDetailPage.routeName);
                                   } else {
                                     Navigator.of(context).pushNamed(
                                       LoanPage.routeName,

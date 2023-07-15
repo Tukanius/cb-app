@@ -60,7 +60,6 @@ class _RegisterPageState extends State<RegisterPage> {
         data.registerNo =
             '${letters.join()}${fbKey.currentState?.value["registerNo"]}';
         await Provider.of<UserProvider>(context, listen: false).register(data);
-        // await show(context);
         setState(() {
           isSubmit = false;
         });
@@ -188,18 +187,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // FormTextField(
-                      //   labelText: "И-Мейл",
-                      //   inputType: TextInputType.emailAddress,
-                      //   name: 'email',
-                      //   hintText: "И-Мейлээ оруулна уу",
-                      //   color: darkGrey,
-                      //   validators: FormBuilderValidators.compose([
-                      //     (value) {
-                      //       return validateEmail(value.toString(), context);
-                      //     }
-                      //   ]),
-                      // ),
                       FormTextField(
                         labelText: "Утаны дугаар",
                         maxLenght: 8,
@@ -215,7 +202,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           }
                         ]),
                       ),
-
                       FormTextField(
                         color: Theme.of(context).splashColor,
                         textColor: Theme.of(context).iconTheme.color,
@@ -224,8 +210,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         name: 'lastName',
                         hintText: "Овогоо оруулна уу",
                         validators: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: 'Овогоо оруулна уу')
+                          (value) {
+                            return isValidCryllic(value.toString(), context);
+                          }
                         ]),
                       ),
                       SizedBox(
@@ -239,8 +226,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         name: 'firstName',
                         hintText: "Нэрээ оруулна уу",
                         validators: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: 'Нэрээ оруулна уу')
+                          (value) {
+                            return isValidCryllic(value.toString(), context);
+                          }
                         ]),
                       ),
                       SizedBox(
@@ -422,47 +410,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             )
                           : SizedBox(),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
-
-                      // FormTextField(
-                      //   labelText: "Нууц үг",
-                      //   obscureText: true,
-                      //   name: 'password',
-                      //   hintText: "Нууц үгээ оруулна уу",
-                      //   color: darkGrey,
-                      //   validators: FormBuilderValidators.compose([
-                      //     (value) {
-                      //       return validatePassword(
-                      //           value.toString(), context);
-                      //     }
-                      //   ]),
-                      // ),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
-                      // FormTextField(
-                      //   labelText: "Нууц үг баталгаажуулалт",
-                      //   name: "password_verify",
-                      //   inputType: TextInputType.text,
-                      //   hintText: "Нууц үгээ давтан оруулна уу",
-                      //   inputAction: TextInputAction.done,
-                      //   obscureText: true,
-                      //   color: darkGrey,
-                      //   validators: FormBuilderValidators.compose([
-                      //     FormBuilderValidators.required(
-                      //         errorText: "Нууц үгээ давтан оруулна уу"),
-                      //     (value) {
-                      //       if (fbKey.currentState?.fields['password']
-                      //               ?.value !=
-                      //           value) {
-                      //         return 'Оруулсан нууц үгтэй таарахгүй байна';
-                      //       }
-                      //       return null;
-                      //     }
-                      //   ]),
-                      // ),
                     ],
                   ),
                 ),
@@ -498,13 +445,14 @@ String? validateRegisterNo(String value, context) {
   }
 }
 
-String? validatePassword(String value, context) {
-  RegExp regex = RegExp(r'^.{6,20}$');
-  if (value.isEmpty) {
-    return 'Нууц үгээ оруулна уу';
+String? isValidCryllic(String name, BuildContext context) {
+  String pattern = r'(^[а-яА-ЯӨөҮүЁёӨө -]+$)';
+  RegExp isValidName = RegExp(pattern);
+  if (name.isEmpty) {
+    return "Заавар оруулна";
   } else {
-    if (!regex.hasMatch(value)) {
-      return 'Нууц үг нь дор хаяж 8 үсэг, тусгай тэмдэгтээс бүрдэх ёстой';
+    if (!isValidName.hasMatch(name)) {
+      return "Зөвхөн крилл үсэг ашиглана";
     } else {
       return null;
     }
@@ -527,10 +475,10 @@ String? validatePhone(String value, context) {
 String? validateEmail(String value, context) {
   RegExp regex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   if (value.isEmpty) {
-    return 'И-Мейлээ оруулна уу';
+    return 'И-Мэйлээ оруулна уу';
   } else {
     if (!regex.hasMatch(value)) {
-      return 'И-Мейлээ шалгана уу';
+      return 'И-Мэйл буруу байна';
     } else {
       return null;
     }

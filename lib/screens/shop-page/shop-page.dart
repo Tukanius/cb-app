@@ -1,6 +1,3 @@
-// import 'package:bank_core/screens/shop-page/company/company.dart';
-// import 'package:bank_core/screens/shop-page/product/product.dart';
-import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:lottie/lottie.dart';
@@ -95,7 +92,6 @@ class ShopPage extends StatefulWidget {
 //       ),
 class _ShopPageState extends State<ShopPage> {
   CarouselController carouselController = CarouselController();
-  int _current = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -111,58 +107,58 @@ class _ShopPageState extends State<ShopPage> {
                 children: [
                   Column(
                     children: [
-                      CarouselSlider(
-                        carouselController: carouselController,
-                        options: CarouselOptions(
-                          height: 200.0,
-                          autoPlay: true,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _current = index;
-                            });
-                          },
-                        ),
-                        items: imgList.map((data) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image: NetworkImage(data),
-                                  ),
-                                ),
-                                alignment: Alignment.center,
-                              );
-                            },
-                          );
-                        }).toList(),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: imgList.asMap().entries.map((entry) {
-                          return GestureDetector(
-                            onTap: () =>
-                                carouselController.animateToPage(entry.key),
-                            child: Container(
-                              width: 10.0,
-                              height: 10.0,
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 8.0, horizontal: 4.0),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == entry.key
-                                      ? buttonColor
-                                      : darkGrey),
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                      // CarouselSlider(
+                      //   carouselController: carouselController,
+                      //   options: CarouselOptions(
+                      //     height: 200.0,
+                      //     autoPlay: true,
+                      //     onPageChanged: (index, reason) {
+                      //       setState(() {
+                      //         _current = index;
+                      //       });
+                      //     },
+                      //   ),
+                      //   items: imgList.map((data) {
+                      //     return Builder(
+                      //       builder: (BuildContext context) {
+                      //         return Container(
+                      //           width: MediaQuery.of(context).size.width,
+                      //           margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      //           decoration: BoxDecoration(
+                      //             borderRadius: BorderRadius.circular(10),
+                      //             image: DecorationImage(
+                      //               image: NetworkImage(data),
+                      //             ),
+                      //           ),
+                      //           alignment: Alignment.center,
+                      //         );
+                      //       },
+                      //     );
+                      //   }).toList(),
+                      // ),
+                      // SizedBox(
+                      //   height: 8,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: imgList.asMap().entries.map((entry) {
+                      //     return GestureDetector(
+                      //       onTap: () =>
+                      //           carouselController.animateToPage(entry.key),
+                      //       child: Container(
+                      //         width: 10.0,
+                      //         height: 10.0,
+                      //         margin: EdgeInsets.symmetric(
+                      //             vertical: 8.0, horizontal: 4.0),
+                      //         decoration: BoxDecoration(
+                      //             shape: BoxShape.circle,
+                      //             color: _current == entry.key
+                      //                 ? buttonColor
+                      //                 : darkGrey),
+                      //       ),
+                      //     );
+                      //   }).toList(),
+                      // ),
                     ],
                   ),
                   Container(

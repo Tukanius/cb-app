@@ -44,7 +44,10 @@ class User {
   String? otpMethod;
   String? otpCode;
 
+  bool? isVerified;
+
   User({
+    this.isVerified,
     this.otpMethod,
     this.otpCode,
     this.whoTypeId,

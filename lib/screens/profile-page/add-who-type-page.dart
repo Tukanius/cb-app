@@ -261,8 +261,9 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       color: Theme.of(context).splashColor,
                       hintText: 'Овог',
                       validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Овог оруулна уу')
+                        (value) {
+                          return isValidCryllic(value.toString(), context);
+                        }
                       ]),
                     ),
                     SizedBox(
@@ -275,8 +276,9 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
                       color: Theme.of(context).splashColor,
                       hintText: 'Нэр',
                       validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Нэр оруулна уу')
+                        (value) {
+                          return isValidCryllic(value.toString(), context);
+                        }
                       ]),
                     ),
                     SizedBox(
@@ -325,9 +327,25 @@ String? validatePhone(String value, context) {
   RegExp regex = RegExp(r'[(9|8]{1}[0-9]{7}$');
   if (value.isEmpty) {
     return 'Утасны дугаараа оруулна уу';
+  } else if (value.length < 8) {
+    return 'Утасны дугаараа шалгана уу';
   } else {
     if (!regex.hasMatch(value)) {
       return 'Утасны дугаараа шалгана уу';
+    } else {
+      return null;
+    }
+  }
+}
+
+String? isValidCryllic(String name, BuildContext context) {
+  String pattern = r'(^[а-яА-ЯӨөҮүЁёӨө -]+$)';
+  RegExp isValidName = RegExp(pattern);
+  if (name.isEmpty) {
+    return "Заавар оруулна";
+  } else {
+    if (!isValidName.hasMatch(name)) {
+      return "Зөвхөн крилл үсэг ашиглана";
     } else {
       return null;
     }

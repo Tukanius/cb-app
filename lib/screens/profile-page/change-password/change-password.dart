@@ -94,7 +94,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         children: <Widget>[
                           TextButton(
                             child: const Text(
-                              "За",
+                              "Буцах",
                               style: TextStyle(color: dark),
                             ),
                             onPressed: () {
@@ -163,7 +163,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         children: <Widget>[
                           TextButton(
                             child: const Text(
-                              "За",
+                              "Буцах",
                               style: TextStyle(color: dark),
                             ),
                             onPressed: () {
@@ -226,6 +226,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 children: [
                   Column(
                     children: [
+                      Text(
+                          'Нууц үг нь хамгийн багадаа 8-н тэмдэг, 1 тоо, 1 тусгай тэмдэгт, 1 том үсэгнээс бүрдсэн байх ёстой'),
                       widget.isForgot == true || widget.isForgot == null
                           ? FormTextField(
                               labelText: "Хуучин нууц үг",

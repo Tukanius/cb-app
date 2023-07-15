@@ -183,7 +183,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
               child: Column(
                 children: [
                   // Text(
-                  //   "Таны ${widget.username} И-Мейл хаягруу явуулсан 6 оронтой тоог оруулна уу.",
+                  //   "Таны ${widget.username} И-Мэйл хаягруу явуулсан 6 оронтой тоог оруулна уу.",
                   //   textAlign: TextAlign.center,
                   //   style: TextStyle(
                   //     color: greyDark,

@@ -1,20 +1,17 @@
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/controller/listen.dart';
-import 'package:bank_core/components/custom-button/custom_button.dart';
-import 'package:bank_core/components/description.dart';
-import 'package:bank_core/components/who-type-card/who-type.card.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/add-information-page.dart';
 import 'package:bank_core/screens/profile-page/add-who-type-page.dart';
+import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
-import 'package:lottie/lottie.dart';
 
 class ProfileDetailPage extends StatefulWidget {
   static const routeName = "ProfileDetailPage";
@@ -32,13 +29,16 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   int limit = 10;
 
   ListenController listenController = ListenController();
+  ListenController addressListenController = ListenController();
   User user = User();
   bool isLoading = true;
   bool isSubmit = false;
+  Customer address = Customer();
 
   @override
   afterFirstLayout(BuildContext context) async {
     customer = await CustomerApi().customerGet(user.customerId!);
+    address = await CustomerApi().addressList();
     list(page, limit);
     setState(() {
       isLoading = false;
@@ -62,6 +62,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   void initState() {
     listenController.addListener(() async {
       customer = await CustomerApi().customerGet(user.customerId!);
+      address = await CustomerApi().addressList();
       list(page, limit);
       setState(() {
         isLoading = false;
@@ -93,7 +94,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
           ),
         ),
         title: Text(
-          'Миний мэдээлэл',
+          'Нэмэлт мэдээлэл',
           style: TextStyle(
             color: Theme.of(context).iconTheme.color,
             fontWeight: FontWeight.bold,
@@ -123,349 +124,198 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                         ),
                       ),
                     ),
-                    Description(
-                      isDone: true,
-                      label: 'Утасны дугаар',
-                      name: '${customer.result?.phone}',
+                    GestureDetector(
                       onTap: () {
-                        print("Утасны дугаар");
+                        if (customer.result?.email == null) {
+                          Navigator.of(context).pushNamed(
+                              AddInformationPage.routeName,
+                              arguments: AddInformationPageArguments(
+                                  listenController: listenController));
+                        }
                       },
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    customer.result?.email == null
-                        ? SizedBox()
-                        : Description(
-                            isDone: false,
-                            label: 'И-мейл',
-                            name: '${customer.result?.email}',
-                            onTap: () {
-                              print("И-мейл");
-                            },
-                          ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Description(
-                      isDone: false,
-                      label: 'Хур систем /DAN/',
-                      name: 'Хур систем',
-                      onTap: () {
-                        print("Хур систем");
-                      },
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Theme.of(context).splashColor,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Овог:',
-                                      style: TextStyle(
-                                        color: Theme.of(context).disabledColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${customer.result?.lastName}',
-                                      style: TextStyle(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Нэр:',
-                                      style: TextStyle(
-                                        color: Theme.of(context).disabledColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${customer.result?.firstName}',
-                                      style: TextStyle(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                customer.result?.email == null
-                                    ? SizedBox()
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'И-Мэйл:',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .disabledColor,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${customer.result?.email}',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                customer.result?.birthDate == null
-                                    ? SizedBox()
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Төрсөн өдөр:',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .disabledColor,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${customer.result?.birthDate}',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                customer.result?.educationType == null
-                                    ? SizedBox()
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Боловсрол:',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .disabledColor,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            '${customer.result?.educationType?.name}',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                            softWrap: false,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.fade,
-                                          ),
-                                        ],
-                                      ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                customer.result?.nationalityType == null
-                                    ? SizedBox()
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Яс үндэс :',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .disabledColor,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${customer.result?.nationalityType?.name}',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                customer.result?.gender == null
-                                    ? SizedBox()
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Хүйс :',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .disabledColor,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${customer.result?.gender?.name}',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                              ],
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Theme.of(context).splashColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Нэмэлт мэдээлэл',
+                              style: TextStyle(
+                                color: Theme.of(context).disabledColor,
+                                fontSize: 12,
+                              ),
                             ),
-                          ),
-                          customer.result?.nationalityType != null
-                              ? SizedBox()
-                              : GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pushNamed(
-                                      AddInformationPage.routeName,
-                                      arguments: AddInformationPageArguments(
-                                          listenController: listenController),
-                                    );
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: buttonColor,
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "Нэмэлт мэдээлэл бөглөх",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Нэмэлт мэдээлэл бөглөх',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Theme.of(context).iconTheme.color,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8, top: 20),
-                      child: Text(
-                        "Гэр бүлийн мэдээлэл",
-                        style: TextStyle(
-                          color: Theme.of(context).iconTheme.color,
-                          fontWeight: FontWeight.bold,
+                                customer.result?.email == null
+                                    ? Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 14,
+                                      )
+                                    : Icon(
+                                        Icons.check,
+                                        color: lightgreen,
+                                        size: 16,
+                                      )
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    relatedList.rows?.length == 0
-                        ? Column(
-                            children: [
-                              Lottie.asset('assets/lottie/empty.json',
-                                  height: 200),
-                              Text(
-                                "Гэр бүлийн мэдээлэл хоосон байна",
-                                style: TextStyle(color: Colors.grey),
+                    GestureDetector(
+                      onTap: () {
+                        if (address.rows?.length == 0) {
+                          Navigator.of(context).pushNamed(
+                              AddAddressPage.routeName,
+                              arguments: AddAddressPageArguments(
+                                  listenController: listenController));
+                        }
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Theme.of(context).splashColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Гэрийн хаяг',
+                              style: TextStyle(
+                                color: Theme.of(context).disabledColor,
+                                fontSize: 12,
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              CustomButton(
-                                isLoading: false,
-                                labelColor: buttonColor,
-                                textColor: white,
-                                onClick: () {
-                                  Navigator.of(context).pushNamed(
-                                      AddWhoTypePage.routeName,
-                                      arguments: AddWhoTypePageArguments(
-                                          listenController: listenController));
-                                },
-                                labelText: "Гэр бүлийн мэдээлэл нэмэх",
-                                boxShadow: true,
-                              ),
-                            ],
-                          )
-                        : Column(
-                            children: [
-                              Column(
-                                children: relatedList.rows!
-                                    .map((e) => Container(
-                                          child: Column(
-                                            children: [
-                                              WhoTypeCard(
-                                                data: e,
-                                              ),
-                                              SizedBox(
-                                                height: 8,
-                                              ),
-                                            ],
-                                          ),
-                                        ))
-                                    .toList(),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              if (relatedList.rows!.length < 3)
-                                CustomButton(
-                                  isLoading: false,
-                                  labelColor: buttonColor,
-                                  textColor: white,
-                                  onClick: () {
-                                    Navigator.of(context).pushNamed(
-                                        AddWhoTypePage.routeName,
-                                        arguments: AddWhoTypePageArguments(
-                                            listenController:
-                                                listenController));
-                                  },
-                                  labelText: "Гишүүн нэмэх",
-                                  boxShadow: true,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Гэрийн хаяг бөглөх',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Theme.of(context).iconTheme.color,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ),
-                            ],
-                          ),
+                                address.rows?.length == 0
+                                    ? Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 14,
+                                      )
+                                    : Icon(
+                                        Icons.check,
+                                        color: lightgreen,
+                                        size: 16,
+                                      )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if (relatedList.rows?.length == 0) {
+                          Navigator.of(context).pushNamed(
+                              AddWhoTypePage.routeName,
+                              arguments: AddWhoTypePageArguments(
+                                  listenController: listenController));
+                        }
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 15,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Theme.of(context).splashColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Гэр бүлийн мэдээлэл',
+                              style: TextStyle(
+                                color: Theme.of(context).disabledColor,
+                                fontSize: 12,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Гэр бүлийн гишүүн нэмэх',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Theme.of(context).iconTheme.color,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                relatedList.rows?.length == 0
+                                    ? Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 14,
+                                      )
+                                    : Icon(
+                                        Icons.check,
+                                        color: lightgreen,
+                                        size: 16,
+                                      )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 50,
                     ),

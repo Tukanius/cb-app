@@ -25,7 +25,9 @@ class PaymentPageArguments {
   String loanId;
   String loanResidual;
   ListenController listenController;
+  String loanPaybackGraphId;
   PaymentPageArguments({
+    required this.loanPaybackGraphId,
     required this.code,
     required this.totalPayAmount,
     required this.loanResidual,
@@ -35,6 +37,7 @@ class PaymentPageArguments {
 }
 
 class PaymentPage extends StatefulWidget {
+  final String loanPaybackGraphId;
   final String code;
   final String totalPayAmount;
   final String loanResidual;
@@ -43,6 +46,7 @@ class PaymentPage extends StatefulWidget {
   static const routeName = 'PaymentPage';
   const PaymentPage({
     Key? key,
+    required this.loanPaybackGraphId,
     required this.code,
     required this.totalPayAmount,
     required this.loanResidual,
@@ -329,7 +333,12 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(QpayPage.routeName);
+                        Navigator.of(context).pushNamed(QpayPage.routeName,
+                            arguments: QpayPageArguments(
+                                loanId: widget.loanId,
+                                loanPaybackGraphId: widget.loanPaybackGraphId,
+                                amount: double.parse(
+                                    widget.totalPayAmount.toString())));
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: 4),
@@ -500,18 +509,18 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                     SizedBox(
                       height: 30,
                     ),
-                    Container(
-                      child: CustomButton(
-                        isLoading: isSubmit,
-                        boxShadow: true,
-                        labelColor: buttonColor,
-                        labelText: 'Төлбөр хийх',
-                        onClick: () {
-                          showVerifyModal();
-                        },
-                        textColor: white,
-                      ),
-                    ),
+                    // Container(
+                    //   child: CustomButton(
+                    //     isLoading: isSubmit,
+                    //     boxShadow: true,
+                    //     labelColor: buttonColor,
+                    //     labelText: 'Төлбөр хийх',
+                    //     onClick: () {
+                    //       showVerifyModal();
+                    //     },
+                    //     textColor: white,
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 50,
                     ),

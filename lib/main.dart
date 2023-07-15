@@ -199,9 +199,16 @@ class MyApp extends StatelessWidget {
                         listenController: arguments.listenController,
                       );
                     });
+
                   case QpayPage.routeName:
+                    QpayPageArguments arguments =
+                        settings.arguments as QpayPageArguments;
                     return MaterialPageRoute(builder: (context) {
-                      return const QpayPage();
+                      return QpayPage(
+                        amount: arguments.amount,
+                        loanId: arguments.loanId,
+                        loanPaybackGraphId: arguments.loanPaybackGraphId,
+                      );
                     });
                   case ProfilePage.routeName:
                     return MaterialPageRoute(builder: (context) {
@@ -294,6 +301,7 @@ class MyApp extends StatelessWidget {
                         loanResidual: arguments.loanResidual,
                         loanId: arguments.loanId,
                         listenController: arguments.listenController,
+                        loanPaybackGraphId: arguments.loanPaybackGraphId,
                       );
                     });
                   default:

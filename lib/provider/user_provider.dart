@@ -65,6 +65,12 @@ class UserProvider extends ChangeNotifier {
     await prefs.remove("ACCESS_TOKEN");
   }
 
+  Future<String?> getUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? username = prefs.getString("PHONE");
+    return username;
+  }
+
   logout() async {
     user = User();
     clearAccessToken();
@@ -86,5 +92,10 @@ class UserProvider extends ChangeNotifier {
     User res = await AuthApi().forgot(data);
     await setAccessToken(res.accessToken);
     return res;
+  }
+
+  setUsername(String username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("PHONE", username);
   }
 }

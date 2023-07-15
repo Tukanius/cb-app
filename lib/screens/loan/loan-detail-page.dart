@@ -313,6 +313,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                           loanResidual: customer.totalPayAmount.toString(),
                           listenController: widget.listenController,
                           totalPayAmount: customer.totalPayAmount!,
+                          loanPaybackGraphId: customer.id!,
                         ),
                       );
                     },

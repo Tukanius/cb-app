@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   bool isBioMetric = false;
   bool activeBio = false;
   String bioType = "";
+  bool saveIsUsername = false;
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -73,6 +74,19 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
         });
       }
     }
+    String? username = await UserProvider().getUsername();
+    if (username == null || username == "") {
+      setState(() {
+        saveIsUsername = false;
+      });
+    } else {
+      setState(() {
+        saveIsUsername = true;
+      });
+    }
+    setState(() {
+      phoneController.text = username!;
+    });
   }
 
   @override
@@ -128,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                               inputType: TextInputType.text,
                               name: 'phone',
                               controller: phoneController,
-                              hintText: 'Нэвтрэх нэр',
+                              hintText: 'Утасны дугаар',
                               validators: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(
                                     errorText: 'Нэвтрэх нэрээ оруулна уу.')
@@ -279,8 +293,8 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
         setState(() {
           isSubmit = true;
         });
-
         User save = User.fromJson(fbKey.currentState!.value);
+        UserProvider().setUsername(save.phone.toString());
         await Provider.of<UserProvider>(context, listen: false).login(save);
         await _storeCredentials(phone, password);
         if (activeBio == true && availableBiometrics.isNotEmpty) {

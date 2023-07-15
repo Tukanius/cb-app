@@ -1,5 +1,6 @@
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/get.dart';
+import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -27,10 +28,12 @@ class PotentialBalanceCard extends StatefulWidget {
 
 class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
   bool isView = false;
+  User user = User();
 
   @override
   Widget build(BuildContext context) {
     isView = Provider.of<UserProvider>(context, listen: true).isView;
+    user = Provider.of<UserProvider>(context, listen: true).user;
 
     return Container(
       width: MediaQuery.of(context).size.width - 38,
@@ -109,12 +112,16 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                   bottomRight: Radius.circular(20),
                 ),
                 color: widget.customer?.balance == "0.00" &&
-                        widget.customer?.loanAmount == "0.00"
+                        widget.customer?.loanAmount == "0.00" &&
+                        user.isVerified != false
                     ? Colors.amber
-                    : buttonColor,
+                    : user.isVerified == false || user.isVerified == null
+                        ? Colors.blue
+                        : buttonColor,
               ),
               child: widget.customer?.balance == "0.00" &&
-                      widget.customer?.loanAmount == "0.00"
+                      widget.customer?.loanAmount == "0.00" &&
+                      user.isVerified != null
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -133,42 +140,42 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                         SizedBox(
                           width: 5,
                         ),
-                        widget.isLoading == false
-                            ? Center(
-                                child: Text(
-                                  'Зээлийн эрх шинэчлэх',
-                                  style: TextStyle(
-                                    color: white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              )
-                            : Center(
-                                child: Text(
-                                  'Зээлийн эрх шинэчлэж байна',
-                                  style: TextStyle(
-                                    color: white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                        Center(
+                          child: Text(
+                            'Зээлийн эрх шинэчлэх',
+                            style: TextStyle(
+                              color: white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
                       ],
                     )
-                  : Center(
-                      child: Text(
-                        'Зээл авах',
-                        style: TextStyle(
-                          color: white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                  : user.isVerified == false || user.isVerified == null
+                      ? Center(
+                          child: Text(
+                            'Нэмэлт мэдээлэл бөглөх',
+                            style: TextStyle(
+                              color: white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      : Center(
+                          child: Text(
+                            'Зээл авах',
+                            style: TextStyle(
+                              color: white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
             ),
           )
         ],
