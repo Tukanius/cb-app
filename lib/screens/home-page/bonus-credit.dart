@@ -118,7 +118,11 @@ class _BonusCreditState extends State<BonusCredit> {
                         borderRadius: BorderRadius.circular(10),
                         color: buttonColor,
                       ),
-                      child: Center(child: Text('Түвшин ахиулах')),
+                      child: Center(
+                          child: Text(
+                        'Түвшин ахиулах',
+                        style: TextStyle(color: white),
+                      )),
                     ),
                   ),
                 ],
