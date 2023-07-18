@@ -8,6 +8,10 @@ class UserProvider extends ChangeNotifier {
   User user = User();
   bool isView = false;
   bool check = false;
+  int _totalSteps = 10;
+  int _currentStep = 1;
+  int get totalSteps => _totalSteps;
+  int get currentStep => _currentStep;
 
   //
   ThemeMode themeMode = ThemeMode.dark;
@@ -31,6 +35,18 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 //
+
+  set totalSteps(int value) {
+    _totalSteps = value;
+    notifyListeners();
+  }
+
+  set currentStep(int value) {
+    if (currentStep < totalSteps) {
+      _currentStep = value;
+      notifyListeners();
+    }
+  }
 
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
