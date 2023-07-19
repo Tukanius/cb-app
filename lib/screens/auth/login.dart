@@ -67,26 +67,28 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
         setState(() {
           bioType = "FACE";
         });
-      }
+      } else {}
       if (availableBiometrics.contains(BiometricType.fingerprint)) {
         setState(() {
           bioType = "FINGER_PRINT";
         });
       }
+      if (isBioMetric == false) {
+        String? username = await UserProvider().getUsername();
+        if (username == null || username == "") {
+          setState(() {
+            saveIsUsername = false;
+          });
+        } else {
+          setState(() {
+            saveIsUsername = true;
+          });
+        }
+        setState(() {
+          phoneController.text = username!;
+        });
+      }
     }
-    String? username = await UserProvider().getUsername();
-    if (username == null || username == "") {
-      setState(() {
-        saveIsUsername = false;
-      });
-    } else {
-      setState(() {
-        saveIsUsername = true;
-      });
-    }
-    setState(() {
-      phoneController.text = username!;
-    });
   }
 
   @override
@@ -138,8 +140,11 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                               child: FormTextField(
                                 textColor: Theme.of(context).iconTheme.color,
                                 labelText: "Утасны дугаар",
-                                onComplete: (value) {
+                                onChanged: (value) {
                                   secureStorage.deleteAll();
+                                  setState(() {
+                                    isBioMetric = false;
+                                  });
                                 },
                                 inputType: TextInputType.text,
                                 name: 'phone',

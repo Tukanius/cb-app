@@ -95,7 +95,7 @@ class _CheckBiometricState extends State<CheckBiometric> with AfterLayoutMixin {
               height: 20,
             ),
             Text(
-              "Та FACE ID -ийг тохиргоог идэвхжүүлснээр цаашид апп руу нэвтрэхэд нэвтрэх нэр нууц үг хийх шаардлагагүй.",
+              "Та тохиргоог идэвхжүүлснээр цаашид апп руу нэвтрэхэд нэвтрэх нэр нууц үг хийх шаардлагагүй.",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Theme.of(context).iconTheme.color,
