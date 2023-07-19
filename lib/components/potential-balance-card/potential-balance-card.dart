@@ -115,13 +115,13 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                         widget.customer?.loanAmount == "0.00" &&
                         user.isVerified != false
                     ? Colors.amber
-                    : user.isVerified == false || user.isVerified == null
+                    : user.isVerified == false
                         ? Colors.blue
                         : buttonColor,
               ),
               child: widget.customer?.balance == "0.00" &&
                       widget.customer?.loanAmount == "0.00" &&
-                      user.isVerified != null
+                      user.isVerified != false
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -153,7 +153,9 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
                         )
                       ],
                     )
-                  : user.isVerified == false || user.isVerified == null
+                  : widget.customer?.balance == "0.00" &&
+                          widget.customer?.loanAmount == "0.00" &&
+                          user.isVerified == false
                       ? Center(
                           child: Text(
                             'Нэмэлт мэдээлэл бөглөх',
