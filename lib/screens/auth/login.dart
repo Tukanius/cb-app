@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                               child: FormTextField(
                                 textColor: Theme.of(context).iconTheme.color,
                                 labelText: "Утасны дугаар",
-                                onChanged: (value) {
+                                onComplete: (value) {
                                   secureStorage.deleteAll();
                                 },
                                 inputType: TextInputType.text,
@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                                 hintText: 'Утасны дугаар',
                                 validators: FormBuilderValidators.compose([
                                   FormBuilderValidators.required(
-                                      errorText: 'Нэвтрэх нэрээ оруулна уу.')
+                                      errorText: 'Утасны дугаар оруулна уу.')
                                 ]),
                                 color: Theme.of(context).splashColor,
                               ),

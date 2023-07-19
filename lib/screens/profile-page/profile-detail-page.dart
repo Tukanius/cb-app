@@ -10,6 +10,7 @@ import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/profile-page/add-information-page.dart';
 import 'package:bank_core/screens/profile-page/add-who-type-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
+import 'package:bank_core/screens/profile-page/address/address.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -76,9 +77,9 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
   onSubmit() async {
     setState(() {
       isSubmit = true;
-      print(isSubmit);
     });
     await LoanApi().loanVerify();
+    await Provider.of<UserProvider>(context, listen: false).me(true);
     Navigator.of(context).pop();
   }
 
@@ -206,6 +207,8 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                               AddAddressPage.routeName,
                               arguments: AddAddressPageArguments(
                                   listenController: listenController));
+                        } else {
+                          Navigator.of(context).pushNamed(AddAddress.routeName);
                         }
                       },
                       child: Container(

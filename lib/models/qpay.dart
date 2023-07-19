@@ -11,8 +11,10 @@ class Qpay {
   String? loanPaybackGraphId;
   double? amount;
   List<Urls>? urls;
+  Qpay? success;
 
   Qpay({
+    this.success,
     this.invoiceId,
     this.qrText,
     this.qrImage,

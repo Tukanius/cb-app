@@ -769,9 +769,9 @@ class _LoanPageState extends State<LoanPage>
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage("images/4.png"),
-                                        ),
+                                            fit: BoxFit.contain,
+                                            image: NetworkImage(
+                                                '${item.bank?.logoUrl}')),
                                       ),
                                     ),
                                     SizedBox(

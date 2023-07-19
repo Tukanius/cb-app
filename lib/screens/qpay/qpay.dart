@@ -41,14 +41,23 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
 
   @override
   void afterFirstLayout(BuildContext context) async {
-    qpay = Qpay.fromJson(qpay.toJson());
-    qpay.loanId = widget.loanId;
-    qpay.loanPaybackGraphId = widget.loanPaybackGraphId;
-    qpay.amount = widget.amount;
-    qpay = await LoanApi().qpayment(qpay);
-    setState(() {
-      loading = false;
-    });
+    try {
+      qpay = Qpay.fromJson(qpay.toJson());
+      qpay.loanId = widget.loanId;
+      qpay.loanPaybackGraphId = widget.loanPaybackGraphId;
+      qpay.amount = widget.amount;
+      qpay = await LoanApi().qpayment(qpay);
+      print('========qpay========');
+      print(qpay.toJson());
+      print('========qpay========');
+      setState(() {
+        loading = false;
+      });
+    } catch (e) {
+      print('======err======');
+      print(e.toString());
+      print('======err======');
+    }
   }
 
   Future<void> _launchInBrowser(String url, Urls link) async {
@@ -101,9 +110,6 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (loading == true) {
-      return const SizedBox();
-    }
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: NestedScrollView(
@@ -146,7 +152,8 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
                         child: SizedBox(
                           height: 230,
                           width: MediaQuery.of(context).size.width * 0.7,
-                          child: Image.memory(base64Decode("${qpay.qrImage}"),
+                          child: Image.memory(
+                              base64Decode("${qpay.success?.qrImage}"),
                               width: 200),
                         ),
                       ),
@@ -169,7 +176,7 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
                             physics: const NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.all(10),
                             crossAxisCount: 3,
-                            children: qpay.urls!
+                            children: qpay.success!.urls!
                                 .map((e) => card(context, e))
                                 .toList()),
                       ),
@@ -184,24 +191,34 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
 
 String getDeepLink(String name) {
   switch (name) {
-    case "Khan bank":
+    case "qPaywallet":
+      return "qpay-wallet";
+    case "Khanbank":
       return "khan-bank";
-    case "State bank":
+    case "Statebank":
       return "state-bank";
-    case "Xac bank":
-      return "khasbank";
-    case "Trade and Development bank":
+    case "Xacbank":
+      return "xacbank";
+    case "TradeandDevelopmentbank":
       return "tdb-online";
-    case "Most money":
+    case "Mostmoney":
       return "mostmoney";
-    case "National investment bank":
+    case "Nationalinvestmentbank":
       return "nibank";
-    case "Chinggis khaan bank":
+    case "Chinggiskhaanbank":
       return "smartbank-ckbank";
-    case "Capitron bank":
-      return "capitron-bank";
-    case "Bogd bank":
+    case "Capitronbank":
+      return "capitron-digital-bank";
+    case "Bogdbank":
       return "bogd-mobile";
+    case "Transbank":
+      return "bogd-mobile";
+    case "Mbank":
+      return "%D0%BC-bank";
+    case "ArdApp":
+      return "ard-app";
+    case "Arigbank":
+      return "arig-online";
     default:
       return "";
   }
@@ -209,19 +226,33 @@ String getDeepLink(String name) {
 
 String? getCode(String name) {
   switch (name) {
-    case "Khan bank":
-      return '1555908766';
-    case "State bank":
-      return '703343972';
-    case "Xac bank":
-      return '1534265552';
-    case "Trade and Development bank":
-      return '1458831706';
-    case "Most money":
-      return '487144325';
-    case "National investment bank":
-      return '882075781';
+    case "qPaywallet":
+      return "1501873159";
+    case "Khanbank":
+      return "1555908766";
+    case "Statebank":
+      return "703343972";
+    case "Xacbank":
+      return "1534265552";
+    case "TradeandDevelopmentbank":
+      return "1458831706";
+    case "Mostmoney":
+      return "487144325";
+    case "Nationalinvestmentbank":
+      return "882075781";
+    case "Chinggiskhaanbank":
+      return "1180620714";
+    case "Capitronbank":
+      return "1612591322";
+    case "Bogdbank":
+      return "1475442374";
+    case "Mbank":
+      return "1455928972";
+    case "ArdApp":
+      return "6444296485";
+    case "Arigbank":
+      return "6444022675";
     default:
+      return "";
   }
-  return '';
 }

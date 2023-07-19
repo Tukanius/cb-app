@@ -16,12 +16,16 @@ Qpay _$QpayFromJson(Map<String, dynamic> json) {
         : null,
     amount:
         json['amount'] != null ? double.parse(json['amount'].toString()) : null,
+    success: json['success'] != null
+        ? Qpay.fromJson(json['success'] as Map<String, dynamic>)
+        : null,
   );
 }
 
 Map<String, dynamic> _$QpayToJson(Qpay instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.success != null) json['success'] = instance.success;
   if (instance.loanId != null) json['loanId'] = instance.loanId;
   if (instance.loanPaybackGraphId != null)
     json['loanPaybackGraphId'] = instance.loanPaybackGraphId;
