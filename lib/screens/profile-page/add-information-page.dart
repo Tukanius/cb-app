@@ -183,531 +183,539 @@ class _AddInformationPageState extends State<AddInformationPage> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FormBuilder(
-                key: fbKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    FormTextField(
-                      labelText: "И-Мэйл",
-                      inputType: TextInputType.text,
-                      name: 'email',
-                      hintText: 'И-мэйл оруулна уу',
-                      color: Theme.of(context).splashColor,
-                      textColor: Theme.of(context).iconTheme.color,
-                      validators: FormBuilderValidators.compose([
-                        (value) {
-                          return validateEmail(value.toString(), context);
-                        }
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    FormTextField(
-                      labelText: "Ургийн овог",
-                      inputType: TextInputType.text,
-                      name: 'familyName',
-                      hintText: 'Ургын овог',
-                      color: Theme.of(context).splashColor,
-                      textColor: Theme.of(context).iconTheme.color,
-                      validators: FormBuilderValidators.compose([
-                        (value) {
-                          return isValidCryllic(value.toString(), context);
-                        }
-                      ]),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8, top: 8),
-                      child: Text(
-                        'Яс үндэс сонгох',
-                        style: TextStyle(
-                          color: Theme.of(context).hoverColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FormBuilder(
+                  key: fbKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 30,
                       ),
-                    ),
-                    DropdownButtonFormField(
-                      dropdownColor: Theme.of(context).colorScheme.onBackground,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: darkGrey,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: white,
-                        ),
+                      FormTextField(
+                        labelText: "И-Мэйл",
+                        inputType: TextInputType.text,
+                        name: 'email',
+                        hintText: 'И-мэйл оруулна уу',
+                        color: Theme.of(context).splashColor,
+                        textColor: Theme.of(context).iconTheme.color,
+                        validators: FormBuilderValidators.compose([
+                          (value) {
+                            return validateEmail(value.toString(), context);
+                          }
+                        ]),
                       ),
-                      onChanged: (value) {
-                        setState(() {
-                          nationalityType = value?.id;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Яс үндэс',
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).disabledColor),
-                        filled: true,
-                        fillColor: Theme.of(context).splashColor,
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                      SizedBox(
+                        height: 8,
                       ),
-                      items: general.nationalityTypes!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(
-                                '${item.name}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8, top: 8),
-                      child: Text(
-                        'Боловсролын зэрэг сонгох',
-                        style: TextStyle(
-                          color: Theme.of(context).hoverColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      FormTextField(
+                        labelText: "Ургийн овог",
+                        inputType: TextInputType.text,
+                        name: 'familyName',
+                        hintText: 'Ургын овог',
+                        color: Theme.of(context).splashColor,
+                        textColor: Theme.of(context).iconTheme.color,
+                        validators: FormBuilderValidators.compose([
+                          (value) {
+                            return isValidCryllic(value.toString(), context);
+                          }
+                        ]),
                       ),
-                    ),
-                    DropdownButtonFormField(
-                      dropdownColor: Theme.of(context).colorScheme.onBackground,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: darkGrey,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: white,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          educationType = value?.id;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Боловсролын зэрэг сонгоно уу',
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).disabledColor),
-                        filled: true,
-                        fillColor: Theme.of(context).splashColor,
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      items: general.educationTypes!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(
-                                '${item.name}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8, top: 8),
-                      child: Text(
-                        'Гэрлэлтийн байдал сонгох',
-                        style: TextStyle(
-                          color: Theme.of(context).hoverColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    DropdownButtonFormField(
-                      dropdownColor: Theme.of(context).colorScheme.onBackground,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: darkGrey,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: white,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          marriageStatuses = value?.id;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Гэрлэлтийн байдал',
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).disabledColor),
-                        filled: true,
-                        fillColor: Theme.of(context).splashColor,
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      items: general.marriageStatuses!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(
-                                '${item.name}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    FormTextField(
-                      labelText: "Ам бүлийн тоо",
-                      inputType: TextInputType.number,
-                      name: 'familyCount',
-                      hintText: 'Ам бүлийн тоо',
-                      textColor: Theme.of(context).iconTheme.color,
-                      color: Theme.of(context).splashColor,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    FormTextField(
-                      textColor: Theme.of(context).iconTheme.color,
-                      labelText: "Сарын орлого",
-                      inputType: TextInputType.number,
-                      name: 'incomeAmountMonth',
-                      hintText: 'Сарын орлого',
-                      color: Theme.of(context).splashColor,
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8, top: 8),
-                      child: Text(
-                        'Хүйс сонгох',
-                        style: TextStyle(
-                          color: Theme.of(context).hoverColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    DropdownButtonFormField(
-                      dropdownColor: Theme.of(context).colorScheme.onBackground,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу')
-                      ]),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: darkGrey,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: white,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          genderId = value?.id;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Хүйс',
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).disabledColor),
-                        filled: true,
-                        fillColor: Theme.of(context).splashColor,
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      items: general.genders!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(
-                                '${item.name}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    FormTextField(
-                      labelText: "Төрсөн газар",
-                      inputType: TextInputType.text,
-                      name: 'birthPlace',
-                      hintText: 'Төрсөн газар',
-                      color: Theme.of(context).splashColor,
-                      textColor: Theme.of(context).iconTheme.color,
-                      validators: FormBuilderValidators.compose([
-                        (value) {
-                          return isValidCryllic(value.toString(), context);
-                        }
-                      ]),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8, top: 8),
-                      child: Text(
-                        'Ажил эрхлэлтийн байдал сонгох',
-                        style: TextStyle(
-                          color: Theme.of(context).hoverColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    DropdownButtonFormField(
-                      dropdownColor: Theme.of(context).colorScheme.onBackground,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Заавал оруулна уу.')
-                      ]),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: darkGrey,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: white,
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(() {
-                          workStatus = value?.id;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Ажил эрхлэлтийн байдал сонгох',
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).disabledColor),
-                        filled: true,
-                        fillColor: Theme.of(context).splashColor,
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(10)),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      items: general.workStatus!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              value: item,
-                              child: Text(
-                                '${item.name}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 8, top: 8),
-                child: Text(
-                  'Төрсөн өдөр сонгоно уу',
-                  style: TextStyle(
-                    color: Theme.of(context).hoverColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Theme.of(context).splashColor,
-                  ),
-                  child: dateTime == null
-                      ? Text(
-                          'Төрсөн өдөр сонгоно уу',
-                          style:
-                              TextStyle(color: Theme.of(context).disabledColor),
-                        )
-                      : Text(
-                          '${dateTime?.format(payload: "YYYY-MM-DD")}',
+                      Container(
+                        margin: EdgeInsets.only(bottom: 8, top: 8),
+                        child: Text(
+                          'Яс үндэс сонгох',
                           style: TextStyle(
-                            color: Theme.of(context).iconTheme.color,
-                            fontSize: 14,
+                            color: Theme.of(context).hoverColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                ),
-                onTap: () {
-                  showCupertinoModalPopup(
-                    context: context,
-                    builder: (context) {
-                      return Container(
-                        color: white,
-                        height: 250,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Text("Болсон"),
-                            ),
-                            Expanded(
-                              child: CupertinoDatePicker(
-                                mode: CupertinoDatePickerMode.date,
-                                onDateTimeChanged: (value) {
-                                  setState(() {
-                                    dateTime = value;
-                                    dateError = false;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
+                      ),
+                      DropdownButtonFormField(
+                        dropdownColor:
+                            Theme.of(context).colorScheme.onBackground,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: 'Заавал оруулна уу')
+                        ]),
+                        icon: Container(
+                          decoration: BoxDecoration(
+                            color: darkGrey,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: white,
+                          ),
                         ),
-                      );
-                    },
-                  );
-                },
-              ),
-              if (dateError == true)
+                        onChanged: (value) {
+                          setState(() {
+                            nationalityType = value?.id;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Яс үндэс',
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).disabledColor),
+                          filled: true,
+                          fillColor: Theme.of(context).splashColor,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10)),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: general.nationalityTypes!
+                            .map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Text(
+                                  '${item.name}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 8, top: 8),
+                        child: Text(
+                          'Боловсролын зэрэг сонгох',
+                          style: TextStyle(
+                            color: Theme.of(context).hoverColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      DropdownButtonFormField(
+                        dropdownColor:
+                            Theme.of(context).colorScheme.onBackground,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: 'Заавал оруулна уу')
+                        ]),
+                        icon: Container(
+                          decoration: BoxDecoration(
+                            color: darkGrey,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: white,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            educationType = value?.id;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Боловсролын зэрэг сонгоно уу',
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).disabledColor),
+                          filled: true,
+                          fillColor: Theme.of(context).splashColor,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10)),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: general.educationTypes!
+                            .map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Text(
+                                  '${item.name}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 8, top: 8),
+                        child: Text(
+                          'Гэрлэлтийн байдал сонгох',
+                          style: TextStyle(
+                            color: Theme.of(context).hoverColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      DropdownButtonFormField(
+                        dropdownColor:
+                            Theme.of(context).colorScheme.onBackground,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: 'Заавал оруулна уу')
+                        ]),
+                        icon: Container(
+                          decoration: BoxDecoration(
+                            color: darkGrey,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: white,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            marriageStatuses = value?.id;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Гэрлэлтийн байдал',
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).disabledColor),
+                          filled: true,
+                          fillColor: Theme.of(context).splashColor,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10)),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: general.marriageStatuses!
+                            .map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Text(
+                                  '${item.name}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      FormTextField(
+                        labelText: "Ам бүлийн тоо",
+                        inputType: TextInputType.number,
+                        name: 'familyCount',
+                        hintText: 'Ам бүлийн тоо',
+                        textColor: Theme.of(context).iconTheme.color,
+                        color: Theme.of(context).splashColor,
+                        validators: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: 'Заавал оруулна уу')
+                        ]),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      FormTextField(
+                        textColor: Theme.of(context).iconTheme.color,
+                        labelText: "Сарын орлого",
+                        inputType: TextInputType.number,
+                        name: 'incomeAmountMonth',
+                        hintText: 'Сарын орлого',
+                        color: Theme.of(context).splashColor,
+                        validators: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: 'Заавал оруулна уу')
+                        ]),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 8, top: 8),
+                        child: Text(
+                          'Хүйс сонгох',
+                          style: TextStyle(
+                            color: Theme.of(context).hoverColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      DropdownButtonFormField(
+                        dropdownColor:
+                            Theme.of(context).colorScheme.onBackground,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: 'Заавал оруулна уу')
+                        ]),
+                        icon: Container(
+                          decoration: BoxDecoration(
+                            color: darkGrey,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: white,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            genderId = value?.id;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Хүйс',
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).disabledColor),
+                          filled: true,
+                          fillColor: Theme.of(context).splashColor,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10)),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: general.genders!
+                            .map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Text(
+                                  '${item.name}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      FormTextField(
+                        labelText: "Төрсөн газар",
+                        inputType: TextInputType.text,
+                        name: 'birthPlace',
+                        hintText: 'Төрсөн газар',
+                        color: Theme.of(context).splashColor,
+                        textColor: Theme.of(context).iconTheme.color,
+                        validators: FormBuilderValidators.compose([
+                          (value) {
+                            return isValidCryllic(value.toString(), context);
+                          }
+                        ]),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 8, top: 8),
+                        child: Text(
+                          'Ажил эрхлэлтийн байдал сонгох',
+                          style: TextStyle(
+                            color: Theme.of(context).hoverColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      DropdownButtonFormField(
+                        dropdownColor:
+                            Theme.of(context).colorScheme.onBackground,
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(
+                              errorText: 'Заавал оруулна уу.')
+                        ]),
+                        icon: Container(
+                          decoration: BoxDecoration(
+                            color: darkGrey,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: white,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            workStatus = value?.id;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Ажил эрхлэлтийн байдал сонгох',
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).disabledColor),
+                          filled: true,
+                          fillColor: Theme.of(context).splashColor,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 15),
+                          focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10)),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: general.workStatus!
+                            .map(
+                              (item) => DropdownMenuItem(
+                                value: item,
+                                child: Text(
+                                  '${item.name}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ],
+                  ),
+                ),
                 Container(
-                  margin: EdgeInsets.only(top: 8, left: 15),
+                  margin: EdgeInsets.only(bottom: 8, top: 8),
                   child: Text(
-                    "Төрсөн өдөрөө оруулна уу",
+                    'Төрсөн өдөр сонгоно уу',
                     style: TextStyle(
-                      color: red,
+                      color: Theme.of(context).hoverColor,
                       fontSize: 12,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-              SizedBox(
-                height: 40,
-              ),
-              CustomButton(
-                isLoading: isSubmit,
-                onClick: onValidate,
-                labelColor: buttonColor,
-                labelText: 'Баталгаажуулах',
-                textColor: white,
-                boxShadow: false,
-              ),
-              SizedBox(
-                height: 50,
-              )
-            ],
+                GestureDetector(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).splashColor,
+                    ),
+                    child: dateTime == null
+                        ? Text(
+                            'Төрсөн өдөр сонгоно уу',
+                            style: TextStyle(
+                                color: Theme.of(context).disabledColor),
+                          )
+                        : Text(
+                            '${dateTime?.format(payload: "YYYY-MM-DD")}',
+                            style: TextStyle(
+                              color: Theme.of(context).iconTheme.color,
+                              fontSize: 14,
+                            ),
+                          ),
+                  ),
+                  onTap: () {
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          color: white,
+                          height: 250,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("Болсон"),
+                              ),
+                              Expanded(
+                                child: CupertinoDatePicker(
+                                  mode: CupertinoDatePickerMode.date,
+                                  onDateTimeChanged: (value) {
+                                    setState(() {
+                                      dateTime = value;
+                                      dateError = false;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                if (dateError == true)
+                  Container(
+                    margin: EdgeInsets.only(top: 8, left: 15),
+                    child: Text(
+                      "Төрсөн өдөрөө оруулна уу",
+                      style: TextStyle(
+                        color: red,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                SizedBox(
+                  height: 40,
+                ),
+                CustomButton(
+                  isLoading: isSubmit,
+                  onClick: onValidate,
+                  labelColor: buttonColor,
+                  labelText: 'Баталгаажуулах',
+                  textColor: white,
+                  boxShadow: false,
+                ),
+                SizedBox(
+                  height: 50,
+                )
+              ],
+            ),
           ),
         ),
       ),

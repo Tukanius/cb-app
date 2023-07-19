@@ -506,9 +506,6 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
                     // Container(
                     //   child: CustomButton(
                     //     isLoading: isSubmit,

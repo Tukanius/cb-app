@@ -188,12 +188,14 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
         : null,
     code: json['code'] != null ? json['code'] as String : null,
     logoUrl: json['logoUrl'] != null ? json['logoUrl'] as String : null,
+    success: json['success'] != null ? json['success'] as bool : null,
   );
 }
 
 Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
+  if (instance.success != null) json['success'] = instance.success;
   if (instance.logoUrl != null) json['logoUrl'] = instance.logoUrl;
   if (instance.code != null) json['code'] = instance.code;
   if (instance.maxRate != null) json['maxRate'] = instance.maxRate;

@@ -1,6 +1,8 @@
 import 'package:bank_core/api/customer-api.dart';
+import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/controller/listen.dart';
+import 'package:bank_core/components/custom-button/custom_button.dart';
 import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
@@ -69,6 +71,15 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
       });
     });
     super.initState();
+  }
+
+  onSubmit() async {
+    setState(() {
+      isSubmit = true;
+      print(isSubmit);
+    });
+    await LoanApi().loanVerify();
+    Navigator.of(context).pop();
   }
 
   @override
@@ -316,6 +327,19 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    user.isVerified == false
+                        ? CustomButton(
+                            isLoading: isSubmit,
+                            labelColor: buttonColor,
+                            labelText: 'Хадгалах',
+                            onClick: () {
+                              onSubmit();
+                            },
+                          )
+                        : SizedBox(),
                     SizedBox(
                       height: 50,
                     ),

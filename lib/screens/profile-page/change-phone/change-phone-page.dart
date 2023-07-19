@@ -47,45 +47,48 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
           ),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: FormBuilder(
-          key: fbKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  FormTextField(
-                    textColor: Theme.of(context).iconTheme.color,
-                    labelText: "Шинэ утасны дугаар оруулах",
-                    inputType: TextInputType.number,
-                    name: 'newPhoneNumber',
-                    hintText: "Шинэ утасны дугаар оруулах",
-                    color: Theme.of(context).splashColor,
-                    validators: FormBuilderValidators.compose([
-                      (value) {
-                        return validatePhone(value.toString(), context);
-                      }
-                    ]),
-                  ),
-                ],
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 30),
-                child: CustomButton(
-                  isLoading: false,
-                  onClick: () {},
-                  boxShadow: true,
-                  labelColor: buttonColor,
-                  labelText: "Үргэлжлүүлэх",
-                  textColor: white,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: FormBuilder(
+            key: fbKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
+                      labelText: "Шинэ утасны дугаар оруулах",
+                      inputType: TextInputType.number,
+                      name: 'newPhoneNumber',
+                      hintText: "Шинэ утасны дугаар оруулах",
+                      color: Theme.of(context).splashColor,
+                      validators: FormBuilderValidators.compose([
+                        (value) {
+                          return validatePhone(value.toString(), context);
+                        }
+                      ]),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Container(
+                  margin: const EdgeInsets.only(bottom: 30),
+                  child: CustomButton(
+                    isLoading: false,
+                    onClick: () {},
+                    boxShadow: true,
+                    labelColor: buttonColor,
+                    labelText: "Үргэлжлүүлэх",
+                    textColor: white,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

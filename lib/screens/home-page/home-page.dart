@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                                         isLoading = true;
                                       });
                                       var res = await LoanApi().scoring();
-                                      if (res == true) {
+                                      if (res.success == true) {
                                         showSuccess(context);
                                       }
                                       listenController.refreshList('change');

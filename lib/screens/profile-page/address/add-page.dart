@@ -157,365 +157,368 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
         ),
       ),
       body: SingleChildScrollView(
-        child: FormBuilder(
-          key: fbKey,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 8, top: 20),
-                  child: Text(
-                    'Хаяг',
-                    style: TextStyle(
-                      color: Theme.of(context).iconTheme.color,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: FormBuilder(
+            key: fbKey,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 8, top: 20),
+                    child: Text(
+                      'Хаяг',
+                      style: TextStyle(
+                        color: Theme.of(context).iconTheme.color,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                ),
-                DropdownButtonFormField(
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Заавал оруулна уу.')
-                  ]),
-                  icon: Container(
-                    decoration: BoxDecoration(
-                      color: darkGrey,
-                      borderRadius: BorderRadius.circular(15),
+                  DropdownButtonFormField(
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(
+                          errorText: 'Заавал оруулна уу.')
+                    ]),
+                    icon: Container(
+                      decoration: BoxDecoration(
+                        color: darkGrey,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: const Icon(
+                        Icons.arrow_drop_down,
+                        color: white,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.arrow_drop_down,
-                      color: white,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      addressTypeId = value?.id;
-                      print(addressTypeId.toString());
-                      print('=====addresstypeid=====');
-                    });
-                  },
-                  dropdownColor: Theme.of(context).colorScheme.onBackground,
-                  elevation: 2,
-                  decoration: InputDecoration(
-                    hintText: 'Оршин сууж байгаа хаягын төрөл',
-                    hintStyle: TextStyle(
-                        fontSize: 14, color: Theme.of(context).disabledColor),
-                    filled: true,
-                    fillColor: Theme.of(context).splashColor,
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 15),
-                    focusedErrorBorder: OutlineInputBorder(
+                    onChanged: (value) {
+                      setState(() {
+                        addressTypeId = value?.id;
+                        print(addressTypeId.toString());
+                        print('=====addresstypeid=====');
+                      });
+                    },
+                    dropdownColor: Theme.of(context).colorScheme.onBackground,
+                    elevation: 2,
+                    decoration: InputDecoration(
+                      hintText: 'Оршин сууж байгаа хаягын төрөл',
+                      hintStyle: TextStyle(
+                          fontSize: 14, color: Theme.of(context).disabledColor),
+                      filled: true,
+                      fillColor: Theme.of(context).splashColor,
+                      errorBorder: OutlineInputBorder(
                         borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10)),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  items: general.addressTypes!
-                      .map(
-                        (item) => DropdownMenuItem(
-                          value: item,
-                          child: Text(
-                            '${item.name}',
-                            style: TextStyle(
-                              color: Theme.of(context).iconTheme.color,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                addressTypeId != null
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 8),
+                    items: general.addressTypes!
+                        .map(
+                          (item) => DropdownMenuItem(
+                            value: item,
                             child: Text(
-                              'Аймаг / Хот',
+                              '${item.name}',
                               style: TextStyle(
                                 color: Theme.of(context).iconTheme.color,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
                               ),
                             ),
                           ),
-                          DropdownButtonFormField(
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(
-                                  errorText: 'Заавал оруулна уу.')
-                            ]),
-                            icon: Container(
-                              decoration: BoxDecoration(
-                                color: darkGrey,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: const Icon(
-                                Icons.arrow_drop_down,
-                                color: white,
+                        )
+                        .toList(),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  addressTypeId != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 8),
+                              child: Text(
+                                'Аймаг / Хот',
+                                style: TextStyle(
+                                  color: Theme.of(context).iconTheme.color,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                            onChanged: (value) {
-                              setState(() {
-                                provinceId = value?.id;
-                              });
-                            },
-                            dropdownColor:
-                                Theme.of(context).colorScheme.onBackground,
-                            elevation: 2,
-                            decoration: InputDecoration(
-                              hintText: 'Аймаг / Хот',
-                              hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).disabledColor),
-                              filled: true,
-                              fillColor: Theme.of(context).splashColor,
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
+                            DropdownButtonFormField(
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(
+                                    errorText: 'Заавал оруулна уу.')
+                              ]),
+                              icon: Container(
+                                decoration: BoxDecoration(
+                                  color: darkGrey,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: white,
+                                ),
                               ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              focusedErrorBorder: OutlineInputBorder(
+                              onChanged: (value) {
+                                setState(() {
+                                  provinceId = value?.id;
+                                });
+                              },
+                              dropdownColor:
+                                  Theme.of(context).colorScheme.onBackground,
+                              elevation: 2,
+                              decoration: InputDecoration(
+                                hintText: 'Аймаг / Хот',
+                                hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).disabledColor),
+                                filled: true,
+                                fillColor: Theme.of(context).splashColor,
+                                errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(10)),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 15),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(10)),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
-                            ),
-                            items: general.provinces!
-                                .map(
-                                  (item) => DropdownMenuItem(
-                                    value: item,
-                                    child: Text(
-                                      '${item.name}',
-                                      style: TextStyle(
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                        fontSize: 14,
+                              items: general.provinces!
+                                  .map(
+                                    (item) => DropdownMenuItem(
+                                      value: item,
+                                      child: Text(
+                                        '${item.name}',
+                                        style: TextStyle(
+                                          color:
+                                              Theme.of(context).iconTheme.color,
+                                          fontSize: 14,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                        ],
-                      )
-                    : SizedBox(),
-                provinceId != null
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              'Сум / Дүүрэг',
-                              style: TextStyle(
-                                color: Theme.of(context).iconTheme.color,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
+                                  )
+                                  .toList(),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                  provinceId != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 8),
+                              child: Text(
+                                'Сум / Дүүрэг',
+                                style: TextStyle(
+                                  color: Theme.of(context).iconTheme.color,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                          ),
-                          DropdownButtonFormField(
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(
-                                  errorText: 'Заавал оруулна уу.')
-                            ]),
-                            icon: Container(
-                              decoration: BoxDecoration(
-                                color: darkGrey,
-                                borderRadius: BorderRadius.circular(15),
+                            DropdownButtonFormField(
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(
+                                    errorText: 'Заавал оруулна уу.')
+                              ]),
+                              icon: Container(
+                                decoration: BoxDecoration(
+                                  color: darkGrey,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: white,
+                                ),
                               ),
-                              child: const Icon(
-                                Icons.arrow_drop_down,
-                                color: white,
-                              ),
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                districtId = value?.id;
-                              });
-                            },
-                            dropdownColor:
-                                Theme.of(context).colorScheme.onBackground,
-                            elevation: 2,
-                            decoration: InputDecoration(
-                              hintText: 'Сум / Дүүрэг',
-                              hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).disabledColor),
-                              filled: true,
-                              fillColor: Theme.of(context).splashColor,
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              focusedErrorBorder: OutlineInputBorder(
+                              onChanged: (value) {
+                                setState(() {
+                                  districtId = value?.id;
+                                });
+                              },
+                              dropdownColor:
+                                  Theme.of(context).colorScheme.onBackground,
+                              elevation: 2,
+                              decoration: InputDecoration(
+                                hintText: 'Сум / Дүүрэг',
+                                hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).disabledColor),
+                                filled: true,
+                                fillColor: Theme.of(context).splashColor,
+                                errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(10)),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            items: general.districts!
-                                .map(
-                                  (item) => DropdownMenuItem(
-                                    value: item,
-                                    child: provinceId == item.provinceId
-                                        ? Text(
-                                            '${item.name}',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        : Text(''),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                        ],
-                      )
-                    : SizedBox(),
-                districtId != null
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 8),
-                            child: Text(
-                              'Баг / Хороо',
-                              style: TextStyle(
-                                color: Theme.of(context).iconTheme.color,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          DropdownButtonFormField(
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(
-                                  errorText: 'Заавал оруулна уу.')
-                            ]),
-                            icon: Container(
-                              decoration: BoxDecoration(
-                                color: darkGrey,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: const Icon(
-                                Icons.arrow_drop_down,
-                                color: white,
-                              ),
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                khoroosId = value?.id;
-                              });
-                            },
-                            dropdownColor:
-                                Theme.of(context).colorScheme.onBackground,
-                            elevation: 2,
-                            decoration: InputDecoration(
-                              hintText: 'Баг / Хороо',
-                              hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: Theme.of(context).disabledColor),
-                              filled: true,
-                              fillColor: Theme.of(context).splashColor,
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 15),
-                              focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 15),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(10)),
+                                border: OutlineInputBorder(
                                   borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(10)),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              items: general.districts!
+                                  .map(
+                                    (item) => DropdownMenuItem(
+                                      value: item,
+                                      child: provinceId == item.provinceId
+                                          ? Text(
+                                              '${item.name}',
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .iconTheme
+                                                    .color,
+                                                fontSize: 14,
+                                              ),
+                                            )
+                                          : Text(''),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                  districtId != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 8),
+                              child: Text(
+                                'Баг / Хороо',
+                                style: TextStyle(
+                                  color: Theme.of(context).iconTheme.color,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                            items: general.khoroos!
-                                .map(
-                                  (item) => DropdownMenuItem(
-                                    value: item,
-                                    child: districtId == item.districtId
-                                        ? Text(
-                                            '${item.name}',
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .iconTheme
-                                                  .color,
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        : Text(''),
-                                  ),
-                                )
-                                .toList(),
+                            DropdownButtonFormField(
+                              validator: FormBuilderValidators.compose([
+                                FormBuilderValidators.required(
+                                    errorText: 'Заавал оруулна уу.')
+                              ]),
+                              icon: Container(
+                                decoration: BoxDecoration(
+                                  color: darkGrey,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: white,
+                                ),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  khoroosId = value?.id;
+                                });
+                              },
+                              dropdownColor:
+                                  Theme.of(context).colorScheme.onBackground,
+                              elevation: 2,
+                              decoration: InputDecoration(
+                                hintText: 'Баг / Хороо',
+                                hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).disabledColor),
+                                filled: true,
+                                fillColor: Theme.of(context).splashColor,
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 15),
+                                focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(10)),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              items: general.khoroos!
+                                  .map(
+                                    (item) => DropdownMenuItem(
+                                      value: item,
+                                      child: districtId == item.districtId
+                                          ? Text(
+                                              '${item.name}',
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .iconTheme
+                                                    .color,
+                                                fontSize: 14,
+                                              ),
+                                            )
+                                          : Text(''),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
+                  khoroosId != null
+                      ? FormTextField(
+                          textColor: Theme.of(context).iconTheme.color,
+                          labelText: "Тоот",
+                          inputType: TextInputType.text,
+                          hintText: "Тоот",
+                          name: 'address',
+                          color: Theme.of(context).splashColor,
+                          validators: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: 'Заавал оруулна уу')
+                          ]),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  khoroosId != null
+                      ? Container(
+                          child: CustomButton(
+                            isLoading: false,
+                            boxShadow: false,
+                            labelColor: buttonColor,
+                            labelText: 'Нэмэх',
+                            onClick: onItemTapped,
+                            textColor: white,
                           ),
-                          SizedBox(
-                            height: 15,
-                          ),
-                        ],
-                      )
-                    : SizedBox(),
-                khoroosId != null
-                    ? FormTextField(
-                        textColor: Theme.of(context).iconTheme.color,
-                        labelText: "Тоот",
-                        inputType: TextInputType.text,
-                        hintText: "Тоот",
-                        name: 'address',
-                        color: Theme.of(context).splashColor,
-                        validators: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: 'Заавал оруулна уу')
-                        ]),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: 30,
-                ),
-                khoroosId != null
-                    ? Container(
-                        child: CustomButton(
-                          isLoading: false,
-                          boxShadow: false,
-                          labelColor: buttonColor,
-                          labelText: 'Нэмэх',
-                          onClick: onItemTapped,
-                          textColor: white,
-                        ),
-                      )
-                    : SizedBox(),
-              ],
+                        )
+                      : SizedBox(),
+                ],
+              ),
             ),
           ),
         ),

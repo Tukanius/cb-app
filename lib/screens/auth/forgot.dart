@@ -67,210 +67,213 @@ class _ForgotPageState extends State<ForgotPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.background,
-      child: SafeArea(
-        bottom: true,
-        child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          appBar: AppBar(
-            elevation: 0,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Container(
+        color: Theme.of(context).colorScheme.background,
+        child: SafeArea(
+          bottom: true,
+          child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
-            automaticallyImplyLeading: false,
-            leading: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: ActionButton(
-                onClick: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Theme.of(context).hoverColor,
-                  size: 10,
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              automaticallyImplyLeading: false,
+              leading: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: ActionButton(
+                  onClick: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Theme.of(context).hoverColor,
+                    size: 10,
+                  ),
+                ),
+              ),
+              title: Text(
+                'Нууц үг сэргээх',
+                style: TextStyle(
+                  color: Theme.of(context).iconTheme.color,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
             ),
-            title: Text(
-              'Нууц үг сэргээх',
-              style: TextStyle(
-                color: Theme.of(context).iconTheme.color,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: FormBuilder(
-              key: fbKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FormTextField(
-                        textColor: Theme.of(context).iconTheme.color,
-                        color: Theme.of(context).splashColor,
-                        showCounter: false,
-                        maxLenght: 8,
-                        labelText: "Утасны дугаар",
-                        inputType: TextInputType.phone,
-                        name: 'phone',
-                        hintText: "Утасны дугаар оруулна уу",
-                        validators: FormBuilderValidators.compose([
-                          (value) {
-                            return validatePhone(value.toString(), context);
-                          }
-                        ]),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "Регистерийн дугаар",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Theme.of(context).iconTheme.color,
-                            fontWeight: FontWeight.w500,
+            body: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: FormBuilder(
+                key: fbKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FormTextField(
+                          textColor: Theme.of(context).iconTheme.color,
+                          color: Theme.of(context).splashColor,
+                          showCounter: false,
+                          maxLenght: 8,
+                          labelText: "Утасны дугаар",
+                          inputType: TextInputType.phone,
+                          name: 'phone',
+                          hintText: "Утасны дугаар оруулна уу",
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return validatePhone(value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            "Регистерийн дугаар",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).iconTheme.color,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                      FormBuilderField(
-                        autovalidateMode: AutovalidateMode.disabled,
-                        name: "registerNo",
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: 'Заавал бөглөнө үү'),
-                          (dynamic value) => value.toString() != ""
-                              ? (validateStructure(
-                                      letters.join(), value.toString())
-                                  ? null
-                                  : "Регистерийн дугаараа оруулна уу!")
-                              : null,
-                        ]),
-                        builder: (FormFieldState<dynamic> field) {
-                          return InputDecorator(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
+                        FormBuilderField(
+                          autovalidateMode: AutovalidateMode.disabled,
+                          name: "registerNo",
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: 'Заавал бөглөнө үү'),
+                            (dynamic value) => value.toString() != ""
+                                ? (validateStructure(
+                                        letters.join(), value.toString())
+                                    ? null
+                                    : "Регистерийн дугаараа оруулна уу!")
+                                : null,
+                          ]),
+                          builder: (FormFieldState<dynamic> field) {
+                            return InputDecorator(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide.none),
+                                errorText: field.errorText,
+                                fillColor: Theme.of(context).splashColor,
+                                filled: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 15),
+                                errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none),
-                              errorText: field.errorText,
-                              fillColor: Theme.of(context).splashColor,
-                              filled: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 15),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedErrorBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.transparent, width: 0.0),
+                                ),
                               ),
-                              focusedErrorBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.transparent, width: 0.0),
-                              ),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                children: [
-                                  RegisterLetters(
-                                    width: DeviceSize.width(3, context),
-                                    height: DeviceSize.height(90, context),
-                                    oneTitle: "Регистер сонгох",
-                                    hideOnPressed: false,
-                                    title: letters[0],
-                                    backgroundColor:
-                                        Theme.of(context).splashColor,
-                                    textColor:
-                                        Theme.of(context).iconTheme.color,
-                                    length: CYRILLIC_ALPHABETS_LIST.length,
-                                    itemBuilder: (ctx, i) => RegisterLetter(
-                                      text: CYRILLIC_ALPHABETS_LIST[i],
-                                      onPressed: () {
-                                        onChangeLetter(
-                                            CYRILLIC_ALPHABETS_LIST[i], 0);
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  RegisterLetters(
-                                    width: DeviceSize.width(3, context),
-                                    height: DeviceSize.height(90, context),
-                                    textColor:
-                                        Theme.of(context).iconTheme.color,
-                                    title: letters[1],
-                                    oneTitle: "Регистер сонгох",
-                                    hideOnPressed: false,
-                                    backgroundColor:
-                                        Theme.of(context).splashColor,
-                                    length: CYRILLIC_ALPHABETS_LIST.length,
-                                    itemBuilder: (ctx, i) => RegisterLetter(
-                                      text: CYRILLIC_ALPHABETS_LIST[i],
-                                      onPressed: () {
-                                        onChangeLetter(
-                                            CYRILLIC_ALPHABETS_LIST[i], 1);
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                    child: FormTextField(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    RegisterLetters(
+                                      width: DeviceSize.width(3, context),
+                                      height: DeviceSize.height(90, context),
+                                      oneTitle: "Регистер сонгох",
+                                      hideOnPressed: false,
+                                      title: letters[0],
+                                      backgroundColor:
+                                          Theme.of(context).splashColor,
                                       textColor:
                                           Theme.of(context).iconTheme.color,
-                                      labelText: "",
-                                      onChanged: (value) {
-                                        setState(() {
-                                          registerNo = value;
-                                        });
-                                        // ignore: invalid_use_of_protected_member
-                                        field.setValue(value);
-                                      },
-                                      controller: regnumController,
-                                      onComplete: () {
-                                        print(123);
-                                      },
-                                      inputType: TextInputType.number,
-                                      name: 'registerNumber',
-                                      hintText: 'Регистерийн дугаар',
-                                      color: transparent,
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp(r'[0-9]')),
-                                      ],
+                                      length: CYRILLIC_ALPHABETS_LIST.length,
+                                      itemBuilder: (ctx, i) => RegisterLetter(
+                                        text: CYRILLIC_ALPHABETS_LIST[i],
+                                        onPressed: () {
+                                          onChangeLetter(
+                                              CYRILLIC_ALPHABETS_LIST[i], 0);
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    RegisterLetters(
+                                      width: DeviceSize.width(3, context),
+                                      height: DeviceSize.height(90, context),
+                                      textColor:
+                                          Theme.of(context).iconTheme.color,
+                                      title: letters[1],
+                                      oneTitle: "Регистер сонгох",
+                                      hideOnPressed: false,
+                                      backgroundColor:
+                                          Theme.of(context).splashColor,
+                                      length: CYRILLIC_ALPHABETS_LIST.length,
+                                      itemBuilder: (ctx, i) => RegisterLetter(
+                                        text: CYRILLIC_ALPHABETS_LIST[i],
+                                        onPressed: () {
+                                          onChangeLetter(
+                                              CYRILLIC_ALPHABETS_LIST[i], 1);
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: FormTextField(
+                                        textColor:
+                                            Theme.of(context).iconTheme.color,
+                                        labelText: "",
+                                        onChanged: (value) {
+                                          setState(() {
+                                            registerNo = value;
+                                          });
+                                          // ignore: invalid_use_of_protected_member
+                                          field.setValue(value);
+                                        },
+                                        controller: regnumController,
+                                        onComplete: () {
+                                          print(123);
+                                        },
+                                        inputType: TextInputType.number,
+                                        name: 'registerNumber',
+                                        hintText: 'Регистерийн дугаар',
+                                        color: transparent,
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp(r'[0-9]')),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  CustomButton(
-                    isLoading: isSubmit,
-                    labelColor: buttonColor,
-                    labelText: "Үргэлжлүүлэх",
-                    onClick: () {
-                      if (isSubmit == false) {
-                        onSubmit();
-                      }
-                    },
-                    textColor: white,
-                    boxShadow: true,
-                  ),
-                ],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    CustomButton(
+                      isLoading: isSubmit,
+                      labelColor: buttonColor,
+                      labelText: "Үргэлжлүүлэх",
+                      onClick: () {
+                        if (isSubmit == false) {
+                          onSubmit();
+                        }
+                      },
+                      textColor: white,
+                      boxShadow: true,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

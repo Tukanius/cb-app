@@ -142,288 +142,291 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).colorScheme.background,
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          appBar: AppBar(
-            elevation: 0,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Container(
+        color: Theme.of(context).colorScheme.background,
+        child: SafeArea(
+          child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
-            automaticallyImplyLeading: false,
-            leading: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: ActionButton(
-                onClick: () {
-                  Navigator.of(context).pop();
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Theme.of(context).hoverColor,
-                  size: 10,
-                ),
-              ),
-            ),
-            title: Text(
-              'Бүртгүүлэх',
-              style: TextStyle(
-                color: Theme.of(context).iconTheme.color,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-          body: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 10,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FormBuilder(
-                  key: fbKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FormTextField(
-                        labelText: "Утаны дугаар",
-                        maxLenght: 8,
-                        inputType: TextInputType.phone,
-                        showCounter: false,
-                        name: 'phone',
-                        hintText: "Утасны дугаараа оруулна уу",
-                        color: Theme.of(context).splashColor,
-                        textColor: Theme.of(context).iconTheme.color,
-                        validators: FormBuilderValidators.compose([
-                          (value) {
-                            return validatePhone(value.toString(), context);
-                          }
-                        ]),
-                      ),
-                      FormTextField(
-                        color: Theme.of(context).splashColor,
-                        textColor: Theme.of(context).iconTheme.color,
-                        labelText: "Овог",
-                        inputType: TextInputType.text,
-                        name: 'lastName',
-                        hintText: "Овогоо оруулна уу",
-                        validators: FormBuilderValidators.compose([
-                          (value) {
-                            return isValidCryllic(value.toString(), context);
-                          }
-                        ]),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      FormTextField(
-                        color: Theme.of(context).splashColor,
-                        textColor: Theme.of(context).iconTheme.color,
-                        labelText: "Нэр",
-                        inputType: TextInputType.text,
-                        name: 'firstName',
-                        hintText: "Нэрээ оруулна уу",
-                        validators: FormBuilderValidators.compose([
-                          (value) {
-                            return isValidCryllic(value.toString(), context);
-                          }
-                        ]),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 8),
-                        child: Text(
-                          "Регистерийн дугаар",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Theme.of(context).iconTheme.color,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      FormBuilderField(
-                        autovalidateMode: AutovalidateMode.disabled,
-                        name: "registerNo",
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(
-                              errorText: 'Заавал бөглөнө үү'),
-                          (dynamic value) => value.toString() != ""
-                              ? (validateStructure(
-                                      letters.join(), value.toString())
-                                  ? null
-                                  : "Регистерийн дугаараа оруулна уу!")
-                              : null,
-                        ]),
-                        builder: (FormFieldState<dynamic> field) {
-                          return InputDecorator(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none),
-                              errorText: field.errorText,
-                              fillColor: Theme.of(context).splashColor,
-                              filled: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 0, horizontal: 15),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedErrorBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.transparent, width: 0.0),
-                              ),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                children: [
-                                  RegisterLetters(
-                                    width: DeviceSize.width(3, context),
-                                    height: DeviceSize.height(90, context),
-                                    oneTitle: "Регистер сонгох",
-                                    hideOnPressed: false,
-                                    title: letters[0],
-                                    backgroundColor:
-                                        Theme.of(context).splashColor,
-                                    textColor:
-                                        Theme.of(context).iconTheme.color,
-                                    length: CYRILLIC_ALPHABETS_LIST.length,
-                                    itemBuilder: (ctx, i) => RegisterLetter(
-                                      text: CYRILLIC_ALPHABETS_LIST[i],
-                                      onPressed: () {
-                                        onChangeLetter(
-                                            CYRILLIC_ALPHABETS_LIST[i], 0);
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  RegisterLetters(
-                                    width: DeviceSize.width(3, context),
-                                    height: DeviceSize.height(90, context),
-                                    title: letters[1],
-                                    oneTitle: "Регистер сонгох",
-                                    hideOnPressed: false,
-                                    backgroundColor:
-                                        Theme.of(context).splashColor,
-                                    textColor:
-                                        Theme.of(context).iconTheme.color,
-                                    length: CYRILLIC_ALPHABETS_LIST.length,
-                                    itemBuilder: (ctx, i) => RegisterLetter(
-                                      text: CYRILLIC_ALPHABETS_LIST[i],
-                                      onPressed: () {
-                                        onChangeLetter(
-                                            CYRILLIC_ALPHABETS_LIST[i], 1);
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Expanded(
-                                    child: FormTextField(
-                                      labelText: "",
-                                      textColor:
-                                          Theme.of(context).iconTheme.color,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          registerNo = value;
-                                        });
-                                        // ignore: invalid_use_of_protected_member
-                                        field.setValue(value);
-                                      },
-                                      controller: regnumController,
-                                      onComplete: () {
-                                        print(123);
-                                      },
-                                      inputType: TextInputType.number,
-                                      name: 'registerNumber',
-                                      hintText: 'Регистерийн дугаар',
-                                      color: transparent,
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp(r'[0-9]')),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            side: MaterialStateBorderSide.resolveWith(
-                              (states) => BorderSide(
-                                color: buttonColor,
-                                width: 2,
-                              ),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            activeColor: buttonColor,
-                            value: isCheck,
-                            onChanged: (value) {
-                              show();
-                            },
-                          ),
-                          Text(
-                            'Үйлчилгээний нөхцөлтэй  ',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              show();
-                            },
-                            child: Text(
-                              'ТАНИЛЦАХ',
-                              style: TextStyle(color: buttonColor),
-                            ),
-                          )
-                        ],
-                      ),
-                      termValidate == true
-                          ? Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                'Үйлчилгээний нөхцөл зөвшөөрөөгүй байна',
-                                style: TextStyle(
-                                  color: Colors.redAccent.withOpacity(0.6),
-                                  fontSize: 12,
-                                ),
-                              ),
-                            )
-                          : SizedBox(),
-                    ],
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              automaticallyImplyLeading: false,
+              leading: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: ActionButton(
+                  onClick: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Theme.of(context).hoverColor,
+                    size: 10,
                   ),
                 ),
-                CustomButton(
-                  isLoading: false,
-                  onClick: () {
-                    checkValidate();
-                  },
-                  labelColor: buttonColor,
-                  labelText: 'Бүртгүүлэх',
-                  boxShadow: false,
-                  textColor: white,
+              ),
+              title: Text(
+                'Бүртгүүлэх',
+                style: TextStyle(
+                  color: Theme.of(context).iconTheme.color,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
-              ],
+              ),
+            ),
+            body: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 10,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  FormBuilder(
+                    key: fbKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FormTextField(
+                          labelText: "Утаны дугаар",
+                          maxLenght: 8,
+                          inputType: TextInputType.phone,
+                          showCounter: false,
+                          name: 'phone',
+                          hintText: "Утасны дугаараа оруулна уу",
+                          color: Theme.of(context).splashColor,
+                          textColor: Theme.of(context).iconTheme.color,
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return validatePhone(value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        FormTextField(
+                          color: Theme.of(context).splashColor,
+                          textColor: Theme.of(context).iconTheme.color,
+                          labelText: "Овог",
+                          inputType: TextInputType.text,
+                          name: 'lastName',
+                          hintText: "Овогоо оруулна уу",
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return isValidCryllic(value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FormTextField(
+                          color: Theme.of(context).splashColor,
+                          textColor: Theme.of(context).iconTheme.color,
+                          labelText: "Нэр",
+                          inputType: TextInputType.text,
+                          name: 'firstName',
+                          hintText: "Нэрээ оруулна уу",
+                          validators: FormBuilderValidators.compose([
+                            (value) {
+                              return isValidCryllic(value.toString(), context);
+                            }
+                          ]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            "Регистерийн дугаар",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context).iconTheme.color,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        FormBuilderField(
+                          autovalidateMode: AutovalidateMode.disabled,
+                          name: "registerNo",
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: 'Заавал бөглөнө үү'),
+                            (dynamic value) => value.toString() != ""
+                                ? (validateStructure(
+                                        letters.join(), value.toString())
+                                    ? null
+                                    : "Регистерийн дугаараа оруулна уу!")
+                                : null,
+                          ]),
+                          builder: (FormFieldState<dynamic> field) {
+                            return InputDecorator(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide.none),
+                                errorText: field.errorText,
+                                fillColor: Theme.of(context).splashColor,
+                                filled: true,
+                                contentPadding: EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 15),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedErrorBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.transparent, width: 0.0),
+                                ),
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  children: [
+                                    RegisterLetters(
+                                      width: DeviceSize.width(3, context),
+                                      height: DeviceSize.height(90, context),
+                                      oneTitle: "Регистер сонгох",
+                                      hideOnPressed: false,
+                                      title: letters[0],
+                                      backgroundColor:
+                                          Theme.of(context).splashColor,
+                                      textColor:
+                                          Theme.of(context).iconTheme.color,
+                                      length: CYRILLIC_ALPHABETS_LIST.length,
+                                      itemBuilder: (ctx, i) => RegisterLetter(
+                                        text: CYRILLIC_ALPHABETS_LIST[i],
+                                        onPressed: () {
+                                          onChangeLetter(
+                                              CYRILLIC_ALPHABETS_LIST[i], 0);
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    RegisterLetters(
+                                      width: DeviceSize.width(3, context),
+                                      height: DeviceSize.height(90, context),
+                                      title: letters[1],
+                                      oneTitle: "Регистер сонгох",
+                                      hideOnPressed: false,
+                                      backgroundColor:
+                                          Theme.of(context).splashColor,
+                                      textColor:
+                                          Theme.of(context).iconTheme.color,
+                                      length: CYRILLIC_ALPHABETS_LIST.length,
+                                      itemBuilder: (ctx, i) => RegisterLetter(
+                                        text: CYRILLIC_ALPHABETS_LIST[i],
+                                        onPressed: () {
+                                          onChangeLetter(
+                                              CYRILLIC_ALPHABETS_LIST[i], 1);
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Expanded(
+                                      child: FormTextField(
+                                        labelText: "",
+                                        textColor:
+                                            Theme.of(context).iconTheme.color,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            registerNo = value;
+                                          });
+                                          // ignore: invalid_use_of_protected_member
+                                          field.setValue(value);
+                                        },
+                                        controller: regnumController,
+                                        onComplete: () {
+                                          print(123);
+                                        },
+                                        inputType: TextInputType.number,
+                                        name: 'registerNumber',
+                                        hintText: 'Регистерийн дугаар',
+                                        color: transparent,
+                                        inputFormatters: <TextInputFormatter>[
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp(r'[0-9]')),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(
+                                  color: buttonColor,
+                                  width: 2,
+                                ),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              activeColor: buttonColor,
+                              value: isCheck,
+                              onChanged: (value) {
+                                show();
+                              },
+                            ),
+                            Text(
+                              'Үйлчилгээний нөхцөлтэй  ',
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                show();
+                              },
+                              child: Text(
+                                'ТАНИЛЦАХ',
+                                style: TextStyle(color: buttonColor),
+                              ),
+                            )
+                          ],
+                        ),
+                        termValidate == true
+                            ? Container(
+                                margin: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  'Үйлчилгээний нөхцөл зөвшөөрөөгүй байна',
+                                  style: TextStyle(
+                                    color: Colors.redAccent.withOpacity(0.6),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                      ],
+                    ),
+                  ),
+                  CustomButton(
+                    isLoading: isSubmit,
+                    onClick: () {
+                      checkValidate();
+                    },
+                    labelColor: buttonColor,
+                    labelText: 'Бүртгүүлэх',
+                    boxShadow: false,
+                    textColor: white,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

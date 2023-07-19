@@ -147,175 +147,179 @@ class _WhoTypePageState extends State<AddWhoTypePage> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 50,
-              ),
-              Text(
-                'Холбоо хамааралтай хүн нэмэх',
-                style: TextStyle(
-                  color: Theme.of(context).iconTheme.color,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 50,
                 ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              FormBuilder(
-                key: fbkey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(bottom: 8),
-                      child: Text(
-                        "Таны хэн болох",
-                        style: TextStyle(
-                            color: Theme.of(context).iconTheme.color,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    FormBuilderDropdown(
-                      dropdownColor: Theme.of(context).colorScheme.onBackground,
-                      initialValue: Text(
-                        'Холбоо хамаарал сонгох',
-                        style:
-                            TextStyle(color: Theme.of(context).disabledColor),
-                      ),
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          color: darkGrey,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_drop_down,
-                          color: white,
+                Text(
+                  'Холбоо хамааралтай хүн нэмэх',
+                  style: TextStyle(
+                    color: Theme.of(context).iconTheme.color,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                FormBuilder(
+                  key: fbkey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          "Таны хэн болох",
+                          style: TextStyle(
+                              color: Theme.of(context).iconTheme.color,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
-                      name: 'whoTypes',
-                      onChanged: (value) async {
-                        setState(() {
-                          selectedValue = value.toString();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Холбоо хамаарал сонгох',
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: Theme.of(context).disabledColor),
-                        filled: true,
-                        fillColor: Theme.of(context).splashColor,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 15),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
+                      FormBuilderDropdown(
+                        dropdownColor:
+                            Theme.of(context).colorScheme.onBackground,
+                        initialValue: Text(
+                          'Холбоо хамаарал сонгох',
+                          style:
+                              TextStyle(color: Theme.of(context).disabledColor),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(10),
+                        icon: Container(
+                          decoration: BoxDecoration(
+                            color: darkGrey,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_drop_down,
+                            color: white,
+                          ),
                         ),
-                      ),
-                      items: general.whoTypes!
-                          .map(
-                            (item) => DropdownMenuItem(
-                              onTap: () {
-                                setState(() {
-                                  whoTypeId = item.id;
-                                });
-                              },
-                              value: item,
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      '${item.name}',
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: Theme.of(context)
-                                              .iconTheme
-                                              .color),
-                                    ),
-                                  ],
+                        name: 'whoTypes',
+                        onChanged: (value) async {
+                          setState(() {
+                            selectedValue = value.toString();
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Холбоо хамаарал сонгох',
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              color: Theme.of(context).disabledColor),
+                          filled: true,
+                          fillColor: Theme.of(context).splashColor,
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 15),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items: general.whoTypes!
+                            .map(
+                              (item) => DropdownMenuItem(
+                                onTap: () {
+                                  setState(() {
+                                    whoTypeId = item.id;
+                                  });
+                                },
+                                value: item,
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '${item.name}',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: Theme.of(context)
+                                                .iconTheme
+                                                .color),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                          .toList(),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      textColor: Theme.of(context).iconTheme.color,
-                      name: 'lastName',
-                      labelText: "Овог",
-                      color: Theme.of(context).splashColor,
-                      hintText: 'Овог',
-                      validators: FormBuilderValidators.compose([
-                        (value) {
-                          return isValidCryllic(value.toString(), context);
-                        }
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      textColor: Theme.of(context).iconTheme.color,
-                      labelText: "Нэр",
-                      name: 'firstName',
-                      color: Theme.of(context).splashColor,
-                      hintText: 'Нэр',
-                      validators: FormBuilderValidators.compose([
-                        (value) {
-                          return isValidCryllic(value.toString(), context);
-                        }
-                      ]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    FormTextField(
-                      textColor: Theme.of(context).iconTheme.color,
-                      labelText: "Утасны дугаар",
-                      name: 'phone',
-                      color: Theme.of(context).splashColor,
-                      inputType: TextInputType.phone,
-                      showCounter: false,
-                      maxLenght: 8,
-                      hintText: 'Утасны дугаар',
-                      validators: FormBuilderValidators.compose([
-                        (value) {
-                          return validatePhone(value.toString(), context);
-                        }
-                      ]),
-                    ),
-                  ],
+                            )
+                            .toList(),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FormTextField(
+                        textColor: Theme.of(context).iconTheme.color,
+                        name: 'lastName',
+                        labelText: "Овог",
+                        color: Theme.of(context).splashColor,
+                        hintText: 'Овог',
+                        validators: FormBuilderValidators.compose([
+                          (value) {
+                            return isValidCryllic(value.toString(), context);
+                          }
+                        ]),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FormTextField(
+                        textColor: Theme.of(context).iconTheme.color,
+                        labelText: "Нэр",
+                        name: 'firstName',
+                        color: Theme.of(context).splashColor,
+                        hintText: 'Нэр',
+                        validators: FormBuilderValidators.compose([
+                          (value) {
+                            return isValidCryllic(value.toString(), context);
+                          }
+                        ]),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FormTextField(
+                        textColor: Theme.of(context).iconTheme.color,
+                        labelText: "Утасны дугаар",
+                        name: 'phone',
+                        color: Theme.of(context).splashColor,
+                        inputType: TextInputType.phone,
+                        showCounter: false,
+                        maxLenght: 8,
+                        hintText: 'Утасны дугаар',
+                        validators: FormBuilderValidators.compose([
+                          (value) {
+                            return validatePhone(value.toString(), context);
+                          }
+                        ]),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              CustomButton(
-                isLoading: isSubmit,
-                boxShadow: false,
-                labelColor: buttonColor,
-                labelText: 'Нэмэх',
-                onClick: () {
-                  onSubmit();
-                },
-                textColor: white,
-              ),
-            ],
+                SizedBox(
+                  height: 30,
+                ),
+                CustomButton(
+                  isLoading: isSubmit,
+                  boxShadow: false,
+                  labelColor: buttonColor,
+                  labelText: 'Нэмэх',
+                  onClick: () {
+                    onSubmit();
+                  },
+                  textColor: white,
+                ),
+              ],
+            ),
           ),
         ),
       ),

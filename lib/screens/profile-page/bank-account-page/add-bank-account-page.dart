@@ -168,134 +168,137 @@ class _AddBankAccountPageState extends State<AddBankAccountPage>
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          child: FormBuilder(
-            key: fbKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 8, top: 20),
-                  child: Text(
-                    'Банк сонгох',
-                    style: TextStyle(
-                      color: Theme.of(context).iconTheme.color,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: FormBuilder(
+              key: fbKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 8, top: 20),
+                    child: Text(
+                      'Банк сонгох',
+                      style: TextStyle(
+                        color: Theme.of(context).iconTheme.color,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
-                ),
-                DropdownButtonFormField(
-                  dropdownColor: Theme.of(context).colorScheme.onBackground,
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Банкаа оруулна уу.')
-                  ]),
-                  icon: Container(
-                    decoration: BoxDecoration(
-                      color: darkGrey,
-                      borderRadius: BorderRadius.circular(15),
+                  DropdownButtonFormField(
+                    dropdownColor: Theme.of(context).colorScheme.onBackground,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(
+                          errorText: 'Банкаа оруулна уу.')
+                    ]),
+                    icon: Container(
+                      decoration: BoxDecoration(
+                        color: darkGrey,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: const Icon(
+                        Icons.arrow_drop_down,
+                        color: white,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.arrow_drop_down,
-                      color: white,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      bank.id = value?.id;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Банк сонгоно уу',
-                    hintStyle: TextStyle(
-                        fontSize: 14, color: Theme.of(context).disabledColor),
-                    filled: true,
-                    fillColor: Theme.of(context).splashColor,
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 15),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(10)),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  items: general.banks!
-                      .map(
-                        (item) => DropdownMenuItem(
-                            value: item,
-                            child: Row(
-                              children: [
-                                item.logoUrl != null
-                                    ? Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(
-                                                  '${item.logoUrl}'),
-                                              fit: BoxFit.cover),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(100),
-                                          ),
-                                        ),
-                                      )
-                                    : SizedBox(),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  '${item.name}',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Theme.of(context).iconTheme.color,
-                                  ),
-                                ),
-                              ],
-                            )),
-                      )
-                      .toList(),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                FormTextField(
-                  labelText: "Дансны дугаар",
-                  name: 'accountNumber',
-                  hintText: 'Дансны дугаараа оруулна уу',
-                  color: Theme.of(context).splashColor,
-                  textColor: Theme.of(context).iconTheme.color,
-                  validators: FormBuilderValidators.compose([
-                    FormBuilderValidators.required(
-                        errorText: 'Дансаа оруулна уу.')
-                  ]),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  child: CustomButton(
-                    isLoading: isSubmit,
-                    boxShadow: false,
-                    labelColor: buttonColor,
-                    labelText: 'Нэмэх',
-                    onClick: () {
-                      if (isSubmit == false) {
-                        onSubmit();
-                      }
+                    onChanged: (value) {
+                      setState(() {
+                        bank.id = value?.id;
+                      });
                     },
-                    textColor: white,
+                    decoration: InputDecoration(
+                      hintText: 'Банк сонгоно уу',
+                      hintStyle: TextStyle(
+                          fontSize: 14, color: Theme.of(context).disabledColor),
+                      filled: true,
+                      fillColor: Theme.of(context).splashColor,
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    items: general.banks!
+                        .map(
+                          (item) => DropdownMenuItem(
+                              value: item,
+                              child: Row(
+                                children: [
+                                  item.logoUrl != null
+                                      ? Container(
+                                          width: 24,
+                                          height: 24,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    '${item.logoUrl}'),
+                                                fit: BoxFit.cover),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(100),
+                                            ),
+                                          ),
+                                        )
+                                      : SizedBox(),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    '${item.name}',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        )
+                        .toList(),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 10,
+                  ),
+                  FormTextField(
+                    labelText: "Дансны дугаар",
+                    name: 'accountNumber',
+                    hintText: 'Дансны дугаараа оруулна уу',
+                    color: Theme.of(context).splashColor,
+                    textColor: Theme.of(context).iconTheme.color,
+                    validators: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(
+                          errorText: 'Дансаа оруулна уу.')
+                    ]),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: CustomButton(
+                      isLoading: isSubmit,
+                      boxShadow: false,
+                      labelColor: buttonColor,
+                      labelText: 'Нэмэх',
+                      onClick: () {
+                        if (isSubmit == false) {
+                          onSubmit();
+                        }
+                      },
+                      textColor: white,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

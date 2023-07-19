@@ -51,7 +51,8 @@ class LoanApi extends HttpRequest {
 
   Future<Customer> scoring() async {
     var res = await get('/loan/scoring', handler: true);
-    return res;
+    print(res);
+    return Customer.fromJson(res as Map<String, dynamic>);
   }
 
   Future<Qpay> qpayment(Qpay data) async {
@@ -60,8 +61,8 @@ class LoanApi extends HttpRequest {
     return Qpay.fromJson(res);
   }
 
-  // Future<Qpay> qpay(Qpay transaction) async {
-  //   var res = await post('/qpay/auth/token', data: transaction.toJson());
-  //   return Qpay.fromJson(res);
-  // }
+  loanVerify() async {
+    var res = get('/loan/verify', handler: true);
+    return res;
+  }
 }

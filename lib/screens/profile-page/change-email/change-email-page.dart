@@ -47,44 +47,47 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
           ),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: FormBuilder(
-          key: fbKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  FormTextField(
-                    textColor: Theme.of(context).iconTheme.color,
-                    labelText: "Шинэ И-мэйл оруулах",
-                    inputType: TextInputType.emailAddress,
-                    name: 'newEmail',
-                    hintText: "Шинэ И-мэйл оруулна уу",
-                    color: Theme.of(context).splashColor,
-                    validators: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(
-                          errorText: "И-мэйл оруулна уу"),
-                    ]),
-                  ),
-                ],
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 30),
-                child: CustomButton(
-                  isLoading: false,
-                  onClick: () {},
-                  boxShadow: true,
-                  labelColor: buttonColor,
-                  labelText: "Үргэлжлүүлэх",
-                  textColor: white,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: FormBuilder(
+            key: fbKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    FormTextField(
+                      textColor: Theme.of(context).iconTheme.color,
+                      labelText: "Шинэ И-мэйл оруулах",
+                      inputType: TextInputType.emailAddress,
+                      name: 'newEmail',
+                      hintText: "Шинэ И-мэйл оруулна уу",
+                      color: Theme.of(context).splashColor,
+                      validators: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(
+                            errorText: "И-мэйл оруулна уу"),
+                      ]),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Container(
+                  margin: const EdgeInsets.only(bottom: 30),
+                  child: CustomButton(
+                    isLoading: false,
+                    onClick: () {},
+                    boxShadow: true,
+                    labelColor: buttonColor,
+                    labelText: "Үргэлжлүүлэх",
+                    textColor: white,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

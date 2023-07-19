@@ -89,6 +89,7 @@ class Customer {
   String? logoUrl;
   List<Customer>? loanProductRate;
   String? maxRate;
+  bool? success;
 
   String getPostDate() {
     final now = Moment.now();
@@ -97,6 +98,7 @@ class Customer {
   }
 
   Customer({
+    this.success,
     this.logoUrl,
     this.code,
     this.maxRate,
