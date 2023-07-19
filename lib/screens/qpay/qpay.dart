@@ -101,7 +101,6 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.amount);
     if (loading == true) {
       return const SizedBox();
     }

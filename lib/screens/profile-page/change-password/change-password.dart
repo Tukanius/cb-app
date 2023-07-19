@@ -269,7 +269,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         inputType: TextInputType.text,
                         obscureText: true,
                         name: 'passwordVerify',
-                        hintText: "Шинэ нууц үгээ давтан оруулна уу",
+                        hintText: "Нууц үгээ давтан оруулна уу",
                         color: Theme.of(context).splashColor,
                         validators: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
