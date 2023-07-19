@@ -154,6 +154,9 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                             ),
                             Container(
                               child: FormTextField(
+                                onComplete: () {
+                                  _performLogin(context);
+                                },
                                 textColor: Theme.of(context).iconTheme.color,
                                 labelText: "Нууц үг",
                                 controller: passwordController,
