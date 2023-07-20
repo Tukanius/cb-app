@@ -15,7 +15,6 @@ import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:skeletons/skeletons.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = 'ProfilePage';
@@ -73,23 +72,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 margin: EdgeInsets.only(top: 30),
                 child: Row(
                   children: [
-                    SkeletonAvatar(
-                      style: SkeletonAvatarStyle(
-                        shape: BoxShape.circle,
-                        width: 40,
-                        height: 40,
-                      ),
+                    SvgPicture.asset(
+                      'assets/svg/avatar.svg',
+                      height: 40,
+                      width: 40,
                     ),
-                    // Container(
-                    //     decoration: BoxDecoration(
-                    //         shape: BoxShape.circle,
-                    //         color: grey.withOpacity(0.3),
-                    //         image: DecorationImage(
-                    //             image: NetworkImage(
-                    //                 "https://sm.ign.com/ign_ap/cover/a/avatar-gen/avatar-generations_hugw.jpg"))),
-                    //     height: 40,
-                    //     width: 40,
-                    //   ),
                     SizedBox(
                       width: 10,
                     ),

@@ -12,7 +12,6 @@ import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:skeletons/skeletons.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = 'MainPage';
@@ -103,12 +102,10 @@ class _MainPageState extends State<MainPage>
                 },
                 child: Row(
                   children: [
-                    SkeletonAvatar(
-                      style: SkeletonAvatarStyle(
-                        shape: BoxShape.circle,
-                        width: 40,
-                        height: 40,
-                      ),
+                    SvgPicture.asset(
+                      'assets/svg/avatar.svg',
+                      height: 40,
+                      width: 40,
                     ),
                     SizedBox(
                       width: 10,
