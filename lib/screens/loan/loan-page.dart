@@ -220,6 +220,10 @@ class _LoanPageState extends State<LoanPage>
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Буцах",
                               style: TextStyle(color: dark),
@@ -282,6 +286,10 @@ class _LoanPageState extends State<LoanPage>
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Буцах",
                               style: TextStyle(color: dark),
@@ -902,6 +910,10 @@ class _LoanPageState extends State<LoanPage>
                               style: TextStyle(color: greyDark, fontSize: 12),
                             ),
                             TextButton(
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                              ),
                               onPressed: () {
                                 Navigator.of(context).pushNamed(
                                   AddBankAccountPage.routeName,

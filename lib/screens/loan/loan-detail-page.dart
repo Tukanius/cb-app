@@ -43,6 +43,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
   int limit = 5;
   double? totalAmount = 0;
   Customer payBackList = Customer();
+  Customer customer = Customer();
 
   @override
   afterFirstLayout(BuildContext context) async {
@@ -50,13 +51,12 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
       isLoading = true;
     });
     customer = await LoanApi().activeLoanGet(widget.id);
+    print(customer.toJson());
     payBackList = await LoanApi().paidList(widget.id);
     setState(() {
       isLoading = false;
     });
   }
-
-  Customer customer = Customer();
 
   @override
   Widget build(BuildContext context) {
@@ -309,6 +309,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                         PaymentPage.routeName,
                         arguments: PaymentPageArguments(
                           code: customer.code!,
+                          loanDate: customer.loan!.loanDate.toString(),
                           loanId: widget.loanId,
                           loanResidual: customer.totalPayAmount.toString(),
                           listenController: widget.listenController,

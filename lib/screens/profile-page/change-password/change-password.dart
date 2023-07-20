@@ -93,6 +93,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Буцах",
                               style: TextStyle(color: dark),
@@ -162,6 +166,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Буцах",
                               style: TextStyle(color: dark),

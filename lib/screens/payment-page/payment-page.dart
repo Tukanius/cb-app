@@ -24,9 +24,11 @@ class PaymentPageArguments {
   String totalPayAmount;
   String loanId;
   String loanResidual;
+  String loanDate;
   ListenController listenController;
   String loanPaybackGraphId;
   PaymentPageArguments({
+    required this.loanDate,
     required this.loanPaybackGraphId,
     required this.code,
     required this.totalPayAmount,
@@ -37,6 +39,7 @@ class PaymentPageArguments {
 }
 
 class PaymentPage extends StatefulWidget {
+  final String loanDate;
   final String loanPaybackGraphId;
   final String code;
   final String totalPayAmount;
@@ -46,6 +49,7 @@ class PaymentPage extends StatefulWidget {
   static const routeName = 'PaymentPage';
   const PaymentPage({
     Key? key,
+    required this.loanDate,
     required this.loanPaybackGraphId,
     required this.code,
     required this.totalPayAmount,
@@ -210,6 +214,10 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Дуусгах",
                               style: TextStyle(color: dark),
@@ -455,7 +463,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                             ],
                           ),
                           Text(
-                            "2024/04/12",
+                            "${widget.loanDate}",
                             style: TextStyle(
                               color: Theme.of(context).iconTheme.color,
                               fontSize: 12,
@@ -465,47 +473,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                         ],
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).splashColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'images/schedule.svg',
-                                height: 20,
-                                width: 20,
-                                color: Theme.of(context).iconTheme.color,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Төлбөр хийх өдөр',
-                                style: TextStyle(
-                                  color: Theme.of(context).disabledColor,
-                                  fontSize: 12,
-                                ),
-                              )
-                            ],
-                          ),
-                          Text(
-                            "2024/04/12",
-                            style: TextStyle(
-                              color: Theme.of(context).iconTheme.color,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+
                     // Container(
                     //   child: CustomButton(
                     //     isLoading: isSubmit,

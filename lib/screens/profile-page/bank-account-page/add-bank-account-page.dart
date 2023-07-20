@@ -112,6 +112,10 @@ class _AddBankAccountPageState extends State<AddBankAccountPage>
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Дуусгах",
                               style: TextStyle(color: dark),

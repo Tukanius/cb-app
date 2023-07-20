@@ -121,6 +121,10 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Болсон",
                               style: TextStyle(color: white),

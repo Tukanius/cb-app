@@ -96,6 +96,10 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       alignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         TextButton(
+                          style: ButtonStyle(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                          ),
                           child: const Text(
                             "Буцах",
                             style: TextStyle(color: dark),

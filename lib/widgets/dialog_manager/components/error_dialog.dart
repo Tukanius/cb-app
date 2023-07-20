@@ -62,6 +62,10 @@ class ErrorDialog {
                           alignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             TextButton(
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                              ),
                               child: const Text(
                                 "Ок",
                                 style: TextStyle(color: dark),

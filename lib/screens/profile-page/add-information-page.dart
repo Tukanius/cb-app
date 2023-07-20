@@ -127,6 +127,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                         alignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             child: const Text(
                               "Дуусгах",
                               style: TextStyle(color: dark),
@@ -666,6 +670,10 @@ class _AddInformationPageState extends State<AddInformationPage> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               TextButton(
+                                style: ButtonStyle(
+                                  overlayColor: MaterialStateProperty.all(
+                                      Colors.transparent),
+                                ),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },

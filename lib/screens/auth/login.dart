@@ -194,6 +194,10 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           TextButton(
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
                             onPressed: () => {
                               Navigator.of(context)
                                   .pushNamed(ForgotPage.routeName),
@@ -273,6 +277,10 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                         width: 5,
                       ),
                       TextButton(
+                        style: ButtonStyle(
+                          overlayColor:
+                              MaterialStateProperty.all(Colors.transparent),
+                        ),
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(RegisterPage.routeName);

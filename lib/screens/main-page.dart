@@ -57,10 +57,16 @@ class _MainPageState extends State<MainPage>
       content: const Text('Та гарахдаа итгэлтэй байна уу?'),
       actions: <Widget>[
         TextButton(
+          style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+          ),
           onPressed: () => Navigator.of(context).pop(false),
           child: const Text('Болих'),
         ),
         TextButton(
+          style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+          ),
           onPressed: () {
             Navigator.of(context).pop(true);
             exit(0);

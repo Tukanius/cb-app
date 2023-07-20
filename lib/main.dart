@@ -302,6 +302,7 @@ class MyApp extends StatelessWidget {
                     return MaterialPageRoute(builder: (context) {
                       return PaymentPage(
                         code: arguments.code,
+                        loanDate: arguments.loanDate,
                         totalPayAmount: arguments.totalPayAmount,
                         loanResidual: arguments.loanResidual,
                         loanId: arguments.loanId,
