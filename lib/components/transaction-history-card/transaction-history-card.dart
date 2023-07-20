@@ -33,7 +33,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   decoration: BoxDecoration(
-                    color: black.withOpacity(0.9),
+                    color: Theme.of(context).colorScheme.background,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -45,13 +45,13 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                           'Гүйлгээний түүхийн дэлгэрэнгүй',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            color: white,
+                            color: Theme.of(context).iconTheme.color,
                             fontSize: 13,
                           ),
                         ),
                       ),
                       Divider(
-                        color: grey.withOpacity(0.3),
+                        color: Theme.of(context).iconTheme.color,
                       ),
                       SizedBox(
                         height: 15,
@@ -60,14 +60,16 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Шилжүүлсэн данс',
-                            style: TextStyle(color: grey),
+                            'Хүлээн авсан данс',
+                            style: TextStyle(
+                              color: Theme.of(context).iconTheme.color,
+                            ),
                           ),
                           Text(
-                            '${widget.data?.debitAccountNumber}',
+                            '${widget.data?.creditAccountNumber}',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                             ),
                           ),
                         ],
@@ -79,14 +81,16 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Харьцсан дансны нэр',
-                            style: TextStyle(color: grey),
+                            'Хүлээн авсан дансны нэр',
+                            style: TextStyle(
+                              color: Theme.of(context).iconTheme.color,
+                            ),
                           ),
                           Text(
-                            '${widget.data?.debitAccountName}',
+                            '${widget.data?.creditAccountName}',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                             ),
                           ),
                         ],
@@ -99,13 +103,14 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                         children: [
                           Text(
                             'Гүйлгээний дүн',
-                            style: TextStyle(color: grey),
+                            style: TextStyle(
+                                color: Theme.of(context).iconTheme.color),
                           ),
                           Text(
                             '${widget.data?.amount}₮',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: white,
+                              color: Theme.of(context).iconTheme.color,
                             ),
                           ),
                         ],
@@ -113,9 +118,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                       SizedBox(
                         height: 15,
                       ),
-                      Divider(
-                        color: grey.withOpacity(0.3),
-                      ),
+                      Divider(color: Theme.of(context).iconTheme.color),
                       ButtonBar(
                         buttonMinWidth: 100,
                         alignment: MainAxisAlignment.spaceEvenly,
@@ -125,9 +128,11 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
                               overlayColor:
                                   MaterialStateProperty.all(Colors.transparent),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Болсон",
-                              style: TextStyle(color: white),
+                              style: TextStyle(
+                                color: Theme.of(context).iconTheme.color,
+                              ),
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
@@ -146,6 +151,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.data?.toJson());
     return GestureDetector(
       onTap: () {
         show(context);
@@ -185,7 +191,7 @@ class _TransactionHistoryCardState extends State<TransactionHistoryCard> {
               ],
             ),
             Text(
-              '${widget.data?.amount}',
+              '${widget.data?.amount} ₮',
               style: TextStyle(
                 color: widget.data?.type != "ЗАРЛАГА"
                     ? Colors.red.shade600

@@ -24,7 +24,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
   bool isLoading = true;
   @override
   afterFirstLayout(BuildContext context) async {
-    String dateString = widget.data!.pay_date.toString();
+    String dateString = widget.data!.payDate.toString();
 
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
@@ -116,7 +116,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
                       ),
                     ),
                     Text(
-                      '${widget.data!.pay_date}',
+                      '${widget.data!.payDate}',
                       style: TextStyle(
                         color: Theme.of(context).iconTheme.color,
                         fontSize: 12,

@@ -94,7 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               Positioned(
-                bottom: 5,
+                bottom: 20,
                 right: 30,
                 left: 30,
                 child: CustomButton(

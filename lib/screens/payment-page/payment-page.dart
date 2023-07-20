@@ -319,7 +319,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
                               height: 10,
                             ),
                             Text(
-                              Utils().formatCurrency(widget.loanResidual),
+                              '${Utils().formatCurrency(widget.loanResidual)} ₮',
                               style: TextStyle(
                                 color: Theme.of(context).iconTheme.color,
                                 fontSize: 24,
