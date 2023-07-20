@@ -57,9 +57,6 @@ class LoanApi extends HttpRequest {
 
   Future<Qpay> qpayment(Qpay data) async {
     var res = await post('/qpay/token', data: data.toJson(), handler: true);
-    print("=================api data=====================");
-    print(res);
-    print("=================api data=====================");
     return Qpay.fromJson(res as Map<String, dynamic>);
   }
 

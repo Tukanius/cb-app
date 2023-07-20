@@ -47,9 +47,6 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
       qpay.loanPaybackGraphId = widget.loanPaybackGraphId;
       qpay.amount = widget.amount;
       qpay = await LoanApi().qpayment(qpay);
-      print('========qpay========');
-      print(qpay.toJson());
-      print('========qpay========');
       setState(() {
         loading = false;
       });
@@ -68,6 +65,10 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
       if (Platform.isIOS) {
         storeLink =
             "https://apps.apple.com/mn/app/${getDeepLink("${link.name}")}/id${getCode('${link.name}')}";
+        print('=========storelink========');
+        print(storeLink.toString());
+        print(link.name.toString());
+        print('=========storelink========');
       } else {
         storeLink =
             "https://play.google.com/store/search?q=${"${link.name}"}&c=apps";
@@ -191,33 +192,33 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
 
 String getDeepLink(String name) {
   switch (name) {
-    case "qPaywallet":
+    case "qPay wallet":
       return "qpay-wallet";
-    case "Khanbank":
+    case "Khan bank":
       return "khan-bank";
-    case "Statebank":
+    case "State bank":
       return "state-bank";
-    case "Xacbank":
+    case "Xac bank":
       return "xacbank";
-    case "TradeandDevelopmentbank":
+    case "Trade and Development bank":
       return "tdb-online";
-    case "Mostmoney":
+    case "Most money":
       return "mostmoney";
-    case "Nationalinvestmentbank":
+    case "National investment bank":
       return "nibank";
-    case "Chinggiskhaanbank":
+    case "Chinggis khaan bank":
       return "smartbank-ckbank";
-    case "Capitronbank":
+    case "Capitron bank":
       return "capitron-digital-bank";
-    case "Bogdbank":
+    case "Bogd bank":
       return "bogd-mobile";
-    case "Transbank":
-      return "bogd-mobile";
-    case "Mbank":
+    case "Trans bank":
+      return "transbаnk";
+    case "M bank":
       return "%D0%BC-bank";
-    case "ArdApp":
+    case "Ard App":
       return "ard-app";
-    case "Arigbank":
+    case "Arig bank":
       return "arig-online";
     default:
       return "";
@@ -226,31 +227,33 @@ String getDeepLink(String name) {
 
 String? getCode(String name) {
   switch (name) {
-    case "qPaywallet":
+    case "qPay wallet":
       return "1501873159";
-    case "Khanbank":
+    case "Khan bank":
       return "1555908766";
-    case "Statebank":
+    case "State bank":
       return "703343972";
-    case "Xacbank":
+    case "Xac bank":
       return "1534265552";
-    case "TradeandDevelopmentbank":
+    case "Trade and Development bank":
       return "1458831706";
-    case "Mostmoney":
+    case "Most money":
       return "487144325";
-    case "Nationalinvestmentbank":
+    case "National investment bank":
       return "882075781";
-    case "Chinggiskhaanbank":
+    case "Chinggis khaan bank":
       return "1180620714";
-    case "Capitronbank":
+    case "Capitron bank":
       return "1612591322";
-    case "Bogdbank":
+    case "Bogd bank":
       return "1475442374";
-    case "Mbank":
+    case "Trans bank":
+      return "1604334470";
+    case "M bank":
       return "1455928972";
-    case "ArdApp":
+    case "Ard App":
       return "6444296485";
-    case "Arigbank":
+    case "Arig bank":
       return "6444022675";
     default:
       return "";
