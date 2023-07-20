@@ -138,10 +138,12 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(
-                            AddInformationPage.routeName,
-                            arguments: AddInformationPageArguments(
-                                listenController: listenController));
+                        if (customer.result?.email == null) {
+                          Navigator.of(context).pushNamed(
+                              AddInformationPage.routeName,
+                              arguments: AddInformationPageArguments(
+                                  listenController: listenController));
+                        }
                       },
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 8),
