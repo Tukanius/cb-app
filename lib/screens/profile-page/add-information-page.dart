@@ -157,6 +157,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
   Widget build(BuildContext context) {
     general = Provider.of<GeneralProvider>(context, listen: false).general;
     user = Provider.of<UserProvider>(context, listen: false).user;
+    DateTime currentDate = DateTime.now();
+    DateTime initialDateTime = currentDate.subtract(Duration(days: 18 * 365));
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
@@ -681,6 +683,8 @@ class _AddInformationPageState extends State<AddInformationPage> {
                               ),
                               Expanded(
                                 child: CupertinoDatePicker(
+                                  initialDateTime: initialDateTime,
+                                  maximumYear: 2005,
                                   mode: CupertinoDatePickerMode.date,
                                   onDateTimeChanged: (value) {
                                     setState(() {

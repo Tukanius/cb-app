@@ -319,7 +319,7 @@ class _LoanPageState extends State<LoanPage>
           onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
             color: Theme.of(context).colorScheme.background,
-            height: 450,
+            height: 350,
             padding: EdgeInsets.only(left: 15, right: 15, top: 20),
             child: SingleChildScrollView(
               child: Column(
@@ -375,63 +375,63 @@ class _LoanPageState extends State<LoanPage>
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Сарын хүү ',
-                        style:
-                            TextStyle(color: Theme.of(context).iconTheme.color),
-                      ),
-                      Text(
-                        '???',
-                        style: TextStyle(
-                            color: Theme.of(context).iconTheme.color,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Үйлчилгээний шимтгэл',
-                        style:
-                            TextStyle(color: Theme.of(context).iconTheme.color),
-                      ),
-                      Text(
-                        '2,000.00₮',
-                        style: TextStyle(
-                            color: Theme.of(context).iconTheme.color,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Нийт төлөх дүн',
-                        style:
-                            TextStyle(color: Theme.of(context).iconTheme.color),
-                      ),
-                      Text(
-                        '${Utils().formatCurrency('${currentValue.toInt() + 2000}')}₮',
-                        style: TextStyle(
-                            color: Theme.of(context).iconTheme.color,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Сарын хүү ',
+                  //       style:
+                  //           TextStyle(color: Theme.of(context).iconTheme.color),
+                  //     ),
+                  //     Text(
+                  //       '???',
+                  //       style: TextStyle(
+                  //           color: Theme.of(context).iconTheme.color,
+                  //           fontWeight: FontWeight.w600),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Үйлчилгээний шимтгэл',
+                  //       style:
+                  //           TextStyle(color: Theme.of(context).iconTheme.color),
+                  //     ),
+                  //     Text(
+                  //       '2,000.00₮',
+                  //       style: TextStyle(
+                  //           color: Theme.of(context).iconTheme.color,
+                  //           fontWeight: FontWeight.w600),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       'Нийт төлөх дүн',
+                  //       style:
+                  //           TextStyle(color: Theme.of(context).iconTheme.color),
+                  //     ),
+                  //     Text(
+                  //       '${Utils().formatCurrency('${currentValue.toInt() + 2000}')}₮',
+                  //       style: TextStyle(
+                  //           color: Theme.of(context).iconTheme.color,
+                  //           fontWeight: FontWeight.w600),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(
                     height: 20,
                   ),
@@ -580,7 +580,7 @@ class _LoanPageState extends State<LoanPage>
                               onTap: () {
                                 if (currentValue > 0) {
                                   setState(() {
-                                    currentValue -= 10000;
+                                    currentValue -= 100;
                                   });
                                   if (currentValue < 50000) {
                                     setState(() {
@@ -617,7 +617,7 @@ class _LoanPageState extends State<LoanPage>
                                 ),
                                 child: Slider(
                                   min: 0,
-                                  max: 5000,
+                                  max: double.parse("${get.balance}"),
                                   thumbColor: buttonColor,
                                   divisions:
                                       double.parse(get.balance.toString()) ~/
