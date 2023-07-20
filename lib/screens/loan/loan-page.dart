@@ -617,7 +617,7 @@ class _LoanPageState extends State<LoanPage>
                                 ),
                                 child: Slider(
                                   min: 0,
-                                  max: double.parse(get.balance.toString()),
+                                  max: 5000,
                                   thumbColor: buttonColor,
                                   divisions:
                                       double.parse(get.balance.toString()) ~/
