@@ -341,7 +341,7 @@ class _LoanPageState extends State<LoanPage>
                             TextStyle(color: Theme.of(context).iconTheme.color),
                       ),
                       Text(
-                        '${Moment.parse(futureDate.toString()).format("YYYY-MM-DD")}/${selectedDay} хоног/',
+                        '${Moment.parse(futureDate.toString()).format("YYYY-MM-DD")} /${selectedDay} хоног/',
                         style: TextStyle(
                             color: Theme.of(context).iconTheme.color,
                             fontWeight: FontWeight.w600),
