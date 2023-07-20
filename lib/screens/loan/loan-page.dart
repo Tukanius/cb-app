@@ -151,13 +151,10 @@ class _LoanPageState extends State<LoanPage>
   }
 
   onSubmit(ctx) async {
-    setState(() {
-      isSuccess = true;
-    });
     if (fbKey.currentState!.saveAndValidate()) {
-      // setState(() {
-      //   isSuccess = true;
-      // });
+      setState(() {
+        isSuccess = true;
+      });
       user.password = textController.text;
       var res = await AuthApi().checkPassword(user);
       if (res == true) {
@@ -310,66 +307,164 @@ class _LoanPageState extends State<LoanPage>
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Container(
-          color: Theme.of(context).colorScheme.background,
-          height: 270,
-          padding: EdgeInsets.only(left: 15, right: 15, top: 20),
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(
-                  bottom: 30,
-                ),
-                child: Text(
-                  "Баталгаажуулалт",
-                  style: TextStyle(
-                    color: Theme.of(context).iconTheme.color,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Container(
+            color: Theme.of(context).colorScheme.background,
+            height: 450,
+            padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      bottom: 10,
+                    ),
+                    child: Text(
+                      "Баталгаажуулалт",
+                      style: TextStyle(
+                        color: Theme.of(context).iconTheme.color,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              FormBuilder(
-                key: fbKey,
-                child: Column(
-                  children: [
-                    FormTextField(
-                      textColor: Theme.of(context).iconTheme.color,
-                      name: "password",
-                      controller: textController,
-                      hintText: 'Нууц үгээ оруулна уу',
-                      inputType: TextInputType.text,
-                      obscureText: true,
-                      autoFocus: true,
-                      labelText: "Нууц үг",
-                      validators: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(
-                            errorText: 'Нууц үг оруулна уу.')
-                      ]),
-                      color: Theme.of(context).splashColor,
+                  Divider(
+                    color: grey,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Хугацаа',
+                        style:
+                            TextStyle(color: Theme.of(context).iconTheme.color),
+                      ),
+                      Text(
+                        '${Moment.parse(futureDate.toString()).format("YYYY-MM-DD")}/${selectedDay} хоног/',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Зээлийн үндсэн дүн',
+                        style:
+                            TextStyle(color: Theme.of(context).iconTheme.color),
+                      ),
+                      Text(
+                        '${Utils().formatCurrency(currentValue.toInt().toString())} ₮',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Сарын хүү ',
+                        style:
+                            TextStyle(color: Theme.of(context).iconTheme.color),
+                      ),
+                      Text(
+                        '???',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Үйлчилгээний шимтгэл',
+                        style:
+                            TextStyle(color: Theme.of(context).iconTheme.color),
+                      ),
+                      Text(
+                        '2,000.00₮',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Нийт төлөх дүн',
+                        style:
+                            TextStyle(color: Theme.of(context).iconTheme.color),
+                      ),
+                      Text(
+                        '${Utils().formatCurrency('${currentValue.toInt() + 2000}')}₮',
+                        style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FormBuilder(
+                    key: fbKey,
+                    child: Column(
+                      children: [
+                        FormTextField(
+                          textColor: Theme.of(context).iconTheme.color,
+                          name: "password",
+                          controller: textController,
+                          hintText: 'Нууц үгээ оруулна уу',
+                          inputType: TextInputType.text,
+                          obscureText: true,
+                          autoFocus: false,
+                          labelText: "Нууц үг",
+                          validators: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(
+                                errorText: 'Нууц үг оруулна уу.')
+                          ]),
+                          color: Theme.of(context).splashColor,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        CustomButton(
+                          boxShadow: true,
+                          isLoading: isSuccess,
+                          labelText: "Баталгаажуулах",
+                          onClick: () {
+                            onSubmit(context);
+                          },
+                          textColor: white,
+                          labelColor: buttonColor,
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    CustomButton(
-                      boxShadow: true,
-                      isLoading: isSuccess,
-                      labelText: "Баталгаажуулах",
-                      onClick: () {
-                        if (isSuccess == false) {
-                          onSubmit(context);
-                          setState(() {
-                            isSuccess = true;
-                          });
-                        } else {}
-                      },
-                      textColor: white,
-                      labelColor: buttonColor,
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       },
@@ -380,7 +475,6 @@ class _LoanPageState extends State<LoanPage>
   Widget build(BuildContext context) {
     general = Provider.of<GeneralProvider>(context, listen: true).general;
     user = Provider.of<UserProvider>(context, listen: true).user;
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
