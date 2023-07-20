@@ -22,7 +22,7 @@ class ActiveLoanCard extends StatefulWidget {
 class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
   Duration duration = Duration();
   bool isLoading = true;
-  @override
+
   afterFirstLayout(BuildContext context) async {
     String dateString = widget.data!.payDate.toString();
 
