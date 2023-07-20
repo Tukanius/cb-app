@@ -37,6 +37,7 @@ import 'package:bank_core/screens/profile-page/add-who-type-page.dart';
 import 'package:bank_core/screens/transaction-history/history-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
+import 'package:bank_core/services/notification.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/dialog_manager/dialog_manager.dart';
@@ -45,9 +46,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   runApp(const MyApp());

@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
     });
     customers = await LoanApi().loanProduct(true);
     await list(page, limit);
-    await Provider.of<UserProvider>(context, listen: true).me(true);
+    await Provider.of<UserProvider>(context, listen: false).me(true);
     refreshController.refreshCompleted();
     setState(() {
       isLoading = false;

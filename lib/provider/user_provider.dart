@@ -54,7 +54,6 @@ class UserProvider extends ChangeNotifier {
   static Future<String?> getAccessToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("ACCESS_TOKEN");
-
     return token;
   }
 
