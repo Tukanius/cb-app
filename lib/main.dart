@@ -37,12 +37,14 @@ import 'package:bank_core/screens/profile-page/add-who-type-page.dart';
 import 'package:bank_core/screens/transaction-history/history-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
+import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:bank_core/widgets/dialog_manager/dialog_manager.dart';
 import 'package:bank_core/widgets/theme/custom-theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,6 +57,11 @@ GetIt locator = GetIt.instance;
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+  static int invalidTokenCount = 0;
+
+  static setInvalidToken(int count) {
+    invalidTokenCount = count;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +82,19 @@ class MyApp extends StatelessWidget {
               themeMode: Provider.of<UserProvider>(context).themeMode,
               builder: (context, widget) => Navigator(
                 onGenerateRoute: (settings) => MaterialPageRoute(
-                  builder: (context) =>
-                      DialogManager(child: loading(context, widget)),
+                  builder: (context) => DialogManager(
+                      child: Listener(
+                    onPointerDown: (PointerEvent details) async {
+                      print("CLICK=>");
+                      DateTime now =
+                          DateTime.now().add(Duration(minutes: expireLogOut));
+                      ;
+                      String formattedDate =
+                          DateFormat('yyyy-MM-dd hh:mm:ss').format(now);
+                      UserProvider().setApiDateExpire(formattedDate);
+                    },
+                    child: loading(context, widget),
+                  )),
                 ),
               ),
               title: 'T-Wallet',

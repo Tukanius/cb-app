@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class UserProvider extends ChangeNotifier {
   User user = User();
@@ -108,6 +111,32 @@ class UserProvider extends ChangeNotifier {
     User res = await AuthApi().forgot(data);
     await setAccessToken(res.accessToken);
     return res;
+  }
+
+  setApiDateExpire(String date) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("expireDate", date);
+  }
+
+  Future<DateTime?> getApiDateExpire() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String res = prefs.getString("expireDate")!;
+    DateTime? time;
+
+    try {
+      time = DateFormat("yyyy-MM-dd hh:mm:ss").parse(res);
+    } catch (err) {
+      debugPrint(err.toString());
+    }
+
+    return time;
+  }
+
+  Future auth() async {
+    String? token = await getAccessToken();
+    if (token != null) {
+      await clearAccessToken();
+    }
   }
 
   setUsername(String username) async {

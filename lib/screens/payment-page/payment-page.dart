@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bank_core/api/auth-api.dart';
 import 'package:bank_core/api/customer-api.dart';
 import 'package:bank_core/components/action-button.dart';

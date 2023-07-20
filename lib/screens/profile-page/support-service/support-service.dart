@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
 import 'package:flutter/material.dart';

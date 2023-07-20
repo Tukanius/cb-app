@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:flutter/material.dart';

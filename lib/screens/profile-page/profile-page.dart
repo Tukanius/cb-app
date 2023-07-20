@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bank_core/screens/profile-page/address/address.dart';
 import 'package:bank_core/screens/profile-page/benefit-ratio/benefit-ratio.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
