@@ -12,6 +12,7 @@ import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:skeletons/skeletons.dart';
 
 class MainPage extends StatefulWidget {
   static const routeName = 'MainPage';
@@ -96,45 +97,44 @@ class _MainPageState extends State<MainPage>
               automaticallyImplyLeading: false,
               backgroundColor: Theme.of(context).colorScheme.background,
               elevation: 0,
-              title: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(ProfilePage.routeName);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
+              title: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(ProfilePage.routeName);
+                },
+                child: Row(
+                  children: [
+                    SkeletonAvatar(
+                      style: SkeletonAvatarStyle(
                         shape: BoxShape.circle,
-                        color: Theme.of(context).canvasColor,
+                        width: 40,
+                        height: 40,
                       ),
-                      height: 40,
-                      width: 40,
                     ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Сайн уу? 👋',
-                        style: TextStyle(
-                          color: Theme.of(context).iconTheme.color,
-                          fontSize: 12,
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Сайн уу? 👋',
+                          style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontSize: 12,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '${user.firstName}',
-                        style: TextStyle(
-                          color: Theme.of(context).iconTheme.color,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        Text(
+                          '${user.firstName}',
+                          style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
               actions: [
                 ActionButton(
