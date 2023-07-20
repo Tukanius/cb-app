@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-const int expireLogOut = 10;
+const int expireLogOut = 5;
 
 class Utils {
   formatCurrency(value) {
