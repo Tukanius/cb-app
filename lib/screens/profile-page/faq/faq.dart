@@ -21,7 +21,6 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
   @override
   void afterFirstLayout(BuildContext context) async {
     answer = await GeneralApi().faqList();
-    print(answer);
     setState(() {
       isLoading = false;
     });
