@@ -6,6 +6,7 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/screens/main-page.dart';
+import 'package:bank_core/services/applife_observer.dart';
 import 'package:bank_core/services/notification.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -29,12 +30,20 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addObserver(AppLifecycleObserver());
     if (token != null) backgroundTimer();
     super.initState();
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(AppLifecycleObserver());
+    super.dispose();
+  }
+
+  @override
   afterFirstLayout(BuildContext context) async {
+    await GeneralProvider.setContext(context);
     DateTime now = DateTime.now().add(Duration(minutes: expireLogOut));
     token = await UserProvider.getAccessToken();
     if (token != null) {

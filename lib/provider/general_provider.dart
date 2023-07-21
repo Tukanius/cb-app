@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 
 class GeneralProvider extends ChangeNotifier {
   General general = General();
+  static late BuildContext context;
+
+  static setContext(BuildContext ctx) {
+    context = ctx;
+  }
 
   init(bool handler) async {
     general = await GeneralApi().init(handler);
