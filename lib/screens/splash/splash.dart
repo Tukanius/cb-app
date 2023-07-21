@@ -6,7 +6,6 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/screens/main-page.dart';
-import 'package:bank_core/services/notification.dart';
 import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
@@ -27,20 +26,20 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
   bool autoLogin = true;
   String? token = "";
 
-  @override
-  void initState() {
-    if (token != null) backgroundTimer();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   if (token != null) backgroundTimer();
+  //   super.initState();
+  // }
 
   @override
   afterFirstLayout(BuildContext context) async {
-    DateTime now = DateTime.now().add(Duration(minutes: expireLogOut));
-    token = await UserProvider.getAccessToken();
-    if (token != null) {
-      String formattedDate = DateFormat('yyyy-MM-dd hh:mm:ss.000').format(now);
-      UserProvider().setApiDateExpire(formattedDate);
-    }
+    // DateTime now = DateTime.now().add(Duration(minutes: expireLogOut));
+    // token = await UserProvider.getAccessToken();
+    // if (token != null) {
+    //   String formattedDate = DateFormat('yyyy-MM-dd hh:mm:ss.000').format(now);
+    //   UserProvider().setApiDateExpire(formattedDate);
+    // }
     try {
       await Provider.of<GeneralProvider>(context, listen: false).init(true);
       await Provider.of<UserProvider>(context, listen: false).me(false);
@@ -51,53 +50,53 @@ class _SplashScreenState extends State<SplashScreen> with AfterLayoutMixin {
     }
   }
 
-  checkForNewSharedLists() async {
-    DateTime? expire;
-    if (token != null) {
-      expire = await UserProvider().getApiDateExpire();
-    }
-    token = await UserProvider.getAccessToken();
+  // checkForNewSharedLists() async {
+  //   DateTime? expire;
+  //   if (token != null) {
+  //     expire = await UserProvider().getApiDateExpire();
+  //   }
+  //   token = await UserProvider.getAccessToken();
 
-    if (token != null) {
-      String formattedDate =
-          DateFormat('yyyy-MM-dd hh:mm:ss.000').format(DateTime.now());
+  //   if (token != null) {
+  //     String formattedDate =
+  //         DateFormat('yyyy-MM-dd hh:mm:ss.000').format(DateTime.now());
 
-      if (expire != null) {
-        if (DateTime.parse(formattedDate).millisecondsSinceEpoch >
-            expire.millisecondsSinceEpoch) {
-          timer!.cancel();
+  //     if (expire != null) {
+  //       if (DateTime.parse(formattedDate).millisecondsSinceEpoch >
+  //           expire.millisecondsSinceEpoch) {
+  //         timer!.cancel();
 
-          if (autoLogin == true && token != null) {
-            setState(() {
-              autoLogin = false;
-            });
-            await UserProvider().auth();
-            NotificationService().showNotification(
-              title: "T-Wallet",
-              body: "Та идэвхгүй 5 минут болсон тул холболт саллаа",
-              id: 1,
-              payLoad: "payload",
-            );
-            Navigator.of(context).pushReplacementNamed(SplashScreen.routeName);
-          }
-          Future.delayed(const Duration(milliseconds: 700), () {
-            setState(() {
-              autoLogin = true;
-            });
-          });
-          return null;
-        }
-      }
-    }
-  }
+  //         if (autoLogin == true && token != null) {
+  //           setState(() {
+  //             autoLogin = false;
+  //           });
+  //           await UserProvider().auth();
+  //           NotificationService().showNotification(
+  //             title: "T-Wallet",
+  //             body: "Та идэвхгүй 5 минут болсон тул холболт саллаа",
+  //             id: 1,
+  //             payLoad: "payload",
+  //           );
+  //           Navigator.of(context).pushReplacementNamed(SplashScreen.routeName);
+  //         }
+  //         Future.delayed(const Duration(milliseconds: 700), () {
+  //           setState(() {
+  //             autoLogin = true;
+  //           });
+  //         });
+  //         return null;
+  //       }
+  //     }
+  //   }
+  // }
 
-  backgroundTimer() {
-    if (timer != null) timer!.cancel();
-    timer = Timer.periodic(
-      const Duration(seconds: 2),
-      (Timer t) => checkForNewSharedLists(),
-    );
-  }
+  // backgroundTimer() {
+  //   if (timer != null) timer!.cancel();
+  //   timer = Timer.periodic(
+  //     const Duration(seconds: 2),
+  //     (Timer t) => checkForNewSharedLists(),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -158,22 +158,29 @@ class _LoanPageState extends State<LoanPage>
         isSuccess = true;
       });
       user.password = textController.text;
-      var res = await AuthApi().checkPassword(user);
-      if (res == true) {
-        loan.amount = currentValue.toInt();
-        loan.loanDate = DateTime.now().toString();
-        loan.loanRate = '5';
-        loan.loanTimeId = loanTimeId;
-        loan.accountId = accountId;
-        await LoanApi().createLoan(loan);
-        setState(() {
-          isSuccess = false;
-        });
-        widget.listenController.changeVariable("loanCreate");
-        Navigator.of(context).pop();
-        showSuccess(context);
-        Navigator.of(ctx).pop();
-      } else {
+      try {
+        var res = await AuthApi().checkPassword(user);
+        if (res == true) {
+          loan.amount = currentValue.toInt();
+          loan.loanDate = DateTime.now().toString();
+          loan.loanRate = '5';
+          loan.loanTimeId = loanTimeId;
+          loan.accountId = accountId;
+          await LoanApi().createLoan(loan);
+          setState(() {
+            isSuccess = false;
+          });
+          widget.listenController.changeVariable("loanCreate");
+          Navigator.of(context).pop();
+          showSuccess(context);
+          Navigator.of(ctx).pop();
+        } else {
+          showError(context);
+          setState(() {
+            isSuccess = false;
+          });
+        }
+      } catch (e) {
         showError(context);
         setState(() {
           isSuccess = false;
@@ -464,7 +471,11 @@ class _LoanPageState extends State<LoanPage>
                           isLoading: isSuccess,
                           labelText: "Баталгаажуулах",
                           onClick: () {
-                            onSubmit(context);
+                            if (isSuccess == false) {
+                              onSubmit(context);
+                            } else {
+                              print("123");
+                            }
                           },
                           textColor: white,
                           labelColor: buttonColor,
