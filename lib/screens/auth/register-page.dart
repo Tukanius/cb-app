@@ -82,8 +82,25 @@ class _RegisterPageState extends State<RegisterPage> {
       builder: (context) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: backgroundColor,
-            title: const Text('Үйлчилгээний нөхцөл'),
+            backgroundColor: Theme.of(context).colorScheme.background,
+            title: Text(
+              'Үйлчилгээний нөхцөл',
+              style: TextStyle(color: Theme.of(context).iconTheme.color),
+            ),
+            automaticallyImplyLeading: false,
+            leading: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: ActionButton(
+                onClick: () {
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Theme.of(context).hoverColor,
+                  size: 10,
+                ),
+              ),
+            ),
           ),
           body: Stack(
             children: [
