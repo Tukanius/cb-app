@@ -65,14 +65,20 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
-                  children: answer.rows!
-                      .map(
-                        (data) => Accordion(
-                          title: data.string.toString(),
-                          content: data.answer.toString(),
-                        ),
-                      )
-                      .toList(),
+                  children: [
+                    Column(
+                      children: answer.rows!
+                          .map(
+                            (data) => Accordion(
+                              data: data,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
               ),
             )

@@ -1,15 +1,29 @@
+import 'package:bank_core/api/general-api.dart';
 import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/models/contact.dart';
 import 'package:flutter/material.dart';
+import 'package:after_layout/after_layout.dart';
 
 class ToContact extends StatefulWidget {
   static const routeName = 'ToContact';
-  const ToContact({super.key});
+  const ToContact({Key? key}) : super(key: key);
 
   @override
   State<ToContact> createState() => _ToContactState();
 }
 
-class _ToContactState extends State<ToContact> {
+class _ToContactState extends State<ToContact> with AfterLayoutMixin {
+  bool isLoading = true;
+  Contact contact = Contact();
+
+  @override
+  void afterFirstLayout(BuildContext context) async {
+    contact = await GeneralApi().contactList();
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,13 +77,13 @@ class _ToContactState extends State<ToContact> {
                     ),
                   ),
                   Text(
-                    "Null",
+                    "${contact.phoneNumber}",
                     style: TextStyle(
                       color: Theme.of(context).iconTheme.color,
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -91,7 +105,7 @@ class _ToContactState extends State<ToContact> {
                     ),
                   ),
                   Text(
-                    "Null",
+                    "${contact.email}",
                     style: TextStyle(
                       color: Theme.of(context).iconTheme.color,
                       fontSize: 15,
@@ -119,7 +133,7 @@ class _ToContactState extends State<ToContact> {
                     ),
                   ),
                   Text(
-                    "Null",
+                    "${contact.address}",
                     style: TextStyle(
                       color: Theme.of(context).iconTheme.color,
                       fontSize: 15,

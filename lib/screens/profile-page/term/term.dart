@@ -1,7 +1,7 @@
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class TermofPolicyPage extends StatefulWidget {
   static const routeName = "/TermofPolicyPage";
@@ -14,7 +14,7 @@ class TermofPolicyPage extends StatefulWidget {
 class _TermofPolicyPageState extends State<TermofPolicyPage>
     with AfterLayoutMixin {
   bool isLoading = true;
-
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   @override
   void afterFirstLayout(BuildContext context) async {
     setState(() {
@@ -54,18 +54,10 @@ class _TermofPolicyPageState extends State<TermofPolicyPage>
         ],
       ),
       body: isLoading == false
-          ? SingleChildScrollView(
-              controller: scrollController,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Html(data: "data"),
-                  ],
-                ),
+          ? Container(
+              child: SfPdfViewer.asset(
+                'assets/svg/term-condition.pdf',
+                key: _pdfViewerKey,
               ),
             )
           : CircularProgressIndicator(

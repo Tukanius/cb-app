@@ -2,6 +2,7 @@
 
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/screens/profile-page/faq/faq.dart';
+import 'package:bank_core/screens/profile-page/support-service/to-contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -84,40 +85,40 @@ class _SupportServiceState extends State<SupportService> {
                   ),
                 ),
               ),
-              // GestureDetector(
-              //   onTap: () {
-              //     Navigator.of(context).pushNamed(ToContact.routeName);
-              //   },
-              //   child: Container(
-              //     margin: EdgeInsets.only(bottom: 10),
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(10),
-              //       color: Theme.of(context).splashColor,
-              //     ),
-              //     padding: const EdgeInsets.all(15),
-              //     child: Row(
-              //       children: [
-              //         SvgPicture.asset(
-              //           'assets/svg/contact.svg',
-              //           height: 24,
-              //           width: 24,
-              //           color: Theme.of(context).iconTheme.color,
-              //         ),
-              //         SizedBox(
-              //           width: 15,
-              //         ),
-              //         Text(
-              //           "Холбоо барих",
-              //           style: TextStyle(
-              //             color: Theme.of(context).iconTheme.color,
-              //             fontSize: 14,
-              //             fontWeight: FontWeight.w600,
-              //           ),
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(ToContact.routeName);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Theme.of(context).splashColor,
+                  ),
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/svg/contact.svg',
+                        height: 24,
+                        width: 24,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "Холбоо барих",
+                        style: TextStyle(
+                          color: Theme.of(context).iconTheme.color,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
