@@ -7,10 +7,12 @@ import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-import 'package:bank_core/screens/profile-page/add-information-page.dart';
-import 'package:bank_core/screens/profile-page/add-who-type-page.dart';
+import 'package:bank_core/screens/profile-page/information/add-information-page.dart';
+import 'package:bank_core/screens/profile-page/who-type/add-who-type-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/screens/profile-page/address/address.dart';
+import 'package:bank_core/screens/profile-page/information/show-detail.dart';
+import 'package:bank_core/screens/profile-page/who-type/who-type.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
@@ -143,6 +145,8 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                               AddInformationPage.routeName,
                               arguments: AddInformationPageArguments(
                                   listenController: listenController));
+                        } else {
+                          Navigator.of(context).pushNamed(ShowDetail.routeName);
                         }
                       },
                       child: Container(
@@ -273,6 +277,8 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
                               AddWhoTypePage.routeName,
                               arguments: AddWhoTypePageArguments(
                                   listenController: listenController));
+                        } else {
+                          Navigator.of(context).pushNamed(WhoType.routeName);
                         }
                       },
                       child: Container(

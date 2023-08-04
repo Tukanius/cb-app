@@ -21,19 +21,21 @@ import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/payment-page/payment-page.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/bank-accounts.dart';
 import 'package:bank_core/screens/profile-page/address/address.dart';
-import 'package:bank_core/screens/profile-page/add-information-page.dart';
+import 'package:bank_core/screens/profile-page/information/add-information-page.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
+import 'package:bank_core/screens/profile-page/information/show-detail.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/auth/register-page.dart';
 import 'package:bank_core/screens/profile-page/settings-page/settings-page.dart';
 import 'package:bank_core/screens/profile-page/support-service/support-service.dart';
 import 'package:bank_core/screens/profile-page/support-service/to-contact.dart';
+import 'package:bank_core/screens/profile-page/who-type/who-type.dart';
 import 'package:bank_core/screens/shop-page/company/company-information.dart';
 import 'package:bank_core/screens/shop-page/product/product-information.dart';
 import 'package:bank_core/screens/qpay/qpay.dart';
 import 'package:bank_core/screens/splash/splash.dart';
 import 'package:bank_core/screens/profile-page/term/term.dart';
-import 'package:bank_core/screens/profile-page/add-who-type-page.dart';
+import 'package:bank_core/screens/profile-page/who-type/add-who-type-page.dart';
 import 'package:bank_core/screens/transaction-history/history-page.dart';
 import 'package:bank_core/services/dialog.dart';
 import 'package:bank_core/services/navigation.dart';
@@ -284,6 +286,14 @@ class MyApp extends StatelessWidget {
                   case FaqPage.routeName:
                     return MaterialPageRoute(builder: (context) {
                       return const FaqPage();
+                    });
+                  case ShowDetail.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const ShowDetail();
+                    });
+                  case WhoType.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const WhoType();
                     });
                   case TermofPolicyPage.routeName:
                     return PageRouteBuilder(
