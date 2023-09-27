@@ -151,6 +151,7 @@ class _AddAddressPageState extends State<AddAddressPage> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Гэрийн хаяг нэмэх',
           style: TextStyle(

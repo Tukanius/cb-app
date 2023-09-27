@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:after_layout/after_layout.dart';
 import 'package:bank_core/api/loan-api.dart';
+import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/models/qpay-urls.dart';
 import 'package:bank_core/models/qpay.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -125,6 +126,20 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
               elevation: 0.0,
               pinned: false,
               snap: true,
+              automaticallyImplyLeading: false,
+              leading: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: ActionButton(
+                  onClick: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Theme.of(context).hoverColor,
+                    size: 10,
+                  ),
+                ),
+              ),
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text(

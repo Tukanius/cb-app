@@ -25,9 +25,7 @@ class _WhoTypeState extends State<WhoType> with AfterLayoutMixin {
     list(page, limit);
     setState(() {
       isLoading = false;
-      print('!!!!WHOTYPE!!!');
       print(relatedList.rows);
-      print('!!!!WHOTYPE!!!');
     });
   }
 
@@ -64,6 +62,7 @@ class _WhoTypeState extends State<WhoType> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Гэр бүлийн гишүүн',
           style: TextStyle(

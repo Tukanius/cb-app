@@ -69,6 +69,7 @@ class _BankAccountsState extends State<BankAccounts> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Дансны мэдээлэл',
           style: TextStyle(

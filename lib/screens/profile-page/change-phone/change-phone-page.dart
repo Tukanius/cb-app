@@ -35,6 +35,7 @@ class _ChangePhonePageState extends State<ChangePhonePage> {
               ),
             ),
           ),
+          centerTitle: true,
           title: Text(
             'Утасны дугаар солих',
             style: TextStyle(

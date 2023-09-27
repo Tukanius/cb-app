@@ -1,6 +1,14 @@
+import 'package:bank_core/components/action-button.dart';
+import 'package:bank_core/models/user.dart';
+import 'package:bank_core/provider/user_provider.dart';
+import 'package:bank_core/screens/notification-page/notification-page.dart';
+import 'package:bank_core/screens/profile-page/profile-page.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -92,110 +100,272 @@ class ShopPage extends StatefulWidget {
 //       ),
 class _ShopPageState extends State<ShopPage> {
   CarouselController carouselController = CarouselController();
-
+  bool isLoading = true;
+  bool isView = false;
+  bool isDarkMode = false;
+  User user = User();
   @override
   Widget build(BuildContext context) {
+    user = Provider.of<UserProvider>(context, listen: true).user;
+    isView = Provider.of<UserProvider>(context, listen: true).isView;
+    isDarkMode = Provider.of<UserProvider>(context, listen: true).check;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Container(
-              height: 500,
-              padding: EdgeInsets.symmetric(vertical: 15),
-              child: Column(
+          SliverAppBar(
+            expandedHeight: 56,
+            automaticallyImplyLeading: false,
+            pinned: false,
+            snap: true,
+            floating: true,
+            backgroundColor: Theme.of(context).colorScheme.background,
+            title: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(ProfilePage.routeName);
+              },
+              child: Row(
                 children: [
+                  SvgPicture.asset(
+                    'assets/svg/avatar.svg',
+                    height: 40,
+                    width: 40,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // CarouselSlider(
-                      //   carouselController: carouselController,
-                      //   options: CarouselOptions(
-                      //     height: 200.0,
-                      //     autoPlay: true,
-                      //     onPageChanged: (index, reason) {
-                      //       setState(() {
-                      //         _current = index;
-                      //       });
-                      //     },
-                      //   ),
-                      //   items: imgList.map((data) {
-                      //     return Builder(
-                      //       builder: (BuildContext context) {
-                      //         return Container(
-                      //           width: MediaQuery.of(context).size.width,
-                      //           margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      //           decoration: BoxDecoration(
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             image: DecorationImage(
-                      //               image: NetworkImage(data),
-                      //             ),
-                      //           ),
-                      //           alignment: Alignment.center,
-                      //         );
-                      //       },
-                      //     );
-                      //   }).toList(),
-                      // ),
-                      // SizedBox(
-                      //   height: 8,
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: imgList.asMap().entries.map((entry) {
-                      //     return GestureDetector(
-                      //       onTap: () =>
-                      //           carouselController.animateToPage(entry.key),
-                      //       child: Container(
-                      //         width: 10.0,
-                      //         height: 10.0,
-                      //         margin: EdgeInsets.symmetric(
-                      //             vertical: 8.0, horizontal: 4.0),
-                      //         decoration: BoxDecoration(
-                      //             shape: BoxShape.circle,
-                      //             color: _current == entry.key
-                      //                 ? buttonColor
-                      //                 : darkGrey),
-                      //       ),
-                      //     );
-                      //   }).toList(),
-                      // ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      'Дэлгүүр',
-                      style: TextStyle(
-                        color: Theme.of(context).iconTheme.color,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        'Сайн уу? 👋',
+                        style: TextStyle(
+                          color: Theme.of(context).iconTheme.color,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 15,
+                      Text(
+                        '${user.firstName}',
+                        style: TextStyle(
+                          color: Theme.of(context).iconTheme.color,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
-                        Lottie.asset('assets/lottie/empty.json', height: 100),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          "Дэлгүүр одоогоор хоосон байна",
-                          style:
-                              TextStyle(color: Theme.of(context).disabledColor),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
+            actions: [
+              ActionButton(
+                icon: isDarkMode == false
+                    ? SvgPicture.asset(
+                        "assets/svg/dark-mode.svg",
+                        height: 24,
+                        width: 24,
+                        color: white,
+                      )
+                    : SvgPicture.asset(
+                        "assets/svg/dark-mode.svg",
+                        height: 24,
+                        width: 24,
+                        color: black,
+                      ),
+                onClick: () {
+                  Provider.of<UserProvider>(context, listen: false)
+                      .toggleDarkMode(!isDarkMode);
+                  final provider =
+                      Provider.of<UserProvider>(context, listen: false);
+                  provider.toggleTheme(!provider.isDarkMode);
+                  print(!provider.isDarkMode);
+                },
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              ActionButton(
+                icon: isView == false
+                    ? Icon(
+                        Icons.visibility,
+                        color: Theme.of(context).hoverColor,
+                      )
+                    : Icon(
+                        Icons.visibility_off,
+                        color: Theme.of(context).hoverColor,
+                      ),
+                onClick: () async {
+                  await Provider.of<UserProvider>(context, listen: false)
+                      .setView(!isView);
+                },
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              ActionButton(
+                onClick: () {
+                  Navigator.of(context).pushNamed(NotificationPage.routeName);
+                },
+                icon: Icon(
+                  Icons.notifications,
+                  color: Theme.of(context).hoverColor,
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              )
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    'Дэлгүүр',
+                    style: TextStyle(
+                      color: Theme.of(context).iconTheme.color,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Center(
+                  child: Lottie.asset('assets/lottie/empty.json', height: 150),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "Гүйлгээний түүх хоосон байна",
+                  style: TextStyle(
+                    color: Theme.of(context).disabledColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
+      // SafeArea(
+      //   child: Column(
+      //     children: [
+      //       SizedBox(
+      //         height: 10,
+      //       ),
+      //       CustomAppBar(),
+      //       SizedBox(
+      //         height: 20,
+      //       ),
+      //       Container(
+      //         padding: EdgeInsets.symmetric(horizontal: 15),
+      //         width: MediaQuery.of(context).size.width,
+      //         child: Text(
+      //           'Дэлгүүр',
+      //           style: TextStyle(
+      //             color: Theme.of(context).iconTheme.color,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ),
+      //       Container(
+      //         child: Column(
+      //           children: [
+      //             SizedBox(
+      //               height: 15,
+      //             ),
+      //             Lottie.asset('assets/lottie/empty.json', height: 100),
+      //             SizedBox(
+      //               height: 15,
+      //             ),
+      //             Text(
+      //               "Дэлгүүр одоогоор хоосон байна",
+      //               style: TextStyle(color: Theme.of(context).disabledColor),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
+// CustomScrollView(
+            //   slivers: <Widget>[
+            //     SliverToBoxAdapter(
+            //       child: Container(
+            //         height: 500,
+            //         padding: EdgeInsets.symmetric(vertical: 15),
+            //         child: Column(
+            //           children: [
+            //             Column(
+            //               children: [
+            //                 // CarouselSlider(
+            //                 //   carouselController: carouselController,
+            //                 //   options: CarouselOptions(
+            //                 //     height: 200.0,
+            //                 //     autoPlay: true,
+            //                 //     onPageChanged: (index, reason) {
+            //                 //       setState(() {
+            //                 //         _current = index;
+            //                 //       });
+            //                 //     },
+            //                 //   ),
+            //                 //   items: imgList.map((data) {
+            //                 //     return Builder(
+            //                 //       builder: (BuildContext context) {
+            //                 //         return Container(
+            //                 //           width: MediaQuery.of(context).size.width,
+            //                 //           margin: EdgeInsets.symmetric(horizontal: 5.0),
+            //                 //           decoration: BoxDecoration(
+            //                 //             borderRadius: BorderRadius.circular(10),
+            //                 //             image: DecorationImage(
+            //                 //               image: NetworkImage(data),
+            //                 //             ),
+            //                 //           ),
+            //                 //           alignment: Alignment.center,
+            //                 //         );
+            //                 //       },
+            //                 //     );
+            //                 //   }).toList(),
+            //                 // ),
+            //                 // SizedBox(
+            //                 //   height: 8,
+            //                 // ),
+            //                 // Row(
+            //                 //   mainAxisAlignment: MainAxisAlignment.center,
+            //                 //   children: imgList.asMap().entries.map((entry) {
+            //                 //     return GestureDetector(
+            //                 //       onTap: () =>
+            //                 //           carouselController.animateToPage(entry.key),
+            //                 //       child: Container(
+            //                 //         width: 10.0,
+            //                 //         height: 10.0,
+            //                 //         margin: EdgeInsets.symmetric(
+            //                 //             vertical: 8.0, horizontal: 4.0),
+            //                 //         decoration: BoxDecoration(
+            //                 //             shape: BoxShape.circle,
+            //                 //             color: _current == entry.key
+            //                 //                 ? buttonColor
+            //                 //                 : darkGrey),
+            //                 //       ),
+            //                 //     );
+            //                 //   }).toList(),
+            //                 // ),
+            //               ],
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),

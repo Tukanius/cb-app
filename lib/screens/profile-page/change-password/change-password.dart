@@ -216,6 +216,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 ),
               ),
             ),
+            centerTitle: true,
             title: Text(
               'Нууц үг',
               style: TextStyle(
@@ -252,7 +253,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             )
                           : SizedBox(),
                       SizedBox(
-                        height: 8,
+                        height: 10,
                       ),
                       FormTextField(
                         labelText: "Нууц үг",

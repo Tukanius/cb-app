@@ -164,6 +164,7 @@ class _OtpVerifyPageState extends State<OtpVerifyPage> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           "Баталгаажуулалт",
           style: TextStyle(

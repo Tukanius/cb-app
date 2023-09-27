@@ -3,6 +3,7 @@ part '../parts/customer.dart';
 
 class Customer {
   int? count;
+  int? day;
   List<Customer>? rows;
   String? id;
   String? customerId;
@@ -10,6 +11,7 @@ class Customer {
   String? firstName;
   String? lastName;
   String? phone;
+  String? loan_date;
   // bool? isActive;
   String? createdAt;
   String? createdUserId;
@@ -25,6 +27,7 @@ class Customer {
   String? provinceId;
   String? districtId;
   Customer? loanType;
+  Customer? loanTime;
   String? khorooId;
   String? address;
   Customer? province;
@@ -99,6 +102,8 @@ class Customer {
   }
 
   Customer({
+    this.loanTime,
+    this.day,
     this.loanDate,
     this.success,
     this.logoUrl,
@@ -158,6 +163,7 @@ class Customer {
     this.loanId,
     this.totalPayAmount,
     this.payDate,
+    this.loan_date,
     this.loanStatusId,
     this.loan,
     this.province,

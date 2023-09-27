@@ -2,12 +2,9 @@
 
 import 'dart:io';
 
-import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/home-page/home-page.dart';
-import 'package:bank_core/screens/notification-page/notification-page.dart';
-import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/screens/shop-page/shop-page.dart';
 import 'package:bank_core/screens/transaction-history/history-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -94,106 +91,6 @@ class _MainPageState extends State<MainPage>
           top: false,
           child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              backgroundColor: Theme.of(context).colorScheme.background,
-              elevation: 0,
-              title: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(ProfilePage.routeName);
-                },
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/svg/avatar.svg',
-                      height: 40,
-                      width: 40,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Сайн уу? 👋',
-                          style: TextStyle(
-                            color: Theme.of(context).iconTheme.color,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Text(
-                          '${user.firstName}',
-                          style: TextStyle(
-                            color: Theme.of(context).iconTheme.color,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                ActionButton(
-                  icon: isDarkMode == false
-                      ? SvgPicture.asset(
-                          "assets/svg/dark-mode.svg",
-                          height: 24,
-                          width: 24,
-                          color: white,
-                        )
-                      : SvgPicture.asset(
-                          "assets/svg/dark-mode.svg",
-                          height: 24,
-                          width: 24,
-                          color: black,
-                        ),
-                  onClick: () {
-                    Provider.of<UserProvider>(context, listen: false)
-                        .toggleDarkMode(!isDarkMode);
-                    final provider =
-                        Provider.of<UserProvider>(context, listen: false);
-                    provider.toggleTheme(!provider.isDarkMode);
-                    print(!provider.isDarkMode);
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ActionButton(
-                  icon: isView == false
-                      ? Icon(
-                          Icons.visibility,
-                          color: Theme.of(context).hoverColor,
-                        )
-                      : Icon(
-                          Icons.visibility_off,
-                          color: Theme.of(context).hoverColor,
-                        ),
-                  onClick: () async {
-                    await Provider.of<UserProvider>(context, listen: false)
-                        .setView(!isView);
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ActionButton(
-                  onClick: () {
-                    Navigator.of(context).pushNamed(NotificationPage.routeName);
-                  },
-                  icon: Icon(
-                    Icons.notifications,
-                    color: Theme.of(context).hoverColor,
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                )
-              ],
-            ),
             body: TabBarView(
               controller: tabController,
               children: [

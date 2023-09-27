@@ -107,6 +107,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage>
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Нэмэлт мэдээлэл',
           style: TextStyle(

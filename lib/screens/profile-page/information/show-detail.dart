@@ -51,6 +51,7 @@ class _ShowDetailState extends State<ShowDetail> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Нэмэлт мэдээлэл',
           style: TextStyle(

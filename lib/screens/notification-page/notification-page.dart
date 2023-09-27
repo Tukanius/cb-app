@@ -16,6 +16,7 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           'Мэдэгдэл',
           style: TextStyle(

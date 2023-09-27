@@ -162,6 +162,7 @@ class _AddBankAccountPageState extends State<AddBankAccountPage>
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Данс холбох',
           style: TextStyle(

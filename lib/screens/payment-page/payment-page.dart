@@ -266,6 +266,7 @@ class _PaymentPageState extends State<PaymentPage> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Зээл төлөх',
           style: TextStyle(

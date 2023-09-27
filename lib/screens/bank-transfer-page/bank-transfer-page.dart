@@ -61,6 +61,7 @@ class _BankTransferPageState extends State<BankTransferPage> {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Банкны шилжүүлэг',
           style: TextStyle(

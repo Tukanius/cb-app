@@ -83,6 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.background,
+            centerTitle: true,
             title: Text(
               'Үйлчилгээний нөхцөл',
               style: TextStyle(color: Theme.of(context).iconTheme.color),
@@ -183,6 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
+              centerTitle: true,
               title: Text(
                 'Бүртгүүлэх',
                 style: TextStyle(

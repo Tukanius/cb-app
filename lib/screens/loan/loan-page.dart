@@ -155,6 +155,7 @@ class _LoanPageState extends State<LoanPage>
   onSubmit(ctx) async {
     if (fbKey.currentState!.saveAndValidate()) {
       setState(() {
+        isLoading = true;
         isSuccess = true;
       });
       user.password = textController.text;
@@ -184,6 +185,7 @@ class _LoanPageState extends State<LoanPage>
         showError(context);
         setState(() {
           isSuccess = false;
+          isLoading = false;
         });
       }
     }

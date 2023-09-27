@@ -81,6 +81,7 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Зээлийн дэлгэрэнгүй',
           style: TextStyle(

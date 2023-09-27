@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 30),
+                margin: EdgeInsets.only(top: 20),
                 child: Row(
                   children: [
                     SvgPicture.asset(

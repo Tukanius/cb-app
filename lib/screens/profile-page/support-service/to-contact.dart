@@ -1,6 +1,7 @@
 import 'package:bank_core/api/general-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/models/contact.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 
@@ -55,97 +56,103 @@ class _ToContactState extends State<ToContact> with AfterLayoutMixin {
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).splashColor,
-              ),
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: isLoading == false
+          ? Container(
+              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Column(
                 children: [
-                  Text(
-                    'Утас:',
-                    style: TextStyle(
-                      color: Theme.of(context).disabledColor,
-                      fontSize: 15,
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).splashColor,
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Утас:',
+                          style: TextStyle(
+                            color: Theme.of(context).disabledColor,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          "${contact.phoneNumber}",
+                          style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    "${contact.phoneNumber}",
-                    style: TextStyle(
-                      color: Theme.of(context).iconTheme.color,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).splashColor,
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'И-мэйл:',
+                          style: TextStyle(
+                            color: Theme.of(context).disabledColor,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          "${contact.email}",
+                          style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).splashColor,
+                    ),
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Хаяг:',
+                          style: TextStyle(
+                            color: Theme.of(context).disabledColor,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Text(
+                          "${contact.address}",
+                          style: TextStyle(
+                            color: Theme.of(context).iconTheme.color,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ],
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).splashColor,
-              ),
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'И-мэйл:',
-                    style: TextStyle(
-                      color: Theme.of(context).disabledColor,
-                      fontSize: 15,
-                    ),
-                  ),
-                  Text(
-                    "${contact.email}",
-                    style: TextStyle(
-                      color: Theme.of(context).iconTheme.color,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
+            )
+          : Center(
+              child: CircularProgressIndicator(
+                color: buttonColor,
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).splashColor,
-              ),
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Хаяг:',
-                    style: TextStyle(
-                      color: Theme.of(context).disabledColor,
-                      fontSize: 15,
-                    ),
-                  ),
-                  Text(
-                    "${contact.address}",
-                    style: TextStyle(
-                      color: Theme.of(context).iconTheme.color,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

@@ -6,12 +6,12 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/login.dart';
 import 'package:bank_core/screens/main-page.dart';
-import 'package:bank_core/utils/utils.dart';
+// import 'package:bank_core/utils/utils.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = 'SplashScreen';

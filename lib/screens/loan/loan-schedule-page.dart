@@ -67,6 +67,7 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Төлбөрийн хуваарь',
           style: TextStyle(

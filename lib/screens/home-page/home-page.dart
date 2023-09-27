@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bank_core/api/loan-api.dart';
+import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/loan/active-loan-card.dart';
 import 'package:bank_core/components/controller/listen.dart';
 import 'package:bank_core/components/potential-balance-card/potential-balance-card.dart';
@@ -10,7 +11,9 @@ import 'package:bank_core/provider/user_provider.dart';
 // import 'package:bank_core/screens/home-page/bonus-credit.dart';
 import 'package:bank_core/screens/loan/loan-detail-page.dart';
 import 'package:bank_core/screens/loan/loan-page.dart';
+import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
+import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 // import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -32,6 +36,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   bool isLoading = true;
   bool isLoadingPage = true;
+  bool isView = false;
+  bool isDarkMode = false;
   int page = 1;
   int limit = 10;
   User user = User();
@@ -174,6 +180,8 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
   @override
   Widget build(BuildContext context) {
     user = Provider.of<UserProvider>(context, listen: true).user;
+    isView = Provider.of<UserProvider>(context, listen: true).isView;
+    isDarkMode = Provider.of<UserProvider>(context, listen: true).check;
     // int currentStep =
     //     Provider.of<UserProvider>(context, listen: false).currentStep;
     // int totalSteps =
@@ -184,16 +192,126 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
               color: buttonColor,
             ),
           )
-        : Container(
-            color: Theme.of(context).colorScheme.background,
-            child: SmartRefresher(
+        : NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  expandedHeight: 56,
+                  automaticallyImplyLeading: false,
+                  pinned: false,
+                  snap: true,
+                  floating: true,
+                  elevation: 0,
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  title: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(ProfilePage.routeName);
+                    },
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          'assets/svg/avatar.svg',
+                          height: 40,
+                          width: 40,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Сайн уу? 👋',
+                              style: TextStyle(
+                                color: Theme.of(context).iconTheme.color,
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              '${user.firstName}',
+                              style: TextStyle(
+                                color: Theme.of(context).iconTheme.color,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  actions: [
+                    ActionButton(
+                      icon: isDarkMode == false
+                          ? SvgPicture.asset(
+                              "assets/svg/dark-mode.svg",
+                              height: 24,
+                              width: 24,
+                              color: white,
+                            )
+                          : SvgPicture.asset(
+                              "assets/svg/dark-mode.svg",
+                              height: 24,
+                              width: 24,
+                              color: black,
+                            ),
+                      onClick: () {
+                        Provider.of<UserProvider>(context, listen: false)
+                            .toggleDarkMode(!isDarkMode);
+                        final provider =
+                            Provider.of<UserProvider>(context, listen: false);
+                        provider.toggleTheme(!provider.isDarkMode);
+                        print(!provider.isDarkMode);
+                      },
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ActionButton(
+                      icon: isView == false
+                          ? Icon(
+                              Icons.visibility,
+                              color: Theme.of(context).hoverColor,
+                            )
+                          : Icon(
+                              Icons.visibility_off,
+                              color: Theme.of(context).hoverColor,
+                            ),
+                      onClick: () async {
+                        await Provider.of<UserProvider>(context, listen: false)
+                            .setView(!isView);
+                      },
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ActionButton(
+                      onClick: () {
+                        Navigator.of(context)
+                            .pushNamed(NotificationPage.routeName);
+                      },
+                      icon: Icon(
+                        Icons.notifications,
+                        color: Theme.of(context).hoverColor,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    )
+                  ],
+                ),
+              ];
+            },
+            body: SmartRefresher(
               enablePullDown: true,
+              enablePullUp: true,
               controller: refreshController,
               header: WaterDropHeader(
                 waterDropColor: darkGrey,
               ),
-              onLoading: _onLoading,
               onRefresh: _onRefresh,
+              onLoading: _onLoading,
               footer: CustomFooter(
                 builder: (context, mode) {
                   Widget body;
@@ -201,7 +319,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                     body = const Text("");
                   } else if (mode == LoadStatus.loading) {
                     body = const CupertinoActivityIndicator(
-                      color: CupertinoColors.white,
+                      color: buttonColor,
                     );
                   } else if (mode == LoadStatus.failed) {
                     body = const Text("Алдаа гарлаа. Дахин үзнэ үү!");
@@ -220,7 +338,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                   children: [
                     Container(
                       margin:
-                          const EdgeInsets.only(left: 25, bottom: 4, top: 20),
+                          const EdgeInsets.only(left: 25, bottom: 4, top: 10),
                       child: Text(
                         'Зээл',
                         style: TextStyle(

@@ -34,6 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Тохиргоо',
           style: TextStyle(
@@ -56,7 +57,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   );
                 },
                 child: Container(
-                  margin: const EdgeInsets.only(top: 30),
+                  margin: const EdgeInsets.only(top: 20),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   decoration: BoxDecoration(

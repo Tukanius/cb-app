@@ -92,6 +92,7 @@ class _ForgotPageState extends State<ForgotPage> {
                   ),
                 ),
               ),
+              centerTitle: true,
               title: Text(
                 'Нууц үг сэргээх',
                 style: TextStyle(

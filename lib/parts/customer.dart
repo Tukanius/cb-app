@@ -3,6 +3,8 @@ part of '../models/customer.dart';
 Customer _$CustomerFromJson(Map<String, dynamic> json) {
   return Customer(
     count: json['count'] != null ? int.parse(json['count'].toString()) : null,
+    day: json['day'] != null ? int.parse(json['day'].toString()) : null,
+
     rows: json['rows'] != null
         ? (json['rows'] as List).map((e) => Customer.fromJson(e)).toList()
         : null,
@@ -10,6 +12,10 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     customerId:
         json['customerId'] != null ? json['customerId'] as String : null,
     whoTypeId: json['whoTypeId'] != null ? json['whoTypeId'] as String : null,
+
+    // created_at:
+    //     json['created_at'] != null ? json['created_at'] as String : null,
+
     firstName: json['firstName'] != null ? json['firstName'] as String : null,
     lastName: json['lastName'] != null ? json['lastName'] as String : null,
     phone: json['phone'] != null ? json['phone'] as String : null,
@@ -60,6 +66,9 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
     loanType: json['loanType'] != null
         ? Customer.fromJson(json['loanType'] as Map<String, dynamic>)
         : null,
+    loanTime: json['loanTime'] != null
+        ? Customer.fromJson(json['loanTime'] as Map<String, dynamic>)
+        : null,
     loan: json['loan'] != null
         ? Customer.fromJson(json['loan'] as Map<String, dynamic>)
         : null,
@@ -94,6 +103,8 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
         ? json['nationalityTypeId'] as String
         : null,
     genderId: json['genderId'] != null ? json['genderId'] as String : null,
+    loan_date: json['loan_date'] != null ? json['loan_date'] as String : null,
+
     birthPlace:
         json['birthPlace'] != null ? json['birthPlace'] as String : null,
     workStatusId:
@@ -197,6 +208,10 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
   if (instance.loanDate != null) json['loanDate'] = instance.loanDate;
+  if (instance.loanTime != null) json['loanTime'] = instance.loanTime;
+  if (instance.day != null) json['day'] = instance.day;
+
+  // if (instance.created_at != null) json['created_at'] = instance.created_at;
   if (instance.success != null) json['success'] = instance.success;
   if (instance.logoUrl != null) json['logoUrl'] = instance.logoUrl;
   if (instance.code != null) json['code'] = instance.code;
@@ -264,6 +279,7 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   if (instance.customerId != null) json['customerId'] = instance.customerId;
   if (instance.whoTypeId != null) json['whoTypeId'] = instance.whoTypeId;
   if (instance.loanType != null) json['loanType'] = instance.loanType;
+
   if (instance.firstName != null) json['firstName'] = instance.firstName;
   if (instance.lastName != null) json['lastName'] = instance.lastName;
   if (instance.phone != null) json['phone'] = instance.phone;

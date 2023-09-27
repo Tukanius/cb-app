@@ -45,6 +45,7 @@ class _BonusCreditState extends State<BonusCredit> {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Бонус оноо',
           style: TextStyle(

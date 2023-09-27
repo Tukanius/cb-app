@@ -76,7 +76,7 @@ class _FaqPageState extends State<FaqPage> with AfterLayoutMixin {
                           .toList(),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
                   ],
                 ),

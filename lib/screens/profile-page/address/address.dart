@@ -67,6 +67,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
             ),
           ),
         ),
+        centerTitle: true,
         title: Text(
           'Оршин суугаа хаяг',
           style: TextStyle(
@@ -77,7 +78,7 @@ class _AddAddressState extends State<AddAddress> with AfterLayoutMixin {
         ),
         actions: [
           isLoading == false
-              ? customer.rows!.length >= 3
+              ? customer.rows!.length >= 2
                   ? SizedBox()
                   : Container(
                       margin: const EdgeInsets.symmetric(

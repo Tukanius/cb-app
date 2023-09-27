@@ -35,6 +35,7 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
               ),
             ),
           ),
+          centerTitle: true,
           title: Text(
             'И-мэйл солих',
             style: TextStyle(
