@@ -4,6 +4,7 @@ import 'package:bank_core/screens/auth/check-biometric.dart';
 import 'package:bank_core/screens/bank-transfer-page/bank-transfer-page.dart';
 import 'package:bank_core/screens/home-page/bonus-credit.dart';
 import 'package:bank_core/screens/otp/otp-page.dart';
+import 'package:bank_core/screens/payment-page/close-payment-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
 import 'package:bank_core/screens/auth/forgot.dart';
 import 'package:bank_core/screens/profile-page/bank-account-page/add-bank-account-page.dart';
@@ -337,6 +338,22 @@ class MyApp extends StatelessWidget {
                         settings.arguments as PaymentPageArguments;
                     return MaterialPageRoute(builder: (context) {
                       return PaymentPage(
+                        code: arguments.code,
+                        loanDate: arguments.loanDate,
+                        totalPayAmount: arguments.totalPayAmount,
+                        loanResidual: arguments.loanResidual,
+                        loanId: arguments.loanId,
+                        listenController: arguments.listenController,
+                        loanPaybackGraphId: arguments.loanPaybackGraphId,
+                      );
+                    });
+                  case ClosePaymentPage.routeName:
+                    ClosePaymentPageArguments arguments =
+                        settings.arguments as ClosePaymentPageArguments;
+                    return MaterialPageRoute(builder: (context) {
+                      return ClosePaymentPage(
+                        todayAmount: arguments.todayAmount,
+                        closeAmount: arguments.closeAmount,
                         code: arguments.code,
                         loanDate: arguments.loanDate,
                         totalPayAmount: arguments.totalPayAmount,

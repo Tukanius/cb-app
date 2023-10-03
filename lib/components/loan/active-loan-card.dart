@@ -65,7 +65,7 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
                       children: [
                         isLoading == false
                             ? Text(
-                                "${duration.inDays < 0 ? 0 : duration.inDays}",
+                                "${duration.inDays}",
                                 style: TextStyle(
                                   color: Theme.of(context).iconTheme.color,
                                   fontSize: 20,

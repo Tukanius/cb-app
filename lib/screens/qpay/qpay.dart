@@ -151,16 +151,16 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
             )
           ];
         },
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: loading == true
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: buttonColor,
-                    ),
-                  )
-                : Column(
+        body: loading == true
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: buttonColor,
+                ),
+              )
+            : SingleChildScrollView(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(
@@ -200,8 +200,8 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
                       ),
                     ],
                   ),
-          ),
-        ),
+                ),
+              ),
       ),
     );
   }

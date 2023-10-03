@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionHistoryCard extends StatefulWidget {
-  final bool? isIncome;
   final Customer? data;
   final Function()? onClick;
   const TransactionHistoryCard({
     this.onClick,
     this.data,
     Key? key,
-    this.isIncome,
   }) : super(key: key);
 
   @override

@@ -23,16 +23,9 @@ class _WhoTypeState extends State<WhoType> with AfterLayoutMixin {
   @override
   afterFirstLayout(BuildContext context) async {
     list(page, limit);
-    setState(() {
-      isLoading = false;
-      print(relatedList.rows);
-    });
   }
 
   list(page, limit) async {
-    setState(() {
-      isLoading = true;
-    });
     Offset offset = Offset(page: page, limit: limit);
     Filter filter = Filter();
     relatedList = await CustomerApi()
