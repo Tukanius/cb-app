@@ -2,6 +2,7 @@ import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/loan/schedule-card.dart';
 import 'package:bank_core/models/result.dart';
+import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 
@@ -77,15 +78,21 @@ class _LoanSchedulePageState extends State<LoanSchedulePage>
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: loanSchedule.rows?.length,
-        itemBuilder: (context, index) {
-          return LoanScheduleCard(
-            key: ValueKey(loanSchedule.rows![index]),
-            data: loanSchedule.rows![index],
-          );
-        },
-      ),
+      body: isLoading == true
+          ? Center(
+              child: CircularProgressIndicator(
+                color: buttonColor,
+              ),
+            )
+          : ListView.builder(
+              itemCount: loanSchedule.rows?.length,
+              itemBuilder: (context, index) {
+                return LoanScheduleCard(
+                  key: ValueKey(loanSchedule.rows![index]),
+                  data: loanSchedule.rows![index],
+                );
+              },
+            ),
     );
   }
 }

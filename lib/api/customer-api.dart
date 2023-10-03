@@ -58,4 +58,14 @@ class CustomerApi extends HttpRequest {
     var res = await put("/customer/$id", data: data.toJson(), handler: true);
     return Customer.fromJson(res as Map<String, dynamic>);
   }
+
+  Future<Customer> changeEmail(String id, Customer data) async {
+    var res = await put("/customer/$id", data: data.toJson(), handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
+  }
+
+  Future<Customer> changePhone(String id, Customer data) async {
+    var res = await put("/customer/$id", data: data.toJson(), handler: true);
+    return Customer.fromJson(res as Map<String, dynamic>);
+  }
 }

@@ -2,6 +2,7 @@
 
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/controller/listen.dart';
+import 'package:bank_core/screens/payment-page/close-payment-page.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/components/paid-back-card/paid-back-card.dart';
@@ -55,6 +56,10 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
     customer = await LoanApi().activeLoanGet(widget.id);
     print(customer.toJson());
     payBackList = await LoanApi().paidList(widget.id);
+    print('=======TODAY======');
+    print(customer.todayAmount);
+    print('=======TODAY======');
+
     setState(() {
       isLoading = false;
     });
@@ -306,25 +311,26 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                       ],
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                        PaymentPage.routeName,
-                        arguments: PaymentPageArguments(
-                          code: customer.code!,
-                          loanDate: customer.loan!.loanDate.toString(),
-                          loanId: widget.loanId,
-                          loanResidual: customer.totalPayAmount.toString(),
-                          listenController: widget.listenController,
-                          totalPayAmount: customer.totalPayAmount!,
-                          loanPaybackGraphId: customer.id!,
-                        ),
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              PaymentPage.routeName,
+                              arguments: PaymentPageArguments(
+                                code: customer.code!,
+                                loanDate: customer.loan!.loanDate.toString(),
+                                loanId: widget.loanId,
+                                loanResidual:
+                                    customer.totalPayAmount.toString(),
+                                listenController: widget.listenController,
+                                totalPayAmount: customer.totalPayAmount!,
+                                loanPaybackGraphId: customer.id!,
+                              ),
+                            );
+                          },
                           child: Container(
                             height: 100,
                             margin: const EdgeInsets.only(
@@ -354,7 +360,26 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                             ),
                           ),
                         ),
-                        Expanded(
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              ClosePaymentPage.routeName,
+                              arguments: ClosePaymentPageArguments(
+                                todayAmount: customer.todayAmount!,
+                                closeAmount: customer.todayAmount.toString(),
+                                code: customer.code!,
+                                loanDate: customer.loan!.loanDate.toString(),
+                                loanId: widget.loanId,
+                                loanResidual:
+                                    customer.totalPayAmount.toString(),
+                                listenController: widget.listenController,
+                                totalPayAmount: customer.totalPayAmount!,
+                                loanPaybackGraphId: customer.id!,
+                              ),
+                            );
+                          },
                           child: Container(
                             height: 100,
                             margin: const EdgeInsets.only(
@@ -384,8 +409,8 @@ class _LoanDetailPageState extends State<LoanDetailPage> with AfterLayoutMixin {
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 20,

@@ -4,6 +4,8 @@ Customer _$CustomerFromJson(Map<String, dynamic> json) {
   return Customer(
     count: json['count'] != null ? int.parse(json['count'].toString()) : null,
     day: json['day'] != null ? int.parse(json['day'].toString()) : null,
+    todayAmount:
+        json['todayAmount'] != null ? json['todayAmount'] as String : null,
 
     rows: json['rows'] != null
         ? (json['rows'] as List).map((e) => Customer.fromJson(e)).toList()
@@ -208,6 +210,8 @@ Map<String, dynamic> _$CustomerToJson(Customer instance) {
   Map<String, dynamic> json = {};
 
   if (instance.loanDate != null) json['loanDate'] = instance.loanDate;
+  if (instance.todayAmount != null) json['todayAmount'] = instance.todayAmount;
+
   if (instance.loanTime != null) json['loanTime'] = instance.loanTime;
   if (instance.day != null) json['day'] = instance.day;
 

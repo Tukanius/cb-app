@@ -5,6 +5,7 @@ class Customer {
   int? count;
   int? day;
   List<Customer>? rows;
+  String? todayAmount;
   String? id;
   String? customerId;
   String? whoTypeId;
@@ -102,6 +103,7 @@ class Customer {
   }
 
   Customer({
+    this.todayAmount,
     this.loanTime,
     this.day,
     this.loanDate,

@@ -1,17 +1,17 @@
 import 'package:bank_core/api/loan-api.dart';
 import 'package:bank_core/components/action-button.dart';
-import 'package:bank_core/components/transaction-history-card/transaction-history-card.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/profile-page/profile-page.dart';
+import 'package:bank_core/screens/transaction-history/all-history.dart';
+import 'package:bank_core/screens/transaction-history/loan-history.dart';
+import 'package:bank_core/screens/transaction-history/paid-loan-history.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
@@ -33,8 +33,7 @@ class _HistoryPageState extends State<HistoryPage>
   int limit = 10;
   Result transactionList = Result(rows: [], count: 0);
   bool isLoading = true;
-  final RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+
   late TabController tabController;
   ScrollController scrollController = ScrollController();
 
@@ -45,32 +44,9 @@ class _HistoryPageState extends State<HistoryPage>
     super.initState();
   }
 
-  void _onLoading() async {
-    setState(() {
-      limit += 10;
-    });
-    await list(page, limit);
-    refreshController.refreshCompleted();
-    setState(() {
-      isLoading = false;
-    });
-  }
-
   @override
   afterFirstLayout(BuildContext context) async {
     list(page, limit);
-  }
-
-  void _onRefresh() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    setState(() {
-      isLoading = true;
-    });
-    await list(page, limit);
-    refreshController.refreshCompleted();
-    setState(() {
-      isLoading = false;
-    });
   }
 
   list(page, limit) async {
@@ -257,6 +233,7 @@ class _HistoryPageState extends State<HistoryPage>
                         pinned: false,
                         snap: true,
                         floating: true,
+                        elevation: 0,
                         backgroundColor:
                             Theme.of(context).colorScheme.background,
                         title: GestureDetector(
@@ -356,102 +333,111 @@ class _HistoryPageState extends State<HistoryPage>
                           ),
                           SizedBox(
                             width: 20,
-                          )
+                          ),
                         ],
+                        bottom: TabBar(
+                          controller: tabController,
+                          indicator: BoxDecoration(
+                            color: Theme.of(context).colorScheme.background,
+                          ),
+                          tabs: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                changePage(0);
+                              },
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: tabController.index == 0
+                                      ? Theme.of(context).splashColor
+                                      : transparent,
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Бүгд',
+                                    style: TextStyle(
+                                      color: tabController.index == 0
+                                          ? Theme.of(context).iconTheme.color
+                                          : Theme.of(context).canvasColor,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                changePage(1);
+                              },
+                              child: Container(
+                                width: 120,
+                                height: 40,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                decoration: BoxDecoration(
+                                  color: tabController.index == 1
+                                      ? Theme.of(context).splashColor
+                                      : transparent,
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Зээл авсан',
+                                    style: TextStyle(
+                                      color: tabController.index == 1
+                                          ? Theme.of(context).iconTheme.color
+                                          : Theme.of(context).canvasColor,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                changePage(2);
+                              },
+                              child: Container(
+                                width: 120,
+                                height: 40,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                decoration: BoxDecoration(
+                                  color: tabController.index == 2
+                                      ? Theme.of(context).splashColor
+                                      : transparent,
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Зээл төлсөн',
+                                    style: TextStyle(
+                                      color: tabController.index == 2
+                                          ? Theme.of(context).iconTheme.color
+                                          : Theme.of(context).canvasColor,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ];
                   },
-                  body: SmartRefresher(
-                    enablePullDown: true,
-                    enablePullUp: true,
-                    controller: refreshController,
-                    header: WaterDropHeader(
-                      waterDropColor: darkGrey,
-                    ),
-                    onRefresh: _onRefresh,
-                    onLoading: _onLoading,
-                    footer: CustomFooter(
-                      builder: (context, mode) {
-                        Widget body;
-                        if (mode == LoadStatus.idle) {
-                          body = const Text("");
-                        } else if (mode == LoadStatus.loading) {
-                          body = const CupertinoActivityIndicator(
-                            color: buttonColor,
-                          );
-                        } else if (mode == LoadStatus.failed) {
-                          body = const Text("Алдаа гарлаа. Дахин үзнэ үү!");
-                        } else {
-                          body = const Text("Мэдээлэл алга байна");
-                        }
-                        return SizedBox(
-                          height: 55.0,
-                          child: Center(child: body),
-                        );
-                      },
-                    ),
-                    child: CustomScrollView(
-                      slivers: <Widget>[
-                        SliverToBoxAdapter(
-                          child: Column(
-                            children: transactionList.rows!
-                                .map(
-                                  (item) => TransactionHistoryCard(
-                                    data: item,
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                        // SliverList(
-                        //   delegate: SliverChildBuilderDelegate(
-                        //     (BuildContext context, int index) {
-                        //       return Column(
-                        //         children: transactionList.rows!
-                        //             .map(
-                        //               (item) => TransactionHistoryCard(
-                        //                 data: item,
-                        //               ),
-                        //             )
-                        //             .toList(),
-                        //       );
-                        //     },
-                        //     childCount: 1,
-                        //   ),
-                        // ),
-                      ],
-                    ),
+                  body: TabBarView(
+                    controller: tabController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      AllHistoryPage(),
+                      LoanHistory(),
+                      PaidHistory(),
+                    ],
                   ),
                 ),
     );
   }
 }
-/*
-SafeArea(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      CustomAppBar(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Center(
-                        child: Lottie.asset('assets/lottie/empty.json',
-                            height: 150),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Гүйлгээний түүх хоосон байна",
-                        style: TextStyle(
-                          color: Theme.of(context).disabledColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
- */
