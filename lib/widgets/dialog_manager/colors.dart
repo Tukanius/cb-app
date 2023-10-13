@@ -13,7 +13,6 @@ const Color yellow = Color(0xffF89938);
 const Color orange = Color(0xffFF8A00);
 const Color backgroundColor = Color(0xff2C2E2F);
 const Color mainColor = Color(0xff1A1C1C);
-const Color blue = Color(0xff197AFA);
 Color lightgreen = Colors.greenAccent.shade400;
 
 const Color primaryBorderColor = Color(0xffF1F1F1);

@@ -2,9 +2,7 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/check-biometric.dart';
 import 'package:bank_core/screens/bank-transfer-page/bank-transfer-page.dart';
-import 'package:bank_core/screens/bonus-page/add-bonus/add-friends.dart';
-import 'package:bank_core/screens/bonus-page/add-bonus/facebook-connection.dart';
-import 'package:bank_core/screens/bonus-page/bonus-credit.dart';
+import 'package:bank_core/screens/home-page/bonus-credit.dart';
 import 'package:bank_core/screens/otp/otp-page.dart';
 import 'package:bank_core/screens/payment-page/close-payment-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
@@ -294,17 +292,9 @@ class MyApp extends StatelessWidget {
                     return MaterialPageRoute(builder: (context) {
                       return const ShowDetail();
                     });
-                  case AddFriends.routeName:
-                    return MaterialPageRoute(builder: (context) {
-                      return const AddFriends();
-                    });
                   case WhoType.routeName:
                     return MaterialPageRoute(builder: (context) {
                       return const WhoType();
-                    });
-                  case FacebookAuth.routeName:
-                    return MaterialPageRoute(builder: (context) {
-                      return const FacebookAuth();
                     });
                   case TermofPolicyPage.routeName:
                     return PageRouteBuilder(

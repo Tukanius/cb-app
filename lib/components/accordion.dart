@@ -69,7 +69,6 @@ class _AccordionState extends State<Accordion> {
                           ),
                           child: Text(
                             widget.data.answer.toString(),
-                            textAlign: TextAlign.justify,
                             style: TextStyle(
                               fontSize: 12,
                               color: Theme.of(context).iconTheme.color,

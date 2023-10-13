@@ -8,9 +8,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:lottie/lottie.dart';
 
 class PaidHistory extends StatefulWidget {
-  final String? startDate;
-  final String? endDate;
-  const PaidHistory({super.key, this.startDate, this.endDate});
+  const PaidHistory({super.key});
 
   @override
   State<PaidHistory> createState() => _AllHistoryPageState();

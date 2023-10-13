@@ -9,9 +9,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:lottie/lottie.dart';
 
 class LoanHistory extends StatefulWidget {
-  final String? startDate;
-  final String? endDate;
-  const LoanHistory({super.key, this.startDate, this.endDate});
+  const LoanHistory({super.key});
 
   @override
   State<LoanHistory> createState() => _AllHistoryPageState();

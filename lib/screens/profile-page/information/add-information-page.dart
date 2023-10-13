@@ -202,7 +202,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: 30,
                       ),
                       FormTextField(
                         labelText: "И-Мэйл",
@@ -679,12 +679,7 @@ class _AddInformationPageState extends State<AddInformationPage> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text(
-                                  "Болсон",
-                                  style: TextStyle(
-                                    color: Theme.of(context).iconTheme.color,
-                                  ),
-                                ),
+                                child: Text("Болсон"),
                               ),
                               Expanded(
                                 child: CupertinoDatePicker(
