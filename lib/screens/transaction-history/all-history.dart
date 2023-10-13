@@ -6,11 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:lottie/lottie.dart';
 
 class AllHistoryPage extends StatefulWidget {
+  final String? startDate;
+  final String? endDate;
   const AllHistoryPage({
-    super.key,
-  });
+    this.startDate,
+    this.endDate,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AllHistoryPage> createState() => _AllHistoryPageState();
@@ -102,15 +107,39 @@ class _AllHistoryPageState extends State<AllHistoryPage> with AfterLayoutMixin {
                   );
                 },
               ),
-              child: ListView.builder(
-                itemCount: transactionList.rows!.length,
-                itemBuilder: (context, index) {
-                  final item = transactionList.rows![index];
-                  return TransactionHistoryCard(
-                    data: item,
-                  );
-                },
-              ),
+              child: transactionList.rows!.length != 0
+                  ? ListView.builder(
+                      itemCount: transactionList.rows!.length,
+                      itemBuilder: (context, index) {
+                        final item = transactionList.rows![index];
+                        return TransactionHistoryCard(
+                          data: item,
+                        );
+                      },
+                    )
+                  : Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Center(
+                            child: Lottie.asset('assets/lottie/empty.json',
+                                height: 150),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            "Гүйлгээний түүх хоосон байна",
+                            style: TextStyle(
+                              color: Theme.of(context).disabledColor,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
             ),
     );
   }

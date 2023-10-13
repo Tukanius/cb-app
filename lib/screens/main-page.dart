@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/home-page/home-page.dart';
+import 'package:bank_core/screens/profile-page/profile-page-for-drawer.dart';
 import 'package:bank_core/screens/shop-page/shop-page.dart';
 import 'package:bank_core/screens/transaction-history/history-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
@@ -52,6 +53,7 @@ class _MainPageState extends State<MainPage>
 
   AlertDialog _buildExitDialog(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Theme.of(context).colorScheme.background,
       title: const Text('Баталгаажуулалт'),
       content: const Text('Та гарахдаа итгэлтэй байна уу?'),
       actions: <Widget>[
@@ -91,6 +93,10 @@ class _MainPageState extends State<MainPage>
           top: false,
           child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
+            drawer: Drawer(
+              backgroundColor: Theme.of(context).colorScheme.background,
+              child: CustomDrawer(),
+            ),
             body: TabBarView(
               controller: tabController,
               children: [
@@ -99,55 +105,52 @@ class _MainPageState extends State<MainPage>
                 ShopPage(),
               ],
             ),
-            bottomNavigationBar: Material(
-              color: Theme.of(context).colorScheme.background,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15.0),
-                    topRight: Radius.circular(15.0),
-                  ),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.background,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(15.0),
+                  topRight: Radius.circular(15.0),
                 ),
-                child: TabBar(
-                  splashBorderRadius: BorderRadius.circular(20),
-                  overlayColor: MaterialStateColor.resolveWith(
-                      (states) => backgroundColor),
-                  controller: tabController,
-                  labelColor: buttonColor,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  unselectedLabelColor: greyDark,
-                  labelPadding: EdgeInsets.only(
-                    top: 5,
-                  ),
-                  indicator: TopIndicator(),
-                  tabs: <Widget>[
-                    Tab(
-                        icon: SvgPicture.asset(
-                          "assets/svg/home1.svg",
-                          height: 24,
-                          width: 24,
-                          color: currentIndex == 0 ? buttonColor : greyDark,
-                        ),
-                        text: 'Нүүр'),
-                    Tab(
-                        icon: SvgPicture.asset(
-                          "assets/svg/list.svg",
-                          height: 24,
-                          width: 24,
-                          color: currentIndex == 1 ? buttonColor : greyDark,
-                        ),
-                        text: 'Түүх'),
-                    Tab(
-                        icon: SvgPicture.asset(
-                          "assets/svg/shop.svg",
-                          height: 24,
-                          width: 24,
-                          color: currentIndex == 2 ? buttonColor : greyDark,
-                        ),
-                        text: 'Дэлгүүр'),
-                  ],
+              ),
+              child: TabBar(
+                splashBorderRadius: BorderRadius.circular(20),
+                overlayColor:
+                    MaterialStateColor.resolveWith((states) => backgroundColor),
+                controller: tabController,
+                labelColor: buttonColor,
+                indicatorSize: TabBarIndicatorSize.label,
+                unselectedLabelColor: greyDark,
+                labelPadding: EdgeInsets.only(
+                  top: 5,
                 ),
+                indicator: TopIndicator(),
+                tabs: <Widget>[
+                  Tab(
+                      icon: SvgPicture.asset(
+                        "assets/svg/home1.svg",
+                        height: 24,
+                        width: 24,
+                        color: currentIndex == 0 ? buttonColor : greyDark,
+                      ),
+                      text: 'Нүүр'),
+                  Tab(
+                      icon: SvgPicture.asset(
+                        "assets/svg/list.svg",
+                        height: 24,
+                        width: 24,
+                        color: currentIndex == 1 ? buttonColor : greyDark,
+                      ),
+                      text: 'Түүх'),
+                  Tab(
+                      icon: SvgPicture.asset(
+                        "assets/svg/shop.svg",
+                        height: 24,
+                        width: 24,
+                        color: currentIndex == 2 ? buttonColor : greyDark,
+                      ),
+                      text: 'Дэлгүүр'),
+                ],
               ),
             ),
           ),
