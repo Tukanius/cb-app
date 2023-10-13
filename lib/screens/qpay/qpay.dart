@@ -106,10 +106,6 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
             const SizedBox(
               height: 5,
             ),
-            // Text(
-            //   link.name!,
-            //   style: TextStyle(color: Theme.of(context).iconTheme.color),
-            // ),
           ],
         ),
       ),

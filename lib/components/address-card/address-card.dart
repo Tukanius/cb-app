@@ -31,8 +31,9 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Хаягын төрөл',
                 style: TextStyle(
-                  color: Theme.of(context).disabledColor,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
@@ -54,8 +55,9 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Аймаг/Хот',
                 style: TextStyle(
-                  color: Theme.of(context).disabledColor,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
@@ -77,8 +79,9 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Дүүргэ/Сум',
                 style: TextStyle(
-                  color: Theme.of(context).disabledColor,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
@@ -100,8 +103,9 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Хороо/Баг',
                 style: TextStyle(
-                  color: Theme.of(context).disabledColor,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
@@ -123,8 +127,9 @@ class _AddressCardState extends State<AddressCard> {
               Text(
                 'Хаяг/Тоот',
                 style: TextStyle(
-                  color: Theme.of(context).disabledColor,
+                  color: Theme.of(context).iconTheme.color,
                   fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
