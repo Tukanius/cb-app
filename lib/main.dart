@@ -2,7 +2,6 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/check-biometric.dart';
 import 'package:bank_core/screens/bank-transfer-page/bank-transfer-page.dart';
-import 'package:bank_core/screens/home-page/bonus-credit.dart';
 import 'package:bank_core/screens/otp/otp-page.dart';
 import 'package:bank_core/screens/payment-page/close-payment-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
@@ -264,10 +263,7 @@ class MyApp extends StatelessWidget {
                     return MaterialPageRoute(builder: (context) {
                       return const NotificationPage();
                     });
-                  case BonusCredit.routeName:
-                    return MaterialPageRoute(builder: (context) {
-                      return const BonusCredit();
-                    });
+
                   case ProductInformation.routeName:
                     return MaterialPageRoute(builder: (context) {
                       return const ProductInformation();
