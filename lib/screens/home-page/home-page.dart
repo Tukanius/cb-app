@@ -8,21 +8,20 @@ import 'package:bank_core/models/customer.dart';
 import 'package:bank_core/models/result.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
-// import 'package:bank_core/screens/home-page/bonus-credit.dart';
+import 'package:bank_core/screens/bonus-credit/bonus-credit.dart';
 import 'package:bank_core/screens/loan/loan-detail-page.dart';
 import 'package:bank_core/screens/loan/loan-page.dart';
 import 'package:bank_core/screens/notification-page/notification-page.dart';
 import 'package:bank_core/screens/profile-page/profile-detail-page.dart';
-import 'package:bank_core/screens/profile-page/profile-page.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-// import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -182,10 +181,10 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
     user = Provider.of<UserProvider>(context, listen: true).user;
     isView = Provider.of<UserProvider>(context, listen: true).isView;
     isDarkMode = Provider.of<UserProvider>(context, listen: true).check;
-    // int currentStep =
-    //     Provider.of<UserProvider>(context, listen: false).currentStep;
-    // int totalSteps =
-    //     Provider.of<UserProvider>(context, listen: false).totalSteps;
+    int currentStep =
+        Provider.of<UserProvider>(context, listen: false).currentStep;
+    int totalSteps =
+        Provider.of<UserProvider>(context, listen: false).totalSteps;
     return isLoadingPage == true
         ? Center(
             child: CircularProgressIndicator(
@@ -206,7 +205,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                   backgroundColor: Theme.of(context).colorScheme.background,
                   title: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamed(ProfilePage.routeName);
+                      Scaffold.of(context).openDrawer();
                     },
                     child: Row(
                       children: [
@@ -475,91 +474,90 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                             ],
                           )
                         : SizedBox(),
-                    // Container(
-                    //   margin: const EdgeInsets.symmetric(
-                    //       horizontal: 20, vertical: 15),
-                    //   decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.circular(20),
-                    //     color: Theme.of(context).splashColor,
-                    //   ),
-                    //   height: 200,
-                    //   width: MediaQuery.of(context).size.width,
-                    //   child: Column(
-                    //     children: [
-                    //       SizedBox(
-                    //         height: 15,
-                    //       ),
-                    //       Text(
-                    //         'Бонус оноо',
-                    //         style: TextStyle(
-                    //           fontSize: 18,
-                    //           color: Theme.of(context).iconTheme.color,
-                    //           fontWeight: FontWeight.bold,
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         height: 25,
-                    //       ),
-                    //       Text(
-                    //         '$currentStep/$totalSteps',
-                    //         style: TextStyle(
-                    //             fontSize: 25,
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Theme.of(context).iconTheme.color),
-                    //       ),
-                    //       Expanded(
-                    //         child: SliderTheme(
-                    //           data: SliderThemeData(
-                    //             thumbShape: RoundSliderThumbShape(
-                    //                 enabledThumbRadius: 3),
-                    //             tickMarkShape:
-                    //                 RoundSliderTickMarkShape(tickMarkRadius: 0),
-                    //           ),
-                    //           child: Container(
-                    //             margin: EdgeInsets.symmetric(
-                    //                 horizontal: 30, vertical: 20),
-                    //             child: Row(
-                    //               children: [
-                    //                 Expanded(
-                    //                   child: StepProgressIndicator(
-                    //                     totalSteps:
-                    //                         Provider.of<UserProvider>(context)
-                    //                             .totalSteps,
-                    //                     currentStep:
-                    //                         Provider.of<UserProvider>(context)
-                    //                             .currentStep,
-                    //                     selectedColor: Colors.red.shade600,
-                    //                     unselectedColor: darkGrey,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       GestureDetector(
-                    //         onTap: () {
-                    //           Navigator.of(context)
-                    //               .pushNamed(BonusCredit.routeName);
-                    //         },
-                    //         child: Container(
-                    //           margin: EdgeInsets.only(bottom: 20),
-                    //           height: 35,
-                    //           width: 150,
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(10),
-                    //             color: buttonColor,
-                    //           ),
-                    //           child: Center(
-                    //               child: Text(
-                    //             'Түвшин ахих',
-                    //             style: TextStyle(color: white),
-                    //           )),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
+                    Container(
+                      margin:
+                          const EdgeInsets.only(left: 25, bottom: 10, top: 20),
+                      child: Text(
+                        'Бонус оноо',
+                        style: TextStyle(
+                          color: Theme.of(context).iconTheme.color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(BonusCredit.routeName);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Theme.of(context).splashColor,
+                        ),
+                        height: 160,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'Бонус оноо',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Theme.of(context).iconTheme.color,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              '$currentStep/$totalSteps',
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).iconTheme.color),
+                            ),
+                            Expanded(
+                              child: SliderTheme(
+                                data: SliderThemeData(
+                                  thumbShape: RoundSliderThumbShape(
+                                      enabledThumbRadius: 3),
+                                  tickMarkShape: RoundSliderTickMarkShape(
+                                      tickMarkRadius: 0),
+                                ),
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 30, vertical: 20),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: StepProgressIndicator(
+                                          totalSteps:
+                                              Provider.of<UserProvider>(context)
+                                                  .totalSteps,
+                                          currentStep:
+                                              Provider.of<UserProvider>(context)
+                                                  .currentStep,
+                                          selectedColor: Colors.red.shade600,
+                                          unselectedColor: darkGrey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
@@ -578,7 +576,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                       ),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                   ],
                 ),

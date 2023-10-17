@@ -93,73 +93,73 @@ class _ActiveLoanCardState extends State<ActiveLoanCard> with AfterLayoutMixin {
             SizedBox(
               height: 25,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Row(
-                  children: [
-                    Text(
-                      'Эргэн төлөх дүн: ',
-                      style: TextStyle(
-                        color: Theme.of(context).disabledColor,
-                        fontSize: 11,
+                Container(
+                  margin: EdgeInsets.only(left: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Эргэн төлөх дүн: ',
+                        style: TextStyle(
+                          color: Theme.of(context).disabledColor,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 6,
-                    ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Text(
+                        'Эргэн төлөх өдөр: ',
+                        style: TextStyle(
+                          color: Theme.of(context).disabledColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Text(
+                        'Зээлийн төлөв: ',
+                        style: TextStyle(
+                          color: Theme.of(context).disabledColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
                       '${Utils().formatCurrency(widget.data!.total_pay_amount)}₮',
                       style: TextStyle(
                         color: Theme.of(context).iconTheme.color,
-                        fontSize: 11,
+                        fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Эргэн төлөх өдөр: ',
-                      style: TextStyle(
-                        color: Theme.of(context).disabledColor,
-                        fontSize: 11,
-                      ),
+                    SizedBox(
+                      height: 12,
                     ),
                     Text(
                       '${widget.data!.payDate}',
                       style: TextStyle(
                         color: Theme.of(context).iconTheme.color,
-                        fontSize: 11,
+                        fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Зээлийн төлөв: ',
-                      style: TextStyle(
-                        color: Theme.of(context).disabledColor,
-                        fontSize: 11,
-                      ),
-                    ),
                     SizedBox(
-                      width: 13,
+                      height: 12,
                     ),
                     Text(
                       '${widget.data!.loan?.loanType?.name}',
                       style: TextStyle(
                         color: Theme.of(context).iconTheme.color,
-                        fontSize: 11,
+                        fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

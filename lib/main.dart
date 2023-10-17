@@ -2,6 +2,10 @@ import 'package:bank_core/provider/general_provider.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/auth/check-biometric.dart';
 import 'package:bank_core/screens/bank-transfer-page/bank-transfer-page.dart';
+import 'package:bank_core/screens/bonus-credit/add-fiends/add-fiends-number.dart';
+import 'package:bank_core/screens/bonus-credit/add-fiends/add-friend.dart';
+import 'package:bank_core/screens/bonus-credit/bonus-credit.dart';
+import 'package:bank_core/screens/bonus-credit/facebook-auth.dart';
 import 'package:bank_core/screens/otp/otp-page.dart';
 import 'package:bank_core/screens/payment-page/close-payment-page.dart';
 import 'package:bank_core/screens/profile-page/address/add-page.dart';
@@ -292,6 +296,23 @@ class MyApp extends StatelessWidget {
                     return MaterialPageRoute(builder: (context) {
                       return const WhoType();
                     });
+                  case AddFriends.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const AddFriends();
+                    });
+                  case UserFaceBookAuth.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const UserFaceBookAuth();
+                    });
+                  case BonusCredit.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const BonusCredit();
+                    });
+                  case InviteFriends.routeName:
+                    return MaterialPageRoute(builder: (context) {
+                      return const InviteFriends();
+                    });
+
                   case TermofPolicyPage.routeName:
                     return PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>

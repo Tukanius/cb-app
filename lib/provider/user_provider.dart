@@ -12,7 +12,7 @@ class UserProvider extends ChangeNotifier {
   bool isView = false;
   bool check = false;
   int _totalSteps = 10;
-  int _currentStep = 1;
+  int _currentStep = 0;
   int get totalSteps => _totalSteps;
   int get currentStep => _currentStep;
 

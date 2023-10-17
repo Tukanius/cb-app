@@ -44,7 +44,6 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
   bool activeBio = false;
   String bioType = "";
   bool saveIsUsername = false;
-
   @override
   afterFirstLayout(BuildContext context) async {
     Future<String?> futureResult = secureStorage.getBioMetric();
@@ -87,7 +86,9 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
           });
         }
         setState(() {
-          phoneController.text = username!;
+          saveIsUsername == true
+              ? phoneController.text = username!
+              : saveIsUsername = false;
         });
       }
     }
@@ -195,9 +196,61 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                             ],
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      saveIsUsername = !saveIsUsername;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 23,
+                                    height: 23,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 1.5,
+                                        color: Theme.of(context).splashColor,
+                                      ),
+                                      color: saveIsUsername == false
+                                          ? buttonColor
+                                          : transparent,
+                                    ),
+                                    child: saveIsUsername == false
+                                        ? Icon(
+                                            Icons.check,
+                                            size: 20.0,
+                                            color: Colors.white,
+                                          )
+                                        : null,
+                                  ),
+                                ),
+                                TextButton(
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Colors.transparent),
+                                  ),
+                                  onPressed: () => {
+                                    Navigator.of(context)
+                                        .pushNamed(ForgotPage.routeName),
+                                  },
+                                  child: Container(
+                                    child: Text(
+                                      "Намайг сана",
+                                      style: TextStyle(
+                                        color:
+                                            Theme.of(context).iconTheme.color,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                             TextButton(
                               style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.all(
@@ -208,7 +261,6 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                                     .pushNamed(ForgotPage.routeName),
                               },
                               child: Container(
-                                margin: EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   "Нууц үгээ мартсан?",
                                   style: TextStyle(
@@ -218,9 +270,14 @@ class _LoginScreenState extends State<LoginScreen> with AfterLayoutMixin {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
                             Row(
                               children: [
                                 Expanded(

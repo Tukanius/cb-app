@@ -2,7 +2,7 @@ import 'package:bank_core/components/action-button.dart';
 import 'package:bank_core/models/user.dart';
 import 'package:bank_core/provider/user_provider.dart';
 import 'package:bank_core/screens/notification-page/notification-page.dart';
-import 'package:bank_core/screens/profile-page/profile-page.dart';
+import 'package:bank_core/screens/profile-page/profile-drawer.dart';
 import 'package:bank_core/widgets/dialog_manager/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -112,6 +112,10 @@ class _ShopPageState extends State<ShopPage> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
+      drawer: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        child: CustomDrawer(),
+      ),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
@@ -123,7 +127,7 @@ class _ShopPageState extends State<ShopPage> {
             backgroundColor: Theme.of(context).colorScheme.background,
             title: GestureDetector(
               onTap: () {
-                Navigator.of(context).pushNamed(ProfilePage.routeName);
+                Scaffold.of(context).openDrawer();
               },
               child: Row(
                 children: [

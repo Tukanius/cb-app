@@ -30,7 +30,9 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   GlobalKey<FormBuilderState> fbKey = GlobalKey<FormBuilderState>();
+  TextEditingController password1 = TextEditingController();
   bool isLoading = false;
+  bool isCheked = false;
 
   onSubmit() async {
     if (fbKey.currentState!.saveAndValidate()) {
@@ -241,8 +243,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       children: [
                         Column(
                           children: [
-                            Text(
-                                'Нууц үг нь хамгийн багадаа 8-н тэмдэг, 1 тоо, 1 тусгай тэмдэгт, 1 том үсэгнээс бүрдсэн байх ёстой'),
+                            // Text(
+                            //     'Нууц үг нь хамгийн багадаа 8-н тэмдэг, 1 тоо, 1 тусгай тэмдэгт, 1 том үсэгнээс бүрдсэн байх ёстой'),
                             widget.isForgot == true || widget.isForgot == null
                                 ? FormTextField(
                                     labelText: "Хуучин нууц үг",
@@ -260,10 +262,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                     ]),
                                   )
                                 : SizedBox(),
-                            SizedBox(
-                              height: 10,
-                            ),
+
                             FormTextField(
+                              controller: password1,
                               labelText: "Нууц үг",
                               inputType: TextInputType.text,
                               obscureText: true,
@@ -301,6 +302,125 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                   return null;
                                 }
                               ]),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: 23,
+                                  height: 23,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      width: 1.5,
+                                      color: Theme.of(context).splashColor,
+                                    ),
+                                    color: password1.text.length <= 8
+                                        ? buttonColor
+                                        : transparent,
+                                  ),
+                                  child: password1.text.length <= 8
+                                      ? Icon(
+                                          Icons.check,
+                                          size: 20.0,
+                                          color: Colors.white,
+                                        )
+                                      : null,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      'Нууц үг 8 болон түүнээс дээш тэмдэгттэй байх'),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      isCheked = !isCheked;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 23,
+                                    height: 23,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 1.5,
+                                        color: Theme.of(context).splashColor,
+                                      ),
+                                      color: isCheked == false
+                                          ? buttonColor
+                                          : transparent,
+                                    ),
+                                    child: isCheked == false
+                                        ? Icon(
+                                            Icons.check,
+                                            size: 20.0,
+                                            color: Colors.white,
+                                          )
+                                        : null,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      'Ядаж 1 том, жижиг үсэг, 1 тоо агуулсан байх'),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      isCheked = !isCheked;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 23,
+                                    height: 23,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 1.5,
+                                        color: Theme.of(context).splashColor,
+                                      ),
+                                      color: isCheked == false
+                                          ? buttonColor
+                                          : transparent,
+                                    ),
+                                    child: isCheked == false
+                                        ? Icon(
+                                            Icons.check,
+                                            size: 20.0,
+                                            color: Colors.white,
+                                          )
+                                        : null,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      'Ядаж 1 тусгай тэмдэгт агуулсан байх !@#%^&*'),
+                                ),
+                              ],
                             ),
                           ],
                         ),
