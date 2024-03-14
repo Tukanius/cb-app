@@ -140,13 +140,11 @@ class QpayPageState extends State<QpayPage> with AfterLayoutMixin<QpayPage> {
                   ),
                 ),
               ),
-              flexibleSpace: FlexibleSpaceBar(
-                centerTitle: true,
-                title: Text(
-                  "QPay",
-                  style: TextStyle(
-                      color: Theme.of(context).iconTheme.color, fontSize: 16),
-                ),
+              centerTitle: true,
+              title: Text(
+                "QPay",
+                style: TextStyle(
+                    color: Theme.of(context).iconTheme.color, fontSize: 16),
               ),
             )
           ];

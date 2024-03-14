@@ -78,8 +78,8 @@ class _RegisterLettersState extends State<RegisterLetters> {
       ),
       builder: (context) {
         return Container(
-          height: widget.height ?? DeviceSize.height(100, context) * 1.2,
-          width: widget.width ?? DeviceSize.width(10, context),
+          height: MediaQuery.of(context).size.height * 0.8,
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(
               top: 10,
               left: 10,

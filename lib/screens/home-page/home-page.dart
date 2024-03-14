@@ -474,90 +474,90 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin {
                             ],
                           )
                         : SizedBox(),
-                    Container(
-                      margin:
-                          const EdgeInsets.only(left: 25, bottom: 10, top: 20),
-                      child: Text(
-                        'Бонус оноо',
-                        style: TextStyle(
-                          color: Theme.of(context).iconTheme.color,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(BonusCredit.routeName);
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Theme.of(context).splashColor,
-                        ),
-                        height: 160,
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Бонус оноо',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Theme.of(context).iconTheme.color,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Text(
-                              '$currentStep/$totalSteps',
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).iconTheme.color),
-                            ),
-                            Expanded(
-                              child: SliderTheme(
-                                data: SliderThemeData(
-                                  thumbShape: RoundSliderThumbShape(
-                                      enabledThumbRadius: 3),
-                                  tickMarkShape: RoundSliderTickMarkShape(
-                                      tickMarkRadius: 0),
-                                ),
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 20),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: StepProgressIndicator(
-                                          totalSteps:
-                                              Provider.of<UserProvider>(context)
-                                                  .totalSteps,
-                                          currentStep:
-                                              Provider.of<UserProvider>(context)
-                                                  .currentStep,
-                                          selectedColor: Colors.red.shade600,
-                                          unselectedColor: darkGrey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   margin:
+                    //       const EdgeInsets.only(left: 25, bottom: 10, top: 20),
+                    //   child: Text(
+                    //     'Бонус оноо',
+                    //     style: TextStyle(
+                    //       color: Theme.of(context).iconTheme.color,
+                    //       fontWeight: FontWeight.w600,
+                    //       fontSize: 14,
+                    //     ),
+                    //   ),
+                    // ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.of(context).pushNamed(BonusCredit.routeName);
+                    //   },
+                    //   child: Container(
+                    //     margin: const EdgeInsets.symmetric(horizontal: 20),
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(20),
+                    //       color: Theme.of(context).splashColor,
+                    //     ),
+                    //     height: 160,
+                    //     width: MediaQuery.of(context).size.width,
+                    //     child: Column(
+                    //       children: [
+                    //         SizedBox(
+                    //           height: 15,
+                    //         ),
+                    //         Text(
+                    //           'Бонус оноо',
+                    //           style: TextStyle(
+                    //             fontSize: 18,
+                    //             color: Theme.of(context).iconTheme.color,
+                    //             fontWeight: FontWeight.bold,
+                    //           ),
+                    //         ),
+                    //         SizedBox(
+                    //           height: 25,
+                    //         ),
+                    //         Text(
+                    //           '$currentStep/$totalSteps',
+                    //           style: TextStyle(
+                    //               fontSize: 25,
+                    //               fontWeight: FontWeight.bold,
+                    //               color: Theme.of(context).iconTheme.color),
+                    //         ),
+                    //         Expanded(
+                    //           child: SliderTheme(
+                    //             data: SliderThemeData(
+                    //               thumbShape: RoundSliderThumbShape(
+                    //                   enabledThumbRadius: 3),
+                    //               tickMarkShape: RoundSliderTickMarkShape(
+                    //                   tickMarkRadius: 0),
+                    //             ),
+                    //             child: Container(
+                    //               margin: EdgeInsets.symmetric(
+                    //                   horizontal: 30, vertical: 20),
+                    //               child: Row(
+                    //                 children: [
+                    //                   Expanded(
+                    //                     child: StepProgressIndicator(
+                    //                       totalSteps:
+                    //                           Provider.of<UserProvider>(context)
+                    //                               .totalSteps,
+                    //                       currentStep:
+                    //                           Provider.of<UserProvider>(context)
+                    //                               .currentStep,
+                    //                       selectedColor: Colors.red.shade600,
+                    //                       unselectedColor: darkGrey,
+                    //                     ),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         SizedBox(
+                    //           height: 10,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 20,
                     ),

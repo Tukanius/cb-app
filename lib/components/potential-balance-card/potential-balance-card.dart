@@ -105,7 +105,7 @@ class _PotentialBalanceCardState extends State<PotentialBalanceCard> {
             onTap: widget.onClick,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: const EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
